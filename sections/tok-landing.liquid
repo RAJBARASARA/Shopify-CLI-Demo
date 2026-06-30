@@ -1,0 +1,471 @@
+{{ 'tok-theme.css' | asset_url | stylesheet_tag }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+{%- assign featured_collection = collections[section.settings.featured_collection] -%}
+{%- assign hero_secondary_link = section.settings.hero_secondary_link -%}
+{%- if hero_secondary_link == blank -%}{%- assign hero_secondary_link = '#tok-story-' | append: section.id -%}{%- endif -%}
+<div class="tok-page">
+  <div class="tok-topbar">{{ section.settings.topbar_text }}</div>
+
+  <header class="tok-nav">
+    <div class="tok-nav-inner">
+      <a class="tok-brand" href="{{ routes.root_url }}">
+        <span class="tok-brand-mark">{{ section.settings.brand_mark }}</span>
+        <span class="tok-brand-meta">
+          <strong>{{ section.settings.brand_title }}</strong>
+          <span>{{ section.settings.brand_subtitle }}</span>
+        </span>
+      </a>
+      <nav class="tok-nav-links">
+        <a href="#tok-drop-{{ section.id }}">{{ section.settings.nav_link_1 }}</a>
+        <a href="#tok-story-{{ section.id }}">{{ section.settings.nav_link_2 }}</a>
+        <a href="#tok-symbols-{{ section.id }}">{{ section.settings.nav_link_3 }}</a>
+        <a href="#tok-journal-{{ section.id }}">{{ section.settings.nav_link_4 }}</a>
+      </nav>
+      <div class="tok-nav-actions">
+        <a class="tok-btn tok-btn--secondary" href="{{ routes.all_products_collection_url }}">Shop</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="tok-section-shell">
+    <div class="tok-hero-grid">
+      <div class="tok-hero-copy">
+        <span class="tok-eyebrow">{{ section.settings.hero_eyebrow }}</span>
+        <h1 class="tok-display">{{ section.settings.hero_title }}</h1>
+        <div class="tok-copy">{{ section.settings.hero_copy }}</div>
+        <div class="tok-hero-actions">
+          <a class="tok-btn tok-btn--primary" href="{{ section.settings.hero_primary_link | default: routes.all_products_collection_url }}">{{ section.settings.hero_primary_label }}</a>
+          <a class="tok-btn tok-btn--secondary" href="{{ hero_secondary_link }}">{{ section.settings.hero_secondary_label }}</a>
+        </div>
+        <div class="tok-kpi-row">
+          <div class="tok-kpi"><strong>{{ section.settings.kpi_1_value }}</strong><span>{{ section.settings.kpi_1_label }}</span></div>
+          <div class="tok-kpi"><strong>{{ section.settings.kpi_2_value }}</strong><span>{{ section.settings.kpi_2_label }}</span></div>
+          <div class="tok-kpi"><strong>{{ section.settings.kpi_3_value }}</strong><span>{{ section.settings.kpi_3_label }}</span></div>
+        </div>
+      </div>
+
+      <div class="tok-visual-column">
+        <div class="tok-visual-frame">
+          {%- if section.settings.hero_image != blank -%}
+            {{ section.settings.hero_image | image_url: width: 1600 | image_tag: loading: 'eager', class: 'tok-media-image', alt: section.settings.hero_image.alt | escape }}
+          {%- endif -%}
+        </div>
+        <div class="tok-stack">
+          <div class="tok-stack-grid">
+            <div>
+              <div class="tok-card-image">
+                {%- if section.settings.hero_card_image_1 != blank -%}
+                  {{ section.settings.hero_card_image_1 | image_url: width: 900 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: section.settings.hero_card_title_1 | escape }}
+                {%- endif -%}
+              </div>
+              <div class="tok-card-copy">
+                <h3 class="tok-card-title">{{ section.settings.hero_card_title_1 }}</h3>
+                <p class="tok-meta">{{ section.settings.hero_card_copy_1 }}</p>
+              </div>
+            </div>
+            <div>
+              <div class="tok-card-image">
+                {%- if section.settings.hero_card_image_2 != blank -%}
+                  {{ section.settings.hero_card_image_2 | image_url: width: 900 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: section.settings.hero_card_title_2 | escape }}
+                {%- endif -%}
+              </div>
+              <div class="tok-card-copy">
+                <h3 class="tok-card-title">{{ section.settings.hero_card_title_2 }}</h3>
+                <p class="tok-meta">{{ section.settings.hero_card_copy_2 }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tok-drop-{{ section.id }}" class="tok-band">
+    <div class="tok-band-inner">
+      <div class="tok-section-shell tok-panel-pad--lg">
+        <div class="tok-band-header">
+          <span class="tok-eyebrow">{{ section.settings.drop_eyebrow }}</span>
+          <h2 class="tok-title">{{ section.settings.drop_title }}</h2>
+          <div class="tok-copy">{{ section.settings.drop_copy }}</div>
+        </div>
+        <div class="tok-drop-layout">
+          <div class="tok-drop-copy tok-panel-pad">
+            <div class="tok-pills">
+              <span class="tok-pill">Shopify Collection</span>
+              <span class="tok-pill">Real Product Cards</span>
+              <span class="tok-pill">Image-Ready</span>
+            </div>
+            <div class="tok-copy">{{ section.settings.drop_side_copy }}</div>
+            <a class="tok-btn tok-btn--primary" href="{{ featured_collection.url | default: routes.all_products_collection_url }}">{{ section.settings.drop_button_label }}</a>
+          </div>
+          <div class="tok-drop-media tok-panel-pad">
+            <div class="tok-drop-image">
+              {%- if section.settings.drop_image != blank -%}
+                {{ section.settings.drop_image | image_url: width: 1600 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: section.settings.drop_title | escape }}
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+        <div class="tok-collection-grid" style="margin-top: 24px;">
+          {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
+            {%- for product in featured_collection.products limit: 3 -%}
+              <article class="tok-product-card">
+                <a href="{{ product.url }}" class="tok-card-image">
+                  {%- if product.featured_image != blank -%}
+                    {{ product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: product.title | escape }}
+                  {%- endif -%}
+                </a>
+                <div class="tok-card-footer">
+                  <span class="tok-small">{{ product.type | default: featured_collection.title }}</span>
+                  <h3 class="tok-card-title">{{ product.title }}</h3>
+                  <div class="tok-meta">{{ product.description | strip_html | truncatewords: 18 }}</div>
+                  <div class="tok-product-price">{{ product.price | money }}</div>
+                  <a class="tok-btn tok-btn--secondary" href="{{ product.url }}">View Product</a>
+                </div>
+              </article>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for i in (1..3) -%}
+              <article class="tok-product-card">
+                <div class="tok-card-image"></div>
+                <div class="tok-card-footer">
+                  <span class="tok-small">Featured Drop</span>
+                  <h3 class="tok-card-title">Connect a Shopify collection</h3>
+                  <div class="tok-meta">Select a collection in the section settings and these cards will populate with real products and unique images.</div>
+                  <div class="tok-product-price">{{ 12900 | money }}</div>
+                </div>
+              </article>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tok-story-{{ section.id }}" class="tok-band">
+    <div class="tok-band-inner">
+      <div class="tok-section-shell tok-panel-pad--lg">
+        <div class="tok-story-grid">
+          <div class="tok-story-copy tok-panel-pad">
+            <span class="tok-eyebrow">{{ section.settings.story_eyebrow }}</span>
+            <h2 class="tok-title">{{ section.settings.story_title }}</h2>
+            <div class="tok-copy">{{ section.settings.story_copy }}</div>
+          </div>
+          <div class="tok-story-media tok-panel-pad">
+            <div class="tok-story-image">
+              {%- if section.settings.story_image != blank -%}
+                {{ section.settings.story_image | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: section.settings.story_title | escape }}
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tok-symbols-{{ section.id }}" class="tok-band">
+    <div class="tok-band-inner">
+      <div class="tok-section-shell tok-panel-pad--lg">
+        <div class="tok-band-header tok-band-header--center">
+          <span class="tok-eyebrow">{{ section.settings.symbols_eyebrow }}</span>
+          <h2 class="tok-title">{{ section.settings.symbols_title }}</h2>
+          <div class="tok-copy">{{ section.settings.symbols_copy }}</div>
+        </div>
+        <div class="tok-symbol-grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'symbol' -%}
+              <article class="tok-symbol-card" {{ block.shopify_attributes }}>
+                <div class="tok-card-image">
+                  {%- if block.settings.image != blank -%}
+                    {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: block.settings.title | escape }}
+                  {%- endif -%}
+                </div>
+                <div class="tok-card-body">
+                  <h3 class="tok-card-title">{{ block.settings.title }}</h3>
+                  <div class="tok-meta">{{ block.settings.copy }}</div>
+                </div>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tok-band">
+    <div class="tok-band-inner">
+      <div class="tok-section-shell tok-panel-pad--lg">
+        <div class="tok-band-header">
+          <span class="tok-eyebrow">{{ section.settings.categories_eyebrow }}</span>
+          <h2 class="tok-title">{{ section.settings.categories_title }}</h2>
+        </div>
+        <div class="tok-category-grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'category' -%}
+              <a class="tok-category-card" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
+                <div class="tok-card-image">
+                  {%- if block.settings.image != blank -%}
+                    {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: block.settings.title | escape }}
+                  {%- endif -%}
+                </div>
+                <div class="tok-card-footer">
+                  <span class="tok-small">Shop Category</span>
+                  <h3 class="tok-card-title">{{ block.settings.title }}</h3>
+                  <div class="tok-meta">{{ block.settings.copy }}</div>
+                </div>
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tok-band">
+    <div class="tok-band-inner">
+      <div class="tok-section-shell tok-panel-pad--lg">
+        <div class="tok-founder-layout">
+          <div class="tok-founder-copy tok-panel-pad">
+            <span class="tok-eyebrow">{{ section.settings.founder_eyebrow }}</span>
+            <h2 class="tok-title">{{ section.settings.founder_title }}</h2>
+            <div class="tok-copy">{{ section.settings.founder_copy }}</div>
+          </div>
+          <div class="tok-founder-media tok-panel-pad">
+            <div class="tok-founder-image">
+              {%- if section.settings.founder_image != blank -%}
+                {{ section.settings.founder_image | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: section.settings.founder_title | escape }}
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tok-band">
+    <div class="tok-band-inner">
+      <div class="tok-section-shell tok-panel-pad--lg">
+        <div class="tok-band-header tok-band-header--center">
+          <span class="tok-eyebrow">{{ section.settings.social_eyebrow }}</span>
+          <h2 class="tok-title">{{ section.settings.social_title }}</h2>
+          <div class="tok-copy">{{ section.settings.social_copy }}</div>
+        </div>
+        <div class="tok-social-grid">
+          {%- for i in (1..3) -%}
+            {%- liquid
+              assign social_image_key = 'social_image_' | append: i
+              assign social_title_key = 'social_title_' | append: i
+              assign social_copy_key = 'social_copy_' | append: i
+            -%}
+            <article class="tok-review-card">
+              <div class="tok-card-image">
+                {%- assign social_image = section.settings[social_image_key] -%}
+                {%- if social_image != blank -%}
+                  {{ social_image | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: section.settings[social_title_key] | escape }}
+                {%- endif -%}
+              </div>
+              <div class="tok-card-footer">
+                <h3 class="tok-card-title">{{ section.settings[social_title_key] }}</h3>
+                <div class="tok-meta">{{ section.settings[social_copy_key] }}</div>
+              </div>
+            </article>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tok-band">
+    <div class="tok-band-inner">
+      <div class="tok-section-shell tok-panel-pad--lg">
+        <div class="tok-email-grid">
+          <div class="tok-email-card tok-panel-pad">
+            <span class="tok-eyebrow">{{ section.settings.email_eyebrow }}</span>
+            <h2 class="tok-title">{{ section.settings.email_title }}</h2>
+            <div class="tok-copy">{{ section.settings.email_copy }}</div>
+            {%- form 'customer', class: 'tok-copy' -%}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <div style="display:grid;gap:12px;">
+                <input type="email" name="contact[email]" placeholder="Email address" style="min-height:54px;border-radius:999px;border:1px solid rgba(23,22,20,.12);padding:0 20px;background:rgba(255,255,255,.72);" required>
+                <button class="tok-btn tok-btn--primary" type="submit">{{ section.settings.email_button_label }}</button>
+              </div>
+            {%- endform -%}
+          </div>
+          <div class="tok-email-card tok-panel-pad">
+            <div class="tok-drop-image">
+              {%- if section.settings.email_image != blank -%}
+                {{ section.settings.email_image | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: section.settings.email_title | escape }}
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tok-journal-{{ section.id }}" class="tok-band">
+    <div class="tok-band-inner">
+      <div class="tok-section-shell tok-panel-pad--lg">
+        <div class="tok-band-header tok-band-header--center">
+          <span class="tok-eyebrow">{{ section.settings.journal_eyebrow }}</span>
+          <h2 class="tok-title">{{ section.settings.journal_title }}</h2>
+          <div class="tok-copy">{{ section.settings.journal_copy }}</div>
+        </div>
+        <div class="tok-journal-grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'journal' -%}
+              <article class="tok-journal-card" {{ block.shopify_attributes }}>
+                <a href="{{ block.settings.link | default: '#' }}" class="tok-journal-image">
+                  {%- if block.settings.image != blank -%}
+                    {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: block.settings.title | escape }}
+                  {%- endif -%}
+                </a>
+                <div class="tok-card-footer">
+                  <span class="tok-small">Journal</span>
+                  <h3 class="tok-card-title">{{ block.settings.title }}</h3>
+                  <div class="tok-meta">{{ block.settings.copy }}</div>
+                  <a class="tok-btn tok-btn--secondary" href="{{ block.settings.link | default: '#' }}">Read Story</a>
+                </div>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="tok-footer">
+    <div class="tok-footer-inner">
+      <span>{{ section.settings.footer_left }}</span>
+      <span>{{ section.settings.footer_right }}</span>
+    </div>
+  </footer>
+</div>
+
+{% schema %}
+{
+  "name": "TOK landing page",
+  "settings": [
+    {"type":"text","id":"topbar_text","label":"Topbar text","default":"Luxury streetwear / Light campaign landing page"},
+    {"type":"text","id":"brand_mark","label":"Brand mark","default":"TK"},
+    {"type":"text","id":"brand_title","label":"Brand title","default":"Threads of Kaos"},
+    {"type":"text","id":"brand_subtitle","label":"Brand subtitle","default":"Identity, rebuilt."},
+    {"type":"text","id":"nav_link_1","label":"Navigation label 1","default":"The Drop"},
+    {"type":"text","id":"nav_link_2","label":"Navigation label 2","default":"Our Story"},
+    {"type":"text","id":"nav_link_3","label":"Navigation label 3","default":"Symbols"},
+    {"type":"text","id":"nav_link_4","label":"Navigation label 4","default":"Journal"},
+    {"type":"text","id":"hero_eyebrow","label":"Hero eyebrow","default":"Luxury Streetwear / Shopify landing page"},
+    {"type":"text","id":"hero_title","label":"Hero title","default":"Not clothing. Identity, rebuilt."},
+    {"type":"richtext","id":"hero_copy","label":"Hero copy","default":"<p>Use this section as your real Shopify landing page. It keeps the same light luxury direction as your original concept, but every major image area is now wired for unique Shopify media.</p>"},
+    {"type":"text","id":"hero_primary_label","label":"Hero primary button","default":"Shop the Drop"},
+    {"type":"url","id":"hero_primary_link","label":"Hero primary link"},
+    {"type":"text","id":"hero_secondary_label","label":"Hero secondary button","default":"Read the Story"},
+    {"type":"url","id":"hero_secondary_link","label":"Hero secondary link"},
+    {"type":"image_picker","id":"hero_image","label":"Hero main image"},
+    {"type":"image_picker","id":"hero_card_image_1","label":"Hero support image 1"},
+    {"type":"text","id":"hero_card_title_1","label":"Hero support title 1","default":"Drop image slot"},
+    {"type":"textarea","id":"hero_card_copy_1","label":"Hero support copy 1","default":"Add a unique campaign photo here."},
+    {"type":"image_picker","id":"hero_card_image_2","label":"Hero support image 2"},
+    {"type":"text","id":"hero_card_title_2","label":"Hero support title 2","default":"Detail image slot"},
+    {"type":"textarea","id":"hero_card_copy_2","label":"Hero support copy 2","default":"Use a different close-up, fabric detail, or texture shot here."},
+    {"type":"text","id":"kpi_1_value","label":"KPI 1 value","default":"24H"},
+    {"type":"text","id":"kpi_1_label","label":"KPI 1 label","default":"Launch window messaging"},
+    {"type":"text","id":"kpi_2_value","label":"KPI 2 value","default":"3X"},
+    {"type":"text","id":"kpi_2_label","label":"KPI 2 label","default":"More image surfaces than the original concept"},
+    {"type":"text","id":"kpi_3_value","label":"KPI 3 value","default":"OS2.0"},
+    {"type":"text","id":"kpi_3_label","label":"KPI 3 label","default":"Built for Shopify templates"},
+    {"type":"text","id":"drop_eyebrow","label":"Drop eyebrow","default":"Featured collection"},
+    {"type":"text","id":"drop_title","label":"Drop title","default":"The drop"},
+    {"type":"richtext","id":"drop_copy","label":"Drop copy","default":"<p>Choose a real Shopify collection and this grid will pull live products, prices, links, and product imagery.</p>"},
+    {"type":"textarea","id":"drop_side_copy","label":"Drop side copy","default":"This keeps your landing page premium, but makes it merchandisable inside Shopify without rebuilding every card by hand."},
+    {"type":"collection","id":"featured_collection","label":"Featured collection"},
+    {"type":"image_picker","id":"drop_image","label":"Drop feature image"},
+    {"type":"text","id":"drop_button_label","label":"Drop button label","default":"Shop collection"},
+    {"type":"text","id":"story_eyebrow","label":"Story eyebrow","default":"Brand story"},
+    {"type":"text","id":"story_title","label":"Story title","default":"This brand wasn’t created. It was survived."},
+    {"type":"richtext","id":"story_copy","label":"Story copy","default":"<p>Keep your editorial story section exactly in the same tone, but now with a real image slot for a founder portrait, campaign still, or story art.</p>"},
+    {"type":"image_picker","id":"story_image","label":"Story image"},
+    {"type":"text","id":"symbols_eyebrow","label":"Symbols eyebrow","default":"Symbols of Kaos"},
+    {"type":"text","id":"symbols_title","label":"Symbols title","default":"Symbols hold power"},
+    {"type":"richtext","id":"symbols_copy","label":"Symbols copy","default":"<p>Use different images for every symbol block so the page never feels duplicated.</p>"},
+    {"type":"text","id":"categories_eyebrow","label":"Categories eyebrow","default":"Shop categories"},
+    {"type":"text","id":"categories_title","label":"Categories title","default":"Built for the rebels"},
+    {"type":"text","id":"founder_eyebrow","label":"Founder eyebrow","default":"Founder section"},
+    {"type":"text","id":"founder_title","label":"Founder title","default":"Built through fire"},
+    {"type":"richtext","id":"founder_copy","label":"Founder copy","default":"<p>Another unique image slot for a founder portrait, atelier shot, or manifesto visual.</p>"},
+    {"type":"image_picker","id":"founder_image","label":"Founder image"},
+    {"type":"text","id":"social_eyebrow","label":"Social eyebrow","default":"Social proof"},
+    {"type":"text","id":"social_title","label":"Social title","default":"More than a brand"},
+    {"type":"richtext","id":"social_copy","label":"Social copy","default":"<p>Three different image surfaces for testimonials, community portraits, or editorial support visuals.</p>"},
+    {"type":"image_picker","id":"social_image_1","label":"Social image 1"},
+    {"type":"text","id":"social_title_1","label":"Social title 1","default":"Community feature"},
+    {"type":"textarea","id":"social_copy_1","label":"Social copy 1","default":"Use a different portrait or scene here."},
+    {"type":"image_picker","id":"social_image_2","label":"Social image 2"},
+    {"type":"text","id":"social_title_2","label":"Social title 2","default":"Editorial proof"},
+    {"type":"textarea","id":"social_copy_2","label":"Social copy 2","default":"Use a separate lifestyle image here."},
+    {"type":"image_picker","id":"social_image_3","label":"Social image 3"},
+    {"type":"text","id":"social_title_3","label":"Social title 3","default":"Movement energy"},
+    {"type":"textarea","id":"social_copy_3","label":"Social copy 3","default":"Use another distinct image here."},
+    {"type":"text","id":"email_eyebrow","label":"Email eyebrow","default":"Email capture"},
+    {"type":"text","id":"email_title","label":"Email title","default":"Join the movement"},
+    {"type":"richtext","id":"email_copy","label":"Email copy","default":"<p>Collect emails in the same design system while using a dedicated visual different from the hero and founder assets.</p>"},
+    {"type":"text","id":"email_button_label","label":"Email button label","default":"Join now"},
+    {"type":"image_picker","id":"email_image","label":"Email section image"},
+    {"type":"text","id":"journal_eyebrow","label":"Journal eyebrow","default":"Journal"},
+    {"type":"text","id":"journal_title","label":"Journal title","default":"The Kaos Journal"},
+    {"type":"richtext","id":"journal_copy","label":"Journal copy","default":"<p>Use these cards for essays, drop stories, or culture notes with a different image on every article.</p>"},
+    {"type":"text","id":"footer_left","label":"Footer left","default":"Threads of Kaos / Shopify landing template"},
+    {"type":"text","id":"footer_right","label":"Footer right","default":"Light luxury design system / image-ready"}
+  ],
+  "blocks": [
+    {
+      "type": "symbol",
+      "name": "Symbol card",
+      "settings": [
+        {"type":"image_picker","id":"image","label":"Image"},
+        {"type":"text","id":"title","label":"Title","default":"Meaningful symbol"},
+        {"type":"textarea","id":"copy","label":"Copy","default":"Add different symbol art, embroidery, sigil, or product detail here."}
+      ]
+    },
+    {
+      "type": "category",
+      "name": "Category card",
+      "settings": [
+        {"type":"image_picker","id":"image","label":"Image"},
+        {"type":"text","id":"title","label":"Title","default":"Category name"},
+        {"type":"textarea","id":"copy","label":"Copy","default":"Short category support text."},
+        {"type":"url","id":"link","label":"Link"}
+      ]
+    },
+    {
+      "type": "journal",
+      "name": "Journal card",
+      "settings": [
+        {"type":"image_picker","id":"image","label":"Image"},
+        {"type":"text","id":"title","label":"Title","default":"Story title"},
+        {"type":"textarea","id":"copy","label":"Copy","default":"Short editorial teaser."},
+        {"type":"url","id":"link","label":"Link"}
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TOK landing page",
+      "blocks": [
+        {"type":"symbol"},
+        {"type":"symbol"},
+        {"type":"symbol"},
+        {"type":"category"},
+        {"type":"category"},
+        {"type":"category"},
+        {"type":"journal"},
+        {"type":"journal"},
+        {"type":"journal"}
+      ]
+    }
+  ]
+}
+{% endschema %}
