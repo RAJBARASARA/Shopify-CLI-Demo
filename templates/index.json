@@ -58,6 +58,7 @@
         "text_YLPk4p",
         "button_H9gpTf"
       ],
+      "disabled": true,
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
@@ -263,6 +264,7 @@
           ]
         }
       },
+      "disabled": true,
       "name": "Featured collection",
       "settings": {
         "collection": "all",
@@ -581,6 +583,7 @@
         "layered_slide_YCXEhr",
         "layered_slide_EgaPnT"
       ],
+      "disabled": true,
       "name": "t:names.layered_slideshow",
       "settings": {
         "section_width": "page-width",
@@ -592,11 +595,160 @@
         "padding-block-start": 40,
         "padding-block-end": 40
       }
+    },
+    "tok_landing_9Jmk9f": {
+      "type": "tok-landing",
+      "blocks": {
+        "symbol_zWfKxK": {
+          "type": "symbol",
+          "settings": {
+            "title": "Meaningful symbol",
+            "copy": "Add different symbol art, embroidery, sigil, or product detail here."
+          }
+        },
+        "symbol_iy3zTK": {
+          "type": "symbol",
+          "settings": {
+            "title": "Meaningful symbol",
+            "copy": "Add different symbol art, embroidery, sigil, or product detail here."
+          }
+        },
+        "symbol_wCBq9b": {
+          "type": "symbol",
+          "settings": {
+            "title": "Meaningful symbol",
+            "copy": "Add different symbol art, embroidery, sigil, or product detail here."
+          }
+        },
+        "category_FDDx4f": {
+          "type": "category",
+          "settings": {
+            "title": "Category name",
+            "copy": "Short category support text.",
+            "link": ""
+          }
+        },
+        "category_EFNhPx": {
+          "type": "category",
+          "settings": {
+            "title": "Category name",
+            "copy": "Short category support text.",
+            "link": ""
+          }
+        },
+        "category_yLAhVC": {
+          "type": "category",
+          "settings": {
+            "title": "Category name",
+            "copy": "Short category support text.",
+            "link": ""
+          }
+        },
+        "journal_cXxTEA": {
+          "type": "journal",
+          "settings": {
+            "title": "Story title",
+            "copy": "Short editorial teaser.",
+            "link": ""
+          }
+        },
+        "journal_pmTfiK": {
+          "type": "journal",
+          "settings": {
+            "title": "Story title",
+            "copy": "Short editorial teaser.",
+            "link": ""
+          }
+        },
+        "journal_ciDNgK": {
+          "type": "journal",
+          "settings": {
+            "title": "Story title",
+            "copy": "Short editorial teaser.",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "symbol_zWfKxK",
+        "symbol_iy3zTK",
+        "symbol_wCBq9b",
+        "category_FDDx4f",
+        "category_EFNhPx",
+        "category_yLAhVC",
+        "journal_cXxTEA",
+        "journal_pmTfiK",
+        "journal_ciDNgK"
+      ],
+      "name": "TOK landing page",
+      "settings": {
+        "topbar_text": "Luxury streetwear / Light campaign landing page",
+        "brand_mark": "TK",
+        "brand_title": "Threads of Kaos",
+        "brand_subtitle": "Identity, rebuilt.",
+        "nav_link_1": "The Drop",
+        "nav_link_2": "Our Story",
+        "nav_link_3": "Symbols",
+        "nav_link_4": "Journal",
+        "hero_eyebrow": "Luxury Streetwear / Shopify landing page",
+        "hero_title": "Not clothing. Identity, rebuilt.",
+        "hero_copy": "<p>Use this section as your real Shopify landing page. It keeps the same light luxury direction as your original concept, but every major image area is now wired for unique Shopify media.</p>",
+        "hero_primary_label": "Shop the Drop",
+        "hero_primary_link": "",
+        "hero_secondary_label": "Read the Story",
+        "hero_secondary_link": "",
+        "hero_card_title_1": "Drop image slot",
+        "hero_card_copy_1": "Add a unique campaign photo here.",
+        "hero_card_title_2": "Detail image slot",
+        "hero_card_copy_2": "Use a different close-up, fabric detail, or texture shot here.",
+        "kpi_1_value": "24H",
+        "kpi_1_label": "Launch window messaging",
+        "kpi_2_value": "3X",
+        "kpi_2_label": "More image surfaces than the original concept",
+        "kpi_3_value": "OS2.0",
+        "kpi_3_label": "Built for Shopify templates",
+        "drop_eyebrow": "Featured collection",
+        "drop_title": "The drop",
+        "drop_copy": "<p>Choose a real Shopify collection and this grid will pull live products, prices, links, and product imagery.</p>",
+        "drop_side_copy": "This keeps your landing page premium, but makes it merchandisable inside Shopify without rebuilding every card by hand.",
+        "featured_collection": "",
+        "drop_button_label": "Shop collection",
+        "story_eyebrow": "Brand story",
+        "story_title": "This brand wasn’t created. It was survived.",
+        "story_copy": "<p>Keep your editorial story section exactly in the same tone, but now with a real image slot for a founder portrait, campaign still, or story art.</p>",
+        "symbols_eyebrow": "Symbols of Kaos",
+        "symbols_title": "Symbols hold power",
+        "symbols_copy": "<p>Use different images for every symbol block so the page never feels duplicated.</p>",
+        "categories_eyebrow": "Shop categories",
+        "categories_title": "Built for the rebels",
+        "founder_eyebrow": "Founder section",
+        "founder_title": "Built through fire",
+        "founder_copy": "<p>Another unique image slot for a founder portrait, atelier shot, or manifesto visual.</p>",
+        "social_eyebrow": "Social proof",
+        "social_title": "More than a brand",
+        "social_copy": "<p>Three different image surfaces for testimonials, community portraits, or editorial support visuals.</p>",
+        "social_title_1": "Community feature",
+        "social_copy_1": "Use a different portrait or scene here.",
+        "social_title_2": "Editorial proof",
+        "social_copy_2": "Use a separate lifestyle image here.",
+        "social_title_3": "Movement energy",
+        "social_copy_3": "Use another distinct image here.",
+        "email_eyebrow": "Email capture",
+        "email_title": "Join the movement",
+        "email_copy": "<p>Collect emails in the same design system while using a dedicated visual different from the hero and founder assets.</p>",
+        "email_button_label": "Join now",
+        "journal_eyebrow": "Journal",
+        "journal_title": "The Kaos Journal",
+        "journal_copy": "<p>Use these cards for essays, drop stories, or culture notes with a different image on every article.</p>",
+        "footer_left": "Threads of Kaos / Shopify landing template",
+        "footer_right": "Light luxury design system / image-ready"
+      }
     }
   },
   "order": [
     "hero_jVaWmY",
     "product_list_fa6P9H",
-    "layered_slideshow_Bckfxj"
+    "layered_slideshow_Bckfxj",
+    "tok_landing_9Jmk9f"
   ]
 }
