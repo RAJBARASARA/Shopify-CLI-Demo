@@ -601,6 +601,7 @@
       "blocks": {
         "symbol_zWfKxK": {
           "type": "symbol",
+          "disabled": true,
           "settings": {
             "title": "Meaningful symbol",
             "copy": "Add different symbol art, embroidery, sigil, or product detail here."
@@ -608,6 +609,7 @@
         },
         "symbol_iy3zTK": {
           "type": "symbol",
+          "disabled": true,
           "settings": {
             "title": "Meaningful symbol",
             "copy": "Add different symbol art, embroidery, sigil, or product detail here."
@@ -615,6 +617,7 @@
         },
         "symbol_wCBq9b": {
           "type": "symbol",
+          "disabled": true,
           "settings": {
             "title": "Meaningful symbol",
             "copy": "Add different symbol art, embroidery, sigil, or product detail here."
@@ -622,6 +625,7 @@
         },
         "category_FDDx4f": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "title": "Category name",
             "copy": "Short category support text.",
@@ -630,6 +634,7 @@
         },
         "category_EFNhPx": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "title": "Category name",
             "copy": "Short category support text.",
@@ -638,6 +643,7 @@
         },
         "category_yLAhVC": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "title": "Category name",
             "copy": "Short category support text.",
@@ -646,6 +652,7 @@
         },
         "journal_cXxTEA": {
           "type": "journal",
+          "disabled": true,
           "settings": {
             "title": "Story title",
             "copy": "Short editorial teaser.",
@@ -654,6 +661,7 @@
         },
         "journal_pmTfiK": {
           "type": "journal",
+          "disabled": true,
           "settings": {
             "title": "Story title",
             "copy": "Short editorial teaser.",
@@ -662,6 +670,7 @@
         },
         "journal_ciDNgK": {
           "type": "journal",
+          "disabled": true,
           "settings": {
             "title": "Story title",
             "copy": "Short editorial teaser.",
