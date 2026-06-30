@@ -57,6 +57,7 @@
           "blocks": {}
         }
       },
+      "disabled": true,
       "settings": {
         "section_width": "page-width",
         "color_scheme": "",
@@ -258,10 +259,37 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "tok_main_cart_zeVHA4": {
+      "type": "tok-main-cart",
+      "name": "TOK main cart",
+      "settings": {
+        "topbar_text": "Cart page / Light luxury Shopify layout",
+        "brand_mark": "TK",
+        "brand_title": "Threads of Kaos",
+        "brand_subtitle": "Identity, rebuilt.",
+        "cart_eyebrow": "Cart page",
+        "cart_title": "Your selected pieces",
+        "cart_copy": "<p>Same design system, now connected to the real Shopify cart with update and checkout actions.</p>",
+        "summary_eyebrow": "Order summary",
+        "summary_chip": "Secure checkout",
+        "summary_copy": "Taxes and shipping are calculated at checkout. Add trust messaging, delivery notes, or limited drop urgency here.",
+        "update_label": "Update cart",
+        "checkout_label": "Proceed to checkout",
+        "empty_title": "Your cart is empty",
+        "empty_copy": "Start with the collection page or a featured product and your selections will appear here.",
+        "empty_button": "Continue shopping",
+        "cross_eyebrow": "Recommended next",
+        "cross_title": "Keep the look moving",
+        "cross_sell_collection": "",
+        "footer_left": "Threads of Kaos / Shopify cart template",
+        "footer_right": "Real cart actions / same design system"
+      }
     }
   },
   "order": [
     "cart-section",
-    "product_list_NNFgcy"
+    "product_list_NNFgcy",
+    "tok_main_cart_zeVHA4"
   ]
 }
