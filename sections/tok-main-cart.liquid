@@ -1,0 +1,200 @@
+{{ 'tok-theme.css' | asset_url | stylesheet_tag }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+{%- assign cross_collection = collections[section.settings.cross_sell_collection] -%}
+<div class="tok-page">
+  <div class="tok-topbar">{{ section.settings.topbar_text }}</div>
+  <header class="tok-nav">
+    <div class="tok-nav-inner">
+      <a class="tok-brand" href="{{ routes.root_url }}">
+        <span class="tok-brand-mark">{{ section.settings.brand_mark }}</span>
+        <span class="tok-brand-meta">
+          <strong>{{ section.settings.brand_title }}</strong>
+          <span>{{ section.settings.brand_subtitle }}</span>
+        </span>
+      </a>
+      <nav class="tok-nav-links">
+        <a href="{{ routes.all_products_collection_url }}">Continue shopping</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="tok-section-shell">
+    <div class="tok-breadcrumbs">
+      <a href="{{ routes.root_url }}">Home</a><span>/</span><span>Cart</span>
+    </div>
+    <div class="tok-cart-shell">
+      <div class="tok-band-header">
+        <span class="tok-eyebrow">{{ section.settings.cart_eyebrow }}</span>
+        <h1 class="tok-cart-title">{{ section.settings.cart_title }}</h1>
+        <div class="tok-copy">{{ section.settings.cart_copy }}</div>
+      </div>
+
+      {%- if cart.item_count > 0 -%}
+        {%- form 'cart', cart -%}
+          <div class="tok-cart-grid">
+            <div class="tok-cart-items">
+              {%- for item in cart.items -%}
+                <article class="tok-item-card">
+                  <a class="tok-cart-item-image" href="{{ item.url }}">
+                    {%- if item.image != blank -%}
+                      {{ item.image | image_url: width: 700 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: item.product.title | escape }}
+                    {%- endif -%}
+                  </a>
+                  <div class="tok-item-copy">
+                    <span class="tok-small">{{ item.product.type | default: 'Product' }}</span>
+                    <h3 class="tok-card-title"><a href="{{ item.url }}">{{ item.product.title }}</a></h3>
+                    <div class="tok-item-meta">
+                      {%- unless item.product.has_only_default_variant -%}
+                        <span class="tok-inline-chip">{{ item.variant.title }}</span>
+                      {%- endunless -%}
+                      <span class="tok-inline-chip">{{ item.final_line_price | money }}</span>
+                    </div>
+                    <div class="tok-cart-actions">
+                      <div class="tok-quantity">
+                        <button type="button" data-qty-minus>-</button>
+                        <input type="number" name="updates[]" min="0" value="{{ item.quantity }}">
+                        <button type="button" data-qty-plus>+</button>
+                      </div>
+                      <a class="tok-remove-link" href="{{ item.url_to_remove }}">Remove</a>
+                    </div>
+                  </div>
+                </article>
+              {%- endfor -%}
+            </div>
+
+            <aside class="tok-cart-summary">
+              <span class="tok-eyebrow">{{ section.settings.summary_eyebrow }}</span>
+              <div class="tok-summary-row">
+                <span class="tok-summary-chip">{{ cart.item_count }} items</span>
+                <span class="tok-summary-chip">{{ section.settings.summary_chip }}</span>
+              </div>
+              <div class="tok-total-row">
+                <span class="tok-label">Estimated total</span>
+                <strong>{{ cart.total_price | money }}</strong>
+              </div>
+              <div class="tok-meta">{{ section.settings.summary_copy }}</div>
+              <button class="tok-btn tok-btn--secondary tok-btn--full" type="submit" name="update">{{ section.settings.update_label }}</button>
+              <button class="tok-btn tok-btn--primary tok-btn--full" type="submit" name="checkout">{{ section.settings.checkout_label }}</button>
+            </aside>
+          </div>
+        {%- endform -%}
+      {%- else -%}
+        <article class="tok-empty-state">
+          <div class="tok-empty-image">
+            {%- if section.settings.empty_image != blank -%}
+              {{ section.settings.empty_image | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: 'Empty cart' }}
+            {%- endif -%}
+          </div>
+          <h2 class="tok-card-title">{{ section.settings.empty_title }}</h2>
+          <div class="tok-empty-copy">{{ section.settings.empty_copy }}</div>
+          <a class="tok-btn tok-btn--primary" href="{{ routes.all_products_collection_url }}">{{ section.settings.empty_button }}</a>
+        </article>
+      {%- endif -%}
+    </div>
+  </section>
+
+  <section class="tok-band">
+    <div class="tok-band-inner">
+      <div class="tok-section-shell tok-panel-pad--lg">
+        <div class="tok-band-header tok-band-header--center">
+          <span class="tok-eyebrow">{{ section.settings.cross_eyebrow }}</span>
+          <h2 class="tok-title">{{ section.settings.cross_title }}</h2>
+        </div>
+        <div class="tok-cross-grid">
+          {%- if cross_collection != blank and cross_collection.products_count > 0 -%}
+            {%- for product in cross_collection.products limit: 3 -%}
+              <article class="tok-look-card">
+                <a href="{{ product.url }}" class="tok-related-image">
+                  {%- if product.featured_image != blank -%}
+                    {{ product.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: product.title | escape }}
+                  {%- endif -%}
+                </a>
+                <div class="tok-look-copy">
+                  <span class="tok-small">Recommended</span>
+                  <h3 class="tok-card-title">{{ product.title }}</h3>
+                  <div class="tok-meta">{{ product.description | strip_html | truncatewords: 14 }}</div>
+                  <div class="tok-product-price">{{ product.price | money }}</div>
+                  <a class="tok-btn tok-btn--secondary" href="{{ product.url }}">View product</a>
+                </div>
+              </article>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for i in (1..3) -%}
+              <article class="tok-look-card">
+                <div class="tok-related-image"></div>
+                <div class="tok-look-copy">
+                  <span class="tok-small">Recommended</span>
+                  <h3 class="tok-card-title">Connect a cross-sell collection</h3>
+                  <div class="tok-meta">Select a collection in the cart section settings to show real related products with different images.</div>
+                </div>
+              </article>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="tok-footer">
+    <div class="tok-footer-inner">
+      <span>{{ section.settings.footer_left }}</span>
+      <span>{{ section.settings.footer_right }}</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+  (() => {
+    const root = document.currentScript.previousElementSibling;
+    if (!root) return;
+    root.querySelectorAll('[data-qty-minus]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const input = button.parentElement.querySelector('input');
+        if (!input) return;
+        input.value = Math.max(0, Number(input.value || 0) - 1);
+      });
+    });
+    root.querySelectorAll('[data-qty-plus]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const input = button.parentElement.querySelector('input');
+        if (!input) return;
+        input.value = Number(input.value || 0) + 1;
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "TOK main cart",
+  "settings": [
+    {"type":"text","id":"topbar_text","label":"Topbar text","default":"Cart page / Light luxury Shopify layout"},
+    {"type":"text","id":"brand_mark","label":"Brand mark","default":"TK"},
+    {"type":"text","id":"brand_title","label":"Brand title","default":"Threads of Kaos"},
+    {"type":"text","id":"brand_subtitle","label":"Brand subtitle","default":"Identity, rebuilt."},
+    {"type":"text","id":"cart_eyebrow","label":"Cart eyebrow","default":"Cart page"},
+    {"type":"text","id":"cart_title","label":"Cart title","default":"Your selected pieces"},
+    {"type":"richtext","id":"cart_copy","label":"Cart copy","default":"<p>Same design system, now connected to the real Shopify cart with update and checkout actions.</p>"},
+    {"type":"text","id":"summary_eyebrow","label":"Summary eyebrow","default":"Order summary"},
+    {"type":"text","id":"summary_chip","label":"Summary chip","default":"Secure checkout"},
+    {"type":"textarea","id":"summary_copy","label":"Summary copy","default":"Taxes and shipping are calculated at checkout. Add trust messaging, delivery notes, or limited drop urgency here."},
+    {"type":"text","id":"update_label","label":"Update label","default":"Update cart"},
+    {"type":"text","id":"checkout_label","label":"Checkout label","default":"Proceed to checkout"},
+    {"type":"image_picker","id":"empty_image","label":"Empty cart image"},
+    {"type":"text","id":"empty_title","label":"Empty cart title","default":"Your cart is empty"},
+    {"type":"textarea","id":"empty_copy","label":"Empty cart copy","default":"Start with the collection page or a featured product and your selections will appear here."},
+    {"type":"text","id":"empty_button","label":"Empty cart button","default":"Continue shopping"},
+    {"type":"text","id":"cross_eyebrow","label":"Cross-sell eyebrow","default":"Recommended next"},
+    {"type":"text","id":"cross_title","label":"Cross-sell title","default":"Keep the look moving"},
+    {"type":"collection","id":"cross_sell_collection","label":"Cross-sell collection"},
+    {"type":"text","id":"footer_left","label":"Footer left","default":"Threads of Kaos / Shopify cart template"},
+    {"type":"text","id":"footer_right","label":"Footer right","default":"Real cart actions / same design system"}
+  ],
+  "presets": [
+    {"name": "TOK main cart"}
+  ]
+}
+{% endschema %}
