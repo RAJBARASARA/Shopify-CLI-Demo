@@ -11,8 +11,46 @@
   "sections": {
     "main": {
       "type": "tok-main-product",
-      "settings": {}
+      "settings": {
+        "topbar_text": "Premium product page / Light luxury Shopify PDP",
+        "brand_mark": "TK",
+        "brand_title": "Threads of Kaos",
+        "brand_subtitle": "Identity, rebuilt.",
+        "product_eyebrow": "Signature product",
+        "rating_label": "4.9 / 5 editor fit",
+        "fit_label": "Oversized premium cut",
+        "shipping_label": "Ships in 24–48h",
+        "add_to_cart_label": "Add to bag",
+        "shipping_copy": "Use this for dispatch timing, shipping thresholds, customs notes, and return windows.",
+        "size_copy": "Use this for exact fit advice, measurements, and recommended sizing notes.",
+        "care_copy": "Use this for wash care, fabric care, and storage guidance.",
+        "reviews_eyebrow": "Social proof",
+        "reviews_title": "Built to convert. Backed by trust.",
+        "reviews_copy": "<p>Keep confidence signals high near the PDP without losing your light editorial styling.</p>",
+        "badge_title_1": "Premium weight",
+        "badge_copy_1": "Heavy fabric story and elevated finish messaging.",
+        "badge_title_2": "Clear fit guidance",
+        "badge_copy_2": "State the silhouette and how it should feel on body.",
+        "badge_title_3": "Low-friction buying",
+        "badge_copy_3": "Answer size, care, shipping, and return questions early.",
+        "story_eyebrow": "Brand story layer",
+        "story_title": "Not just a product. A symbol.",
+        "story_copy": "<p>Use this image block for campaign art, embroidery details, close crop product stills, or a styling visual different from the product gallery.</p>",
+        "look_eyebrow": "AOV growth",
+        "look_title": "Complete the look",
+        "look_copy": "<p>Choose specific products or connect a related collection for matching cross-sells.</p>",
+        "related_collection": "",
+        "ugc_eyebrow": "Community proof",
+        "ugc_title": "Worn with purpose",
+        "ugc_copy": "<p>Every UGC card below has its own image slot so nothing repeats.</p>",
+        "faq_eyebrow": "FAQ",
+        "faq_title": "Remove the last objection",
+        "footer_left": "Threads of Kaos / Shopify PDP template",
+        "footer_right": "Real product media / real cart actions"
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
