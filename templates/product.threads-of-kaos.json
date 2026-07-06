@@ -11,6 +11,7 @@
   "sections": {
     "main": {
       "type": "tok-main-product",
+      "disabled": true,
       "settings": {
         "topbar_text": "Premium product page / Light luxury Shopify PDP",
         "brand_mark": "TK",
