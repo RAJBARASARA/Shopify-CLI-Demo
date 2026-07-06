@@ -11,8 +11,22 @@
   "sections": {
     "main": {
       "type": "tok-main-collection",
-      "settings": {}
+      "disabled": true,
+      "settings": {
+        "topbar_text": "Collection page / Light luxury Shopify layout",
+        "brand_mark": "TK",
+        "brand_title": "Threads of Kaos",
+        "brand_subtitle": "Identity, rebuilt.",
+        "banner_eyebrow": "Collection page",
+        "fallback_copy": "<p>Use this collection template to keep the landing page visual language while showing real Shopify products and unique images.</p>",
+        "features_eyebrow": "Collection story",
+        "features_title": "Why this drop stands apart",
+        "footer_left": "Threads of Kaos / Shopify collection template",
+        "footer_right": "Real collection products / same design system"
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
