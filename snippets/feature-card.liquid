@@ -1,0 +1,143 @@
+{% comment %}
+  Prepare image variables used throughout the card.
+
+  - card_image: image shown on the card itself
+  - popup_image: optional image shown inside popup
+  - popup_image_url: image used for popup animation
+  - card_bg_image: background image displayed on card
+{% endcomment %}
+{% liquid
+  assign card_image = block.settings.card_image
+  assign popup_image = block.settings.popup_image
+
+  comment
+    Prefer popup image for popup animation.
+    If no popup image exists, fall back to card image.
+  endcomment
+  if popup_image
+    assign popup_image_url = popup_image | image_url: width: 2000
+  elsif card_image
+    assign popup_image_url = card_image | image_url: width: 2000
+  endif
+
+  comment
+    Card background image.
+  endcomment
+  if card_image
+    assign card_bg_image = card_image | image_url: width: 1600
+  endif
+%}
+
+{% comment %}
+  Individual feature card.
+
+  data-card:
+  Used by JavaScript to attach click behavior
+  and open the popup.
+{% endcomment %}
+<div
+  class="feature-card"
+  data-card
+  {{ block.shopify_attributes }}>
+
+  {% comment %}
+    Visual card image.
+
+    data-image:
+    Used by JavaScript during the popup animation.
+
+    data-image-url:
+    Stores the popup image URL used when opening
+    the fullscreen popup.
+  {% endcomment %}
+  <div
+    class="feature-card__image"
+    data-image
+    {% if popup_image_url %}
+    data-image-url="{{ popup_image_url }}"
+    {% endif %}
+    {% if card_bg_image %}
+    style="background-image:url('{{ card_bg_image }}')"
+    {% endif %}></div>
+
+  {% comment %}
+    Card title and subtitle shown below image.
+  {% endcomment %}
+  <div class="feature-card__content">
+    <span class="feature-card__title">
+      {{ block.settings.title }}
+    </span>
+
+    <span class="feature-card__subtitle">
+      {{ block.settings.subtitle }}
+    </span>
+  </div>
+
+  {% comment %}
+    Hidden popup template.
+
+    JavaScript reads this template and injects it
+    into the popup overlay when a card is clicked.
+  {% endcomment %}
+  <template class="card-popup-template">
+
+    <div class="popup-layout">
+
+      {% comment %}
+        Popup image area.
+
+        Uses popup image if provided.
+        Falls back to card image otherwise.
+      {% endcomment %}
+      <div class="popup-layout__image">
+        {% if popup_image %}
+          {{
+            popup_image | image_url: width: 2400 | image_tag: loading: 'lazy', alt: block.settings.title
+          }}
+        {% elsif card_image %}
+          {{
+            card_image | image_url: width: 2400 | image_tag: loading: 'lazy', alt: block.settings.title
+          }}
+        {% endif %}
+      </div>
+
+      {% comment %}
+        Popup content area.
+
+        Contains:
+        - Title
+        - Subtitle
+        - Description
+        - Close button
+      {% endcomment %}
+      <div class="popup-layout__content">
+
+        {% comment %}
+          Popup heading section.
+        {% endcomment %}
+        <div class="popup-heading">
+          <h3>{{ block.settings.title }}</h3>
+          <span>{{ block.settings.subtitle }}</span>
+        </div>
+
+        {% comment %}
+          Rich text description entered in theme editor.
+        {% endcomment %}
+        <div class="popup-description">
+          {{ block.settings.description }}
+        </div>
+
+        {% comment %}
+          Popup close button.
+
+          JavaScript listens for clicks on
+          .popup-close to close the popup.
+        {% endcomment %}
+        <button type="button" class="popup-close">
+          {{ block.settings.button_text | default: 'Go Back' }}
+        </button>
+
+      </div>
+    </div>
+  </template>
+</div>

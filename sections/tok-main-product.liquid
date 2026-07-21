@@ -1,0 +1,446 @@
+{{ 'tok-theme.css' | asset_url | stylesheet_tag }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign look_collection = collections[section.settings.related_collection] -%}
+
+<div class="tok-page">
+  <div class="tok-topbar">{{ section.settings.topbar_text }}</div>
+  <header class="tok-nav">
+    <div class="tok-nav-inner">
+      <a class="tok-brand" href="{{ routes.root_url }}">
+        <span class="tok-brand-mark">{{ section.settings.brand_mark }}</span>
+        <span class="tok-brand-meta">
+          <strong>{{ section.settings.brand_title }}</strong>
+          <span>{{ section.settings.brand_subtitle }}</span>
+        </span>
+      </a>
+      <nav class="tok-nav-links">
+        <a href="#tok-product-details-{{ section.id }}">Details</a>
+        <a href="#tok-product-reviews-{{ section.id }}">Reviews</a>
+        <a href="#tok-product-look-{{ section.id }}">Complete the Look</a>
+        <a href="#tok-product-faq-{{ section.id }}">FAQ</a>
+      </nav>
+      <div class="tok-nav-actions">
+        <a class="tok-btn tok-btn--secondary" href="{{ routes.cart_url }}">Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="tok-section-shell">
+    <div class="tok-breadcrumbs">
+      <a href="{{ routes.root_url }}">Home</a><span>/</span>
+      {%- if product.collections.first -%}<a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a><span>/</span>{%- endif -%}
+      <span>{{ product.title }}</span>
+    </div>
+
+    <div class="tok-product-grid">
+      <div class="tok-product-gallery">
+        <div class="tok-product-main-media" id="tokMainMedia-{{ section.id }}">
+          {%- if product.featured_media != blank -%}
+            {{ product.featured_media.preview_image | image_url: width: 1800 | image_tag: loading: 'eager', class: 'tok-media-image', alt: product.title | escape }}
+          {%- elsif section.settings.fallback_image != blank -%}
+            {{ section.settings.fallback_image | image_url: width: 1800 | image_tag: loading: 'eager', class: 'tok-media-image', alt: product.title | escape }}
+          {%- endif -%}
+        </div>
+        <div class="tok-thumb-grid" style="margin-top:16px;">
+          {%- if product.media.size > 0 -%}
+            {%- for media in product.media limit: 8 -%}
+              <button class="tok-thumb-button{% if forloop.first %} is-active{% endif %}" type="button" data-target="tokMainMedia-{{ section.id }}" data-image="{{ media.preview_image | image_url: width: 1800 }}" data-alt="{{ media.alt | default: product.title | escape }}">
+                <span class="tok-thumb-media">
+                  {{ media.preview_image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: media.alt | default: product.title | escape }}
+                </span>
+              </button>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for i in (1..4) -%}
+              <button class="tok-thumb-button{% if forloop.first %} is-active{% endif %}" type="button">
+                <span class="tok-thumb-media"></span>
+              </button>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="tok-product-info">
+        <span class="tok-eyebrow">{{ section.settings.product_eyebrow }}</span>
+        <h1 class="tok-product-title">{{ product.title }}</h1>
+        <div class="tok-rating-row">
+          <span class="tok-rating-chip">{{ section.settings.rating_label }}</span>
+          <span class="tok-rating-chip">{{ section.settings.fit_label }}</span>
+          <span class="tok-rating-chip">{{ section.settings.shipping_label }}</span>
+        </div>
+        <div class="tok-price-row">
+          <span class="tok-price-main">{{ current_variant.price | money }}</span>
+          {%- if current_variant.compare_at_price > current_variant.price -%}
+            <span class="tok-price-compare">{{ current_variant.compare_at_price | money }}</span>
+          {%- endif -%}
+        </div>
+        <div class="tok-copy">{{ product.description | strip_html | truncatewords: 48 }}</div>
+
+        {%- form 'product', product -%}
+          {%- unless product.has_only_default_variant -%}
+            <div class="tok-option-group">
+              <label class="tok-label" for="tokVariant-{{ section.id }}">Variant</label>
+              <select id="tokVariant-{{ section.id }}" name="id" style="min-height:52px;border-radius:999px;border:1px solid rgba(23,22,20,.12);padding:0 20px;background:rgba(255,255,255,.72);">
+                {%- for variant in product.variants -%}
+                  <option value="{{ variant.id }}" {% if variant == current_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
+                    {{ variant.title }} — {{ variant.price | money }}
+                  </option>
+                {%- endfor -%}
+              </select>
+            </div>
+          {%- else -%}
+            <input type="hidden" name="id" value="{{ current_variant.id }}">
+          {%- endunless -%}
+
+          <div class="tok-buy-row">
+            <div class="tok-quantity">
+              <button type="button" data-qty-minus>-</button>
+              <input type="number" name="quantity" min="1" value="1">
+              <button type="button" data-qty-plus>+</button>
+            </div>
+            <button class="tok-btn tok-btn--primary" type="submit" {% unless current_variant.available %}disabled{% endunless %}>
+              {% if current_variant.available %}{{ section.settings.add_to_cart_label }}{% else %}Sold out{% endif %}
+            </button>
+          </div>
+        {%- endform -%}
+
+        <div class="tok-trust-row">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'trust' -%}
+              <span class="tok-trust-chip" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        <div id="tok-product-details-{{ section.id }}" class="tok-accordion">
+          <div class="tok-accordion-item">
+            <button class="tok-accordion-button" type="button" data-accordion-trigger>Product details <span>+</span></button>
+            <div class="tok-accordion-content">{{ product.description }}</div>
+          </div>
+          <div class="tok-accordion-item">
+            <button class="tok-accordion-button" type="button" data-accordion-trigger>Shipping + returns <span>+</span></button>
+            <div class="tok-accordion-content" hidden>{{ section.settings.shipping_copy }}</div>
+          </div>
+          <div class="tok-accordion-item">
+            <button class="tok-accordion-button" type="button" data-accordion-trigger>Size + fit <span>+</span></button>
+            <div class="tok-accordion-content" hidden>{{ section.settings.size_copy }}</div>
+          </div>
+          <div class="tok-accordion-item">
+            <button class="tok-accordion-button" type="button" data-accordion-trigger>Care instructions <span>+</span></button>
+            <div class="tok-accordion-content" hidden>{{ section.settings.care_copy }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <section id="tok-product-reviews-{{ section.id }}" class="tok-band">
+    <div class="tok-band-inner">
+      <div class="tok-section-shell tok-panel-pad--lg">
+        <div class="tok-band-header tok-band-header--center">
+          <span class="tok-eyebrow">{{ section.settings.reviews_eyebrow }}</span>
+          <h2 class="tok-title">{{ section.settings.reviews_title }}</h2>
+          <div class="tok-copy">{{ section.settings.reviews_copy }}</div>
+        </div>
+        <div class="tok-badge-row">
+          <div class="tok-badge"><strong>{{ section.settings.badge_title_1 }}</strong><span class="tok-meta">{{ section.settings.badge_copy_1 }}</span></div>
+          <div class="tok-badge"><strong>{{ section.settings.badge_title_2 }}</strong><span class="tok-meta">{{ section.settings.badge_copy_2 }}</span></div>
+          <div class="tok-badge"><strong>{{ section.settings.badge_title_3 }}</strong><span class="tok-meta">{{ section.settings.badge_copy_3 }}</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tok-band">
+    <div class="tok-band-inner">
+      <div class="tok-section-shell tok-panel-pad--lg">
+        <div class="tok-story-grid">
+          <div class="tok-story-copy tok-panel-pad">
+            <span class="tok-eyebrow">{{ section.settings.story_eyebrow }}</span>
+            <h2 class="tok-title">{{ section.settings.story_title }}</h2>
+            <div class="tok-copy">{{ section.settings.story_copy }}</div>
+          </div>
+          <div class="tok-story-media tok-panel-pad">
+            <div class="tok-story-image">
+              {%- if section.settings.story_image != blank -%}
+                {{ section.settings.story_image | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: section.settings.story_title | escape }}
+              {%- elsif product.featured_media != blank -%}
+                {{ product.featured_media.preview_image | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: product.title | escape }}
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tok-product-look-{{ section.id }}" class="tok-band">
+    <div class="tok-band-inner">
+      <div class="tok-section-shell tok-panel-pad--lg">
+        <div class="tok-band-header tok-band-header--center">
+          <span class="tok-eyebrow">{{ section.settings.look_eyebrow }}</span>
+          <h2 class="tok-title">{{ section.settings.look_title }}</h2>
+          <div class="tok-copy">{{ section.settings.look_copy }}</div>
+        </div>
+        <div class="tok-look-grid">
+          {%- assign look_count = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'look_product' -%}
+              {%- assign look_product = all_products[block.settings.product] -%}
+              {%- if look_product != blank -%}
+                {%- assign look_count = look_count | plus: 1 -%}
+                <article class="tok-look-card" {{ block.shopify_attributes }}>
+                  <a href="{{ look_product.url }}" class="tok-card-image">
+                    {%- if block.settings.image != blank -%}
+                      {{ block.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: look_product.title | escape }}
+                    {%- elsif look_product.featured_image != blank -%}
+                      {{ look_product.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: look_product.title | escape }}
+                    {%- endif -%}
+                  </a>
+                  <div class="tok-look-copy">
+                    <span class="tok-small">{{ block.settings.kicker | default: 'Complete the look' }}</span>
+                    <h3 class="tok-card-title">{{ look_product.title }}</h3>
+                    <div class="tok-meta">{{ block.settings.copy | default: look_product.description | strip_html | truncatewords: 16 }}</div>
+                    <div class="tok-product-price">{{ look_product.price | money }}</div>
+                    <a class="tok-btn tok-btn--secondary" href="{{ look_product.url }}">Shop this</a>
+                  </div>
+                </article>
+              {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if look_count == 0 and look_collection != blank -%}
+            {%- for look_product in look_collection.products limit: 3 -%}
+              {%- unless look_product.id == product.id -%}
+                <article class="tok-look-card">
+                  <a href="{{ look_product.url }}" class="tok-card-image">
+                    {%- if look_product.featured_image != blank -%}
+                      {{ look_product.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: look_product.title | escape }}
+                    {%- endif -%}
+                  </a>
+                  <div class="tok-look-copy">
+                    <span class="tok-small">Collection pair</span>
+                    <h3 class="tok-card-title">{{ look_product.title }}</h3>
+                    <div class="tok-meta">{{ look_product.description | strip_html | truncatewords: 16 }}</div>
+                    <div class="tok-product-price">{{ look_product.price | money }}</div>
+                    <a class="tok-btn tok-btn--secondary" href="{{ look_product.url }}">Shop this</a>
+                  </div>
+                </article>
+              {%- endunless -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tok-band">
+    <div class="tok-band-inner">
+      <div class="tok-section-shell tok-panel-pad--lg">
+        <div class="tok-band-header tok-band-header--center">
+          <span class="tok-eyebrow">{{ section.settings.ugc_eyebrow }}</span>
+          <h2 class="tok-title">{{ section.settings.ugc_title }}</h2>
+          <div class="tok-copy">{{ section.settings.ugc_copy }}</div>
+        </div>
+        <div class="tok-ugc-grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'ugc' -%}
+              <article class="tok-ugc-card" {{ block.shopify_attributes }}>
+                <div class="tok-ugc-image">
+                  {%- if block.settings.image != blank -%}
+                    {{ block.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: block.settings.title | escape }}
+                  {%- endif -%}
+                </div>
+                <div class="tok-ugc-copy">
+                  <span class="tok-small">{{ block.settings.kicker | default: 'Community proof' }}</span>
+                  <h3 class="tok-card-title">{{ block.settings.title }}</h3>
+                  <div class="tok-meta">{{ block.settings.copy }}</div>
+                </div>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tok-product-faq-{{ section.id }}" class="tok-band">
+    <div class="tok-band-inner">
+      <div class="tok-section-shell tok-panel-pad--lg">
+        <div class="tok-band-header tok-band-header--center">
+          <span class="tok-eyebrow">{{ section.settings.faq_eyebrow }}</span>
+          <h2 class="tok-title">{{ section.settings.faq_title }}</h2>
+        </div>
+        <div class="tok-faq-grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'faq' -%}
+              <article class="tok-faq-card" {{ block.shopify_attributes }}>
+                <div class="tok-card-body">
+                  <h3 class="tok-card-title">{{ block.settings.question }}</h3>
+                  <div class="tok-meta">{{ block.settings.answer }}</div>
+                </div>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="tok-footer">
+    <div class="tok-footer-inner">
+      <span>{{ section.settings.footer_left }}</span>
+      <span>{{ section.settings.footer_right }}</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+  (() => {
+    const root = document.currentScript.previousElementSibling;
+    if (!root) return;
+
+    root.querySelectorAll('.tok-thumb-button[data-image]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const main = root.querySelector('#' + button.dataset.target);
+        if (!main) return;
+        main.innerHTML = `<img class="tok-media-image" src="${button.dataset.image}" alt="${button.dataset.alt || ''}">`;
+        root.querySelectorAll(`.tok-thumb-button[data-target="${button.dataset.target}"]`).forEach((item) => item.classList.remove('is-active'));
+        button.classList.add('is-active');
+      });
+    });
+
+    root.querySelectorAll('[data-accordion-trigger]').forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const content = trigger.nextElementSibling;
+        const icon = trigger.querySelector('span');
+        const isHidden = content.hasAttribute('hidden');
+        if (isHidden) {
+          content.removeAttribute('hidden');
+          if (icon) icon.textContent = '−';
+        } else {
+          content.setAttribute('hidden', 'hidden');
+          if (icon) icon.textContent = '+';
+        }
+      });
+    });
+
+    root.querySelectorAll('[data-qty-minus]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const input = button.parentElement.querySelector('input[name="quantity"]');
+        if (!input) return;
+        input.value = Math.max(1, Number(input.value || 1) - 1);
+      });
+    });
+
+    root.querySelectorAll('[data-qty-plus]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const input = button.parentElement.querySelector('input[name="quantity"]');
+        if (!input) return;
+        input.value = Number(input.value || 1) + 1;
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "TOK main product",
+  "settings": [
+    {"type":"text","id":"topbar_text","label":"Topbar text","default":"Premium product page / Light luxury Shopify PDP"},
+    {"type":"text","id":"brand_mark","label":"Brand mark","default":"TK"},
+    {"type":"text","id":"brand_title","label":"Brand title","default":"Threads of Kaos"},
+    {"type":"text","id":"brand_subtitle","label":"Brand subtitle","default":"Identity, rebuilt."},
+    {"type":"text","id":"product_eyebrow","label":"Product eyebrow","default":"Signature product"},
+    {"type":"text","id":"rating_label","label":"Rating label","default":"4.9 / 5 editor fit"},
+    {"type":"text","id":"fit_label","label":"Fit label","default":"Oversized premium cut"},
+    {"type":"text","id":"shipping_label","label":"Shipping label","default":"Ships in 24–48h"},
+    {"type":"text","id":"add_to_cart_label","label":"Add to cart label","default":"Add to bag"},
+    {"type":"textarea","id":"shipping_copy","label":"Shipping copy","default":"Use this for dispatch timing, shipping thresholds, customs notes, and return windows."},
+    {"type":"textarea","id":"size_copy","label":"Size + fit copy","default":"Use this for exact fit advice, measurements, and recommended sizing notes."},
+    {"type":"textarea","id":"care_copy","label":"Care copy","default":"Use this for wash care, fabric care, and storage guidance."},
+    {"type":"image_picker","id":"fallback_image","label":"Fallback product image"},
+    {"type":"text","id":"reviews_eyebrow","label":"Reviews eyebrow","default":"Social proof"},
+    {"type":"text","id":"reviews_title","label":"Reviews title","default":"Built to convert. Backed by trust."},
+    {"type":"richtext","id":"reviews_copy","label":"Reviews copy","default":"<p>Keep confidence signals high near the PDP without losing your light editorial styling.</p>"},
+    {"type":"text","id":"badge_title_1","label":"Badge title 1","default":"Premium weight"},
+    {"type":"textarea","id":"badge_copy_1","label":"Badge copy 1","default":"Heavy fabric story and elevated finish messaging."},
+    {"type":"text","id":"badge_title_2","label":"Badge title 2","default":"Clear fit guidance"},
+    {"type":"textarea","id":"badge_copy_2","label":"Badge copy 2","default":"State the silhouette and how it should feel on body."},
+    {"type":"text","id":"badge_title_3","label":"Badge title 3","default":"Low-friction buying"},
+    {"type":"textarea","id":"badge_copy_3","label":"Badge copy 3","default":"Answer size, care, shipping, and return questions early."},
+    {"type":"text","id":"story_eyebrow","label":"Story eyebrow","default":"Brand story layer"},
+    {"type":"text","id":"story_title","label":"Story title","default":"Not just a product. A symbol."},
+    {"type":"richtext","id":"story_copy","label":"Story copy","default":"<p>Use this image block for campaign art, embroidery details, close crop product stills, or a styling visual different from the product gallery.</p>"},
+    {"type":"image_picker","id":"story_image","label":"Story image"},
+    {"type":"text","id":"look_eyebrow","label":"Look eyebrow","default":"AOV growth"},
+    {"type":"text","id":"look_title","label":"Look title","default":"Complete the look"},
+    {"type":"richtext","id":"look_copy","label":"Look copy","default":"<p>Choose specific products or connect a related collection for matching cross-sells.</p>"},
+    {"type":"collection","id":"related_collection","label":"Fallback related collection"},
+    {"type":"text","id":"ugc_eyebrow","label":"UGC eyebrow","default":"Community proof"},
+    {"type":"text","id":"ugc_title","label":"UGC title","default":"Worn with purpose"},
+    {"type":"richtext","id":"ugc_copy","label":"UGC copy","default":"<p>Every UGC card below has its own image slot so nothing repeats.</p>"},
+    {"type":"text","id":"faq_eyebrow","label":"FAQ eyebrow","default":"FAQ"},
+    {"type":"text","id":"faq_title","label":"FAQ title","default":"Remove the last objection"},
+    {"type":"text","id":"footer_left","label":"Footer left","default":"Threads of Kaos / Shopify PDP template"},
+    {"type":"text","id":"footer_right","label":"Footer right","default":"Real product media / real cart actions"}
+  ],
+  "blocks": [
+    {
+      "type": "trust",
+      "name": "Trust chip",
+      "settings": [
+        {"type":"text","id":"text","label":"Text","default":"Premium fabrication"}
+      ]
+    },
+    {
+      "type": "look_product",
+      "name": "Look product",
+      "settings": [
+        {"type":"product","id":"product","label":"Product"},
+        {"type":"image_picker","id":"image","label":"Override image"},
+        {"type":"text","id":"kicker","label":"Kicker","default":"Complete the look"},
+        {"type":"textarea","id":"copy","label":"Copy","default":"Optional custom cross-sell copy."}
+      ]
+    },
+    {
+      "type": "ugc",
+      "name": "UGC card",
+      "settings": [
+        {"type":"image_picker","id":"image","label":"Image"},
+        {"type":"text","id":"kicker","label":"Kicker","default":"Community proof"},
+        {"type":"text","id":"title","label":"Title","default":"Styled in motion"},
+        {"type":"textarea","id":"copy","label":"Copy","default":"Use a different lifestyle image or short still from your content library."}
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ item",
+      "settings": [
+        {"type":"text","id":"question","label":"Question","default":"How does the fit run?"},
+        {"type":"textarea","id":"answer","label":"Answer","default":"Add your fit answer here."}
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TOK main product",
+      "blocks": [
+        {"type":"trust"},
+        {"type":"trust"},
+        {"type":"trust"},
+        {"type":"ugc"},
+        {"type":"ugc"},
+        {"type":"ugc"},
+        {"type":"faq"},
+        {"type":"faq"},
+        {"type":"faq"}
+      ]
+    }
+  ]
+}
+{% endschema %}

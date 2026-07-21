@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "tok-main-cart",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
