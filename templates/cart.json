@@ -57,7 +57,6 @@
           "blocks": {}
         }
       },
-      "disabled": true,
       "settings": {
         "section_width": "page-width",
         "color_scheme": "",
@@ -238,7 +237,6 @@
           ]
         }
       },
-      "disabled": true,
       "name": "Featured collection",
       "settings": {
         "collection": "all",
@@ -262,6 +260,7 @@
     },
     "tok_main_cart_zeVHA4": {
       "type": "tok-main-cart",
+      "disabled": true,
       "name": "TOK main cart",
       "settings": {
         "topbar_text": "Cart page / Light luxury Shopify layout",
