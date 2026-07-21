@@ -1,0 +1,298 @@
+/* ============================================================
+   Zenn-space featured products carousel
+   ============================================================ */
+
+.zpc {
+  --zpc-gap: clamp(0.85rem, 1.5vw, 1.5rem);
+  font-family: var(--zenn-font-body);
+  padding-block: clamp(2.75rem, 6vw, 5rem);
+}
+
+.zpc--white { background: #fff; }
+.zpc--ivory { background: var(--zenn-ivory); }
+.zpc--sand { background: var(--zenn-sand); }
+
+.zpc__wrap {
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 5vw, 5rem);
+}
+
+/* ---- Header ---- */
+.zpc__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.zpc__eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--zenn-clay);
+}
+
+.zpc__title {
+  margin: 0;
+  font-family: var(--zenn-font-heading);
+  font-weight: 500;
+  font-optical-sizing: auto;
+  font-size: clamp(1.85rem, 3.4vw, 2.9rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--zenn-charcoal);
+}
+
+.zpc__head-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-shrink: 0;
+}
+
+.zpc__viewall {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--zenn-text);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  transition: color var(--zenn-transition);
+}
+
+.zpc__viewall:hover { color: var(--zenn-clay); }
+
+.zpc__nav { display: flex; gap: 0.5rem; }
+
+.zpc__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--zenn-radius-pill);
+  border: 1.5px solid rgba(28, 27, 25, 0.2);
+  background: transparent;
+  color: var(--zenn-charcoal);
+  cursor: pointer;
+  transition: background-color var(--zenn-transition), border-color var(--zenn-transition),
+    color var(--zenn-transition), opacity var(--zenn-transition);
+}
+
+.zpc__arrow:hover {
+  background: var(--zenn-charcoal);
+  border-color: var(--zenn-charcoal);
+  color: var(--zenn-on-dark);
+}
+
+.zpc__arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+  background: transparent;
+  border-color: rgba(28, 27, 25, 0.2);
+  color: var(--zenn-charcoal);
+}
+
+.zpc--static .zpc__nav { display: none; }
+
+/* ---- Track ---- */
+.zpc__track {
+  display: flex;
+  gap: var(--zpc-gap);
+  margin: 0;
+  padding: 0.25rem 0 0.5rem;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.zpc__track::-webkit-scrollbar { display: none; }
+
+.zpc__item {
+  scroll-snap-align: start;
+  flex: 0 0 calc((100% - (var(--zpc-cols) - 1) * var(--zpc-gap)) / var(--zpc-cols));
+}
+
+/* ---- Card ---- */
+.zpc__card { display: flex; flex-direction: column; }
+
+.zpc__media-link { display: block; text-decoration: none; }
+
+.zpc__media {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--zenn-radius);
+  aspect-ratio: 4 / 5;
+  background: var(--zenn-ivory-dim);
+}
+
+.zpc__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.zpc__img--primary {
+  transition: transform 0.6s var(--zenn-ease), opacity var(--zenn-transition);
+}
+
+.zpc__img--secondary {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.5s var(--zenn-ease);
+}
+
+.zpc__card:hover .zpc__img--primary { transform: scale(1.04); }
+.zpc__card:hover .zpc__img--secondary { opacity: 1; }
+
+.zpc__img--placeholder {
+  background:
+    radial-gradient(120% 90% at 30% 0%, rgba(166, 121, 92, 0.28), transparent 60%),
+    linear-gradient(150deg, var(--zenn-sand) 0%, var(--zenn-ivory-dim) 100%);
+}
+.zpc__item:nth-child(even) .zpc__img--placeholder {
+  background:
+    radial-gradient(120% 90% at 70% 0%, rgba(51, 48, 43, 0.22), transparent 60%),
+    linear-gradient(150deg, var(--zenn-ivory-dim) 0%, var(--zenn-sand) 100%);
+}
+
+.zpc__badges {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: flex-start;
+}
+
+.zpc__badge {
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--zenn-radius-pill);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+.zpc__badge--new { background: var(--zenn-charcoal); color: var(--zenn-on-dark); }
+.zpc__badge--sale { background: var(--zenn-clay); color: #fff; }
+
+/* ---- Body ---- */
+.zpc__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-top: 0.85rem;
+}
+
+.zpc__swatches {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 18px;
+  margin-bottom: 0.1rem;
+}
+
+.zpc__swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  box-shadow: inset 0 0 0 1px rgba(28, 27, 25, 0.15);
+}
+
+.zpc__swatch--empty { background: var(--zenn-ivory-dim); }
+
+.zpc__swatch-more {
+  font-size: 0.72rem;
+  color: var(--zenn-text);
+  opacity: 0.7;
+}
+
+.zpc__name {
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: var(--zenn-charcoal);
+  text-decoration: none;
+  line-height: 1.35;
+}
+
+.zpc__name:hover { color: var(--zenn-clay); }
+
+/* ---- Rating stars ---- */
+.zpc__rating {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.zpc__stars {
+  --star: "★★★★★";
+  position: relative;
+  display: inline-block;
+  font-size: 0.85rem;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  color: rgba(28, 27, 25, 0.2);
+}
+
+.zpc__stars::before {
+  content: "★★★★★";
+}
+
+.zpc__stars::after {
+  content: "★★★★★";
+  position: absolute;
+  inset: 0;
+  width: var(--rating, 0%);
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--zenn-clay);
+}
+
+.zpc__rating-count {
+  font-size: 0.78rem;
+  color: var(--zenn-text);
+  opacity: 0.7;
+}
+
+/* ---- Price ---- */
+.zpc__price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-top: 0.1rem;
+}
+
+.zpc__price-sale {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--zenn-charcoal);
+}
+
+.zpc__price-was {
+  font-size: 0.85rem;
+  color: var(--zenn-text);
+  opacity: 0.55;
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 749px) {
+  .zpc__item { flex-basis: 70%; }
+  .zpc__nav { display: none; }
+  .zpc__head { align-items: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zpc__img--primary,
+  .zpc__img--secondary { transition: none; }
+}

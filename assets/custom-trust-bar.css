@@ -1,0 +1,101 @@
+/* ============================================================
+   Zenn-space trust bar
+   ============================================================ */
+
+.ztrust {
+  font-family: var(--zenn-font-body);
+  padding-block: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.ztrust--sand { background: var(--zenn-sand); color: var(--zenn-charcoal); }
+.ztrust--ivory { background: var(--zenn-ivory); color: var(--zenn-charcoal); }
+.ztrust--white { background: #fff; color: var(--zenn-charcoal); }
+.ztrust--charcoal { background: var(--zenn-charcoal); color: var(--zenn-on-dark); }
+
+.ztrust__wrap {
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 5vw, 5rem);
+}
+
+.ztrust__heading {
+  margin: 0 0 clamp(1.75rem, 3.5vw, 2.75rem);
+  text-align: center;
+  font-family: var(--zenn-font-heading);
+  font-weight: 500;
+  font-optical-sizing: auto;
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  letter-spacing: -0.01em;
+}
+
+.ztrust__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--ztrust-cols, 4), 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.ztrust__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.6rem;
+  padding-inline: 0.5rem;
+}
+
+.ztrust__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--zenn-radius-pill);
+  color: var(--zenn-clay);
+  background: rgba(166, 121, 92, 0.12);
+  margin-bottom: 0.3rem;
+}
+
+.ztrust--charcoal .ztrust__icon {
+  color: var(--zenn-sand);
+  background: rgba(228, 220, 207, 0.14);
+}
+
+.ztrust__title {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+}
+
+.ztrust__text {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  opacity: 0.8;
+  max-width: 22rem;
+}
+
+/* Column dividers on wider screens for an editorial feel */
+@media (min-width: 750px) {
+  .ztrust__item + .ztrust__item {
+    border-left: 1px solid currentColor;
+    border-image: linear-gradient(transparent 15%, currentColor 15%, currentColor 85%, transparent 85%) 1;
+    opacity: 1;
+  }
+  .ztrust__item {
+    border-color: rgba(28, 27, 25, 0.12);
+  }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 990px) {
+  .ztrust__grid { grid-template-columns: repeat(2, 1fr); }
+  .ztrust__item + .ztrust__item { border-left: none; }
+}
+
+@media (max-width: 560px) {
+  .ztrust__grid { grid-template-columns: 1fr; gap: 1.75rem; }
+}

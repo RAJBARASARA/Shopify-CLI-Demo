@@ -1,0 +1,227 @@
+{% comment %}
+  Zenn-space custom hero.
+  Full-bleed lifestyle image with centered/left content: eyebrow, serif heading,
+  subtext and up to two buttons. Fully editable in the theme editor.
+  Brand tokens + Fraunces font come from snippets/zenn-brand.liquid.
+{% endcomment %}
+
+{% render 'zenn-brand' %}
+{{ 'custom-hero.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign s = section.settings
+  assign align = s.content_alignment | default: 'center'
+  assign theme = s.text_theme | default: 'light'
+
+  case s.height
+    when 'medium'
+      assign min_height = '66svh'
+    when 'large'
+      assign min_height = '82svh'
+    when 'full'
+      assign min_height = '100svh'
+    else
+      assign min_height = '66svh'
+  endcase
+%}
+
+<section
+  class="zenn-hero zenn-hero--{{ align }} zenn-hero--{{ theme }}"
+  style="--zenn-hero-min-height: {{ min_height }}; --zenn-hero-overlay: {{ s.overlay_opacity | default: 40 | divided_by: 100.0 }};"
+  {% if request.design_mode %}data-design-mode="true"{% endif %}
+>
+  <div class="zenn-hero__media">
+    {%- if s.image != blank -%}
+      {%- if s.mobile_image != blank -%}
+        <picture>
+          <source
+            media="(max-width: 749px)"
+            srcset="{{ s.mobile_image | image_url: width: 1200 }}"
+          >
+          {{
+            s.image
+            | image_url: width: 3000
+            | image_tag:
+              widths: '750, 1100, 1500, 2000, 2600, 3000',
+              sizes: '100vw',
+              class: 'zenn-hero__img',
+              fetchpriority: 'high',
+              alt: s.image.alt | default: s.heading | strip_html
+          }}
+        </picture>
+      {%- else -%}
+        {{
+          s.image
+          | image_url: width: 3000
+          | image_tag:
+            widths: '750, 1100, 1500, 2000, 2600, 3000',
+            sizes: '100vw',
+            class: 'zenn-hero__img',
+            fetchpriority: 'high',
+            alt: s.image.alt | default: s.heading | strip_html
+        }}
+      {%- endif -%}
+    {%- else -%}
+      <div class="zenn-hero__img zenn-hero__img--placeholder" aria-hidden="true"></div>
+    {%- endif -%}
+    <div class="zenn-hero__overlay" aria-hidden="true"></div>
+  </div>
+
+  <div class="zenn-hero__inner">
+    <div class="zenn-hero__content">
+      {%- if s.eyebrow != blank -%}
+        <p class="zenn-hero__eyebrow" style="--i: 0;">{{ s.eyebrow | escape }}</p>
+      {%- endif -%}
+
+      {%- if s.heading != blank -%}
+        <h1 class="zenn-hero__heading" style="--i: 1;">{{ s.heading }}</h1>
+      {%- endif -%}
+
+      {%- if s.subheading != blank -%}
+        <div class="zenn-hero__subheading" style="--i: 2;">{{ s.subheading }}</div>
+      {%- endif -%}
+
+      {%- if s.button_1_label != blank or s.button_2_label != blank -%}
+        <div class="zenn-hero__buttons" style="--i: 3;">
+          {%- if s.button_1_label != blank -%}
+            <a
+              class="zenn-btn zenn-btn--primary"
+              {% if s.button_1_link != blank %}href="{{ s.button_1_link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+            >{{ s.button_1_label | escape }}</a>
+          {%- endif -%}
+          {%- if s.button_2_label != blank -%}
+            <a
+              class="zenn-btn zenn-btn--secondary"
+              {% if s.button_2_link != blank %}href="{{ s.button_2_link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+            >{{ s.button_2_label | escape }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Zenn Hero",
+  "tag": "section",
+  "class": "zenn-hero-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image",
+      "info": "Full-bleed lifestyle image. Leave empty to preview with a brand gradient placeholder."
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile image (optional)",
+      "info": "Falls back to the background image if empty."
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Image darkening",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 40,
+      "info": "Improves text legibility over the photo."
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "New Season"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Designed to move with you"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>Elevated apparel and accessories, made for everyday wear. Considered fabrics, timeless cuts.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "button_1_label",
+      "label": "Primary button label",
+      "default": "Shop new arrivals"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "button_2_label",
+      "label": "Secondary button label",
+      "default": "Explore collections"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content alignment",
+      "options": [
+        { "value": "center", "label": "Centered" },
+        { "value": "left", "label": "Left" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "text_theme",
+      "label": "Text color",
+      "options": [
+        { "value": "light", "label": "Light (for dark images)" },
+        { "value": "dark", "label": "Dark (for light images)" }
+      ],
+      "default": "light"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Section height",
+      "options": [
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" },
+        { "value": "full", "label": "Full screen" }
+      ],
+      "default": "large"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zenn Hero"
+    }
+  ]
+}
+{% endschema %}

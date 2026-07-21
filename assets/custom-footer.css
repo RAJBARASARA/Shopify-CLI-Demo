@@ -1,0 +1,264 @@
+/* ============================================================
+   Zenn-space footer (dark) — sand CTA band + charcoal main
+   ============================================================ */
+
+.zfoot {
+  font-family: var(--zenn-font-body);
+}
+
+/* ---- CTA band (side-by-side row) ---- */
+.zfoot__cta {
+  background: var(--zenn-sand);
+  color: var(--zenn-charcoal);
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+
+.zfoot__cta-inner {
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 5vw, 5rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem 2.5rem;
+}
+
+.zfoot__cta-heading {
+  margin: 0;
+  font-family: var(--zenn-font-heading);
+  font-weight: 500;
+  font-optical-sizing: auto;
+  font-size: clamp(1.9rem, 4vw, 3.25rem);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  flex: 0 1 auto;
+}
+
+.zfoot__cta-text {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  max-width: 26rem;
+  opacity: 0.85;
+  flex: 1 1 14rem;
+}
+
+.zfoot__cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.05rem 2.4rem;
+  border-radius: var(--zenn-radius-pill);
+  background: var(--zenn-charcoal);
+  color: var(--zenn-on-dark);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1.5px solid var(--zenn-charcoal);
+  white-space: nowrap;
+  margin-left: auto;
+  transition: transform var(--zenn-transition), background-color var(--zenn-transition);
+}
+
+.zfoot__cta-btn:hover { background: var(--zenn-charcoal-soft); transform: translateY(-2px); }
+.zfoot__cta-btn[aria-disabled="true"] { pointer-events: none; }
+
+/* ---- Main ---- */
+.zfoot__main {
+  background: var(--zenn-charcoal);
+  color: var(--zenn-on-dark-dim);
+  padding-block: clamp(2.75rem, 5vw, 4.5rem);
+}
+
+.zfoot__grid {
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 5vw, 5rem);
+  display: grid;
+  grid-template-columns: 1.6fr repeat(auto-fit, minmax(140px, 1fr));
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: start;
+}
+
+.zfoot__logo {
+  margin: 0 0 0.75rem;
+  font-family: var(--zenn-font-heading);
+  font-weight: 500;
+  font-size: 1.6rem;
+  letter-spacing: -0.01em;
+  color: var(--zenn-on-dark);
+}
+
+.zfoot__tagline {
+  margin: 0 0 1.5rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  max-width: 22rem;
+}
+
+.zfoot__col-title {
+  margin: 0 0 1.1rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--zenn-on-dark);
+}
+
+.zfoot__col ul,
+.zfoot__policies {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.zfoot__col a,
+.zfoot__policies a {
+  color: var(--zenn-on-dark-dim);
+  text-decoration: none;
+  font-size: 0.92rem;
+  transition: color var(--zenn-transition);
+}
+
+.zfoot__col a:hover,
+.zfoot__policies a:hover { color: var(--zenn-on-dark); }
+
+/* ---- Social (bordered circles) ---- */
+.zfoot__social {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.zfoot__social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--zenn-radius-pill);
+  border: 1.5px solid rgba(247, 244, 238, 0.25);
+  color: var(--zenn-on-dark-dim);
+  transition: background-color var(--zenn-transition), color var(--zenn-transition), border-color var(--zenn-transition);
+}
+
+.zfoot__social a:hover {
+  background: var(--zenn-on-dark);
+  color: var(--zenn-charcoal);
+  border-color: var(--zenn-on-dark);
+}
+
+/* ---- Newsletter (underline input) ---- */
+.zfoot__signup-text {
+  margin: 0 0 1.1rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  max-width: 22rem;
+}
+
+.zfoot__signup-row {
+  display: flex;
+  align-items: center;
+  border-bottom: 1.5px solid rgba(247, 244, 238, 0.35);
+  max-width: 22rem;
+  transition: border-color var(--zenn-transition);
+}
+
+.zfoot__signup-row:focus-within { border-color: var(--zenn-on-dark); }
+
+.zfoot__input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--zenn-on-dark);
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.25rem;
+}
+
+.zfoot__input::placeholder { color: rgba(247, 244, 238, 0.55); }
+
+.zfoot__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  color: var(--zenn-on-dark);
+  cursor: pointer;
+  transition: transform var(--zenn-transition), color var(--zenn-transition);
+}
+
+.zfoot__submit:hover { transform: translateX(3px); color: var(--zenn-sand); }
+
+.zfoot__form-msg {
+  margin: 0.75rem 0 0;
+  font-size: 0.85rem;
+  color: var(--zenn-sand);
+}
+
+.zfoot__form-msg--error { color: #e6a58c; }
+
+.zfoot__visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---- Bottom bar ---- */
+.zfoot__bottom {
+  max-width: 1400px;
+  margin: clamp(2.25rem, 4vw, 3.5rem) auto 0;
+  padding: 1.75rem clamp(1.25rem, 5vw, 5rem) 0;
+  border-top: 1px solid rgba(247, 244, 238, 0.15);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.zfoot__copy {
+  margin: 0;
+  font-size: 0.82rem;
+  opacity: 0.7;
+}
+
+.zfoot__policies {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.zfoot__policies a { font-size: 0.82rem; }
+
+/* ---- Responsive ---- */
+@media (max-width: 749px) {
+  .zfoot__cta-btn { margin-left: 0; }
+  .zfoot__cta-heading { flex: 1 1 100%; }
+  .zfoot__grid { grid-template-columns: 1fr 1fr; }
+  .zfoot__brand,
+  .zfoot__signup { grid-column: 1 / -1; }
+}
+
+@media (max-width: 480px) {
+  .zfoot__grid { grid-template-columns: 1fr; gap: 2rem; }
+  .zfoot__bottom { flex-direction: column; align-items: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zfoot__cta-btn:hover,
+  .zfoot__submit:hover { transform: none; }
+}

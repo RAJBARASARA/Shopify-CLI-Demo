@@ -121,17 +121,28 @@
                     class="mega-menu__grid"
                     data-menu-grid-id="{{ list_id }}"
                   >
-                    {% render 'mega-menu-list',
-                      parent_link: link,
-                      id: list_id,
-                      section: section,
-                      grid_columns_count: 6,
-                      grid_columns_count_tablet: 4,
-                      grid_columns_count_collection_images: 8,
-                      menu_content_type: menu_content_type,
-                      content_aspect_ratio: ratio,
-                      image_border_radius: image_border_radius
-                    %}
+                    {% if menu_content_type == 'custom' %}
+                      {% render 'mega-menu-custom',
+                        parent_link: link,
+                        promo_image: block_settings.promo_image,
+                        promo_heading: block_settings.promo_heading,
+                        promo_text: block_settings.promo_text,
+                        promo_cta_label: block_settings.promo_cta_label,
+                        promo_cta_link: block_settings.promo_cta_link
+                      %}
+                    {% else %}
+                      {% render 'mega-menu-list',
+                        parent_link: link,
+                        id: list_id,
+                        section: section,
+                        grid_columns_count: 6,
+                        grid_columns_count_tablet: 4,
+                        grid_columns_count_collection_images: 8,
+                        menu_content_type: menu_content_type,
+                        content_aspect_ratio: ratio,
+                        image_border_radius: image_border_radius
+                      %}
+                    {% endif %}
                   </div>
                 </div>
               </div>
@@ -821,9 +832,48 @@
         {
           "value": "featured_collections",
           "label": "t:options.featured_collections"
+        },
+        {
+          "value": "custom",
+          "label": "Custom mega menu (Zenn)"
         }
       ],
       "default": "collection_images"
+    },
+    {
+      "type": "header",
+      "content": "Custom mega menu promo",
+      "visible_if": "{{ block.settings.menu_style == 'custom' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "promo_image",
+      "label": "Promo image",
+      "visible_if": "{{ block.settings.menu_style == 'custom' }}"
+    },
+    {
+      "type": "text",
+      "id": "promo_heading",
+      "label": "Promo heading",
+      "visible_if": "{{ block.settings.menu_style == 'custom' }}"
+    },
+    {
+      "type": "text",
+      "id": "promo_text",
+      "label": "Promo text",
+      "visible_if": "{{ block.settings.menu_style == 'custom' }}"
+    },
+    {
+      "type": "text",
+      "id": "promo_cta_label",
+      "label": "Promo button label",
+      "visible_if": "{{ block.settings.menu_style == 'custom' }}"
+    },
+    {
+      "type": "url",
+      "id": "promo_cta_link",
+      "label": "Promo button link",
+      "visible_if": "{{ block.settings.menu_style == 'custom' }}"
     },
     {
       "type": "select",

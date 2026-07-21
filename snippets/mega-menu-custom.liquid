@@ -1,0 +1,259 @@
+{% doc %}
+  Renders a Zenn-space custom mega-menu panel: category column(s) built from the
+  menu structure, with per-link subtitles/badges (see mega-link) and an optional
+  free-form promo tile. Designed to drop inside Horizon's existing
+  .mega-menu__grid container so open/close, sticky and a11y keep working.
+
+  @param {object} parent_link - The top-level menu link whose children build the panel.
+  @param {image} [promo_image] - Promo tile image.
+  @param {string} [promo_heading] - Promo tile heading.
+  @param {string} [promo_text] - Promo tile supporting text.
+  @param {string} [promo_cta_label] - Promo tile call-to-action label.
+  @param {string} [promo_cta_link] - Promo tile call-to-action link.
+  @example
+  {% render 'mega-menu-custom', parent_link: link, promo_image: block.settings.promo_image %}
+{% enddoc %}
+
+{% render 'zenn-brand' %}
+
+{%- liquid
+  assign has_leaf = false
+  for child in parent_link.links
+    unless child.links != blank
+      assign has_leaf = true
+    endunless
+  endfor
+  assign has_promo = false
+  if promo_image != blank or promo_heading != blank or promo_cta_label != blank
+    assign has_promo = true
+  endif
+-%}
+
+<div class="zmega{% if has_promo %} zmega--has-promo{% endif %}">
+  <div class="zmega__cols">
+    {%- if has_leaf -%}
+      <div class="zmega__col zmega__col--primary">
+        <ul class="zmega__list" role="list">
+          {%- for child in parent_link.links -%}
+            {%- unless child.links != blank -%}
+              <li>{% render 'mega-link', link: child, primary: true %}</li>
+            {%- endunless -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+
+    {%- for child in parent_link.links -%}
+      {%- if child.links != blank -%}
+        <div class="zmega__col">
+          <h3 class="zmega__col-title">{{ child.title | escape }}</h3>
+          <ul class="zmega__list" role="list">
+            {%- for grandchild in child.links -%}
+              <li>{% render 'mega-link', link: grandchild %}</li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+  {%- if has_promo -%}
+    <a
+      class="zmega__promo"
+      {% if promo_cta_link != blank %}href="{{ promo_cta_link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+    >
+      {%- if promo_image != blank -%}
+        <span class="zmega__promo-media">
+          {{
+            promo_image
+            | image_url: width: 720
+            | image_tag:
+              widths: '360, 540, 720',
+              sizes: '320px',
+              loading: 'lazy',
+              class: 'zmega__promo-img',
+              alt: promo_heading | default: ''
+          }}
+        </span>
+      {%- endif -%}
+      <span class="zmega__promo-body">
+        {%- if promo_heading != blank -%}
+          <span class="zmega__promo-heading">
+            {{ promo_heading | escape }}
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        {%- endif -%}
+        {%- if promo_text != blank -%}<span class="zmega__promo-text">{{ promo_text | escape }}</span>{%- endif -%}
+        {%- if promo_cta_label != blank -%}<span class="zmega__promo-cta">{{ promo_cta_label | escape }}</span>{%- endif -%}
+      </span>
+    </a>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .zmega {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: flex-start;
+    font-family: var(--zenn-font-body);
+    padding-block: 0.5rem;
+  }
+
+  .zmega__cols {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(1.5rem, 3.5vw, 3.5rem);
+    flex: 1 1 auto;
+  }
+
+  .zmega__col {
+    min-width: 150px;
+  }
+
+  .zmega__col--primary {
+    min-width: 190px;
+  }
+
+  .zmega__col-title {
+    margin: 0 0 1.1rem;
+    font-family: var(--zenn-font-body);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.55;
+  }
+
+  .zmega__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .zmega__link {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    text-decoration: none;
+    color: inherit;
+    transition: color var(--zenn-transition, 0.3s ease);
+  }
+
+  .zmega__link-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .zmega__link-title {
+    font-size: 0.95rem;
+    font-weight: 400;
+  }
+
+  .zmega__link--primary .zmega__link-title {
+    font-size: 1.05rem;
+  }
+
+  .zmega__link:hover .zmega__link-title,
+  .zmega__link.is-active .zmega__link-title {
+    color: var(--zenn-clay, #a6795c);
+  }
+
+  .zmega__link-sub {
+    font-size: 0.8rem;
+    opacity: 0.6;
+    line-height: 1.35;
+  }
+
+  .zmega__badge {
+    display: inline-block;
+    padding: 0.15rem 0.55rem;
+    border-radius: var(--zenn-radius-pill, 999px);
+    background: var(--zenn-clay, #a6795c);
+    color: #fff;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* ---- Promo tile ---- */
+  .zmega__promo {
+    flex: 0 0 300px;
+    max-width: 300px;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .zmega__promo-media {
+    display: block;
+    overflow: hidden;
+    border-radius: var(--zenn-radius, 14px);
+    aspect-ratio: 4 / 3;
+    background: var(--zenn-sand, #e4dccf);
+  }
+
+  .zmega__promo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s var(--zenn-ease, ease);
+  }
+
+  .zmega__promo:hover .zmega__promo-img {
+    transform: scale(1.04);
+  }
+
+  .zmega__promo-body {
+    display: block;
+    padding-top: 0.85rem;
+  }
+
+  .zmega__promo-heading {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--zenn-font-heading, Georgia, serif);
+    font-size: 1.15rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .zmega__promo-heading svg {
+    color: var(--zenn-clay, #a6795c);
+    transition: transform var(--zenn-transition, 0.3s ease);
+  }
+
+  .zmega__promo:hover .zmega__promo-heading svg {
+    transform: translateX(3px);
+  }
+
+  .zmega__promo-text {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    opacity: 0.7;
+  }
+
+  .zmega__promo-cta {
+    display: inline-block;
+    margin-top: 0.6rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 1px;
+  }
+
+  @media screen and (max-width: 990px) {
+    .zmega { flex-direction: column; }
+    .zmega__promo { flex-basis: auto; max-width: 420px; }
+  }
+{% endstylesheet %}

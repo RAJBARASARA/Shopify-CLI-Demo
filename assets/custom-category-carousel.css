@@ -1,0 +1,222 @@
+/* ============================================================
+   Zenn-space "Shop by category" carousel
+   ============================================================ */
+
+.zenn-cats {
+  --zenn-cats-gap: clamp(0.75rem, 1.4vw, 1.25rem);
+  font-family: var(--zenn-font-body);
+  padding-block: clamp(2.75rem, 6vw, 5rem);
+}
+
+.zenn-cats--ivory { background: var(--zenn-ivory); }
+.zenn-cats--sand { background: var(--zenn-sand); }
+.zenn-cats--white { background: #fff; }
+
+.zenn-cats__wrap {
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 5vw, 5rem);
+}
+
+/* ---- Header ---- */
+.zenn-cats__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.zenn-cats__eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--zenn-clay);
+}
+
+.zenn-cats__title {
+  margin: 0;
+  font-family: var(--zenn-font-heading);
+  font-weight: 500;
+  font-optical-sizing: auto;
+  font-size: clamp(1.85rem, 3.4vw, 2.9rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--zenn-charcoal);
+}
+
+.zenn-cats__head-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-shrink: 0;
+}
+
+.zenn-cats__viewall {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--zenn-text);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  transition: color var(--zenn-transition);
+}
+
+.zenn-cats__viewall:hover { color: var(--zenn-clay); }
+
+.zenn-cats__nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.zenn-cats__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--zenn-radius-pill);
+  border: 1.5px solid rgba(28, 27, 25, 0.2);
+  background: transparent;
+  color: var(--zenn-charcoal);
+  cursor: pointer;
+  transition: background-color var(--zenn-transition), border-color var(--zenn-transition),
+    color var(--zenn-transition), opacity var(--zenn-transition);
+}
+
+.zenn-cats__arrow:hover {
+  background: var(--zenn-charcoal);
+  border-color: var(--zenn-charcoal);
+  color: var(--zenn-on-dark);
+}
+
+.zenn-cats__arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+  background: transparent;
+  border-color: rgba(28, 27, 25, 0.2);
+  color: var(--zenn-charcoal);
+}
+
+/* Hide arrows when nothing overflows */
+.zenn-cats--static .zenn-cats__nav { display: none; }
+
+/* ---- Track ---- */
+.zenn-cats__track {
+  display: flex;
+  gap: var(--zenn-cats-gap);
+  margin: 0;
+  padding: 0.25rem 0 0.5rem;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.zenn-cats__track::-webkit-scrollbar { display: none; }
+
+.zenn-cats__item {
+  scroll-snap-align: start;
+  /* (cols visible) cards share the row width minus the gaps between them */
+  flex: 0 0 calc(
+    (100% - (var(--zenn-cats-cols) - 1) * var(--zenn-cats-gap)) / var(--zenn-cats-cols)
+  );
+}
+
+/* ---- Card ---- */
+.zenn-cats__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  text-decoration: none;
+}
+
+.zenn-cats__media {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--zenn-radius-lg);
+  aspect-ratio: 3 / 4;
+  background: var(--zenn-ivory-dim);
+}
+
+.zenn-cats__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s var(--zenn-ease);
+}
+
+.zenn-cats__img--placeholder {
+  background:
+    radial-gradient(120% 90% at 30% 0%, rgba(166, 121, 92, 0.35), transparent 60%),
+    linear-gradient(150deg, var(--zenn-sand) 0%, var(--zenn-ivory-dim) 100%);
+}
+
+.zenn-cats__item:nth-child(3n) .zenn-cats__img--placeholder {
+  background:
+    radial-gradient(120% 90% at 70% 0%, rgba(51, 48, 43, 0.28), transparent 60%),
+    linear-gradient(150deg, var(--zenn-ivory-dim) 0%, var(--zenn-sand) 100%);
+}
+
+.zenn-cats__card:hover .zenn-cats__img {
+  transform: scale(1.05);
+}
+
+.zenn-cats__badge {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--zenn-radius-pill);
+  background: var(--zenn-charcoal);
+  color: var(--zenn-on-dark);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.zenn-cats__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.02rem;
+  font-weight: 500;
+  color: var(--zenn-charcoal);
+}
+
+.zenn-cats__label-arrow {
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity var(--zenn-transition), transform var(--zenn-transition);
+  color: var(--zenn-clay);
+}
+
+.zenn-cats__card:hover .zenn-cats__label-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 749px) {
+  .zenn-cats__item {
+    flex-basis: 62%;
+  }
+
+  .zenn-cats__nav { display: none; }
+
+  .zenn-cats__head {
+    align-items: center;
+  }
+}
+
+/* ---- Accessibility ---- */
+@media (prefers-reduced-motion: reduce) {
+  .zenn-cats__img,
+  .zenn-cats__label-arrow {
+    transition: none;
+  }
+}

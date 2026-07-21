@@ -1,0 +1,287 @@
+/* ============================================================
+   Zenn-space custom hero
+   ============================================================ */
+
+.zenn-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: var(--zenn-hero-min-height, 82svh);
+  width: 100%;
+  overflow: hidden;
+  background: var(--zenn-charcoal);
+  font-family: var(--zenn-font-body);
+  isolation: isolate;
+}
+
+/* ---- Media ---- */
+.zenn-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.zenn-hero__media picture {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.zenn-hero__img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  /* Subtle slow zoom-in on load for a polished, alive feel */
+  animation: zenn-hero-zoom 12s var(--zenn-ease) forwards;
+}
+
+.zenn-hero__img--placeholder {
+  background:
+    radial-gradient(120% 120% at 20% 10%, rgba(166, 121, 92, 0.55), transparent 55%),
+    linear-gradient(135deg, #23211d 0%, #3a3630 45%, #a6795c 130%);
+  animation: none;
+}
+
+.zenn-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(to top, rgba(20, 19, 17, 0.55) 0%, rgba(20, 19, 17, 0) 55%),
+    rgba(20, 19, 17, var(--zenn-hero-overlay, 0.4));
+}
+
+.zenn-hero--dark .zenn-hero__overlay {
+  background:
+    linear-gradient(to top, rgba(244, 240, 234, 0.35) 0%, rgba(244, 240, 234, 0) 55%),
+    rgba(244, 240, 234, var(--zenn-hero-overlay, 0.4));
+}
+
+/* ---- Layout ---- */
+.zenn-hero__inner {
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+  padding: clamp(2rem, 6vw, 6rem) clamp(1.25rem, 5vw, 5rem);
+}
+
+.zenn-hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.9rem, 1.6vw, 1.5rem);
+  max-width: 46rem;
+}
+
+.zenn-hero--center .zenn-hero__inner {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.zenn-hero--center .zenn-hero__content {
+  align-items: center;
+}
+
+.zenn-hero--left .zenn-hero__content {
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* ---- Type ---- */
+.zenn-hero__eyebrow {
+  margin: 0;
+  font-size: clamp(0.72rem, 0.9vw, 0.82rem);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--zenn-clay);
+}
+
+.zenn-hero--dark .zenn-hero__eyebrow {
+  color: var(--zenn-charcoal-soft);
+}
+
+.zenn-hero__heading {
+  margin: 0;
+  font-family: var(--zenn-font-heading);
+  font-weight: 500;
+  font-optical-sizing: auto;
+  font-size: clamp(2.6rem, 6.2vw, 5.25rem);
+  line-height: 1.03;
+  letter-spacing: -0.01em;
+  color: var(--zenn-on-dark);
+  text-wrap: balance;
+}
+
+.zenn-hero--dark .zenn-hero__heading {
+  color: var(--zenn-charcoal);
+}
+
+.zenn-hero__subheading {
+  font-size: clamp(1rem, 1.35vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--zenn-on-dark-dim);
+  max-width: 34rem;
+}
+
+.zenn-hero__subheading p {
+  margin: 0;
+}
+
+.zenn-hero--dark .zenn-hero__subheading {
+  color: rgba(43, 42, 40, 0.85);
+}
+
+/* ---- Buttons ---- */
+.zenn-hero__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: clamp(0.5rem, 1vw, 1rem);
+}
+
+.zenn-hero--center .zenn-hero__buttons {
+  justify-content: center;
+}
+
+.zenn-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.95rem 1.9rem;
+  border-radius: var(--zenn-radius);
+  font-family: var(--zenn-font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: transform var(--zenn-transition), background-color var(--zenn-transition),
+    color var(--zenn-transition), border-color var(--zenn-transition);
+  will-change: transform;
+}
+
+.zenn-btn:hover {
+  transform: translateY(-2px);
+}
+
+.zenn-btn:active {
+  transform: translateY(0);
+}
+
+.zenn-btn--primary {
+  background: var(--zenn-ivory);
+  color: var(--zenn-charcoal);
+  border-color: var(--zenn-ivory);
+}
+
+.zenn-btn--primary:hover {
+  background: #fff;
+  border-color: #fff;
+}
+
+.zenn-btn--secondary {
+  background: transparent;
+  color: var(--zenn-on-dark);
+  border-color: rgba(247, 244, 238, 0.55);
+}
+
+.zenn-btn--secondary:hover {
+  background: rgba(247, 244, 238, 0.12);
+  border-color: var(--zenn-on-dark);
+}
+
+.zenn-hero--dark .zenn-btn--primary {
+  background: var(--zenn-charcoal);
+  color: var(--zenn-on-dark);
+  border-color: var(--zenn-charcoal);
+}
+
+.zenn-hero--dark .zenn-btn--primary:hover {
+  background: var(--zenn-charcoal-soft);
+  border-color: var(--zenn-charcoal-soft);
+}
+
+.zenn-hero--dark .zenn-btn--secondary {
+  color: var(--zenn-charcoal);
+  border-color: rgba(28, 27, 25, 0.45);
+}
+
+.zenn-hero--dark .zenn-btn--secondary:hover {
+  background: rgba(28, 27, 25, 0.06);
+  border-color: var(--zenn-charcoal);
+}
+
+.zenn-btn[aria-disabled="true"] {
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ---- Entrance animation (staggered fade-up) ---- */
+.zenn-hero__eyebrow,
+.zenn-hero__heading,
+.zenn-hero__subheading,
+.zenn-hero__buttons {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: zenn-hero-rise 0.8s var(--zenn-ease) forwards;
+  animation-delay: calc(0.12s * var(--i, 0) + 0.1s);
+}
+
+@keyframes zenn-hero-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zenn-hero-zoom {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 749px) {
+  .zenn-hero__content {
+    gap: 1rem;
+  }
+
+  .zenn-hero__buttons {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .zenn-btn {
+    width: 100%;
+  }
+}
+
+/* ---- Accessibility ---- */
+@media (prefers-reduced-motion: reduce) {
+  .zenn-hero__img,
+  .zenn-hero__eyebrow,
+  .zenn-hero__heading,
+  .zenn-hero__subheading,
+  .zenn-hero__buttons {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Keep everything visible/static while editing in the theme editor */
+.zenn-hero[data-design-mode="true"] .zenn-hero__eyebrow,
+.zenn-hero[data-design-mode="true"] .zenn-hero__heading,
+.zenn-hero[data-design-mode="true"] .zenn-hero__subheading,
+.zenn-hero[data-design-mode="true"] .zenn-hero__buttons {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
