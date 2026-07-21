@@ -1,0 +1,51 @@
+{% doc %}
+  Renders one Zenn-space mega-menu link, parsing an optional subtitle and badge
+  from the menu link title using a convention:
+    "Classic Percale | Crisp, cool"     -> title + subtitle
+    "Bedding Bundles [UP TO 30% OFF]"    -> title + badge
+    "Cool TENCEL | Truly refreshing [NEW]" -> title + subtitle + badge
+  @param {object} link - The menu link object.
+  @param {boolean} [primary] - Larger styling for the first (category) column.
+  @example
+  {% render 'mega-link', link: childLink %}
+{% enddoc %}
+
+{%- liquid
+  assign raw = link.title | strip
+  assign title = raw
+  assign subtitle = ''
+  assign badge = ''
+
+  if raw contains '|'
+    assign bits = raw | split: '|'
+    assign title = bits | first | strip
+    assign subtitle = bits | last | strip
+  endif
+
+  assign badge_source = title
+  if subtitle contains '['
+    assign badge_source = subtitle
+  endif
+
+  if badge_source contains '['
+    assign after = badge_source | split: '[' | last
+    assign badge = after | split: ']' | first | strip
+    assign clean = badge_source | split: '[' | first | strip
+    if subtitle contains '['
+      assign subtitle = clean
+    else
+      assign title = clean
+    endif
+  endif
+-%}
+
+<a
+  class="zmega__link{% if primary %} zmega__link--primary{% endif %}{% if link.active %} is-active{% endif %}"
+  href="{{ link.url }}"
+>
+  <span class="zmega__link-row">
+    <span class="zmega__link-title">{{ title }}</span>
+    {%- if badge != blank -%}<span class="zmega__badge">{{ badge }}</span>{%- endif -%}
+  </span>
+  {%- if subtitle != blank -%}<span class="zmega__link-sub">{{ subtitle }}</span>{%- endif -%}
+</a>

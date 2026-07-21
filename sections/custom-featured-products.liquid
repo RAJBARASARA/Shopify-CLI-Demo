@@ -1,0 +1,284 @@
+{% comment %}
+  Zenn-space featured products carousel.
+  Pulls products from a chosen collection and renders premium cards:
+  image (with hover swap), badges, star rating, color swatches, sale pricing.
+  Falls back to placeholder cards when no collection/products are set so it
+  previews cleanly. Brand tokens + Fraunces from snippets/zenn-brand.liquid.
+{% endcomment %}
+
+{% render 'zenn-brand' %}
+{{ 'custom-featured-products.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign s = section.settings
+  assign bg = s.background | default: 'white'
+  assign products = s.collection.products
+  assign product_count = products | size
+  assign limit = s.max_products | default: 8
+%}
+
+<section class="zpc zpc--{{ bg }}" style="--zpc-cols: {{ s.columns | default: 4 }};">
+  <div class="zpc__wrap">
+    <div class="zpc__head">
+      <div class="zpc__head-text">
+        {%- if s.eyebrow != blank -%}
+          <p class="zpc__eyebrow">{{ s.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if s.heading != blank -%}
+          <h2 class="zpc__title">{{ s.heading | escape }}</h2>
+        {%- endif -%}
+      </div>
+      <div class="zpc__head-actions">
+        {%- if s.link_label != blank and s.collection != blank -%}
+          <a class="zpc__viewall" href="{{ s.collection.url }}">{{ s.link_label | escape }}</a>
+        {%- endif -%}
+        <div class="zpc__nav">
+          <button class="zpc__arrow" type="button" data-dir="prev" aria-label="Scroll to previous products">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="zpc__arrow" type="button" data-dir="next" aria-label="Scroll to next products">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <ul class="zpc__track" role="list">
+      {%- if product_count > 0 -%}
+        {%- for product in products limit: limit -%}
+          {%- liquid
+            assign on_sale = false
+            if product.compare_at_price > product.price
+              assign on_sale = true
+              assign pct_off = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round
+            endif
+
+            assign second_image = product.images[1]
+
+            assign color_opt = null
+            for opt in product.options_with_values
+              assign oname = opt.name | downcase
+              if oname contains 'color' or oname contains 'colour'
+                assign color_opt = opt
+              endif
+            endfor
+
+            assign rating = product.metafields.reviews.rating.value
+            assign rating_count = product.metafields.reviews.rating_count.value
+          -%}
+          <li class="zpc__item">
+            <div class="zpc__card">
+              <a class="zpc__media-link" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+                <div class="zpc__media">
+                  {%- if product.featured_image != blank -%}
+                    {{
+                      product.featured_image
+                      | image_url: width: 800
+                      | image_tag:
+                        widths: '300, 450, 600, 800',
+                        sizes: '(max-width: 749px) 70vw, 25vw',
+                        class: 'zpc__img zpc__img--primary',
+                        loading: 'lazy',
+                        alt: product.featured_image.alt | default: product.title
+                    }}
+                    {%- if second_image != blank -%}
+                      {{
+                        second_image
+                        | image_url: width: 800
+                        | image_tag:
+                          widths: '300, 450, 600, 800',
+                          sizes: '(max-width: 749px) 70vw, 25vw',
+                          class: 'zpc__img zpc__img--secondary',
+                          loading: 'lazy',
+                          alt: ''
+                      }}
+                    {%- endif -%}
+                  {%- else -%}
+                    <div class="zpc__img zpc__img--placeholder" aria-hidden="true"></div>
+                  {%- endif -%}
+
+                  <div class="zpc__badges">
+                    {%- if product.tags contains 'new' or product.tags contains 'New' -%}
+                      <span class="zpc__badge zpc__badge--new">New</span>
+                    {%- endif -%}
+                    {%- if on_sale -%}
+                      <span class="zpc__badge zpc__badge--sale">{{ pct_off }}% off</span>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </a>
+
+              <div class="zpc__body">
+                {%- if color_opt and color_opt.values.size > 0 -%}
+                  <div class="zpc__swatches" aria-label="Available colors">
+                    {%- for value in color_opt.values limit: 5 -%}
+                      {%- if value.swatch.image != blank -%}
+                        <span class="zpc__swatch" style="background-image:url({{ value.swatch.image | image_url: width: 40 }});" title="{{ value | escape }}"></span>
+                      {%- elsif value.swatch.color -%}
+                        <span class="zpc__swatch" style="background:{{ value.swatch.color }};" title="{{ value | escape }}"></span>
+                      {%- else -%}
+                        <span class="zpc__swatch zpc__swatch--empty" title="{{ value | escape }}"></span>
+                      {%- endif -%}
+                    {%- endfor -%}
+                    {%- if color_opt.values.size > 5 -%}
+                      <span class="zpc__swatch-more">+{{ color_opt.values.size | minus: 5 }}</span>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+
+                <a class="zpc__name" href="{{ product.url }}">{{ product.title | escape }}</a>
+
+                {%- if rating -%}
+                  <div class="zpc__rating" aria-label="Rated {{ rating }} out of 5">
+                    <span class="zpc__stars" style="--rating: {{ rating | times: 20 }}%;" aria-hidden="true"></span>
+                    {%- if rating_count -%}<span class="zpc__rating-count">({{ rating_count }})</span>{%- endif -%}
+                  </div>
+                {%- endif -%}
+
+                <div class="zpc__price">
+                  {%- if on_sale -%}
+                    <span class="zpc__price-sale">{{ product.price | money }}</span>
+                    <s class="zpc__price-was">{{ product.compare_at_price | money }}</s>
+                  {%- else -%}
+                    <span class="zpc__price-sale">{{ product.price | money }}</span>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          </li>
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%} Placeholder cards so the section previews before a collection is chosen {%- endcomment -%}
+        {%- assign placeholders = 'Cashmere Crew Sweater,Relaxed Linen Shirt,Tailored Wool Trouser,Merino Beanie,Leather Weekender' | split: ',' -%}
+        {%- for name in placeholders -%}
+          <li class="zpc__item">
+            <div class="zpc__card">
+              <div class="zpc__media-link">
+                <div class="zpc__media">
+                  <div class="zpc__img zpc__img--placeholder" aria-hidden="true"></div>
+                  {%- if forloop.first -%}<div class="zpc__badges"><span class="zpc__badge zpc__badge--new">New</span></div>{%- endif -%}
+                </div>
+              </div>
+              <div class="zpc__body">
+                <div class="zpc__swatches" aria-hidden="true">
+                  <span class="zpc__swatch" style="background:#2b2a28;"></span>
+                  <span class="zpc__swatch" style="background:#a6795c;"></span>
+                  <span class="zpc__swatch" style="background:#e4dccf;"></span>
+                </div>
+                <span class="zpc__name">{{ name | strip }}</span>
+                <div class="zpc__rating" aria-hidden="true">
+                  <span class="zpc__stars" style="--rating: 92%;"></span>
+                  <span class="zpc__rating-count">(128)</span>
+                </div>
+                <div class="zpc__price"><span class="zpc__price-sale">$—</span></div>
+              </div>
+            </div>
+          </li>
+        {%- endfor -%}
+      {%- endif -%}
+    </ul>
+  </div>
+</section>
+
+{% javascript %}
+  (function () {
+    function initZpc(root) {
+      (root || document).querySelectorAll('.zpc').forEach(function (el) {
+        if (el.dataset.znInit === '1') return;
+        el.dataset.znInit = '1';
+        var track = el.querySelector('.zpc__track');
+        var prev = el.querySelector('[data-dir="prev"]');
+        var next = el.querySelector('[data-dir="next"]');
+        if (!track || !prev || !next) return;
+
+        function step() {
+          var card = track.querySelector('.zpc__item');
+          var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 0) || 0;
+          var w = card ? card.getBoundingClientRect().width + gap : track.clientWidth * 0.8;
+          return Math.max(w, 120);
+        }
+        function update() {
+          var max = track.scrollWidth - track.clientWidth - 2;
+          prev.disabled = track.scrollLeft <= 2;
+          next.disabled = track.scrollLeft >= max;
+          el.classList.toggle('zpc--static', track.scrollWidth <= track.clientWidth + 4);
+        }
+        prev.addEventListener('click', function () { track.scrollBy({ left: -step() * 2, behavior: 'smooth' }); });
+        next.addEventListener('click', function () { track.scrollBy({ left: step() * 2, behavior: 'smooth' }); });
+        track.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+        update();
+      });
+    }
+    if (document.readyState !== 'loading') { initZpc(); }
+    else { document.addEventListener('DOMContentLoaded', function () { initZpc(); }); }
+    document.addEventListener('shopify:section:load', function (e) { initZpc(e.target); });
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Featured products",
+  "tag": "section",
+  "class": "zpc-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "Featured"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop the collection"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "View-all link label",
+      "default": "View all"
+    },
+    {
+      "type": "range",
+      "id": "max_products",
+      "label": "Maximum products",
+      "min": 4,
+      "max": 16,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Cards visible (desktop)",
+      "min": 3,
+      "max": 5,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "ivory", "label": "Ivory" },
+        { "value": "sand", "label": "Sand" }
+      ],
+      "default": "white"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured products"
+    }
+  ]
+}
+{% endschema %}

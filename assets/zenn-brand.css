@@ -1,0 +1,34 @@
+/* ============================================================
+   Zenn-space brand foundation
+   Shared design tokens for all custom Zenn-space sections.
+   Palette: "Charcoal + warm sand". Headings: Fraunces + Inter body.
+   Loaded once via snippets/zenn-brand.liquid.
+   ============================================================ */
+
+:root {
+  /* Core palette */
+  --zenn-charcoal: #1c1b19;
+  --zenn-charcoal-soft: #33302b;
+  --zenn-ivory: #f4f0ea;
+  --zenn-sand: #e4dccf;
+  --zenn-text: #2b2a28;
+  --zenn-clay: #a6795c;
+
+  /* Derived tints */
+  --zenn-ivory-dim: #ece7dd;
+  --zenn-on-dark: #f7f4ee;
+  --zenn-on-dark-dim: rgba(247, 244, 238, 0.82);
+
+  /* Type */
+  --zenn-font-heading: "Fraunces", Georgia, "Times New Roman", serif;
+  --zenn-font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Shape + spacing */
+  --zenn-radius: 14px;
+  --zenn-radius-lg: 22px;
+  --zenn-radius-pill: 999px;
+
+  /* Motion */
+  --zenn-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --zenn-transition: 0.4s var(--zenn-ease);
+}

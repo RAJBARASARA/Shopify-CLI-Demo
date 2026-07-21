@@ -1,0 +1,145 @@
+{% comment %}
+  Zenn-space footer (dark).
+  Sand CTA band with a side-by-side row (serif heading | text | pill button),
+  then a charcoal main area: brand block + social, menu columns, newsletter,
+  and a policy/copyright bottom bar.
+  Brand tokens + Fraunces from snippets/zenn-brand.liquid.
+{% endcomment %}
+
+{% render 'zenn-brand' %}
+{{ 'custom-footer.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign s = section.settings
+%}
+
+<footer class="zfoot">
+  {%- if s.show_cta and s.cta_heading != blank -%}
+    <div class="zfoot__cta">
+      <div class="zfoot__cta-inner">
+        <h2 class="zfoot__cta-heading">{{ s.cta_heading | escape }}</h2>
+        {%- if s.cta_text != blank -%}<p class="zfoot__cta-text">{{ s.cta_text | escape }}</p>{%- endif -%}
+        {%- if s.cta_button_label != blank -%}
+          <a class="zfoot__cta-btn" {% if s.cta_button_link != blank %}href="{{ s.cta_button_link }}"{% else %}role="link" aria-disabled="true"{% endif %}>{{ s.cta_button_label | escape }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="zfoot__main">
+    <div class="zfoot__grid">
+      <div class="zfoot__brand">
+        <p class="zfoot__logo">{{ s.brand_name | default: shop.name | escape }}</p>
+        {%- if s.brand_tagline != blank -%}<p class="zfoot__tagline">{{ s.brand_tagline | escape }}</p>{%- endif -%}
+        {%- render 'zfoot-social', s: s -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- assign menu = block.settings.menu -%}
+        {%- if menu != blank -%}
+          <nav class="zfoot__col" aria-label="{{ block.settings.heading | default: menu.title | escape }}" {{ block.shopify_attributes }}>
+            <h3 class="zfoot__col-title">{{ block.settings.heading | default: menu.title | escape }}</h3>
+            <ul role="list">
+              {%- for link in menu.links -%}
+                <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </nav>
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if s.show_newsletter -%}
+        <div class="zfoot__signup">
+          <h3 class="zfoot__col-title">{{ s.newsletter_heading | default: 'Get on the list' | escape }}</h3>
+          {%- if s.newsletter_text != blank -%}<p class="zfoot__signup-text">{{ s.newsletter_text | escape }}</p>{%- endif -%}
+          {%- form 'customer', class: 'zfoot__form' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div class="zfoot__signup-row">
+              <label class="zfoot__visually-hidden" for="zfoot-email-{{ section.id }}">Email address</label>
+              <input
+                id="zfoot-email-{{ section.id }}"
+                class="zfoot__input"
+                type="email"
+                name="contact[email]"
+                placeholder="Email address"
+                autocomplete="email"
+                required
+              >
+              <button class="zfoot__submit" type="submit" aria-label="Subscribe">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            {%- if form.posted_successfully? -%}
+              <p class="zfoot__form-msg">Thanks for subscribing.</p>
+            {%- elsif form.errors -%}
+              <p class="zfoot__form-msg zfoot__form-msg--error">{{ form.errors | default_errors }}</p>
+            {%- endif -%}
+          {%- endform -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="zfoot__bottom">
+      <p class="zfoot__copy">&copy; {{ 'now' | date: '%Y' }} {{ s.brand_name | default: shop.name | escape }}. All rights reserved.</p>
+      {%- if shop.policies.size > 0 -%}
+        <ul class="zfoot__policies" role="list">
+          {%- for policy in shop.policies -%}
+            <li><a href="{{ policy.url }}">{{ policy.title | escape }}</a></li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Zenn Footer",
+  "tag": "section",
+  "class": "zfoot-section",
+  "settings": [
+    { "type": "header", "content": "CTA band" },
+    { "type": "checkbox", "id": "show_cta", "label": "Show CTA band", "default": true },
+    { "type": "text", "id": "cta_heading", "label": "CTA heading", "default": "Come say hi" },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Questions, sizing, styling — our team is one message away." },
+    { "type": "text", "id": "cta_button_label", "label": "CTA button label", "default": "Contact us" },
+    { "type": "url", "id": "cta_button_link", "label": "CTA button link" },
+
+    { "type": "header", "content": "Brand" },
+    { "type": "text", "id": "brand_name", "label": "Brand name", "info": "Defaults to your store name.", "default": "Zenn-space" },
+    { "type": "text", "id": "brand_tagline", "label": "Tagline", "default": "Elevated everyday apparel, made to move with you." },
+
+    { "type": "header", "content": "Newsletter" },
+    { "type": "checkbox", "id": "show_newsletter", "label": "Show newsletter signup", "default": true },
+    { "type": "text", "id": "newsletter_heading", "label": "Heading", "default": "Get on the list" },
+    { "type": "text", "id": "newsletter_text", "label": "Text", "default": "Early access to new arrivals and members-only offers." },
+
+    { "type": "header", "content": "Social links" },
+    { "type": "url", "id": "social_instagram", "label": "Instagram" },
+    { "type": "url", "id": "social_tiktok", "label": "TikTok" },
+    { "type": "url", "id": "social_facebook", "label": "Facebook" },
+    { "type": "url", "id": "social_pinterest", "label": "Pinterest" },
+    { "type": "url", "id": "social_x", "label": "X (Twitter)" },
+    { "type": "url", "id": "social_youtube", "label": "YouTube" }
+  ],
+  "blocks": [
+    {
+      "type": "menu_column",
+      "name": "Menu column",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "info": "Defaults to the menu's title." },
+        { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zenn Footer",
+      "blocks": [
+        { "type": "menu_column", "settings": { "heading": "Shop", "menu": "main-menu" } },
+        { "type": "menu_column", "settings": { "heading": "Help", "menu": "footer" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
