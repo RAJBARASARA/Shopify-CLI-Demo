@@ -1,0 +1,398 @@
+/* ==========================================================================
+   CUSTOM FEATURE SECTION
+   Main two-column layout
+   ========================================================================== */
+
+.custom-feature-section__wrapper{
+  display:grid;
+  grid-template-columns:49% 51%;
+}
+
+/* Left sticky image column */
+.custom-feature-section__left{
+  position:sticky;
+  top:0;
+  height:100vh;
+}
+
+/* Left column image */
+.custom-feature-section__left img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* Right content column */
+.custom-feature-section__right{
+  position:relative;
+  padding:24px;
+}
+
+/* ==========================================================================
+   SECTION HEADER
+   Top title area
+   ========================================================================== */
+
+.custom-feature-section__top{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:269px;
+}
+
+/* Main heading */
+.custom-feature-section__top-title{
+  color:#000;
+  text-align:center;
+  font-family:'Inter regular';
+  font-size:22px;
+  font-style:normal;
+  font-weight:400;
+  line-height:26px;
+}
+
+/* Bottom italic text */
+.custom-feature-section__bottom span{
+  color:#000;
+  text-align:center;
+  font-family:'Inter Custom';
+  font-size:24px;
+  font-style:italic;
+  font-weight:400;
+  line-height:26px;
+  width:100%;
+  display:block;
+}
+
+/* ==========================================================================
+   FEATURE CARD GRID
+   Product / feature cards listing
+   ========================================================================== */
+
+.feature-card-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:24px;
+  margin-top:47px;
+}
+
+/* Individual card */
+.feature-card{
+  width:calc(50% - 12px);
+  cursor:pointer;
+  overflow:hidden;
+}
+
+/* Card image */
+.feature-card__image{
+  width:100%;
+  height:268px;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  transition:transform .8s ease;
+}
+
+/* Hover zoom effect */
+.feature-card:hover .feature-card__image{
+  transform:scale(1.05);
+}
+
+/* Card footer content */
+.feature-card__content{
+  display:flex;
+  justify-content:space-between;
+  padding-top:5px;
+}
+
+/* Card title */
+.feature-card__content span.feature-card__title{
+  color:#000;
+  text-align:left;
+  font-family:'Inter regular';
+  font-size:14px;
+  font-style:normal;
+  font-weight:400;
+  line-height:16px;
+}
+
+/* Card subtitle */
+.feature-card__content span.feature-card__subtitle{
+  color:#000;
+  text-align:right;
+  font-family:'Cormorant';
+  font-size:14px;
+  font-style:normal;
+  font-weight:400;
+  line-height:16px;
+}
+
+/* Default title styles */
+.feature-card__title{
+  display:block;
+  font-size:24px;
+  font-weight:600;
+}
+
+/* Default subtitle styles */
+.feature-card__subtitle{
+  display:block;
+  font-size:14px;
+}
+
+/* ==========================================================================
+   POPUP / MODAL
+   Fullscreen feature detail popup
+   ========================================================================== */
+
+.feature-popup-overlay{
+  position:fixed;
+  inset:0;
+  width:100vw;
+  height:100vh;
+  background:#fff;
+  z-index:9999;
+  display:none;
+  overflow:hidden;
+}
+
+/* Popup visible state */
+.feature-popup-overlay.active{
+  display:block;
+}
+
+/* Popup two-column layout */
+.popup-layout{
+  display:grid;
+  grid-template-columns:50vw 1fr;
+  height:100vh;
+}
+
+/* Popup image area */
+.popup-layout__image{
+  height:100vh;
+  overflow:hidden;
+}
+
+/* Popup image */
+.popup-layout__image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* Popup content wrapper */
+.popup-layout__content{
+  padding:96px 96px 24px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  align-items:center;
+}
+
+/* Popup heading alignment */
+.popup-layout__content .popup-heading{
+  text-align:center;
+}
+
+/* Initial animation state */
+.popup-heading,
+.popup-description,
+.popup-close{
+  opacity:0;
+  transform:translateY(30px);
+}
+
+/* Popup description alignment */
+.popup-description{
+  text-align:center;
+}
+
+/* Main popup heading */
+.popup-layout__content .popup-heading h3{
+  text-align:center;
+  font-family:'Inter regular';
+  font-size:58px;
+  font-style:normal;
+  font-weight:400;
+  line-height:70px;
+  margin:0;
+}
+
+/* Popup subtitle */
+.popup-layout__content .popup-heading span{
+  color:#000;
+  text-align:center;
+  font-family:'Inter Custom';
+  font-size:24px;
+  font-style:italic;
+  font-weight:400;
+  line-height:26px;
+}
+
+/* Popup description text */
+.popup-layout__content .popup-description p{
+  color:#000;
+  text-align:center;
+  font-family:'Inter regular';
+  font-size:22px;
+  font-style:normal;
+  font-weight:400;
+  line-height:26px;
+}
+
+/* Popup close button */
+.popup-layout__content button.popup-close,
+.get_in_touch {
+  margin: 0;
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 26px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  position: relative;
+  display: inline-block; /* Makes width equal to text */
+  text-decoration: none;
+  padding: 0;
+}
+
+.get_in_touch {
+  margin: 48px auto 0;
+  display: flex;
+}
+
+.popup-layout__content button.popup-close::after,
+.get_in_touch::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px; /* Adjust distance from text */
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform-origin: right; /* Shrinks toward the right */
+  transform: scaleX(1);
+  transition: transform 0.35s ease;
+}
+
+.popup-layout__content button.popup-close:hover::after,
+.get_in_touch:hover::after {
+  transform: scaleX(0);
+}
+
+/* Close button wrapper */
+.popup-close{
+  margin-top:40px;
+  width:fit-content;
+  cursor:pointer;
+}
+
+/* Animated cloned image */
+.popup-image-clone{
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+
+/* ==========================================================================
+   RESPONSIVE - LARGE TABLET
+   ========================================================================== */
+
+@media(max-width:1200px){
+
+  /* Reduce card image height */
+  .feature-card__image{
+    height:201px;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE - TABLET
+   ========================================================================== */
+
+@media(max-width:1024px){
+
+  /* Reduce spacing in header */
+  .custom-feature-section__top{
+    gap:136px;
+  }
+
+  /* Smaller card images */
+  .feature-card__image{
+    height:167px;
+  }
+
+  /* Increase vertical spacing between rows */
+  .feature-card-list{
+    row-gap:28px;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE - SMALL TABLET
+   ========================================================================== */
+
+@media(max-width:991px){
+
+  /* Single column cards */
+  .feature-card{
+    width:100%;
+  }
+
+  /* Larger image for full-width card */
+  .feature-card__image{
+    height:271px;
+  }
+
+  /* Reduce popup side padding */
+  .popup-layout__content{
+    padding:96px 64px 24px;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE - MOBILE
+   ========================================================================== */
+
+@media(max-width:768px){
+
+  /* Convert section into single column */
+  .custom-feature-section__wrapper{
+    grid-template-columns:1fr;
+  }
+
+  /* Popup becomes stacked layout */
+  .popup-layout{
+    grid-template-columns:1fr;
+    overflow:scroll;
+  }
+
+  /* Mobile popup spacing */
+  .popup-layout__content{
+    padding:24px;
+    gap:128px;
+  }
+
+  /* Popup image height */
+  .popup-layout__image{
+    height:51vh;
+  }
+
+  /* Disable sticky image on mobile */
+  .custom-feature-section__left{
+    position:unset;
+    height:51vh;
+  }
+
+  /* Mobile card spacing */
+  .feature-card-list{
+    row-gap:24px;
+  }
+}

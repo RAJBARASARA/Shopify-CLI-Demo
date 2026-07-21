@@ -1,0 +1,162 @@
+{{ 'tok-theme.css' | asset_url | stylesheet_tag }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+{%- assign current_sort = collection.sort_by | default: collection.default_sort_by -%}
+<div class="tok-page">
+  <div class="tok-topbar">{{ section.settings.topbar_text }}</div>
+  <header class="tok-nav">
+    <div class="tok-nav-inner">
+      <a class="tok-brand" href="{{ routes.root_url }}">
+        <span class="tok-brand-mark">{{ section.settings.brand_mark }}</span>
+        <span class="tok-brand-meta">
+          <strong>{{ section.settings.brand_title }}</strong>
+          <span>{{ section.settings.brand_subtitle }}</span>
+        </span>
+      </a>
+      <nav class="tok-nav-links">
+        <a href="#tok-collection-grid-{{ section.id }}">Products</a>
+        <a href="{{ routes.cart_url }}">Cart</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="tok-section-shell">
+    <div class="tok-breadcrumbs">
+      <a href="{{ routes.root_url }}">Home</a><span>/</span><span>{{ collection.title }}</span>
+    </div>
+    <div class="tok-collection-hero">
+      <div class="tok-collection-banner">
+        <div class="tok-banner-copy">
+          <span class="tok-eyebrow">{{ section.settings.banner_eyebrow }}</span>
+          <h1 class="tok-collection-title">{{ collection.title }}</h1>
+          <div class="tok-copy">{{ collection.description | default: section.settings.fallback_copy }}</div>
+          <div class="tok-toolbar">
+            <span class="tok-summary-chip">{{ collection.products_count }} products</span>
+            <form class="tok-sort-form" method="get">
+              <select name="sort_by" onchange="this.form.submit()">
+                {%- for option in collection.sort_options -%}
+                  <option value="{{ option.value }}" {% if option.value == current_sort %}selected{% endif %}>{{ option.name }}</option>
+                {%- endfor -%}
+              </select>
+            </form>
+          </div>
+        </div>
+        <div class="tok-banner-image">
+          {%- if section.settings.banner_image != blank -%}
+            {{ section.settings.banner_image | image_url: width: 1600 | image_tag: loading: 'eager', class: 'tok-media-image', alt: collection.title | escape }}
+          {%- elsif collection.image != blank -%}
+            {{ collection.image | image_url: width: 1600 | image_tag: loading: 'eager', class: 'tok-media-image', alt: collection.title | escape }}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tok-band">
+    <div class="tok-band-inner">
+      <div class="tok-section-shell tok-panel-pad--lg">
+        <div class="tok-band-header tok-band-header--center">
+          <span class="tok-eyebrow">{{ section.settings.features_eyebrow }}</span>
+          <h2 class="tok-title">{{ section.settings.features_title }}</h2>
+        </div>
+        <div class="tok-social-grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'feature' -%}
+              <article class="tok-review-card" {{ block.shopify_attributes }}>
+                <div class="tok-card-image">
+                  {%- if block.settings.image != blank -%}
+                    {{ block.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: block.settings.title | escape }}
+                  {%- endif -%}
+                </div>
+                <div class="tok-card-footer">
+                  <h3 class="tok-card-title">{{ block.settings.title }}</h3>
+                  <div class="tok-meta">{{ block.settings.copy }}</div>
+                </div>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tok-collection-grid-{{ section.id }}" class="tok-band">
+    <div class="tok-band-inner">
+      <div class="tok-section-shell tok-panel-pad--lg">
+        <div class="tok-collection-grid">
+          {%- for product in collection.products -%}
+            <article class="tok-product-card">
+              <a href="{{ product.url }}" class="tok-card-image">
+                {%- if product.featured_image != blank -%}
+                  {{ product.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'tok-media-image', alt: product.title | escape }}
+                {%- endif -%}
+              </a>
+              <div class="tok-card-footer">
+                <span class="tok-small">{{ product.type | default: collection.title }}</span>
+                <h3 class="tok-card-title">{{ product.title }}</h3>
+                <div class="tok-meta">{{ product.description | strip_html | truncatewords: 16 }}</div>
+                <div class="tok-product-price">{{ product.price | money }}</div>
+                <a class="tok-btn tok-btn--secondary" href="{{ product.url }}">View product</a>
+              </div>
+            </article>
+          {%- else -%}
+            <article class="tok-empty-state" style="grid-column:1/-1;">
+              <div class="tok-empty-image"></div>
+              <h3 class="tok-card-title">No products yet</h3>
+              <div class="tok-empty-copy">Add products to this collection and the layout will populate automatically in the same design system.</div>
+            </article>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="tok-footer">
+    <div class="tok-footer-inner">
+      <span>{{ section.settings.footer_left }}</span>
+      <span>{{ section.settings.footer_right }}</span>
+    </div>
+  </footer>
+</div>
+
+{% schema %}
+{
+  "name": "TOK main collection",
+  "settings": [
+    {"type":"text","id":"topbar_text","label":"Topbar text","default":"Collection page / Light luxury Shopify layout"},
+    {"type":"text","id":"brand_mark","label":"Brand mark","default":"TK"},
+    {"type":"text","id":"brand_title","label":"Brand title","default":"Threads of Kaos"},
+    {"type":"text","id":"brand_subtitle","label":"Brand subtitle","default":"Identity, rebuilt."},
+    {"type":"text","id":"banner_eyebrow","label":"Banner eyebrow","default":"Collection page"},
+    {"type":"richtext","id":"fallback_copy","label":"Fallback copy","default":"<p>Use this collection template to keep the landing page visual language while showing real Shopify products and unique images.</p>"},
+    {"type":"image_picker","id":"banner_image","label":"Banner image"},
+    {"type":"text","id":"features_eyebrow","label":"Features eyebrow","default":"Collection story"},
+    {"type":"text","id":"features_title","label":"Features title","default":"Why this drop stands apart"},
+    {"type":"text","id":"footer_left","label":"Footer left","default":"Threads of Kaos / Shopify collection template"},
+    {"type":"text","id":"footer_right","label":"Footer right","default":"Real collection products / same design system"}
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature card",
+      "settings": [
+        {"type":"image_picker","id":"image","label":"Image"},
+        {"type":"text","id":"title","label":"Title","default":"Feature heading"},
+        {"type":"textarea","id":"copy","label":"Copy","default":"Use a unique supporting image and short selling message here."}
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TOK main collection",
+      "blocks": [
+        {"type":"feature"},
+        {"type":"feature"},
+        {"type":"feature"}
+      ]
+    }
+  ]
+}
+{% endschema %}

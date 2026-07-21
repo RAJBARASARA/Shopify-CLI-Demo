@@ -1,0 +1,195 @@
+{% comment %}
+  Load section-specific stylesheet from Assets folder.
+  Keeps CSS separate from Liquid for better maintainability.
+{% endcomment %}
+{{ 'custom-feature-cards.css' | asset_url | stylesheet_tag }}
+
+{% comment %}
+  Cache frequently used section settings into variables.
+  Improves readability and avoids repeated lookups.
+{% endcomment %}
+{% liquid
+  assign left_image = section.settings.left_image
+  assign logo = section.settings.logo
+%}
+
+{% capture cards_data %}
+  {
+    "cards": [
+      {% for block in section.blocks %}
+        {
+          "id": {{ block.id | json }},
+          "title": {{ block.settings.title | json }},
+          "subtitle": {{ block.settings.subtitle | json }},
+          "cardImage": {{ block.settings.card_image | image_url: width: 1600 | json }},
+          "popupImage": {{ block.settings.popup_image | image_url: width: 2400 | json }},
+          "description": {{ block.settings.description | json }},
+          "buttonText": {{ block.settings.button_text | default: 'Go Back' | json }}
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }
+{% endcapture %}
+<script id="custom-feature-cards-data" type="application/json">{{ cards_data }}
+</script>
+
+{% comment %}
+  Main Feature Cards Section
+{% endcomment %}
+<section class="custom-feature-section">
+  <div class="custom-feature-section__wrapper">
+    {% comment %}
+      Left column:
+      Sticky image that remains visible while scrolling on desktop.
+    {% endcomment %}
+    <div class="custom-feature-section__left">
+      {% if left_image %}
+        {{ left_image | image_url: width: 1800 | image_tag: loading: 'lazy', widths: '600,900,1200,1800' }}
+      {% endif %}
+    </div>
+
+    {% comment %}
+      Right column:
+      Contains logo, heading, feature cards, and popup overlay.
+    {% endcomment %}
+    <div class="custom-feature-section__right">
+      {% comment %}
+        Top content area:
+        Displays optional logo and supporting text.
+      {% endcomment %}
+      <div class="custom-feature-section__top">
+        {% comment %}
+          Brand logo
+        {% endcomment %}
+        {% if logo %}
+          {{ logo | image_url: width: 300 | image_tag: loading: 'lazy', widths: '150,300' }}
+        {% endif %}
+
+        {% comment %}
+          Intro / supporting text below logo
+        {% endcomment %}
+        {% if section.settings.top_text != blank %}
+          <span class="custom-feature-section__top-title">
+            {{ section.settings.top_text }}
+          </span>
+        {% endif %}
+      </div>
+
+      {% comment %}
+        Bottom content area:
+        Section title and feature card grid.
+      {% endcomment %}
+      <div class="custom-feature-section__bottom">
+        {% comment %}
+          Main section heading
+        {% endcomment %}
+        {% if section.settings.title != blank %}
+          <span>{{ section.settings.title }}</span>
+        {% endif %}
+
+        {% comment %}
+          Feature cards loop.
+          Each card is rendered through the feature-card snippet.
+        {% endcomment %}
+        <div class="feature-card-list" data-vue-feature-cards-root></div>
+        <button type="button" class="get_in_touch">
+          {{ section.settings.get_in_touch | default: 'Get in touch' }}
+        </button>
+      </div>
+
+      {% comment %}
+        Popup container.
+        Content is injected dynamically via JavaScript
+        when a card is clicked.
+      {% endcomment %}
+      <div class="feature-popup-overlay"></div>
+    </div>
+  </div>
+</section>
+
+{% comment %}
+  GSAP animation library.
+  Used for card-to-popup transition animations.
+{% endcomment %}
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+{% comment %}
+  Section-specific JavaScript.
+  Handles popup opening, closing, and animations.
+{% endcomment %}
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script defer src="{{ 'custom-feature-cards.js' | asset_url }}"></script>
+
+{% schema %}
+  {
+    "name": "Custom Feature Cards",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "left_image",
+        "label": "Left Sticky Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "textarea",
+        "id": "top_text",
+        "label": "Top Text"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Section Title"
+      }, {
+        "type": "text",
+        "id": "get_in_touch",
+        "label": "Get-In Touch"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "card",
+        "name": "Card",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "card_image",
+            "label": "Card Background Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "popup_image",
+            "label": "Popup Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "text",
+            "id": "subtitle",
+            "label": "Subtitle"
+          }, {
+            "type": "richtext",
+            "id": "description",
+            "label": "Description"
+          }, {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text",
+            "default": "Go Back"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Custom Feature Cards"
+      }
+    ]
+  }
+{% endschema %}
