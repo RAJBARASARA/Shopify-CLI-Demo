@@ -142,6 +142,343 @@
         "padding_bottom": 80
       }
     },
+    "tks_story_1": {
+      "type": "custom-tok-brand-story",
+      "name": "TKS Brand Story",
+      "settings": {
+        "eyebrow": "Brand Story",
+        "heading": "This brand wasn't created. It was survived.",
+        "heading_font": "times_new_roman_n4",
+        "body": "<p>Threads of Kaos was built for the people who weren't supposed to make it.</p><p>The ones who know what loss feels like. What survival costs. What rebuilding demands.</p><p>This is luxury streetwear rooted in resilience. Every piece represents transformation.</p><p>A reminder that your past didn't destroy you. It shaped you.</p><p>We don't believe broken means finished. We believe chaos creates something stronger.</p>",
+        "button_label": "Read our story",
+        "button_link": "",
+        "monogram": "TK",
+        "page_bg": "#efe9e0",
+        "card_bg": "#faf8f4",
+        "panel_start": "#f2ece1",
+        "panel_end": "#e2d7c5",
+        "heading_color": "#1c1a17",
+        "muted_color": "#7d7264",
+        "eyebrow_color": "#8a7f70",
+        "outline_color": "#c9bfae",
+        "corner_radius": 22,
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "tks_symbols_1": {
+      "type": "custom-tok-symbols",
+      "blocks": {
+        "s1": {
+          "type": "symbol",
+          "settings": {
+            "glyph": "♛",
+            "title": "The Crown",
+            "text": "The crown symbolizes reclaimed power. Not inherited. Earned. For the ones who lost themselves and fought their way back."
+          }
+        },
+        "s2": {
+          "type": "symbol",
+          "settings": {
+            "glyph": "TK",
+            "title": "TK",
+            "text": "The Threads of Kaos monogram represents identity rebuilt. Past and present woven together. A reminder that survival becomes strength."
+          }
+        },
+        "s3": {
+          "type": "symbol",
+          "settings": {
+            "glyph": "✦",
+            "title": "Built From Broken",
+            "text": "Broken is not the end. It is the beginning of becoming. Your scars are proof of survival, not weakness."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "name": "TKS Symbols",
+      "settings": {
+        "eyebrow": "Symbols of Kaos",
+        "heading": "Symbols hold power",
+        "heading_font": "times_new_roman_n4",
+        "intro": "Nothing inside Threads of Kaos exists without meaning. Every symbol represents survival, identity, and transformation.",
+        "button_label": "Discover the symbols",
+        "button_link": "",
+        "page_bg": "#efe9e0",
+        "card_bg": "#faf8f4",
+        "tile_bg": "#2b2620",
+        "tile_text": "#f4efe6",
+        "heading_color": "#1c1a17",
+        "muted_color": "#7d7264",
+        "eyebrow_color": "#8a7f70",
+        "button_bg": "#1c1a17",
+        "button_text": "#ffffff",
+        "corner_radius": 20,
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "tks_cats_1": {
+      "type": "custom-tok-categories",
+      "blocks": {
+        "c1": {
+          "type": "category",
+          "settings": {
+            "label": "Men",
+            "link": ""
+          }
+        },
+        "c2": {
+          "type": "category",
+          "settings": {
+            "label": "Women",
+            "link": ""
+          }
+        },
+        "c3": {
+          "type": "category",
+          "settings": {
+            "label": "Hoodies",
+            "link": ""
+          }
+        },
+        "c4": {
+          "type": "category",
+          "settings": {
+            "label": "Tees",
+            "link": ""
+          }
+        },
+        "c5": {
+          "type": "category",
+          "settings": {
+            "label": "Headwear",
+            "link": ""
+          }
+        },
+        "c6": {
+          "type": "category",
+          "settings": {
+            "label": "Signature Pieces",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
+      "name": "TKS Categories",
+      "settings": {
+        "eyebrow": "Shop Categories",
+        "heading": "Built for the rebels",
+        "heading_font": "times_new_roman_n4",
+        "page_bg": "#efe9e0",
+        "tile_start": "#efe7d8",
+        "tile_end": "#b9ab93",
+        "pill_bg": "#f4efe6",
+        "pill_text": "#2b2620",
+        "heading_color": "#1c1a17",
+        "eyebrow_color": "#8a7f70",
+        "corner_radius": 16,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "tks_founder_1": {
+      "type": "custom-tok-founder",
+      "name": "TKS Founder",
+      "settings": {
+        "eyebrow": "Founder Section",
+        "heading": "Built through fire",
+        "heading_font": "times_new_roman_n4",
+        "body": "<p>Threads of Kaos wasn't created in comfort. It was created through survival. Through grief. Addiction. Loss. Rebuilding.</p><p>This brand exists because healing deserves representation. Because the people carrying invisible battles deserve something that understands them.</p><p>If someone wears Threads of Kaos and feels understood for even a moment, then this brand is doing exactly what it was created to do.</p>",
+        "name": "RAJ",
+        "role": "Founder",
+        "button_label": "Meet the founder",
+        "button_link": "",
+        "page_bg": "#efe9e0",
+        "card_bg": "#faf8f4",
+        "panel_start": "#f2ece1",
+        "panel_end": "#e2d7c5",
+        "heading_color": "#1c1a17",
+        "muted_color": "#7d7264",
+        "eyebrow_color": "#8a7f70",
+        "quote_color": "#c9a24b",
+        "outline_color": "#c9bfae",
+        "corner_radius": 22,
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "tks_values_1": {
+      "type": "custom-tok-values",
+      "blocks": {
+        "v1": {
+          "type": "value",
+          "settings": {
+            "number": "01",
+            "label": "Identity Rebuilt"
+          }
+        },
+        "v2": {
+          "type": "value",
+          "settings": {
+            "number": "02",
+            "label": "Purpose Stitched In"
+          }
+        },
+        "v3": {
+          "type": "value",
+          "settings": {
+            "number": "03",
+            "label": "Luxury With Meaning"
+          }
+        },
+        "v4": {
+          "type": "value",
+          "settings": {
+            "number": "04",
+            "label": "Movement Over Trend"
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4"
+      ],
+      "name": "TKS Values",
+      "settings": {
+        "eyebrow": "Social Proof",
+        "heading": "More than a brand",
+        "heading_font": "times_new_roman_n4",
+        "body": "<p>Threads of Kaos is for the ones rebuilding. The survivors. The fighters. The ones who refuse to let chaos define them. Join a movement built through resilience.</p>",
+        "page_bg": "#efe9e0",
+        "frame_start": "#f7f3ec",
+        "frame_end": "#eee7db",
+        "card_bg": "#ffffff",
+        "heading_color": "#1c1a17",
+        "muted_color": "#7d7264",
+        "eyebrow_color": "#8a7f70",
+        "number_color": "#1c1a17",
+        "corner_radius": 16,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "tks_journal_1": {
+      "type": "custom-tok-journal",
+      "blocks": {
+        "j1": {
+          "type": "story",
+          "settings": {
+            "label": "Story 01",
+            "title": "Survival has a voice.",
+            "text": "Editorial story space for founder reflections, recovery narratives, and resilience-centered brand writing.",
+            "link": ""
+          }
+        },
+        "j2": {
+          "type": "story",
+          "settings": {
+            "label": "Story 02",
+            "title": "Transformation, documented.",
+            "text": "A premium journal layout that can become a content engine for brand affinity and repeat engagement.",
+            "link": ""
+          }
+        },
+        "j3": {
+          "type": "story",
+          "settings": {
+            "label": "Story 03",
+            "title": "Healing with identity intact.",
+            "text": "Use these cards for essays, drop stories, or cultural notes that deepen the movement around the brand.",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "j1",
+        "j2",
+        "j3"
+      ],
+      "name": "TKS Journal",
+      "settings": {
+        "eyebrow": "Journal",
+        "heading": "The Kaos Journal",
+        "heading_font": "times_new_roman_n4",
+        "intro": "Stories of survival. Transformation. Healing. Identity rebuilt.",
+        "page_bg": "#efe9e0",
+        "card_start": "#efe6d6",
+        "card_end": "#bfb097",
+        "heading_color": "#1c1a17",
+        "muted_color": "#6e6455",
+        "eyebrow_color": "#8a7f70",
+        "corner_radius": 18,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "tks_email_1": {
+      "type": "custom-tok-email",
+      "name": "TKS Email Capture",
+      "settings": {
+        "eyebrow": "Email Capture",
+        "heading": "Join the movement",
+        "heading_font": "times_new_roman_n4",
+        "body": "Get first access to limited drops, exclusive releases, founder stories, and pieces stitched with purpose.",
+        "perks": "10% off your first order / Early access to drops",
+        "placeholder": "Enter your email address",
+        "button_label": "Join now",
+        "success_text": "Thanks — you're on the list.",
+        "page_bg": "#efe9e0",
+        "frame_start": "#faf6ef",
+        "frame_end": "#efe7db",
+        "panel_start": "#f2ece1",
+        "panel_end": "#e2d7c5",
+        "input_bg": "#ffffff",
+        "heading_color": "#1c1a17",
+        "muted_color": "#7d7264",
+        "eyebrow_color": "#8a7f70",
+        "button_bg": "#1c1a17",
+        "button_text": "#ffffff",
+        "corner_radius": 18,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "tks_finalcta_1": {
+      "type": "custom-tok-final-cta",
+      "name": "TKS Final CTA",
+      "settings": {
+        "eyebrow": "Final CTA",
+        "heading": "Not saved. Self made.",
+        "heading_font": "times_new_roman_n4",
+        "body": "You survived enough. Now wear the reminder.",
+        "button_label": "Shop Threads of Kaos",
+        "button_link": "",
+        "page_bg": "#efe9e0",
+        "frame_start": "#faf6ef",
+        "frame_end": "#e7ddcd",
+        "heading_color": "#1c1a17",
+        "muted_color": "#7d7264",
+        "eyebrow_color": "#8a7f70",
+        "button_bg": "#1c1a17",
+        "button_text": "#ffffff",
+        "corner_radius": 18,
+        "padding_top": 64,
+        "padding_bottom": 80
+      }
+    },
     "custom_hero_bfywzD": {
       "type": "custom-hero",
       "disabled": true,
@@ -216,6 +553,7 @@
         "category_k79Ccy",
         "category_V73FGA"
       ],
+      "disabled": true,
       "name": "Shop by category",
       "settings": {
         "eyebrow": "Browse",
@@ -224,11 +562,11 @@
         "link_url": "",
         "columns": 4,
         "background": "ivory"
-      },
-      "disabled": true
+      }
     },
     "custom_featured_products_WGYHig": {
       "type": "custom-featured-products",
+      "disabled": true,
       "name": "Featured products",
       "settings": {
         "eyebrow": "Featured",
@@ -238,8 +576,7 @@
         "max_products": 8,
         "columns": 4,
         "background": "white"
-      },
-      "disabled": true
+      }
     },
     "custom_trust_bar_LKhpYd": {
       "type": "custom-trust-bar",
@@ -283,196 +620,12 @@
         "feature_zVqcmF",
         "feature_niFYKJ"
       ],
+      "disabled": true,
       "name": "Trust bar",
       "settings": {
         "heading": "Why Zenn-space",
         "background": "sand"
-      },
-      "disabled": true
-    },
-    "tks_story_1": {
-      "type": "custom-tok-brand-story",
-      "name": "TKS Brand Story",
-      "settings": {}
-    },
-    "tks_symbols_1": {
-      "type": "custom-tok-symbols",
-      "name": "TKS Symbols",
-      "settings": {},
-      "blocks": {
-        "s1": {
-          "type": "symbol",
-          "settings": {
-            "glyph": "\u265b",
-            "title": "The Crown",
-            "text": "The crown symbolizes reclaimed power. Not inherited. Earned. For the ones who lost themselves and fought their way back."
-          }
-        },
-        "s2": {
-          "type": "symbol",
-          "settings": {
-            "glyph": "TK",
-            "title": "TK",
-            "text": "The Threads of Kaos monogram represents identity rebuilt. Past and present woven together. A reminder that survival becomes strength."
-          }
-        },
-        "s3": {
-          "type": "symbol",
-          "settings": {
-            "glyph": "\u2726",
-            "title": "Built From Broken",
-            "text": "Broken is not the end. It is the beginning of becoming. Your scars are proof of survival, not weakness."
-          }
-        }
-      },
-      "block_order": [
-        "s1",
-        "s2",
-        "s3"
-      ]
-    },
-    "tks_cats_1": {
-      "type": "custom-tok-categories",
-      "name": "TKS Categories",
-      "settings": {},
-      "blocks": {
-        "c1": {
-          "type": "category",
-          "settings": {
-            "label": "Men"
-          }
-        },
-        "c2": {
-          "type": "category",
-          "settings": {
-            "label": "Women"
-          }
-        },
-        "c3": {
-          "type": "category",
-          "settings": {
-            "label": "Hoodies"
-          }
-        },
-        "c4": {
-          "type": "category",
-          "settings": {
-            "label": "Tees"
-          }
-        },
-        "c5": {
-          "type": "category",
-          "settings": {
-            "label": "Headwear"
-          }
-        },
-        "c6": {
-          "type": "category",
-          "settings": {
-            "label": "Signature Pieces"
-          }
-        }
-      },
-      "block_order": [
-        "c1",
-        "c2",
-        "c3",
-        "c4",
-        "c5",
-        "c6"
-      ]
-    },
-    "tks_founder_1": {
-      "type": "custom-tok-founder",
-      "name": "TKS Founder",
-      "settings": {}
-    },
-    "tks_values_1": {
-      "type": "custom-tok-values",
-      "name": "TKS Values",
-      "settings": {},
-      "blocks": {
-        "v1": {
-          "type": "value",
-          "settings": {
-            "number": "01",
-            "label": "Identity Rebuilt"
-          }
-        },
-        "v2": {
-          "type": "value",
-          "settings": {
-            "number": "02",
-            "label": "Purpose Stitched In"
-          }
-        },
-        "v3": {
-          "type": "value",
-          "settings": {
-            "number": "03",
-            "label": "Luxury With Meaning"
-          }
-        },
-        "v4": {
-          "type": "value",
-          "settings": {
-            "number": "04",
-            "label": "Movement Over Trend"
-          }
-        }
-      },
-      "block_order": [
-        "v1",
-        "v2",
-        "v3",
-        "v4"
-      ]
-    },
-    "tks_journal_1": {
-      "type": "custom-tok-journal",
-      "name": "TKS Journal",
-      "settings": {},
-      "blocks": {
-        "j1": {
-          "type": "story",
-          "settings": {
-            "label": "Story 01",
-            "title": "Survival has a voice.",
-            "text": "Editorial story space for founder reflections, recovery narratives, and resilience-centered brand writing."
-          }
-        },
-        "j2": {
-          "type": "story",
-          "settings": {
-            "label": "Story 02",
-            "title": "Transformation, documented.",
-            "text": "A premium journal layout that can become a content engine for brand affinity and repeat engagement."
-          }
-        },
-        "j3": {
-          "type": "story",
-          "settings": {
-            "label": "Story 03",
-            "title": "Healing with identity intact.",
-            "text": "Use these cards for essays, drop stories, or cultural notes that deepen the movement around the brand."
-          }
-        }
-      },
-      "block_order": [
-        "j1",
-        "j2",
-        "j3"
-      ]
-    },
-    "tks_email_1": {
-      "type": "custom-tok-email",
-      "name": "TKS Email Capture",
-      "settings": {}
-    },
-    "tks_finalcta_1": {
-      "type": "custom-tok-final-cta",
-      "name": "TKS Final CTA",
-      "settings": {}
+      }
     }
   },
   "order": [
