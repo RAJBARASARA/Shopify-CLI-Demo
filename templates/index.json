@@ -120,6 +120,7 @@
         },
         "info_launch": {
           "type": "info_card",
+          "disabled": true,
           "settings": {
             "eyebrow": "Launch Energy",
             "heading": "Premium pieces, powerful silence.",
