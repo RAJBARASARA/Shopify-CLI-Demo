@@ -1,9 +1,72 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
-      "type": "tok-main-product",
-      "settings": {}
+      "type": "tok-pdp-hero",
+      "settings": {},
+      "blocks": {
+        "f1": {
+          "type": "feature",
+          "settings": {
+            "label": "Fabric",
+            "text": "Heavyweight brushed cotton blend with premium hand feel."
+          }
+        },
+        "f2": {
+          "type": "feature",
+          "settings": {
+            "label": "Fit",
+            "text": "Relaxed oversized silhouette with sculpted shoulder drop."
+          }
+        },
+        "f3": {
+          "type": "feature",
+          "settings": {
+            "label": "Feeling",
+            "text": "Built for resilience, warmth, structure, and everyday impact."
+          }
+        },
+        "t1": {
+          "type": "trust",
+          "settings": {
+            "title": "Fast Delivery",
+            "text": "2\u20135 business days with premium tracked shipping."
+          }
+        },
+        "t2": {
+          "type": "trust",
+          "settings": {
+            "title": "Easy Returns",
+            "text": "14-day returns for unworn pieces with tags attached."
+          }
+        },
+        "t3": {
+          "type": "trust",
+          "settings": {
+            "title": "Drop Access",
+            "text": "Members get early access to limited releases and restocks."
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "t1",
+        "t2",
+        "t3"
+      ]
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }

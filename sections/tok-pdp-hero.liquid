@@ -1,0 +1,433 @@
+{% comment %}
+  Threads of Kaos — PDP hero / first section.
+  Fully dynamic: real product media gallery, variant-aware price + stock,
+  option-driven selectors (colour swatches when a colour option exists,
+  otherwise pill buttons), quantity, Add to Bag (product form) and Buy Now
+  (Shopify dynamic checkout). Editorial "light luxury" layout.
+  Soft/marketing content (rating, badges, feature + trust cards, insight
+  overlays) is editable via settings/blocks — no invented product data.
+{% endcomment %}
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+
+{%- liquid
+  assign s = section.settings
+  assign uid = section.id
+  assign cv = product.selected_or_first_available_variant
+-%}
+
+<section class="tokpdp" id="tokpdp-{{ uid }}" style="
+  --c-page:{{ s.page_bg }};--c-frame-a:{{ s.frame_start }};--c-frame-b:{{ s.frame_end }};--c-card:{{ s.card_bg }};
+  --c-head:{{ s.heading_color }};--c-muted:{{ s.muted_color }};--c-eye:{{ s.eyebrow_color }};
+  --c-line:{{ s.line_color }};--c-btn:{{ s.button_bg }};--c-btntxt:{{ s.button_text }};--c-ok:{{ s.stock_color }};
+  --r:{{ s.corner_radius }}px;--pad:{{ s.padding_top }}px {{ s.padding_bottom }}px;">
+  <div class="tokpdp__frame">
+
+    {%- comment -%} breadcrumb {%- endcomment -%}
+    <nav class="tokpdp__crumbs" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a><span>/</span>
+      {%- if product.collections.first != blank -%}
+        <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a><span>/</span>
+      {%- endif -%}
+      <span class="tokpdp__crumb-current">{{ product.title }}</span>
+    </nav>
+
+    <div class="tokpdp__grid">
+
+      {%- comment -%} ===== LEFT: gallery ===== {%- endcomment -%}
+      <div class="tokpdp__gallery">
+        <div class="tokpdp__thumbs">
+          {%- if product.media.size > 0 -%}
+            {%- for media in product.media limit: 6 -%}
+              <button type="button" class="tokpdp__thumb{% if forloop.first %} is-active{% endif %}"
+                data-thumb data-src="{{ media.preview_image | image_url: width: 1400 }}"
+                data-alt="{{ media.alt | default: product.title | escape }}" aria-label="View image {{ forloop.index }}">
+                {{ media.preview_image | image_url: width: 200 | image_tag: loading:'lazy', alt: media.alt | default: product.title | escape }}
+              </button>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for i in (1..5) -%}<span class="tokpdp__thumb is-empty" aria-hidden="true"></span>{%- endfor -%}
+          {%- endif -%}
+        </div>
+
+        <div class="tokpdp__stage">
+          <div class="tokpdp__main-media" data-main-media>
+            {%- if product.featured_media != blank -%}
+              {{ product.featured_media.preview_image | image_url: width: 1600 | image_tag: loading:'eager', class:'tokpdp__main-img', alt: product.title | escape }}
+            {%- elsif s.fallback_image != blank -%}
+              {{ s.fallback_image | image_url: width: 1600 | image_tag: loading:'eager', class:'tokpdp__main-img', alt: product.title | escape }}
+            {%- endif -%}
+          </div>
+          <div class="tokpdp__overlays">
+            {%- if s.insight1_title != blank -%}
+              <div class="tokpdp__overlay">
+                <p class="tokpdp__ov-title">{{ s.insight1_title }}</p>
+                <p class="tokpdp__ov-text">{{ s.insight1_text }}</p>
+              </div>
+            {%- endif -%}
+            {%- if s.insight2_title != blank -%}
+              <div class="tokpdp__overlay">
+                <p class="tokpdp__ov-title">{{ s.insight2_title }}</p>
+                <p class="tokpdp__ov-text">{{ s.insight2_text }}</p>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+      {%- comment -%} ===== RIGHT: buy box ===== {%- endcomment -%}
+      <div class="tokpdp__info">
+        {%- if s.eyebrow != blank -%}
+          <p class="tokpdp__eye"><span class="tokpdp__dash"></span>{{ s.eyebrow }}</p>
+        {%- endif -%}
+
+        <div class="tokpdp__rating">
+          {%- if s.rating_stars != blank -%}<span class="tokpdp__stars" aria-hidden="true">{{ s.rating_stars }}</span>{%- endif -%}
+          {%- if s.rating_value != blank -%}<span class="tokpdp__rating-num">{{ s.rating_value }}</span>{%- endif -%}
+          {%- if s.reviews_text != blank -%}<span class="tokpdp__rating-meta">{{ s.reviews_text }}</span>{%- endif -%}
+          {%- if s.badge_seller != blank -%}<span class="tokpdp__dot-sep">&bull;</span><span class="tokpdp__rating-meta">{{ s.badge_seller }}</span>{%- endif -%}
+        </div>
+
+        <h1 class="tokpdp__title">{{ product.title }}</h1>
+
+        {%- if product.description != blank -%}
+          <div class="tokpdp__desc">{{ product.description | strip_html | truncatewords: 44 }}</div>
+        {%- endif -%}
+
+        <div class="tokpdp__price-row">
+          <span class="tokpdp__price" data-price>{{ cv.price | money }}</span>
+          <span class="tokpdp__price-compare" data-compare {% if cv.compare_at_price <= cv.price %}hidden{% endif %}>{{ cv.compare_at_price | money }}</span>
+          {%- if s.badge_drop != blank -%}<span class="tokpdp__badge">{{ s.badge_drop }}</span>{%- endif -%}
+        </div>
+
+        {%- if section.blocks.size > 0 -%}
+          <div class="tokpdp__features">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'feature' -%}
+                <div class="tokpdp__feature" {{ block.shopify_attributes }}>
+                  <p class="tokpdp__feat-label">{{ block.settings.label }}</p>
+                  <p class="tokpdp__feat-text">{{ block.settings.text }}</p>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} variants JSON for the switcher {%- endcomment -%}
+        <script type="application/json" data-variants>
+          [{% for v in product.variants %}{"id":{{ v.id }},"available":{{ v.available }},"options":{{ v.options | json }},"price":{{ v.price | money | json }},"compare":{% if v.compare_at_price > v.price %}{{ v.compare_at_price | money | json }}{% else %}null{% endif %}}{% unless forloop.last %},{% endunless %}{% endfor %}]
+        </script>
+
+        {%- form 'product', product, class: 'tokpdp__form', novalidate: 'novalidate' -%}
+          <input type="hidden" name="id" value="{{ cv.id }}" data-variant-id>
+
+          {%- unless product.has_only_default_variant -%}
+            {%- for option in product.options_with_values -%}
+              {%- liquid
+                assign oname = option.name | downcase
+                assign is_color = false
+                if oname contains 'color' or oname contains 'colour'
+                  assign is_color = true
+                endif
+              -%}
+              <div class="tokpdp__opt" data-option-index="{{ forloop.index0 }}">
+                <div class="tokpdp__opt-head">
+                  <span class="tokpdp__opt-label">{{ option.name }}{% if is_color %} <span class="tokpdp__opt-sel" data-selected-for="{{ forloop.index0 }}">/ {{ option.selected_value }}</span>{% endif %}</span>
+                  {%- if is_color and s.help_link_label != blank -%}
+                    <a class="tokpdp__opt-link" href="{{ s.help_link_url | default: '#' }}">{{ s.help_link_label }}</a>
+                  {%- elsif is_color == false and s.size_guide_label != blank -%}
+                    <a class="tokpdp__opt-link" href="{{ s.size_guide_url | default: '#' }}">{{ s.size_guide_label }}</a>
+                  {%- endif -%}
+                </div>
+                <div class="tokpdp__opt-values{% if is_color %} is-color{% endif %}">
+                  {%- for value in option.values -%}
+                    <button type="button"
+                      class="tokpdp__val{% if is_color %} tokpdp__val--swatch{% endif %}{% if option.selected_value == value %} is-selected{% endif %}"
+                      data-option-index="{{ forloop.parentloop.index0 }}"
+                      data-value="{{ value | escape }}"
+                      title="{{ value | escape }}">
+                      {% if is_color %}<span class="tokpdp__swatch"></span>{% else %}{{ value }}{% endif %}
+                    </button>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endunless -%}
+
+          <p class="tokpdp__stock" data-stock>
+            <span class="tokpdp__stock-dot" aria-hidden="true"></span>
+            <span data-stock-text>{% if cv.available %}{{ s.stock_text }}{% else %}{{ s.soldout_text }}{% endif %}</span>
+          </p>
+
+          <div class="tokpdp__buy">
+            <div class="tokpdp__qty">
+              <button type="button" data-qty-minus aria-label="Decrease quantity">&minus;</button>
+              <input type="number" name="quantity" value="1" min="1" inputmode="numeric" aria-label="Quantity">
+              <button type="button" data-qty-plus aria-label="Increase quantity">+</button>
+            </div>
+            <button type="submit" name="add" class="tokpdp__btn tokpdp__btn--add" data-add {% unless cv.available %}disabled{% endunless %}>
+              <span data-add-label>{% if cv.available %}{{ s.add_label }}{% else %}{{ s.soldout_text }}{% endif %}</span>
+            </button>
+          </div>
+
+          <div class="tokpdp__paybtn">{{ form | payment_button }}</div>
+
+          {%- if s.save_label != blank or s.gift_label != blank -%}
+            <div class="tokpdp__secondary">
+              {%- if s.save_label != blank -%}<a class="tokpdp__btn tokpdp__btn--ghost" href="{{ s.save_url | default: '#' }}">{{ s.save_label }}</a>{%- endif -%}
+              {%- if s.gift_label != blank -%}<a class="tokpdp__btn tokpdp__btn--ghost" href="{{ s.gift_url | default: '#' }}">{{ s.gift_label }}</a>{%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endform -%}
+
+        {%- if s.cro_text != blank -%}<p class="tokpdp__cro">{{ s.cro_text }}</p>{%- endif -%}
+
+        {%- assign trust_count = 0 -%}
+        {%- for block in section.blocks -%}{% if block.type == 'trust' %}{% assign trust_count = trust_count | plus: 1 %}{% endif %}{%- endfor -%}
+        {%- if trust_count > 0 -%}
+          <div class="tokpdp__trust">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'trust' -%}
+                <div class="tokpdp__trust-card" {{ block.shopify_attributes }}>
+                  <p class="tokpdp__trust-title">{{ block.settings.title }}</p>
+                  <p class="tokpdp__trust-text">{{ block.settings.text }}</p>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #tokpdp-{{ uid }}.tokpdp{padding:var(--pad);background:var(--c-page);font-family:'Inter',system-ui,sans-serif;}
+  #tokpdp-{{ uid }} *{box-sizing:border-box;}
+  #tokpdp-{{ uid }} .tokpdp__frame{max-width:1240px;margin:0 auto;padding:clamp(20px,3vw,44px);border-radius:calc(var(--r)*1.4);background:radial-gradient(120% 120% at 85% 0%,var(--c-frame-a),var(--c-frame-b));box-shadow:0 40px 90px -55px rgba(60,45,30,.5);}
+  #tokpdp-{{ uid }} .tokpdp__crumbs{display:flex;gap:8px;flex-wrap:wrap;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--c-eye);margin:0 0 24px;}
+  #tokpdp-{{ uid }} .tokpdp__crumbs a{color:var(--c-eye);text-decoration:none;}
+  #tokpdp-{{ uid }} .tokpdp__crumb-current{color:var(--c-head);}
+  #tokpdp-{{ uid }} .tokpdp__grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(24px,3vw,48px);align-items:start;}
+
+  /* gallery */
+  #tokpdp-{{ uid }} .tokpdp__gallery{display:grid;grid-template-columns:72px 1fr;gap:16px;}
+  #tokpdp-{{ uid }} .tokpdp__thumbs{display:flex;flex-direction:column;gap:12px;}
+  #tokpdp-{{ uid }} .tokpdp__thumb{width:72px;height:88px;border-radius:16px;border:1px solid rgba(255,255,255,.7);background:linear-gradient(135deg,rgba(255,255,255,.5),rgba(255,255,255,.12));overflow:hidden;cursor:pointer;padding:0;transition:transform .15s ease,box-shadow .15s ease;}
+  #tokpdp-{{ uid }} .tokpdp__thumb img{width:100%;height:100%;object-fit:cover;}
+  #tokpdp-{{ uid }} .tokpdp__thumb.is-active{box-shadow:0 0 0 2px var(--c-head);}
+  #tokpdp-{{ uid }} .tokpdp__thumb.is-empty{cursor:default;}
+  #tokpdp-{{ uid }} .tokpdp__stage{position:relative;border-radius:var(--r);overflow:hidden;min-height:520px;background:radial-gradient(120% 100% at 30% 0%,#f2ece1,#ddd0bd);border:1px solid rgba(255,255,255,.6);}
+  #tokpdp-{{ uid }} .tokpdp__main-media,#tokpdp-{{ uid }} .tokpdp__main-img{position:absolute;inset:0;width:100%;height:100%;}
+  #tokpdp-{{ uid }} .tokpdp__main-img{object-fit:cover;}
+  #tokpdp-{{ uid }} .tokpdp__overlays{position:absolute;left:16px;right:16px;bottom:16px;display:flex;gap:12px;}
+  #tokpdp-{{ uid }} .tokpdp__overlay{flex:1;background:rgba(250,248,244,.86);backdrop-filter:blur(6px);border-radius:14px;padding:14px 16px;box-shadow:0 14px 30px -18px rgba(60,45,30,.4);}
+  #tokpdp-{{ uid }} .tokpdp__ov-title{font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--c-head);margin:0 0 6px;}
+  #tokpdp-{{ uid }} .tokpdp__ov-text{font-size:11px;line-height:1.5;color:var(--c-muted);margin:0;}
+
+  /* info */
+  #tokpdp-{{ uid }} .tokpdp__eye{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--c-eye);font-weight:600;margin:0 0 18px;}
+  #tokpdp-{{ uid }} .tokpdp__dash{width:26px;height:1px;background:var(--c-eye);display:inline-block;}
+  #tokpdp-{{ uid }} .tokpdp__rating{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--c-muted);margin:0 0 14px;}
+  #tokpdp-{{ uid }} .tokpdp__stars{color:#c9a24b;letter-spacing:2px;}
+  #tokpdp-{{ uid }} .tokpdp__rating-num{font-weight:700;color:var(--c-head);}
+  #tokpdp-{{ uid }} .tokpdp__title{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:clamp(38px,4.4vw,60px);line-height:1.02;letter-spacing:-.01em;color:var(--c-head);margin:0 0 20px;text-transform:uppercase;}
+  #tokpdp-{{ uid }} .tokpdp__desc{font-size:15px;line-height:1.65;color:var(--c-muted);margin:0 0 26px;max-width:46ch;}
+  #tokpdp-{{ uid }} .tokpdp__price-row{display:flex;align-items:center;gap:14px;margin:0 0 26px;}
+  #tokpdp-{{ uid }} .tokpdp__price{font-size:26px;font-weight:700;color:var(--c-head);}
+  #tokpdp-{{ uid }} .tokpdp__price-compare{font-size:16px;color:var(--c-muted);text-decoration:line-through;}
+  #tokpdp-{{ uid }} .tokpdp__price-compare[hidden]{display:none;}
+  #tokpdp-{{ uid }} .tokpdp__badge{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--c-head);background:rgba(255,255,255,.7);border:1px solid var(--c-line);padding:6px 12px;border-radius:999px;}
+  #tokpdp-{{ uid }} .tokpdp__features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 28px;}
+  #tokpdp-{{ uid }} .tokpdp__feature{background:var(--c-card);border-radius:14px;padding:16px;border:1px solid rgba(255,255,255,.6);}
+  #tokpdp-{{ uid }} .tokpdp__feat-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--c-head);margin:0 0 8px;}
+  #tokpdp-{{ uid }} .tokpdp__feat-text{font-size:12px;line-height:1.5;color:var(--c-muted);margin:0;}
+  #tokpdp-{{ uid }} .tokpdp__opt{margin:0 0 22px;}
+  #tokpdp-{{ uid }} .tokpdp__opt-head{display:flex;justify-content:space-between;align-items:center;margin:0 0 12px;}
+  #tokpdp-{{ uid }} .tokpdp__opt-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--c-head);}
+  #tokpdp-{{ uid }} .tokpdp__opt-sel{color:var(--c-muted);font-weight:600;}
+  #tokpdp-{{ uid }} .tokpdp__opt-link{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--c-eye);text-decoration:none;border-bottom:1px solid var(--c-line);}
+  #tokpdp-{{ uid }} .tokpdp__opt-values{display:flex;flex-wrap:wrap;gap:10px;}
+  #tokpdp-{{ uid }} .tokpdp__val{min-width:52px;padding:13px 16px;border-radius:12px;border:1px solid var(--c-line);background:var(--c-card);color:var(--c-head);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .15s ease;}
+  #tokpdp-{{ uid }} .tokpdp__val:hover{border-color:var(--c-head);}
+  #tokpdp-{{ uid }} .tokpdp__val.is-selected{background:var(--c-head);color:var(--c-btntxt);border-color:var(--c-head);}
+  #tokpdp-{{ uid }} .tokpdp__val[disabled]{opacity:.35;cursor:not-allowed;text-decoration:line-through;}
+  #tokpdp-{{ uid }} .tokpdp__val--swatch{min-width:0;width:38px;height:38px;padding:0;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;}
+  #tokpdp-{{ uid }} .tokpdp__val--swatch .tokpdp__swatch{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#d8c7ac,#a99274);}
+  #tokpdp-{{ uid }} .tokpdp__val--swatch.is-selected{background:transparent;box-shadow:0 0 0 2px var(--c-head);}
+  #tokpdp-{{ uid }} .tokpdp__stock{display:flex;align-items:center;gap:9px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--c-head);margin:0 0 16px;}
+  #tokpdp-{{ uid }} .tokpdp__stock-dot{width:8px;height:8px;border-radius:50%;background:var(--c-ok);display:inline-block;}
+  #tokpdp-{{ uid }} .tokpdp__buy{display:flex;gap:12px;margin:0 0 12px;}
+  #tokpdp-{{ uid }} .tokpdp__qty{display:flex;align-items:center;border:1px solid var(--c-line);border-radius:999px;background:var(--c-card);padding:0 6px;}
+  #tokpdp-{{ uid }} .tokpdp__qty button{width:38px;height:48px;border:0;background:transparent;font-size:18px;color:var(--c-head);cursor:pointer;}
+  #tokpdp-{{ uid }} .tokpdp__qty input{width:40px;text-align:center;border:0;background:transparent;font-size:15px;color:var(--c-head);-moz-appearance:textfield;}
+  #tokpdp-{{ uid }} .tokpdp__qty input::-webkit-outer-spin-button,#tokpdp-{{ uid }} .tokpdp__qty input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+  #tokpdp-{{ uid }} .tokpdp__btn{border:0;cursor:pointer;font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;border-radius:999px;padding:16px 28px;text-decoration:none;text-align:center;transition:transform .15s ease,opacity .15s ease;}
+  #tokpdp-{{ uid }} .tokpdp__btn--add{flex:1;background:var(--c-btn);color:var(--c-btntxt);}
+  #tokpdp-{{ uid }} .tokpdp__btn--add:hover{transform:translateY(-1px);}
+  #tokpdp-{{ uid }} .tokpdp__btn--add[disabled]{opacity:.45;cursor:not-allowed;transform:none;}
+  #tokpdp-{{ uid }} .tokpdp__paybtn{margin:0 0 12px;}
+  #tokpdp-{{ uid }} .tokpdp__paybtn .shopify-payment-button__button{border-radius:999px !important;min-height:54px;text-transform:uppercase;letter-spacing:.12em;}
+  #tokpdp-{{ uid }} .tokpdp__secondary{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 18px;}
+  #tokpdp-{{ uid }} .tokpdp__btn--ghost{background:transparent;color:var(--c-head);border:1px solid var(--c-line);}
+  #tokpdp-{{ uid }} .tokpdp__cro{font-size:12px;line-height:1.6;color:var(--c-muted);margin:0 0 26px;}
+  #tokpdp-{{ uid }} .tokpdp__trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  #tokpdp-{{ uid }} .tokpdp__trust-card{background:var(--c-card);border-radius:14px;padding:16px;border:1px solid rgba(255,255,255,.6);}
+  #tokpdp-{{ uid }} .tokpdp__trust-title{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--c-head);margin:0 0 8px;}
+  #tokpdp-{{ uid }} .tokpdp__trust-text{font-size:11px;line-height:1.5;color:var(--c-muted);margin:0;}
+
+  @media(max-width:980px){#tokpdp-{{ uid }} .tokpdp__grid{grid-template-columns:1fr;}#tokpdp-{{ uid }} .tokpdp__stage{min-height:400px;}}
+  @media(max-width:560px){#tokpdp-{{ uid }} .tokpdp__gallery{grid-template-columns:1fr;}#tokpdp-{{ uid }} .tokpdp__thumbs{flex-direction:row;order:2;}#tokpdp-{{ uid }} .tokpdp__features,#tokpdp-{{ uid }} .tokpdp__trust{grid-template-columns:1fr;}#tokpdp-{{ uid }} .tokpdp__overlays{position:static;margin-top:12px;}}
+</style>
+
+<script>
+  (() => {
+    const root = document.getElementById('tokpdp-{{ uid }}');
+    if (!root) return;
+
+    // ---- gallery thumbnails ----
+    const mainMedia = root.querySelector('[data-main-media]');
+    root.querySelectorAll('[data-thumb]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (!mainMedia) return;
+        const img = mainMedia.querySelector('img') || document.createElement('img');
+        img.className = 'tokpdp__main-img';
+        img.src = btn.dataset.src;
+        img.alt = btn.dataset.alt || '';
+        if (!img.parentElement) mainMedia.appendChild(img);
+        root.querySelectorAll('[data-thumb]').forEach((t) => t.classList.remove('is-active'));
+        btn.classList.add('is-active');
+      });
+    });
+
+    // ---- quantity ----
+    const qty = root.querySelector('input[name="quantity"]');
+    root.querySelector('[data-qty-minus]')?.addEventListener('click', () => { if (qty) qty.value = Math.max(1, (parseInt(qty.value, 10) || 1) - 1); });
+    root.querySelector('[data-qty-plus]')?.addEventListener('click', () => { if (qty) qty.value = (parseInt(qty.value, 10) || 1) + 1; });
+
+    // ---- variant switching ----
+    let variants = [];
+    try { variants = JSON.parse(root.querySelector('[data-variants]').textContent); } catch (e) { variants = []; }
+    const idInput = root.querySelector('[data-variant-id]');
+    const priceEl = root.querySelector('[data-price]');
+    const compareEl = root.querySelector('[data-compare]');
+    const stockText = root.querySelector('[data-stock-text]');
+    const addBtn = root.querySelector('[data-add]');
+    const addLabel = root.querySelector('[data-add-label]');
+    const STOCK = {{ s.stock_text | json }};
+    const SOLD = {{ s.soldout_text | json }};
+    const ADD = {{ s.add_label | json }};
+
+    function selection() {
+      const groups = root.querySelectorAll('.tokpdp__opt');
+      const sel = [];
+      groups.forEach((g) => {
+        const i = parseInt(g.dataset.optionIndex, 10);
+        const active = g.querySelector('.tokpdp__val.is-selected');
+        if (active) sel[i] = active.dataset.value;
+      });
+      return sel;
+    }
+
+    function match(sel) {
+      if (!sel.length) return variants[0];
+      return variants.find((v) => v.options.every((o, i) => String(o) === String(sel[i])));
+    }
+
+    function update() {
+      const v = match(selection());
+      if (!v) { if (addBtn) { addBtn.disabled = true; } if (addLabel) addLabel.textContent = SOLD; if (stockText) stockText.textContent = SOLD; return; }
+      if (idInput) idInput.value = v.id;
+      if (priceEl) priceEl.innerHTML = v.price;
+      if (compareEl) { if (v.compare) { compareEl.innerHTML = v.compare; compareEl.hidden = false; } else { compareEl.hidden = true; } }
+      if (addBtn) addBtn.disabled = !v.available;
+      if (addLabel) addLabel.textContent = v.available ? ADD : SOLD;
+      if (stockText) stockText.textContent = v.available ? STOCK : SOLD;
+      root.querySelectorAll('[data-selected-for]').forEach((el) => {
+        const i = parseInt(el.dataset.selectedFor, 10);
+        el.textContent = '/ ' + (selection()[i] || '');
+      });
+    }
+
+    root.querySelectorAll('.tokpdp__val').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const group = btn.closest('.tokpdp__opt');
+        group.querySelectorAll('.tokpdp__val').forEach((b) => b.classList.remove('is-selected'));
+        btn.classList.add('is-selected');
+        update();
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "TOK PDP Hero",
+  "tag": "section",
+  "class": "section-tok-pdp-hero",
+  "settings": [
+    {"type":"header","content":"Header + rating"},
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"Product Detail Page / Light Luxury Layout"},
+    {"type":"text","id":"rating_stars","label":"Stars","default":"★★★★★"},
+    {"type":"text","id":"rating_value","label":"Rating value","default":"4.9"},
+    {"type":"text","id":"reviews_text","label":"Reviews text","default":"128 reviews"},
+    {"type":"text","id":"badge_seller","label":"Seller badge","default":"Best Seller"},
+    {"type":"text","id":"badge_drop","label":"Price badge","default":"Limited Drop"},
+    {"type":"header","content":"Buy box"},
+    {"type":"text","id":"stock_text","label":"In-stock text","default":"In stock / Ready to ship"},
+    {"type":"text","id":"soldout_text","label":"Sold-out text","default":"Sold out"},
+    {"type":"text","id":"add_label","label":"Add to cart label","default":"Add to bag"},
+    {"type":"text","id":"size_guide_label","label":"Size link label","default":"Size guide"},
+    {"type":"url","id":"size_guide_url","label":"Size link URL"},
+    {"type":"text","id":"help_link_label","label":"Colour link label","default":"Need help choosing"},
+    {"type":"url","id":"help_link_url","label":"Colour link URL"},
+    {"type":"text","id":"save_label","label":"Save button label","default":"Save"},
+    {"type":"url","id":"save_url","label":"Save button URL"},
+    {"type":"text","id":"gift_label","label":"Gift button label","default":"Gift this"},
+    {"type":"url","id":"gift_url","label":"Gift button URL"},
+    {"type":"textarea","id":"cro_text","label":"CRO note","default":"Low-friction CRO layout: quick value comprehension, clear size selection, strong social proof, and immediate purchase actions above the fold."},
+    {"type":"header","content":"Gallery"},
+    {"type":"image_picker","id":"fallback_image","label":"Fallback image (if product has none)"},
+    {"type":"text","id":"insight1_title","label":"Overlay 1 title","default":"Fit Insight"},
+    {"type":"textarea","id":"insight1_text","label":"Overlay 1 text","default":"Oversized premium silhouette. Model reference space can sit here just like a high-end retail PDP."},
+    {"type":"text","id":"insight2_title","label":"Overlay 2 title","default":"Why It Converts"},
+    {"type":"textarea","id":"insight2_text","label":"Overlay 2 text","default":"Key product answers are surfaced directly near imagery for faster purchase decisions."},
+    {"type":"header","content":"Colours"},
+    {"type":"color","id":"page_bg","label":"Page background","default":"#efe9e0"},
+    {"type":"color","id":"frame_start","label":"Frame gradient top","default":"#f7f3ec"},
+    {"type":"color","id":"frame_end","label":"Frame gradient bottom","default":"#eae2d5"},
+    {"type":"color","id":"card_bg","label":"Card background","default":"#faf8f4"},
+    {"type":"color","id":"heading_color","label":"Heading / dark","default":"#1c1a17"},
+    {"type":"color","id":"muted_color","label":"Body text","default":"#7d7264"},
+    {"type":"color","id":"eyebrow_color","label":"Eyebrow / labels","default":"#8a7f70"},
+    {"type":"color","id":"line_color","label":"Borders","default":"#d9cfbf"},
+    {"type":"color","id":"button_bg","label":"Button bg","default":"#1c1a17"},
+    {"type":"color","id":"button_text","label":"Button text","default":"#ffffff"},
+    {"type":"color","id":"stock_color","label":"In-stock dot","default":"#4a8c4a"},
+    {"type":"header","content":"Layout"},
+    {"type":"range","id":"corner_radius","label":"Corner radius","min":0,"max":40,"step":2,"unit":"px","default":18},
+    {"type":"range","id":"padding_top","label":"Padding top","min":0,"max":160,"step":4,"unit":"px","default":48},
+    {"type":"range","id":"padding_bottom","label":"Padding bottom","min":0,"max":160,"step":4,"unit":"px","default":64}
+  ],
+  "blocks": [
+    {"type":"feature","name":"Feature card","settings":[
+      {"type":"text","id":"label","label":"Label","default":"Fabric"},
+      {"type":"textarea","id":"text","label":"Text","default":"Heavyweight brushed cotton blend with premium hand feel."}
+    ]},
+    {"type":"trust","name":"Trust card","settings":[
+      {"type":"text","id":"title","label":"Title","default":"Fast Delivery"},
+      {"type":"textarea","id":"text","label":"Text","default":"2–5 business days with premium tracked shipping."}
+    ]}
+  ],
+  "presets": [
+    {"name":"TOK PDP Hero","blocks":[
+      {"type":"feature","settings":{"label":"Fabric","text":"Heavyweight brushed cotton blend with premium hand feel."}},
+      {"type":"feature","settings":{"label":"Fit","text":"Relaxed oversized silhouette with sculpted shoulder drop."}},
+      {"type":"feature","settings":{"label":"Feeling","text":"Built for resilience, warmth, structure, and everyday impact."}},
+      {"type":"trust","settings":{"title":"Fast Delivery","text":"2–5 business days with premium tracked shipping."}},
+      {"type":"trust","settings":{"title":"Easy Returns","text":"14-day returns for unworn pieces with tags attached."}},
+      {"type":"trust","settings":{"title":"Drop Access","text":"Members get early access to limited releases and restocks."}}
+    ]}
+  ]
+}
+{% endschema %}
