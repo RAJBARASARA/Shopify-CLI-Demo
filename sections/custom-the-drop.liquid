@@ -1,0 +1,294 @@
+{% comment %}
+  Custom "THE DROP" featured-collection section.
+  Self-contained: markup + scoped styles in one file.
+  Editorial two-column layout — big serif headline + campaign slab on the
+  left, stacked info cards with CTA hierarchy on the right.
+  All colours, radii and copy are editable from the theme editor.
+{% endcomment %}
+
+{%- liquid
+  assign s = section.settings
+  assign uid = section.id
+-%}
+
+<section
+  class="the-drop"
+  id="the-drop-{{ uid }}"
+  style="
+    --td-bg-start: {{ s.bg_start }};
+    --td-bg-end: {{ s.bg_end }};
+    --td-card-bg: {{ s.card_bg }};
+    --td-heading: {{ s.heading_color }};
+    --td-muted: {{ s.muted_color }};
+    --td-eyebrow: {{ s.eyebrow_color }};
+    --td-btn-bg: {{ s.button_bg }};
+    --td-btn-text: {{ s.button_text_color }};
+    --td-radius: {{ s.corner_radius }}px;
+    --td-pad-y: {{ s.padding_top }}px {{ s.padding_bottom }}px;
+  "
+>
+  <div class="the-drop__inner">
+    {%- comment -%} ---------- LEFT COLUMN ---------- {%- endcomment -%}
+    <div class="the-drop__left">
+      {% if s.eyebrow != blank %}
+        <p class="the-drop__eyebrow">{{ s.eyebrow }}</p>
+      {% endif %}
+      {% if s.heading != blank %}
+        <h2 class="the-drop__title">{{ s.heading }}</h2>
+      {% endif %}
+
+      <div class="the-drop__slab {% if s.campaign_image == blank %}is-empty{% endif %}">
+        {% if s.campaign_image != blank %}
+          {{
+            s.campaign_image
+            | image_url: width: 1800
+            | image_tag:
+              loading: 'lazy',
+              class: 'the-drop__slab-img',
+              widths: '600,900,1200,1800',
+              alt: s.campaign_title
+          }}
+        {% else %}
+          <span class="the-drop__frame the-drop__frame--back" aria-hidden="true"></span>
+          <span class="the-drop__frame the-drop__frame--front" aria-hidden="true"></span>
+        {% endif %}
+
+        {% if s.campaign_eyebrow != blank or s.campaign_title != blank or s.campaign_text != blank %}
+          <div class="the-drop__slab-card">
+            {% if s.campaign_eyebrow != blank %}
+              <p class="the-drop__mini-eyebrow">{{ s.campaign_eyebrow }}</p>
+            {% endif %}
+            {% if s.campaign_title != blank %}
+              <p class="the-drop__mini-title">{{ s.campaign_title }}</p>
+            {% endif %}
+            {% if s.campaign_text != blank %}
+              <p class="the-drop__mini-text">{{ s.campaign_text }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    {%- comment -%} ---------- RIGHT COLUMN ---------- {%- endcomment -%}
+    <div class="the-drop__right">
+      {% if s.intro != blank %}
+        <div class="the-drop__intro">{{ s.intro }}</div>
+      {% endif %}
+
+      {% for block in section.blocks %}
+        {%- assign b = block.settings -%}
+        <article class="the-drop__card" {{ block.shopify_attributes }}>
+          {% if b.eyebrow != blank %}
+            <p class="the-drop__mini-eyebrow">{{ b.eyebrow }}</p>
+          {% endif %}
+          {% if b.heading != blank %}
+            <h3 class="the-drop__card-title">{{ b.heading }}</h3>
+          {% endif %}
+          {% if b.text != blank %}
+            <div class="the-drop__card-text">{{ b.text }}</div>
+          {% endif %}
+          {% if b.button_label != blank %}
+            <a
+              class="the-drop__btn"
+              {% if b.button_link != blank %}href="{{ b.button_link }}"{% else %}href="#" role="button"{% endif %}
+            >{{ b.button_label }}</a>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  #the-drop-{{ uid }}.the-drop {
+    padding: var(--td-pad-y);
+    background: radial-gradient(120% 120% at 15% 0%, var(--td-bg-start) 0%, var(--td-bg-end) 70%);
+  }
+  #the-drop-{{ uid }} .the-drop__inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  #the-drop-{{ uid }} .the-drop__eyebrow,
+  #the-drop-{{ uid }} .the-drop__mini-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--td-eyebrow);
+    margin: 0 0 12px;
+    font-weight: 600;
+  }
+  #the-drop-{{ uid }} .the-drop__title {
+    font-family: {{ s.heading_font.family }}, {{ s.heading_font.fallback_families }};
+    font-weight: {{ s.heading_font.weight }};
+    font-size: clamp(48px, 6vw, 84px);
+    line-height: 0.95;
+    color: var(--td-heading);
+    margin: 0 0 36px;
+    letter-spacing: -0.01em;
+  }
+
+  /* ---- LEFT campaign slab ---- */
+  #the-drop-{{ uid }} .the-drop__slab {
+    position: relative;
+    border-radius: var(--td-radius);
+    min-height: 540px;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(255,255,255,0.35), rgba(255,255,255,0.08));
+    border: 1px solid rgba(255,255,255,0.6);
+    box-shadow: 0 30px 60px -30px rgba(60,45,30,0.35);
+    display: flex;
+  }
+  #the-drop-{{ uid }} .the-drop__slab-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  #the-drop-{{ uid }} .the-drop__frame {
+    position: absolute;
+    border-radius: calc(var(--td-radius) * 0.7);
+    background: linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0.12));
+    border: 1px solid rgba(255,255,255,0.7);
+  }
+  #the-drop-{{ uid }} .the-drop__frame--back {
+    top: 40px; left: 40px; width: 40%; height: 62%;
+  }
+  #the-drop-{{ uid }} .the-drop__frame--front {
+    top: 20px; left: 34%; width: 46%; height: 74%;
+  }
+  #the-drop-{{ uid }} .the-drop__slab-card {
+    position: absolute;
+    left: 28px; bottom: 28px; right: 28px;
+    max-width: 340px;
+    background: var(--td-card-bg);
+    border-radius: calc(var(--td-radius) * 0.55);
+    padding: 20px 22px;
+    box-shadow: 0 18px 40px -18px rgba(60,45,30,0.4);
+    backdrop-filter: blur(6px);
+  }
+  #the-drop-{{ uid }} .the-drop__mini-title {
+    font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
+    font-weight: 700; color: var(--td-heading); margin: 0 0 10px;
+  }
+  #the-drop-{{ uid }} .the-drop__mini-text {
+    font-size: 14px; line-height: 1.55; color: var(--td-muted); margin: 0;
+  }
+
+  /* ---- RIGHT column ---- */
+  #the-drop-{{ uid }} .the-drop__intro {
+    font-size: 17px; line-height: 1.6; color: var(--td-muted); margin: 8px 0 28px;
+  }
+  #the-drop-{{ uid }} .the-drop__intro p { margin: 0; }
+  #the-drop-{{ uid }} .the-drop__card {
+    background: var(--td-card-bg);
+    border-radius: var(--td-radius);
+    padding: 30px 32px 34px;
+    margin-bottom: 24px;
+    box-shadow: 0 24px 50px -30px rgba(60,45,30,0.4);
+    border: 1px solid rgba(255,255,255,0.7);
+  }
+  #the-drop-{{ uid }} .the-drop__card:last-child { margin-bottom: 0; }
+  #the-drop-{{ uid }} .the-drop__card-title {
+    font-family: {{ s.heading_font.family }}, {{ s.heading_font.fallback_families }};
+    font-weight: {{ s.heading_font.weight }};
+    font-size: clamp(24px, 2.4vw, 32px);
+    line-height: 1.1; color: var(--td-heading); margin: 0 0 12px;
+  }
+  #the-drop-{{ uid }} .the-drop__card-text {
+    font-size: 15px; line-height: 1.6; color: var(--td-muted);
+  }
+  #the-drop-{{ uid }} .the-drop__card-text p { margin: 0; }
+  #the-drop-{{ uid }} .the-drop__btn {
+    display: inline-block; margin-top: 22px;
+    background: var(--td-btn-bg); color: var(--td-btn-text);
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600;
+    padding: 15px 30px; border-radius: 999px; text-decoration: none;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+  }
+  #the-drop-{{ uid }} .the-drop__btn:hover { transform: translateY(-1px); opacity: 0.9; }
+
+  @media (max-width: 900px) {
+    #the-drop-{{ uid }} .the-drop__inner { grid-template-columns: 1fr; gap: 36px; }
+    #the-drop-{{ uid }} .the-drop__slab { min-height: 420px; }
+    #the-drop-{{ uid }} .the-drop__title { margin-bottom: 28px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "THE DROP",
+  "tag": "section",
+  "class": "section-the-drop",
+  "settings": [
+    { "type": "header", "content": "Left column" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Featured Collection" },
+    { "type": "text", "id": "heading", "label": "Big heading", "default": "THE DROP" },
+    {
+      "type": "font_picker",
+      "id": "heading_font",
+      "label": "Heading font",
+      "default": "times_new_roman_n4"
+    },
+    { "type": "header", "content": "Campaign slab" },
+    { "type": "image_picker", "id": "campaign_image", "label": "Campaign image (optional)", "info": "Leave empty to show the placeholder frames." },
+    { "type": "text", "id": "campaign_eyebrow", "label": "Slab eyebrow", "default": "Campaign Frame" },
+    { "type": "text", "id": "campaign_title", "label": "Slab title", "default": "Forged Through Chaos" },
+    { "type": "textarea", "id": "campaign_text", "label": "Slab text", "default": "Use this hero-style collection slab for premium campaign photography, signature pieces, or drop-focused imagery when assets are ready." },
+    { "type": "header", "content": "Right column" },
+    { "type": "richtext", "id": "intro", "label": "Intro paragraph", "default": "<p>Built for the ones who never folded. Premium pieces forged through chaos, stitched with meaning, and created for those rebuilding identity on their own terms.</p>" },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_start", "label": "Background — top", "default": "#efe9e0" },
+    { "type": "color", "id": "bg_end", "label": "Background — bottom", "default": "#e4dccf" },
+    { "type": "color", "id": "card_bg", "label": "Card background", "default": "#faf8f4" },
+    { "type": "color", "id": "heading_color", "label": "Heading text", "default": "#1c1a17" },
+    { "type": "color", "id": "muted_color", "label": "Body text", "default": "#7d7264" },
+    { "type": "color", "id": "eyebrow_color", "label": "Eyebrow text", "default": "#8a7f70" },
+    { "type": "color", "id": "button_bg", "label": "Button background", "default": "#1c1a17" },
+    { "type": "color", "id": "button_text_color", "label": "Button text", "default": "#ffffff" },
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "corner_radius", "label": "Corner radius", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 22 },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "info_card",
+      "name": "Info card",
+      "settings": [
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Launch Energy" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Premium pieces, powerful silence." },
+        { "type": "richtext", "id": "text", "label": "Body", "default": "<p>The collection section is designed to feel elevated and fashion-forward while keeping the interface light, sharp, and breathable.</p>" },
+        { "type": "text", "id": "button_label", "label": "Button label (optional)" },
+        { "type": "url", "id": "button_link", "label": "Button link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "THE DROP",
+      "blocks": [
+        {
+          "type": "info_card",
+          "settings": {
+            "eyebrow": "Launch Energy",
+            "heading": "Premium pieces, powerful silence.",
+            "text": "<p>The collection section is designed to feel elevated and fashion-forward while keeping the interface light, sharp, and breathable.</p>"
+          }
+        },
+        {
+          "type": "info_card",
+          "settings": {
+            "eyebrow": "Conversion Focus",
+            "heading": "Built to move from story to shop.",
+            "text": "<p>Minimal friction. High intent. Distinct CTA hierarchy inspired by premium retail landing experiences.</p>",
+            "button_label": "Shop all"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
