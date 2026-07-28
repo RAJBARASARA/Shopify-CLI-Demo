@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
     "main": {
       "type": "product-information",
@@ -24,6 +25,7 @@
             "slideshow_mobile_controls_style": "dots",
             "thumbnail_position": "right",
             "thumbnail_width": 44,
+            "thumbnail_radius": 0,
             "aspect_ratio": "adapt",
             "constrain_to_viewport": true,
             "media_fit": "contain",
@@ -70,7 +72,6 @@
               "type": "group",
               "name": "Header",
               "settings": {
-                "open_in_new_tab": false,
                 "content_direction": "column",
                 "vertical_on_mobile": true,
                 "horizontal_alignment": "flex-start",
@@ -98,6 +99,9 @@
                 "overlay_color": "#00000026",
                 "overlay_style": "solid",
                 "gradient_direction": "to top",
+                "link": "",
+                "open_in_new_tab": false,
+                "placeholder": "",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -188,6 +192,7 @@
               "settings": {
                 "stacking": true,
                 "show_pickup_availability": false,
+                "gift_card_form": true,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -253,12 +258,14 @@
           ]
         }
       },
+      "disabled": true,
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
         "equal_columns": false,
         "limit_details_width": false,
         "gap": 48,
+        "enable_sticky_add_to_cart": true,
         "color_scheme": "",
         "padding-block-start": 0,
         "padding-block-end": 0
@@ -385,6 +392,7 @@
       "block_order": [
         "text_cbcgyb"
       ],
+      "disabled": true,
       "name": "t:names.product_recommendations",
       "settings": {
         "product": "{{ closest.product }}",
@@ -404,10 +412,105 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "tok_pdp_hero_BLGYeT": {
+      "type": "tok-pdp-hero",
+      "blocks": {
+        "feature_rK6Ff4": {
+          "type": "feature",
+          "settings": {
+            "label": "Fabric",
+            "text": "Heavyweight brushed cotton blend with premium hand feel."
+          }
+        },
+        "feature_em36ce": {
+          "type": "feature",
+          "settings": {
+            "label": "Fit",
+            "text": "Relaxed oversized silhouette with sculpted shoulder drop."
+          }
+        },
+        "feature_KrbW6m": {
+          "type": "feature",
+          "settings": {
+            "label": "Feeling",
+            "text": "Built for resilience, warmth, structure, and everyday impact."
+          }
+        },
+        "trust_HxBYUM": {
+          "type": "trust",
+          "settings": {
+            "title": "Fast Delivery",
+            "text": "2–5 business days with premium tracked shipping."
+          }
+        },
+        "trust_i9Bnqp": {
+          "type": "trust",
+          "settings": {
+            "title": "Easy Returns",
+            "text": "14-day returns for unworn pieces with tags attached."
+          }
+        },
+        "trust_xY8zjt": {
+          "type": "trust",
+          "settings": {
+            "title": "Drop Access",
+            "text": "Members get early access to limited releases and restocks."
+          }
+        }
+      },
+      "block_order": [
+        "feature_rK6Ff4",
+        "feature_em36ce",
+        "feature_KrbW6m",
+        "trust_HxBYUM",
+        "trust_i9Bnqp",
+        "trust_xY8zjt"
+      ],
+      "name": "TOK PDP Hero",
+      "settings": {
+        "eyebrow": "Product Detail Page / Light Luxury Layout",
+        "rating_stars": "★★★★★",
+        "rating_value": "4.9",
+        "reviews_text": "128 reviews",
+        "badge_seller": "Best Seller",
+        "badge_drop": "Limited Drop",
+        "stock_text": "In stock / Ready to ship",
+        "soldout_text": "Sold out",
+        "add_label": "Add to bag",
+        "size_guide_label": "Size guide",
+        "size_guide_url": "",
+        "help_link_label": "Need help choosing",
+        "help_link_url": "",
+        "save_label": "Save",
+        "save_url": "",
+        "gift_label": "Gift this",
+        "gift_url": "",
+        "cro_text": "Low-friction CRO layout: quick value comprehension, clear size selection, strong social proof, and immediate purchase actions above the fold.",
+        "insight1_title": "Fit Insight",
+        "insight1_text": "Oversized premium silhouette. Model reference space can sit here just like a high-end retail PDP.",
+        "insight2_title": "Why It Converts",
+        "insight2_text": "Key product answers are surfaced directly near imagery for faster purchase decisions.",
+        "page_bg": "#efe9e0",
+        "frame_start": "#f7f3ec",
+        "frame_end": "#eae2d5",
+        "card_bg": "#faf8f4",
+        "heading_color": "#1c1a17",
+        "muted_color": "#7d7264",
+        "eyebrow_color": "#8a7f70",
+        "line_color": "#d9cfbf",
+        "button_bg": "#1c1a17",
+        "button_text": "#ffffff",
+        "stock_color": "#4a8c4a",
+        "corner_radius": 18,
+        "padding_top": 48,
+        "padding_bottom": 64
+      }
     }
   },
   "order": [
     "main",
-    "product_recommendations_qggXJq"
+    "product_recommendations_qggXJq",
+    "tok_pdp_hero_BLGYeT"
   ]
 }
