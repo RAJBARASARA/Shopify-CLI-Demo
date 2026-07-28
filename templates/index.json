@@ -80,6 +80,68 @@
         "padding_bottom": 72
       }
     },
+    "custom_the_drop_zn01": {
+      "type": "custom-the-drop",
+      "blocks": {
+        "info_card_iYt6MD": {
+          "type": "info_card",
+          "settings": {
+            "eyebrow": "Launch Energy",
+            "heading": "Premium pieces, powerful silence.",
+            "text": "<p>The collection section is designed to feel elevated and fashion-forward while keeping the interface light, sharp, and breathable.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "info_launch": {
+          "type": "info_card",
+          "disabled": true,
+          "settings": {
+            "eyebrow": "Launch Energy",
+            "heading": "Premium pieces, powerful silence.",
+            "text": "<p>The collection section is designed to feel elevated and fashion-forward while keeping the interface light, sharp, and breathable.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "info_convert": {
+          "type": "info_card",
+          "settings": {
+            "eyebrow": "Conversion Focus",
+            "heading": "Built to move from story to shop.",
+            "text": "<p>Minimal friction. High intent. Distinct CTA hierarchy inspired by premium retail landing experiences.</p>",
+            "button_label": "Shop all",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "info_card_iYt6MD",
+        "info_launch",
+        "info_convert"
+      ],
+      "name": "THE DROP",
+      "settings": {
+        "eyebrow": "Featured Collection",
+        "heading": "THE DROP",
+        "heading_font": "times_new_roman_n4",
+        "campaign_eyebrow": "Campaign Frame",
+        "campaign_title": "Forged Through Chaos",
+        "campaign_text": "Use this hero-style collection slab for premium campaign photography, signature pieces, or drop-focused imagery when assets are ready.",
+        "intro": "<p>Built for the ones who never folded. Premium pieces forged through chaos, stitched with meaning, and created for those rebuilding identity on their own terms.</p>",
+        "bg_start": "#efe9e0",
+        "bg_end": "#e4dccf",
+        "card_bg": "#faf8f4",
+        "heading_color": "#1c1a17",
+        "muted_color": "#7d7264",
+        "eyebrow_color": "#8a7f70",
+        "button_bg": "#1c1a17",
+        "button_text_color": "#ffffff",
+        "corner_radius": 22,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
     "custom_hero_bfywzD": {
       "type": "custom-hero",
       "disabled": true,
@@ -177,68 +239,6 @@
         "background": "white"
       }
     },
-    "custom_the_drop_zn01": {
-      "type": "custom-the-drop",
-      "blocks": {
-        "info_card_iYt6MD": {
-          "type": "info_card",
-          "settings": {
-            "eyebrow": "Launch Energy",
-            "heading": "Premium pieces, powerful silence.",
-            "text": "<p>The collection section is designed to feel elevated and fashion-forward while keeping the interface light, sharp, and breathable.</p>",
-            "button_label": "",
-            "button_link": ""
-          }
-        },
-        "info_launch": {
-          "type": "info_card",
-          "disabled": true,
-          "settings": {
-            "eyebrow": "Launch Energy",
-            "heading": "Premium pieces, powerful silence.",
-            "text": "<p>The collection section is designed to feel elevated and fashion-forward while keeping the interface light, sharp, and breathable.</p>",
-            "button_label": "",
-            "button_link": ""
-          }
-        },
-        "info_convert": {
-          "type": "info_card",
-          "settings": {
-            "eyebrow": "Conversion Focus",
-            "heading": "Built to move from story to shop.",
-            "text": "<p>Minimal friction. High intent. Distinct CTA hierarchy inspired by premium retail landing experiences.</p>",
-            "button_label": "Shop all",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "info_card_iYt6MD",
-        "info_launch",
-        "info_convert"
-      ],
-      "name": "THE DROP",
-      "settings": {
-        "eyebrow": "Featured Collection",
-        "heading": "THE DROP",
-        "heading_font": "times_new_roman_n4",
-        "campaign_eyebrow": "Campaign Frame",
-        "campaign_title": "Forged Through Chaos",
-        "campaign_text": "Use this hero-style collection slab for premium campaign photography, signature pieces, or drop-focused imagery when assets are ready.",
-        "intro": "<p>Built for the ones who never folded. Premium pieces forged through chaos, stitched with meaning, and created for those rebuilding identity on their own terms.</p>",
-        "bg_start": "#efe9e0",
-        "bg_end": "#e4dccf",
-        "card_bg": "#faf8f4",
-        "heading_color": "#1c1a17",
-        "muted_color": "#7d7264",
-        "eyebrow_color": "#8a7f70",
-        "button_bg": "#1c1a17",
-        "button_text_color": "#ffffff",
-        "corner_radius": 22,
-        "padding_top": 80,
-        "padding_bottom": 80
-      }
-    },
     "custom_trust_bar_LKhpYd": {
       "type": "custom-trust-bar",
       "blocks": {
@@ -290,10 +290,10 @@
   },
   "order": [
     "custom_tok_hero_zn01",
+    "custom_the_drop_zn01",
     "custom_hero_bfywzD",
     "custom_category_carousel_ibi7HY",
     "custom_featured_products_WGYHig",
-    "custom_the_drop_zn01",
     "custom_trust_bar_LKhpYd"
   ]
 }
