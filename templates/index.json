@@ -9,8 +9,80 @@
  */
 {
   "sections": {
+    "custom_tok_hero_zn01": {
+      "type": "custom-tok-hero",
+      "blocks": {
+        "p1": {
+          "type": "panel",
+          "settings": {
+            "eyebrow": "Symbol / Crown",
+            "title": "Reclaimed Power",
+            "text": "Premium editorial placeholder panel designed to suggest texture, presence, and luxury campaign energy.",
+            "panel_height": 500,
+            "offset_top": 20
+          }
+        },
+        "p2": {
+          "type": "panel",
+          "settings": {
+            "eyebrow": "Monogram / 7K",
+            "title": "Identity Rebuilt",
+            "text": "Airy collage composition.",
+            "panel_height": 560,
+            "offset_top": 0
+          }
+        },
+        "p3": {
+          "type": "panel",
+          "settings": {
+            "eyebrow": "Statement",
+            "title": "Built From Broken",
+            "text": "A sculpted block for campaign art, detail photography, or signature drop imagery.",
+            "panel_height": 420,
+            "offset_top": 60
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "name": "THREADS OF KAOS Hero",
+      "settings": {
+        "eyebrow": "Luxury Streetwear / Light Campaign Landing Page",
+        "heading": "Zenn Space",
+        "kicker": "Not clothing.",
+        "heading_2": "Identity, rebuilt.",
+        "body": "<p>Luxury streetwear for the ones who survived chaos and rebuilt themselves. Born from pain. Refined through fire. Worn with purpose.</p>",
+        "heading_font": "serif",
+        "button_1_label": "Shop the drop",
+        "button_1_link": "",
+        "button_2_label": "Our story",
+        "button_2_link": "",
+        "footer_text": "Built From Broken",
+        "badge_mark": "DROP",
+        "badge_title": "Premium Launch Aesthetic",
+        "badge_text": "Editorial layout, light luxury palette, conversion-first storytelling.",
+        "page_bg": "#efe9e0",
+        "panel_start": "#f7f3ec",
+        "panel_end": "#eae2d5",
+        "card_bg": "#ffffff",
+        "heading_color": "#1c1a17",
+        "muted_color": "#7d7264",
+        "eyebrow_color": "#8a7f70",
+        "pill_bg": "#1c1a17",
+        "pill_text": "#ffffff",
+        "outline_color": "#c9bfae",
+        "dot_color": "#c9a24b",
+        "corner_radius": 20,
+        "padding_top": 56,
+        "padding_bottom": 72
+      }
+    },
     "custom_hero_bfywzD": {
       "type": "custom-hero",
+      "disabled": true,
       "name": "Zenn Hero",
       "settings": {
         "overlay_opacity": 40,
@@ -24,8 +96,7 @@
         "content_alignment": "left",
         "text_theme": "light",
         "height": "medium"
-      },
-      "disabled": true
+      }
     },
     "custom_category_carousel_ibi7HY": {
       "type": "custom-category-carousel",
@@ -215,48 +286,6 @@
         "heading": "Why Zenn-space",
         "background": "sand"
       }
-    },
-    "custom_tok_hero_zn01": {
-      "type": "custom-tok-hero",
-      "name": "THREADS OF KAOS Hero",
-      "blocks": {
-        "p1": {
-          "type": "panel",
-          "settings": {
-            "eyebrow": "Symbol / Crown",
-            "title": "Reclaimed Power",
-            "text": "Premium editorial placeholder panel designed to suggest texture, presence, and luxury campaign energy.",
-            "panel_height": 500,
-            "offset_top": 20
-          }
-        },
-        "p2": {
-          "type": "panel",
-          "settings": {
-            "eyebrow": "Monogram / 7K",
-            "title": "Identity Rebuilt",
-            "text": "Airy collage composition.",
-            "panel_height": 560,
-            "offset_top": 0
-          }
-        },
-        "p3": {
-          "type": "panel",
-          "settings": {
-            "eyebrow": "Statement",
-            "title": "Built From Broken",
-            "text": "A sculpted block for campaign art, detail photography, or signature drop imagery.",
-            "panel_height": 420,
-            "offset_top": 60
-          }
-        }
-      },
-      "block_order": [
-        "p1",
-        "p2",
-        "p3"
-      ],
-      "settings": {}
     }
   },
   "order": [
