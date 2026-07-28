@@ -1,0 +1,92 @@
+{% comment %} Threads of Kaos — Symbols Hold Power. Self-contained. {% endcomment %}
+{%- liquid
+  assign s = section.settings
+  assign uid = section.id
+-%}
+<section class="tks-sym" id="tks-sym-{{ uid }}" style="
+  --c-page:{{ s.page_bg }};--c-card:{{ s.card_bg }};--c-tile:{{ s.tile_bg }};--c-tiletxt:{{ s.tile_text }};
+  --c-head:{{ s.heading_color }};--c-muted:{{ s.muted_color }};--c-eye:{{ s.eyebrow_color }};
+  --c-btn:{{ s.button_bg }};--c-btntxt:{{ s.button_text }};--r:{{ s.corner_radius }}px;--pad:{{ s.padding_top }}px {{ s.padding_bottom }}px;">
+  <div class="tks-sym__inner">
+    <div class="tks-sym__head">
+      <div>
+        {% if s.eyebrow != blank %}<p class="tks-sym__eye">{{ s.eyebrow }}</p>{% endif %}
+        {% if s.heading != blank %}<h2 class="tks-sym__title">{{ s.heading }}</h2>{% endif %}
+      </div>
+      {% if s.intro != blank %}<p class="tks-sym__intro">{{ s.intro }}</p>{% endif %}
+    </div>
+    <div class="tks-sym__grid">
+      {% for block in section.blocks %}
+        {%- assign b = block.settings -%}
+        <article class="tks-sym__card" {{ block.shopify_attributes }}>
+          <div class="tks-sym__tile">
+            {% if b.icon != blank %}{{ b.icon | image_url: width: 120 | image_tag: loading:'lazy', class:'tks-sym__tile-img', alt: b.title }}
+            {% else %}<span class="tks-sym__glyph">{{ b.glyph | default: '◆' }}</span>{% endif %}
+          </div>
+          {% if b.title != blank %}<p class="tks-sym__ctitle">{{ b.title }}</p>{% endif %}
+          {% if b.text != blank %}<p class="tks-sym__ctext">{{ b.text }}</p>{% endif %}
+        </article>
+      {% endfor %}
+    </div>
+    {% if s.button_label != blank %}
+      <div class="tks-sym__cta"><a class="tks-sym__btn" {% if s.button_link != blank %}href="{{ s.button_link }}"{% else %}href="#" role="button"{% endif %}>{{ s.button_label }}</a></div>
+    {% endif %}
+  </div>
+</section>
+<style>
+  #tks-sym-{{ uid }}.tks-sym{padding:var(--pad);background:var(--c-page);}
+  #tks-sym-{{ uid }} .tks-sym__inner{max-width:1240px;margin:0 auto;padding:0 24px;}
+  #tks-sym-{{ uid }} .tks-sym__head{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:end;margin:0 0 40px;}
+  #tks-sym-{{ uid }} .tks-sym__eye{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--c-eye);font-weight:600;margin:0 0 16px;}
+  #tks-sym-{{ uid }} .tks-sym__title{font-family:{{ s.heading_font.family }},{{ s.heading_font.fallback_families }};font-weight:{{ s.heading_font.weight }};font-size:clamp(34px,4vw,56px);line-height:1;letter-spacing:-.01em;color:var(--c-head);margin:0;}
+  #tks-sym-{{ uid }} .tks-sym__intro{font-size:15px;line-height:1.65;color:var(--c-muted);margin:0;max-width:42ch;}
+  #tks-sym-{{ uid }} .tks-sym__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  #tks-sym-{{ uid }} .tks-sym__card{background:var(--c-card);border-radius:var(--r);padding:24px 26px 30px;box-shadow:0 24px 50px -32px rgba(60,45,30,.4);border:1px solid rgba(255,255,255,.6);}
+  #tks-sym-{{ uid }} .tks-sym__tile{width:56px;height:56px;border-radius:16px;background:var(--c-tile);color:var(--c-tiletxt);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;margin:0 0 26px;overflow:hidden;}
+  #tks-sym-{{ uid }} .tks-sym__tile-img{width:60%;height:60%;object-fit:contain;}
+  #tks-sym-{{ uid }} .tks-sym__glyph{font-size:22px;}
+  #tks-sym-{{ uid }} .tks-sym__ctitle{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--c-head);margin:0 0 12px;}
+  #tks-sym-{{ uid }} .tks-sym__ctext{font-size:14px;line-height:1.6;color:var(--c-muted);margin:0;}
+  #tks-sym-{{ uid }} .tks-sym__cta{text-align:center;margin-top:40px;}
+  #tks-sym-{{ uid }} .tks-sym__btn{display:inline-block;background:var(--c-btn);color:var(--c-btntxt);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;padding:16px 34px;border-radius:999px;text-decoration:none;transition:transform .15s ease,opacity .15s ease;}
+  #tks-sym-{{ uid }} .tks-sym__btn:hover{transform:translateY(-1px);opacity:.9;}
+  @media(max-width:900px){#tks-sym-{{ uid }} .tks-sym__head{grid-template-columns:1fr;}#tks-sym-{{ uid }} .tks-sym__grid{grid-template-columns:1fr;}}
+</style>
+{% schema %}
+{
+  "name":"TKS Symbols","tag":"section","class":"section-tks-sym",
+  "settings":[
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"Symbols of Kaos"},
+    {"type":"text","id":"heading","label":"Heading","default":"Symbols hold power"},
+    {"type":"font_picker","id":"heading_font","label":"Heading font","default":"times_new_roman_n4"},
+    {"type":"textarea","id":"intro","label":"Intro","default":"Nothing inside Threads of Kaos exists without meaning. Every symbol represents survival, identity, and transformation."},
+    {"type":"text","id":"button_label","label":"Button label","default":"Discover the symbols"},
+    {"type":"url","id":"button_link","label":"Button link"},
+    {"type":"header","content":"Colours"},
+    {"type":"color","id":"page_bg","label":"Page background","default":"#efe9e0"},
+    {"type":"color","id":"card_bg","label":"Card background","default":"#faf8f4"},
+    {"type":"color","id":"tile_bg","label":"Icon tile bg","default":"#2b2620"},
+    {"type":"color","id":"tile_text","label":"Icon tile text","default":"#f4efe6"},
+    {"type":"color","id":"heading_color","label":"Heading","default":"#1c1a17"},
+    {"type":"color","id":"muted_color","label":"Body","default":"#7d7264"},
+    {"type":"color","id":"eyebrow_color","label":"Eyebrow","default":"#8a7f70"},
+    {"type":"color","id":"button_bg","label":"Button bg","default":"#1c1a17"},
+    {"type":"color","id":"button_text","label":"Button text","default":"#ffffff"},
+    {"type":"header","content":"Layout"},
+    {"type":"range","id":"corner_radius","label":"Corner radius","min":0,"max":40,"step":2,"unit":"px","default":20},
+    {"type":"range","id":"padding_top","label":"Padding top","min":0,"max":160,"step":4,"unit":"px","default":72},
+    {"type":"range","id":"padding_bottom","label":"Padding bottom","min":0,"max":160,"step":4,"unit":"px","default":72}
+  ],
+  "blocks":[{"type":"symbol","name":"Symbol","settings":[
+    {"type":"image_picker","id":"icon","label":"Icon (optional)"},
+    {"type":"text","id":"glyph","label":"Glyph fallback","default":"◆"},
+    {"type":"text","id":"title","label":"Title","default":"The Crown"},
+    {"type":"textarea","id":"text","label":"Text","default":"The crown symbolizes reclaimed power. Not inherited. Earned. For the ones who lost themselves and fought their way back."}
+  ]}],
+  "presets":[{"name":"TKS Symbols","blocks":[
+    {"type":"symbol","settings":{"glyph":"♛","title":"The Crown","text":"The crown symbolizes reclaimed power. Not inherited. Earned. For the ones who lost themselves and fought their way back."}},
+    {"type":"symbol","settings":{"glyph":"TK","title":"TK","text":"The Threads of Kaos monogram represents identity rebuilt. Past and present woven together. A reminder that survival becomes strength."}},
+    {"type":"symbol","settings":{"glyph":"✦","title":"Built From Broken","text":"Broken is not the end. It is the beginning of becoming. Your scars are proof of survival, not weakness."}}
+  ]}]
+}
+{% endschema %}

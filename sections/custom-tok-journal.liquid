@@ -1,0 +1,83 @@
+{% comment %} Threads of Kaos — The Kaos Journal. Self-contained. {% endcomment %}
+{%- liquid
+  assign s = section.settings
+  assign uid = section.id
+-%}
+<section class="tks-jrn" id="tks-jrn-{{ uid }}" style="
+  --c-page:{{ s.page_bg }};--c-card-a:{{ s.card_start }};--c-card-b:{{ s.card_end }};
+  --c-head:{{ s.heading_color }};--c-muted:{{ s.muted_color }};--c-eye:{{ s.eyebrow_color }};
+  --r:{{ s.corner_radius }}px;--pad:{{ s.padding_top }}px {{ s.padding_bottom }}px;">
+  <div class="tks-jrn__inner">
+    <div class="tks-jrn__head">
+      <div>
+        {% if s.eyebrow != blank %}<p class="tks-jrn__eye">{{ s.eyebrow }}</p>{% endif %}
+        {% if s.heading != blank %}<h2 class="tks-jrn__title">{{ s.heading }}</h2>{% endif %}
+      </div>
+      {% if s.intro != blank %}<p class="tks-jrn__intro">{{ s.intro }}</p>{% endif %}
+    </div>
+    <div class="tks-jrn__grid">
+      {% for block in section.blocks %}
+        {%- assign b = block.settings -%}
+        <a class="tks-jrn__card" {% if b.link != blank %}href="{{ b.link }}"{% else %}href="#"{% endif %} {{ block.shopify_attributes }}>
+          {% if b.image != blank %}{{ b.image | image_url: width: 800 | image_tag: loading:'lazy', class:'tks-jrn__img', widths:'300,600,800', alt: b.title }}{% endif %}
+          <div class="tks-jrn__body">
+            {% if b.label != blank %}<p class="tks-jrn__label">{{ b.label }}</p>{% endif %}
+            {% if b.title != blank %}<h3 class="tks-jrn__ctitle">{{ b.title }}</h3>{% endif %}
+            {% if b.text != blank %}<p class="tks-jrn__ctext">{{ b.text }}</p>{% endif %}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<style>
+  #tks-jrn-{{ uid }}.tks-jrn{padding:var(--pad);background:var(--c-page);}
+  #tks-jrn-{{ uid }} .tks-jrn__inner{max-width:1240px;margin:0 auto;padding:0 24px;}
+  #tks-jrn-{{ uid }} .tks-jrn__head{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:end;margin:0 0 34px;}
+  #tks-jrn-{{ uid }} .tks-jrn__eye{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--c-eye);font-weight:600;margin:0 0 14px;}
+  #tks-jrn-{{ uid }} .tks-jrn__title{font-family:{{ s.heading_font.family }},{{ s.heading_font.fallback_families }};font-weight:{{ s.heading_font.weight }};font-size:clamp(34px,4.2vw,58px);line-height:1;letter-spacing:-.01em;color:var(--c-head);margin:0;}
+  #tks-jrn-{{ uid }} .tks-jrn__intro{font-size:14px;line-height:1.6;color:var(--c-muted);margin:0;max-width:42ch;}
+  #tks-jrn-{{ uid }} .tks-jrn__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  #tks-jrn-{{ uid }} .tks-jrn__card{position:relative;display:flex;align-items:flex-end;min-height:340px;border-radius:var(--r);overflow:hidden;text-decoration:none;background:linear-gradient(160deg,var(--c-card-a),var(--c-card-b));border:1px solid rgba(255,255,255,.5);box-shadow:0 26px 52px -34px rgba(60,45,30,.45);transition:transform .18s ease;}
+  #tks-jrn-{{ uid }} .tks-jrn__card:hover{transform:translateY(-4px);}
+  #tks-jrn-{{ uid }} .tks-jrn__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9;}
+  #tks-jrn-{{ uid }} .tks-jrn__body{position:relative;z-index:1;padding:28px 28px 30px;}
+  #tks-jrn-{{ uid }} .tks-jrn__label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--c-eye);font-weight:600;margin:0 0 14px;}
+  #tks-jrn-{{ uid }} .tks-jrn__ctitle{font-family:{{ s.heading_font.family }},{{ s.heading_font.fallback_families }};font-weight:{{ s.heading_font.weight }};font-size:22px;line-height:1.1;color:var(--c-head);margin:0 0 12px;}
+  #tks-jrn-{{ uid }} .tks-jrn__ctext{font-size:13px;line-height:1.6;color:var(--c-muted);margin:0;}
+  @media(max-width:900px){#tks-jrn-{{ uid }} .tks-jrn__head{grid-template-columns:1fr;}#tks-jrn-{{ uid }} .tks-jrn__grid{grid-template-columns:1fr;}}
+</style>
+{% schema %}
+{
+  "name":"TKS Journal","tag":"section","class":"section-tks-jrn",
+  "settings":[
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"Journal"},
+    {"type":"text","id":"heading","label":"Heading","default":"The Kaos Journal"},
+    {"type":"font_picker","id":"heading_font","label":"Heading font","default":"times_new_roman_n4"},
+    {"type":"textarea","id":"intro","label":"Intro","default":"Stories of survival. Transformation. Healing. Identity rebuilt."},
+    {"type":"header","content":"Colours"},
+    {"type":"color","id":"page_bg","label":"Page background","default":"#efe9e0"},
+    {"type":"color","id":"card_start","label":"Card gradient top","default":"#efe6d6"},
+    {"type":"color","id":"card_end","label":"Card gradient bottom","default":"#bfb097"},
+    {"type":"color","id":"heading_color","label":"Heading","default":"#1c1a17"},
+    {"type":"color","id":"muted_color","label":"Body","default":"#6e6455"},
+    {"type":"color","id":"eyebrow_color","label":"Eyebrow / label","default":"#8a7f70"},
+    {"type":"header","content":"Layout"},
+    {"type":"range","id":"corner_radius","label":"Corner radius","min":0,"max":40,"step":2,"unit":"px","default":18},
+    {"type":"range","id":"padding_top","label":"Padding top","min":0,"max":160,"step":4,"unit":"px","default":64},
+    {"type":"range","id":"padding_bottom","label":"Padding bottom","min":0,"max":160,"step":4,"unit":"px","default":64}
+  ],
+  "blocks":[{"type":"story","name":"Story","settings":[
+    {"type":"image_picker","id":"image","label":"Image (optional)"},
+    {"type":"text","id":"label","label":"Label","default":"Story 01"},
+    {"type":"text","id":"title","label":"Title","default":"Survival has a voice."},
+    {"type":"textarea","id":"text","label":"Text","default":"Editorial story space for founder reflections, recovery narratives, and resilience-centered brand writing."},
+    {"type":"url","id":"link","label":"Link"}
+  ]}],
+  "presets":[{"name":"TKS Journal","blocks":[
+    {"type":"story","settings":{"label":"Story 01","title":"Survival has a voice.","text":"Editorial story space for founder reflections, recovery narratives, and resilience-centered brand writing."}},
+    {"type":"story","settings":{"label":"Story 02","title":"Transformation, documented.","text":"A premium journal layout that can become a content engine for brand affinity and repeat engagement."}},
+    {"type":"story","settings":{"label":"Story 03","title":"Healing with identity intact.","text":"Use these cards for essays, drop stories, or cultural notes that deepen the movement around the brand."}}
+  ]}]
+}
+{% endschema %}
