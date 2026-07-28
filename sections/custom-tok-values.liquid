@@ -1,0 +1,76 @@
+{% comment %} Threads of Kaos — More Than A Brand (social proof / values). Self-contained. {% endcomment %}
+{%- liquid
+  assign s = section.settings
+  assign uid = section.id
+-%}
+<section class="tks-val" id="tks-val-{{ uid }}" style="
+  --c-page:{{ s.page_bg }};--c-frame-a:{{ s.frame_start }};--c-frame-b:{{ s.frame_end }};--c-card:{{ s.card_bg }};
+  --c-head:{{ s.heading_color }};--c-muted:{{ s.muted_color }};--c-eye:{{ s.eyebrow_color }};--c-num:{{ s.number_color }};
+  --r:{{ s.corner_radius }}px;--pad:{{ s.padding_top }}px {{ s.padding_bottom }}px;">
+  <div class="tks-val__frame">
+    <div class="tks-val__inner">
+      <div class="tks-val__left">
+        {% if s.eyebrow != blank %}<p class="tks-val__eye">{{ s.eyebrow }}</p>{% endif %}
+        {% if s.heading != blank %}<h2 class="tks-val__title">{{ s.heading }}</h2>{% endif %}
+        {% if s.body != blank %}<div class="tks-val__body">{{ s.body }}</div>{% endif %}
+      </div>
+      <div class="tks-val__grid">
+        {% for block in section.blocks %}
+          {%- assign b = block.settings -%}
+          <div class="tks-val__cell" {{ block.shopify_attributes }}>
+            {% if b.number != blank %}<p class="tks-val__num">{{ b.number }}</p>{% endif %}
+            {% if b.label != blank %}<p class="tks-val__label">{{ b.label }}</p>{% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  #tks-val-{{ uid }}.tks-val{padding:var(--pad);background:var(--c-page);}
+  #tks-val-{{ uid }} .tks-val__frame{max-width:1240px;margin:0 auto;padding:clamp(28px,3vw,48px);border-radius:calc(var(--r)*1.3);background:radial-gradient(120% 120% at 80% 0%,var(--c-frame-a),var(--c-frame-b));box-shadow:0 34px 70px -44px rgba(60,45,30,.45);}
+  #tks-val-{{ uid }} .tks-val__inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,56px);align-items:center;}
+  #tks-val-{{ uid }} .tks-val__eye{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--c-eye);font-weight:600;margin:0 0 16px;}
+  #tks-val-{{ uid }} .tks-val__title{font-family:{{ s.heading_font.family }},{{ s.heading_font.fallback_families }};font-weight:{{ s.heading_font.weight }};font-size:clamp(34px,4vw,54px);line-height:1;letter-spacing:-.01em;color:var(--c-head);margin:0 0 22px;}
+  #tks-val-{{ uid }} .tks-val__body{font-size:15px;line-height:1.9;color:var(--c-muted);}
+  #tks-val-{{ uid }} .tks-val__body p{margin:0;}
+  #tks-val-{{ uid }} .tks-val__grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  #tks-val-{{ uid }} .tks-val__cell{background:var(--c-card);border-radius:var(--r);padding:24px 26px;box-shadow:0 20px 44px -30px rgba(60,45,30,.35);border:1px solid rgba(255,255,255,.6);}
+  #tks-val-{{ uid }} .tks-val__num{font-family:{{ s.heading_font.family }},serif;font-size:30px;color:var(--c-num);margin:0 0 26px;letter-spacing:.02em;}
+  #tks-val-{{ uid }} .tks-val__label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--c-eye);margin:0;}
+  @media(max-width:900px){#tks-val-{{ uid }} .tks-val__inner{grid-template-columns:1fr;}}
+</style>
+{% schema %}
+{
+  "name":"TKS Values","tag":"section","class":"section-tks-val",
+  "settings":[
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"Social Proof"},
+    {"type":"text","id":"heading","label":"Heading","default":"More than a brand"},
+    {"type":"font_picker","id":"heading_font","label":"Heading font","default":"times_new_roman_n4"},
+    {"type":"richtext","id":"body","label":"Body","default":"<p>Threads of Kaos is for the ones rebuilding. The survivors. The fighters. The ones who refuse to let chaos define them. Join a movement built through resilience.</p>"},
+    {"type":"header","content":"Colours"},
+    {"type":"color","id":"page_bg","label":"Page background","default":"#efe9e0"},
+    {"type":"color","id":"frame_start","label":"Frame gradient top","default":"#f7f3ec"},
+    {"type":"color","id":"frame_end","label":"Frame gradient bottom","default":"#eee7db"},
+    {"type":"color","id":"card_bg","label":"Card background","default":"#ffffff"},
+    {"type":"color","id":"heading_color","label":"Heading","default":"#1c1a17"},
+    {"type":"color","id":"muted_color","label":"Body","default":"#7d7264"},
+    {"type":"color","id":"eyebrow_color","label":"Eyebrow","default":"#8a7f70"},
+    {"type":"color","id":"number_color","label":"Number","default":"#1c1a17"},
+    {"type":"header","content":"Layout"},
+    {"type":"range","id":"corner_radius","label":"Corner radius","min":0,"max":40,"step":2,"unit":"px","default":16},
+    {"type":"range","id":"padding_top","label":"Padding top","min":0,"max":160,"step":4,"unit":"px","default":64},
+    {"type":"range","id":"padding_bottom","label":"Padding bottom","min":0,"max":160,"step":4,"unit":"px","default":64}
+  ],
+  "blocks":[{"type":"value","name":"Value","settings":[
+    {"type":"text","id":"number","label":"Number","default":"01"},
+    {"type":"text","id":"label","label":"Label","default":"Identity Rebuilt"}
+  ]}],
+  "presets":[{"name":"TKS Values","blocks":[
+    {"type":"value","settings":{"number":"01","label":"Identity Rebuilt"}},
+    {"type":"value","settings":{"number":"02","label":"Purpose Stitched In"}},
+    {"type":"value","settings":{"number":"03","label":"Luxury With Meaning"}},
+    {"type":"value","settings":{"number":"04","label":"Movement Over Trend"}}
+  ]}]
+}
+{% endschema %}

@@ -1,0 +1,74 @@
+{% comment %} Threads of Kaos — Brand Story ("This brand wasn't created"). Self-contained. {% endcomment %}
+{%- liquid
+  assign s = section.settings
+  assign uid = section.id
+-%}
+<section class="tks-story" id="tks-story-{{ uid }}" style="
+  --c-page:{{ s.page_bg }};--c-card:{{ s.card_bg }};--c-panel-a:{{ s.panel_start }};--c-panel-b:{{ s.panel_end }};
+  --c-head:{{ s.heading_color }};--c-muted:{{ s.muted_color }};--c-eye:{{ s.eyebrow_color }};
+  --c-oline:{{ s.outline_color }};--r:{{ s.corner_radius }}px;--pad:{{ s.padding_top }}px {{ s.padding_bottom }}px;">
+  <div class="tks-story__inner">
+    <div class="tks-story__card">
+      {% if s.eyebrow != blank %}<p class="tks-story__eye">{{ s.eyebrow }}</p>{% endif %}
+      {% if s.heading != blank %}<h2 class="tks-story__title">{{ s.heading }}</h2>{% endif %}
+      {% if s.body != blank %}<div class="tks-story__body">{{ s.body }}</div>{% endif %}
+      {% if s.button_label != blank %}<a class="tks-story__btn" {% if s.button_link != blank %}href="{{ s.button_link }}"{% else %}href="#" role="button"{% endif %}>{{ s.button_label }}</a>{% endif %}
+    </div>
+    <div class="tks-story__visual">
+      {% if s.image != blank %}
+        {{ s.image | image_url: width: 1200 | image_tag: loading:'lazy', class:'tks-story__img', widths:'400,800,1200', alt: s.heading }}
+      {% else %}
+        <span class="tks-story__rect tks-story__rect--a" aria-hidden="true"></span>
+        <span class="tks-story__rect tks-story__rect--b" aria-hidden="true"></span>
+      {% endif %}
+      {% if s.monogram != blank %}<span class="tks-story__mono">{{ s.monogram }}</span>{% endif %}
+    </div>
+  </div>
+</section>
+<style>
+  #tks-story-{{ uid }}.tks-story{padding:var(--pad);background:var(--c-page);}
+  #tks-story-{{ uid }} .tks-story__inner{max-width:1240px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch;}
+  #tks-story-{{ uid }} .tks-story__card{background:var(--c-card);border-radius:var(--r);padding:clamp(28px,3vw,48px);box-shadow:0 30px 60px -34px rgba(60,45,30,.4);}
+  #tks-story-{{ uid }} .tks-story__eye{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--c-eye);font-weight:600;margin:0 0 20px;}
+  #tks-story-{{ uid }} .tks-story__title{font-family:{{ s.heading_font.family }},{{ s.heading_font.fallback_families }};font-weight:{{ s.heading_font.weight }};font-size:clamp(34px,3.6vw,52px);line-height:1.02;letter-spacing:-.01em;color:var(--c-head);margin:0 0 26px;}
+  #tks-story-{{ uid }} .tks-story__body{font-size:15px;line-height:1.7;color:var(--c-muted);}
+  #tks-story-{{ uid }} .tks-story__body p{margin:0 0 16px;}
+  #tks-story-{{ uid }} .tks-story__btn{display:inline-block;margin-top:14px;border:1px solid var(--c-oline);color:var(--c-head);background:transparent;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;padding:14px 28px;border-radius:999px;text-decoration:none;transition:transform .15s ease;}
+  #tks-story-{{ uid }} .tks-story__btn:hover{transform:translateY(-1px);}
+  #tks-story-{{ uid }} .tks-story__visual{position:relative;border-radius:var(--r);min-height:520px;overflow:hidden;background:radial-gradient(120% 100% at 30% 0%,var(--c-panel-a),var(--c-panel-b));border:1px solid rgba(255,255,255,.6);}
+  #tks-story-{{ uid }} .tks-story__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  #tks-story-{{ uid }} .tks-story__rect{position:absolute;border-radius:calc(var(--r)*.7);background:linear-gradient(135deg,rgba(255,255,255,.4),rgba(255,255,255,.08));border:1px solid rgba(255,255,255,.7);}
+  #tks-story-{{ uid }} .tks-story__rect--a{top:40px;left:12%;width:52%;height:72%;}
+  #tks-story-{{ uid }} .tks-story__rect--b{top:120px;left:34%;width:52%;height:66%;}
+  #tks-story-{{ uid }} .tks-story__mono{position:absolute;right:26px;bottom:26px;width:64px;height:64px;border-radius:50%;background:var(--c-card);color:var(--c-head);display:flex;align-items:center;justify-content:center;font-family:{{ s.heading_font.family }},serif;font-size:22px;box-shadow:0 18px 40px -18px rgba(60,45,30,.5);}
+  @media(max-width:900px){#tks-story-{{ uid }} .tks-story__inner{grid-template-columns:1fr;}#tks-story-{{ uid }} .tks-story__visual{min-height:360px;}}
+</style>
+{% schema %}
+{
+  "name":"TKS Brand Story","tag":"section","class":"section-tks-story",
+  "settings":[
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"Brand Story"},
+    {"type":"text","id":"heading","label":"Heading","default":"This brand wasn't created. It was survived."},
+    {"type":"font_picker","id":"heading_font","label":"Heading font","default":"times_new_roman_n4"},
+    {"type":"richtext","id":"body","label":"Body","default":"<p>Threads of Kaos was built for the people who weren't supposed to make it.</p><p>The ones who know what loss feels like. What survival costs. What rebuilding demands.</p><p>This is luxury streetwear rooted in resilience. Every piece represents transformation.</p><p>A reminder that your past didn't destroy you. It shaped you.</p><p>We don't believe broken means finished. We believe chaos creates something stronger.</p>"},
+    {"type":"text","id":"button_label","label":"Button label","default":"Read our story"},
+    {"type":"url","id":"button_link","label":"Button link"},
+    {"type":"image_picker","id":"image","label":"Right image (optional)"},
+    {"type":"text","id":"monogram","label":"Monogram","default":"TK"},
+    {"type":"header","content":"Colours"},
+    {"type":"color","id":"page_bg","label":"Page background","default":"#efe9e0"},
+    {"type":"color","id":"card_bg","label":"Card background","default":"#faf8f4"},
+    {"type":"color","id":"panel_start","label":"Visual gradient top","default":"#f2ece1"},
+    {"type":"color","id":"panel_end","label":"Visual gradient bottom","default":"#e2d7c5"},
+    {"type":"color","id":"heading_color","label":"Heading","default":"#1c1a17"},
+    {"type":"color","id":"muted_color","label":"Body","default":"#7d7264"},
+    {"type":"color","id":"eyebrow_color","label":"Eyebrow","default":"#8a7f70"},
+    {"type":"color","id":"outline_color","label":"Button border","default":"#c9bfae"},
+    {"type":"header","content":"Layout"},
+    {"type":"range","id":"corner_radius","label":"Corner radius","min":0,"max":40,"step":2,"unit":"px","default":22},
+    {"type":"range","id":"padding_top","label":"Padding top","min":0,"max":160,"step":4,"unit":"px","default":72},
+    {"type":"range","id":"padding_bottom","label":"Padding bottom","min":0,"max":160,"step":4,"unit":"px","default":72}
+  ],
+  "presets":[{"name":"TKS Brand Story"}]
+}
+{% endschema %}
