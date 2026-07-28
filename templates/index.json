@@ -24,7 +24,8 @@
         "content_alignment": "left",
         "text_theme": "light",
         "height": "medium"
-      }
+      },
+      "disabled": true
     },
     "custom_category_carousel_ibi7HY": {
       "type": "custom-category-carousel",
@@ -214,9 +215,52 @@
         "heading": "Why Zenn-space",
         "background": "sand"
       }
+    },
+    "custom_tok_hero_zn01": {
+      "type": "custom-tok-hero",
+      "name": "THREADS OF KAOS Hero",
+      "blocks": {
+        "p1": {
+          "type": "panel",
+          "settings": {
+            "eyebrow": "Symbol / Crown",
+            "title": "Reclaimed Power",
+            "text": "Premium editorial placeholder panel designed to suggest texture, presence, and luxury campaign energy.",
+            "panel_height": 500,
+            "offset_top": 20
+          }
+        },
+        "p2": {
+          "type": "panel",
+          "settings": {
+            "eyebrow": "Monogram / 7K",
+            "title": "Identity Rebuilt",
+            "text": "Airy collage composition.",
+            "panel_height": 560,
+            "offset_top": 0
+          }
+        },
+        "p3": {
+          "type": "panel",
+          "settings": {
+            "eyebrow": "Statement",
+            "title": "Built From Broken",
+            "text": "A sculpted block for campaign art, detail photography, or signature drop imagery.",
+            "panel_height": 420,
+            "offset_top": 60
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "settings": {}
     }
   },
   "order": [
+    "custom_tok_hero_zn01",
     "custom_hero_bfywzD",
     "custom_category_carousel_ibi7HY",
     "custom_featured_products_WGYHig",
