@@ -152,12 +152,41 @@
         "heading": "Why Zenn-space",
         "background": "sand"
       }
+    },
+    "custom_the_drop_zn01": {
+      "type": "custom-the-drop",
+      "name": "THE DROP",
+      "blocks": {
+        "info_launch": {
+          "type": "info_card",
+          "settings": {
+            "eyebrow": "Launch Energy",
+            "heading": "Premium pieces, powerful silence.",
+            "text": "<p>The collection section is designed to feel elevated and fashion-forward while keeping the interface light, sharp, and breathable.</p>"
+          }
+        },
+        "info_convert": {
+          "type": "info_card",
+          "settings": {
+            "eyebrow": "Conversion Focus",
+            "heading": "Built to move from story to shop.",
+            "text": "<p>Minimal friction. High intent. Distinct CTA hierarchy inspired by premium retail landing experiences.</p>",
+            "button_label": "Shop all"
+          }
+        }
+      },
+      "block_order": [
+        "info_launch",
+        "info_convert"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "custom_hero_bfywzD",
     "custom_category_carousel_ibi7HY",
     "custom_featured_products_WGYHig",
+    "custom_the_drop_zn01",
     "custom_trust_bar_LKhpYd"
   ]
 }
