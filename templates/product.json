@@ -11,7 +11,33 @@
   "sections": {
     "main": {
       "type": "main-luxury-pdp",
-      "settings": {}
+      "settings": {
+        "label_text": "PRODUCT DETAIL PAGE / LIGHT LUXURY LAYOUT",
+        "default_rating": "4.9",
+        "default_reviews": "128",
+        "show_best_seller": true,
+        "best_seller_text": "Best Seller",
+        "drop_badge_text": "LIMITED DROP",
+        "default_fabric": "Heavyweight brushed cotton blend with premium hand feel.",
+        "default_fit": "Relaxed oversized silhouette with sculpted shoulder drop.",
+        "default_feeling": "Built for resilience, warmth, structure, and everyday impact.",
+        "overlay1_title": "FIT INSIGHT",
+        "overlay1_text": "Oversized premium silhouette. Model reference space can sit here just like a high-end retail PDP.",
+        "overlay2_title": "WHY IT CONVERTS",
+        "overlay2_text": "Key product answers are surfaced directly near imagery for faster purchase decisions.",
+        "help_link": "",
+        "size_guide_link": "",
+        "gift_link": "",
+        "instock_text": "In stock / ready to ship",
+        "oos_text": "Sold out",
+        "cro_text": "Low-friction CRO layout: quick value comprehension, clear size selection, strong social proof, and immediate purchase actions above the fold.",
+        "badge1_title": "FAST DELIVERY",
+        "badge1_text": "2-5 business days with premium tracked shipping.",
+        "badge2_title": "EASY RETURNS",
+        "badge2_text": "14-day returns for unworn pieces with tags attached.",
+        "badge3_title": "DROP ACCESS",
+        "badge3_text": "Members get early access to limited releases and restocks."
+      }
     }
   },
   "order": [
