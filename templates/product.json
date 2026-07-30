@@ -13,7 +13,7 @@
       "type": "main-luxury-pdp",
       "settings": {
         "label_text": "PRODUCT DETAIL PAGE / LIGHT LUXURY LAYOUT",
-        "default_rating": "4.9",
+        "default_rating": "",
         "default_reviews": "128",
         "show_best_seller": true,
         "best_seller_text": "Best Seller",
