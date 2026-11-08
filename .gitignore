@@ -1,0 +1,4 @@
+# Claude Code runtime files (not theme files)
+.claude/audit.log
+.claude/settings.local.json
+node_modules/
