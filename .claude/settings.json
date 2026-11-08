@@ -1,0 +1,79 @@
+{
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "Read(*)",
+      "Write(specs/**)",
+      "Write(sections/**)",
+      "Write(snippets/**)",
+      "Write(assets/**)",
+      "Write(templates/**)",
+      "Write(locales/**)",
+      "Bash(shopify theme check*)",
+      "Bash(shopify theme dev*)",
+      "Bash(shopify theme list*)",
+      "Bash(shopify theme info*)",
+      "Bash(shopify theme push*)",
+      "Bash(git *)",
+      "Bash(ls*)",
+      "Bash(pwd*)",
+      "Bash(which *)"
+    ],
+    "deny": [
+      "Write(config/settings_data.json)",
+      "Write(.env*)",
+      "Bash(rm -rf *)",
+      "Bash(shopify theme push --live*)",
+      "Bash(shopify theme push *--live*)",
+      "Bash(shopify theme push --force*)",
+      "Bash(shopify theme push *--force*)",
+      "Bash(npm install*)",
+      "Bash(npx *)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/check-theme-sync.sh",
+            "timeout": 5,
+            "statusMessage": "Checking theme sync status..."
+          },
+          {
+            "type": "command",
+            "command": ".claude/hooks/block-settings-data-commit.sh",
+            "timeout": 10,
+            "statusMessage": "Checking for protected files..."
+          },
+          {
+            "type": "command",
+            "command": ".claude/hooks/block-hardcoded-colors.sh",
+            "timeout": 10,
+            "statusMessage": "Checking for hardcoded colors..."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/mark-theme-synced.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "mcpServers": {
+    "shopify-dev-mcp": {
+      "command": "npx",
+      "args": ["-y", "@shopify/dev-mcp@latest"]
+    }
+  }
+}
