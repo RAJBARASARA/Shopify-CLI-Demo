@@ -1,0 +1,341 @@
+{%- comment -%}
+  html-collection — Threads of Kaos light-luxury collection page.
+  Faithful editorial bands + REAL product grid / filters / sort using
+  Horizon's native results-list + filters + product-grid pipeline.
+  NOTE: Shopify forbids mixing native theme blocks with section-defined
+  (local) blocks in one section. This section uses the native theme blocks
+  (filters + _product-card), so editorial content is driven by SETTINGS
+  (category pivot via a collection_list, journal via a blog picker).
+  Palette/typography in assets/html-pages.css. Header/footer from groups.
+{%- endcomment -%}
+
+{% render 'html-fonts' %}
+{{ 'html-pages.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'results-list.js' | asset_url }}" type="module" fetchpriority="low"></script>
+
+{%- liquid
+  assign s = section.settings
+  assign products_per_page = 24
+  if s.enable_infinite_scroll == false
+    assign products_per_page = s.products_per_page
+  endif
+-%}
+
+<div class="htmlp htmlp-collection" id="htmlp-collection-{{ section.id }}">
+  {%- if s.topbar_text != blank -%}
+    <div class="htmlp-topbar">{{ s.topbar_text }}</div>
+  {%- endif -%}
+
+  <main>
+    {%- comment -%} ---------- EDITORIAL HERO ---------- {%- endcomment -%}
+    <section class="hero reveal">
+      <div class="hero-shell">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            {%- if s.hero_eyebrow != blank -%}<span class="htmlp-eyebrow">{{ s.hero_eyebrow }}</span>{%- endif -%}
+            <h1 class="display">{{ s.hero_title }}{%- if s.hero_subline != blank -%}<span class="sans">{{ s.hero_subline }}</span>{%- endif -%}{%- if s.hero_title_2 != blank -%} {{ s.hero_title_2 }}{%- endif -%}</h1>
+            {%- if s.hero_copy != blank -%}<div class="hero-text">{{ s.hero_copy }}</div>{%- endif -%}
+            <div class="hero-actions">
+              {%- if s.hero_primary_label != blank -%}<a class="htmlp-btn htmlp-btn--primary" href="{{ s.hero_primary_link | default: '#catalog' }}">{{ s.hero_primary_label }}</a>{%- endif -%}
+              {%- if s.hero_secondary_label != blank -%}<a class="htmlp-btn htmlp-btn--secondary" href="{{ s.hero_secondary_link | default: '#' }}">{{ s.hero_secondary_label }}</a>{%- endif -%}
+            </div>
+            {%- if s.hero_meta_line != blank -%}<div class="meta-line">{{ s.hero_meta_line }}</div>{%- endif -%}
+          </div>
+          <div class="hero-visual">
+            <div class="editorial-stack">
+              <div class="visual-card primary">
+                {%- if s.hero_image_1 != blank -%}{{ s.hero_image_1 | image_url: width: 800 | image_tag: loading: 'eager', fetchpriority: 'high', alt: '' }}{%- endif -%}
+                <div class="card-copy">
+                  <span class="htmlp-kicker" style="margin-bottom:0;">{{ s.hero_card1_kicker | default: 'Campaign edit' }}</span>
+                  <strong>{{ s.hero_card1_title | default: 'Reclaimed power, cut for the street.' }}</strong>
+                  {%- if s.hero_card1_copy != blank -%}<p>{{ s.hero_card1_copy }}</p>{%- endif -%}
+                </div>
+              </div>
+              <div style="display:grid; gap:18px;">
+                <div class="visual-card secondary">
+                  {%- if s.hero_image_2 != blank -%}{{ s.hero_image_2 | image_url: width: 600 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
+                  <div class="card-copy">
+                    <span class="htmlp-kicker" style="margin-bottom:0;">{{ s.hero_card2_kicker | default: 'Monogram / TK' }}</span>
+                    <strong>{{ s.hero_card2_title | default: 'Identity rebuilt.' }}</strong>
+                  </div>
+                </div>
+                <div class="visual-card secondary">
+                  {%- if s.hero_image_3 != blank -%}{{ s.hero_image_3 | image_url: width: 600 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
+                  <div class="card-copy">
+                    <span class="htmlp-kicker" style="margin-bottom:0;">{{ s.hero_card3_kicker | default: 'Launch mood' }}</span>
+                    <strong>{{ s.hero_card3_title | default: 'Luxury, but never fragile.' }}</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {%- comment -%} ---------- REAL PRODUCT GRID + FILTERS/SORT ---------- {%- endcomment -%}
+    <section id="catalog">
+      <div class="htmlp-container collection-toolbar-head">
+        <div class="section-head">
+          <div>
+            {%- if s.catalog_kicker != blank -%}<span class="htmlp-kicker">{{ s.catalog_kicker }}</span>{%- endif -%}
+            <h2 class="section-title">{{ s.catalog_title | default: collection.title }}</h2>
+          </div>
+          {%- if s.catalog_subtext != blank -%}<div class="section-subtext">{{ s.catalog_subtext }}</div>{%- endif -%}
+        </div>
+      </div>
+
+      <results-list
+        class="section product-grid-container color-{{ s.color_scheme }}"
+        section-id="{{ section.id }}"
+        infinite-scroll="{{ s.enable_infinite_scroll }}"
+      >
+        {% render 'skip-to-content-link', href: '#ResultsList', text: 'accessibility.skip_to_results_list' %}
+        <div class="htmlp-container">
+          <div class="product-grid-wrap">
+            <div class="collection-wrapper grid gap-style">
+              {% content_for 'block', type: 'filters', id: 'filters', results: collection, results_size: collection.products_count %}
+
+              {% paginate collection.products by products_per_page %}
+                {% capture children %}
+                  {% for product in collection.products %}
+                    <li
+                      id="{{ section.id }}-{{ product.id }}"
+                      class="product-grid__item product-grid__item--{{ forloop.index0 }}"
+                      data-page="{{ paginate.current_page }}"
+                      data-product-id="{{ product.id }}"
+                      ref="cards[]"
+                    >
+                      {% # theme-check-disable %}
+                      {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
+                      {% # theme-check-enable %}
+                    </li>
+                  {% endfor %}
+                {% endcapture %}
+
+                {% render 'product-grid',
+                  section: section,
+                  children: children,
+                  products: collection.products,
+                  paginate: paginate,
+                  enable_infinite_scroll: s.enable_infinite_scroll
+                %}
+              {% endpaginate %}
+            </div>
+          </div>
+        </div>
+      </results-list>
+    </section>
+
+    {%- comment -%} ---------- MOVEMENT / EDITORIAL ---------- {%- endcomment -%}
+    {%- if s.editorial_title != blank or s.look1_title != blank -%}
+      <section class="reveal">
+        <div class="htmlp-container">
+          <div class="collection-layout">
+            <div class="editorial-card">
+              {%- if s.editorial_image != blank -%}{{ s.editorial_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
+              <div class="editorial-note">
+                {%- if s.editorial_kicker != blank -%}<span class="htmlp-kicker" style="margin-bottom:0;">{{ s.editorial_kicker }}</span>{%- endif -%}
+                {%- if s.editorial_title != blank -%}<h3>{{ s.editorial_title }}</h3>{%- endif -%}
+                {%- if s.editorial_copy != blank -%}<p>{{ s.editorial_copy }}</p>{%- endif -%}
+              </div>
+            </div>
+            <div class="look-grid">
+              <div class="look-card">
+                {%- if s.look1_image != blank -%}{{ s.look1_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
+                <div class="look-note">
+                  <span class="htmlp-kicker" style="margin-bottom:0;">{{ s.look1_kicker | default: 'Look 01' }}</span>
+                  <h3>{{ s.look1_title | default: 'Silence. Texture. Weight.' }}</h3>
+                  {%- if s.look1_copy != blank -%}<p>{{ s.look1_copy }}</p>{%- endif -%}
+                </div>
+              </div>
+              <div class="look-card">
+                {%- if s.look2_image != blank -%}{{ s.look2_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
+                <div class="look-note">
+                  <span class="htmlp-kicker" style="margin-bottom:0;">{{ s.look2_kicker | default: 'Look 02' }}</span>
+                  <h3>{{ s.look2_title | default: 'Not trend. Testament.' }}</h3>
+                  {%- if s.look2_copy != blank -%}<p>{{ s.look2_copy }}</p>{%- endif -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- comment -%} ---------- CATEGORY PIVOT (collection_list) ---------- {%- endcomment -%}
+    {%- if s.category_collections != blank and s.category_collections.count > 0 -%}
+      <section class="reveal">
+        <div class="htmlp-container">
+          <div class="section-head">
+            <div>
+              {%- if s.cat_kicker != blank -%}<span class="htmlp-kicker">{{ s.cat_kicker }}</span>{%- endif -%}
+              {%- if s.cat_title != blank -%}<h2 class="section-title">{{ s.cat_title }}</h2>{%- endif -%}
+            </div>
+            {%- if s.cat_subtext != blank -%}<div class="section-subtext">{{ s.cat_subtext }}</div>{%- endif -%}
+          </div>
+          <div class="categories-grid">
+            {%- for cat_col in s.category_collections -%}
+              <a class="category-card" href="{{ cat_col.url }}">
+                {%- assign cat_img = cat_col.featured_image | default: cat_col.image -%}
+                {%- if cat_img != blank -%}{{ cat_img | image_url: width: 500 | image_tag: loading: 'lazy', alt: cat_col.title | default: '' }}{%- endif -%}
+                <span class="category-label">{{ cat_col.title }}</span>
+              </a>
+            {%- endfor -%}
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- comment -%} ---------- JOURNAL (blog picker) ---------- {%- endcomment -%}
+    {%- assign journal_blog = s.journal_blog -%}
+    {%- if s.journal_title != blank and journal_blog != blank and journal_blog.articles.size > 0 -%}
+      <section class="reveal">
+        <div class="htmlp-container">
+          <div class="section-head">
+            <div>
+              {%- if s.journal_kicker != blank -%}<span class="htmlp-kicker">{{ s.journal_kicker }}</span>{%- endif -%}
+              <h2 class="section-title">{{ s.journal_title }}</h2>
+            </div>
+            {%- if s.journal_copy != blank -%}<div class="section-subtext">{{ s.journal_copy }}</div>{%- endif -%}
+          </div>
+          <div class="journal-grid">
+            {%- for article in journal_blog.articles limit: s.journal_limit -%}
+              <a class="journal-card{% if article.image %} has-media{% endif %}" href="{{ article.url }}">
+                {%- if article.image -%}<div class="journal-media">{{ article.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: article.title | default: '' }}</div>{%- endif -%}
+                <div class="journal-meta">{{ article.published_at | date: '%b %d, %Y' }}</div>
+                <div class="journal-body">
+                  <h3>{{ article.title }}</h3>
+                  {%- if article.excerpt_or_content != blank -%}<p>{{ article.excerpt_or_content | strip_html | truncatewords: 22 }}</p>{%- endif -%}
+                </div>
+              </a>
+            {%- endfor -%}
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- comment -%} ---------- CTA ---------- {%- endcomment -%}
+    {%- if s.cta_title != blank -%}
+      <section class="reveal">
+        <div class="htmlp-container">
+          <div class="cta-band">
+            <div class="cta-inner">
+              <div class="cta-text">
+                {%- if s.cta_kicker != blank -%}<span class="htmlp-kicker">{{ s.cta_kicker }}</span>{%- endif -%}
+                <h2 class="section-title">{{ s.cta_title }}</h2>
+                {%- if s.cta_copy != blank -%}<p>{{ s.cta_copy }}</p>{%- endif -%}
+              </div>
+              {%- if s.cta_label != blank -%}<a class="htmlp-btn htmlp-btn--primary" href="{{ s.cta_link | default: '#catalog' }}">{{ s.cta_label }}</a>{%- endif -%}
+            </div>
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+  </main>
+</div>
+
+{% javascript %}
+  (function () {
+    const roots = document.querySelectorAll('.htmlp-collection');
+    if (!roots.length) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    roots.forEach((root) => {
+      const reveals = root.querySelectorAll('.reveal');
+      if (reduce || !('IntersectionObserver' in window)) {
+        reveals.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+          });
+        }, { threshold: 0.12 });
+        reveals.forEach((el) => io.observe(el));
+      }
+    });
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Collection (HTML)",
+  "enabled_on": { "templates": ["collection"] },
+  "settings": [
+    { "type": "text", "id": "topbar_text", "label": "Topbar text", "default": "Luxury streetwear for the ones who survived chaos and rebuilt themselves." },
+
+    { "type": "header", "content": "Editorial hero" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "Collection Page / Light Luxury Retail" },
+    { "type": "text", "id": "hero_title", "label": "Title (line 1)", "default": "THE DROP" },
+    { "type": "text", "id": "hero_subline", "label": "Title sub-line (sans)", "default": "Threads of Kaos" },
+    { "type": "text", "id": "hero_title_2", "label": "Title (line 2)", "default": "BUILT FROM BROKEN." },
+    { "type": "richtext", "id": "hero_copy", "label": "Intro copy", "default": "<p>A premium collection experience designed to feel editorial, breathable, and conversion-ready.</p>" },
+    { "type": "text", "id": "hero_primary_label", "label": "Primary button label", "default": "Shop the Collection" },
+    { "type": "url", "id": "hero_primary_link", "label": "Primary button link" },
+    { "type": "text", "id": "hero_secondary_label", "label": "Secondary button label", "default": "Our Movement" },
+    { "type": "url", "id": "hero_secondary_link", "label": "Secondary button link" },
+    { "type": "text", "id": "hero_meta_line", "label": "Meta line", "default": "Signature pieces / limited launch edit / luxury streetwear" },
+    { "type": "image_picker", "id": "hero_image_1", "label": "Hero image 1 (large)" },
+    { "type": "text", "id": "hero_card1_kicker", "label": "Card 1 kicker", "default": "Campaign edit" },
+    { "type": "text", "id": "hero_card1_title", "label": "Card 1 title", "default": "Reclaimed power, cut for the street." },
+    { "type": "textarea", "id": "hero_card1_copy", "label": "Card 1 copy", "default": "Hero frame for your seasonal drop or signature feature once live assets are ready." },
+    { "type": "image_picker", "id": "hero_image_2", "label": "Hero image 2" },
+    { "type": "text", "id": "hero_card2_kicker", "label": "Card 2 kicker", "default": "Monogram / TK" },
+    { "type": "text", "id": "hero_card2_title", "label": "Card 2 title", "default": "Identity rebuilt." },
+    { "type": "image_picker", "id": "hero_image_3", "label": "Hero image 3" },
+    { "type": "text", "id": "hero_card3_kicker", "label": "Card 3 kicker", "default": "Launch mood" },
+    { "type": "text", "id": "hero_card3_title", "label": "Card 3 title", "default": "Luxury, but never fragile." },
+
+    { "type": "header", "content": "Product grid overview" },
+    { "type": "text", "id": "catalog_kicker", "label": "Kicker", "default": "Collection Overview" },
+    { "type": "text", "id": "catalog_title", "label": "Title (defaults to collection title)", "default": "SHOP THE MOVEMENT" },
+    { "type": "richtext", "id": "catalog_subtext", "label": "Subtext", "default": "<p>Structured like a premium retail collection page: editorial banner first, then filters and a strong product grid.</p>" },
+
+    { "type": "header", "content": "Product grid layout" },
+    { "type": "select", "id": "layout_type", "label": "Layout", "options": [ { "value": "grid", "label": "Grid" }, { "value": "organic", "label": "Editorial" } ], "default": "grid" },
+    { "type": "select", "id": "product_card_size", "label": "Card size", "options": [ { "value": "small", "label": "Small" }, { "value": "medium", "label": "Medium" }, { "value": "large", "label": "Large" }, { "value": "extra-large", "label": "Extra large" } ], "default": "medium" },
+    { "type": "select", "id": "mobile_product_card_size", "label": "Mobile card size", "options": [ { "value": "small", "label": "Small" }, { "value": "large", "label": "Large" } ], "default": "small" },
+    { "type": "checkbox", "id": "enable_infinite_scroll", "label": "Auto-load products (infinite scroll)", "default": true },
+    { "type": "range", "id": "products_per_page", "label": "Products per page", "min": 8, "max": 36, "step": 4, "default": 24, "visible_if": "{{ section.settings.enable_infinite_scroll == false }}" },
+    { "type": "select", "id": "product_grid_width", "label": "Grid width", "options": [ { "value": "centered", "label": "Page" }, { "value": "full-width", "label": "Full" } ], "default": "centered" },
+    { "type": "checkbox", "id": "full_width_on_mobile", "label": "Full width on mobile", "default": true },
+    { "type": "range", "id": "columns_gap_horizontal", "label": "Horizontal gap", "min": 0, "max": 50, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "columns_gap_vertical", "label": "Vertical gap", "min": 0, "max": 50, "step": 1, "unit": "px", "default": 24 },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Grid color scheme", "default": "scheme-1" },
+
+    { "type": "header", "content": "Movement / editorial" },
+    { "type": "text", "id": "editorial_kicker", "label": "Kicker", "default": "Editorial Story Panel" },
+    { "type": "text", "id": "editorial_title", "label": "Title", "default": "Luxury retail structure, brand-story soul." },
+    { "type": "textarea", "id": "editorial_copy", "label": "Copy", "default": "This block translates the founder-led landing page into a commerce section without losing identity." },
+    { "type": "image_picker", "id": "editorial_image", "label": "Editorial image" },
+    { "type": "text", "id": "look1_kicker", "label": "Look 1 kicker", "default": "Look 01" },
+    { "type": "text", "id": "look1_title", "label": "Look 1 title", "default": "Silence. Texture. Weight." },
+    { "type": "textarea", "id": "look1_copy", "label": "Look 1 copy", "default": "Use the upper card for a styling story or material highlight tied to the collection." },
+    { "type": "image_picker", "id": "look1_image", "label": "Look 1 image" },
+    { "type": "text", "id": "look2_kicker", "label": "Look 2 kicker", "default": "Look 02" },
+    { "type": "text", "id": "look2_title", "label": "Look 2 title", "default": "Not trend. Testament." },
+    { "type": "textarea", "id": "look2_copy", "label": "Look 2 copy", "default": "This lower card works as a campaign insert or member-exclusive offer slot." },
+    { "type": "image_picker", "id": "look2_image", "label": "Look 2 image" },
+
+    { "type": "header", "content": "Category pivot" },
+    { "type": "text", "id": "cat_kicker", "label": "Kicker", "default": "Category Pivot" },
+    { "type": "text", "id": "cat_title", "label": "Title", "default": "SHOP BY ENERGY" },
+    { "type": "richtext", "id": "cat_subtext", "label": "Subtext", "default": "<p>These category blocks reuse the same soft gradients and glass labels from the landing page.</p>" },
+    { "type": "collection_list", "id": "category_collections", "label": "Category collections", "limit": 8 },
+
+    { "type": "header", "content": "Journal" },
+    { "type": "text", "id": "journal_kicker", "label": "Kicker", "default": "Journal Integration" },
+    { "type": "text", "id": "journal_title", "label": "Title", "default": "KEEP STORY INSIDE THE SHOP" },
+    { "type": "richtext", "id": "journal_copy", "label": "Subtext", "default": "<p>A matching content layer for editorial commerce: founder notes, recovery stories, transformation essays.</p>" },
+    { "type": "blog", "id": "journal_blog", "label": "Blog (pulls real articles)" },
+    { "type": "range", "id": "journal_limit", "label": "Articles to show", "min": 1, "max": 6, "step": 1, "default": 3 },
+
+    { "type": "header", "content": "CTA band" },
+    { "type": "text", "id": "cta_kicker", "label": "Kicker", "default": "Next Step" },
+    { "type": "text", "id": "cta_title", "label": "Title", "default": "OPEN THE PDP EXPERIENCE." },
+    { "type": "richtext", "id": "cta_copy", "label": "Copy", "default": "<p>Use the linked product page to keep the same premium system while moving into gallery, storytelling, and purchase conversion.</p>" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Shop the Collection" },
+    { "type": "url", "id": "cta_link", "label": "Button link" }
+  ]
+}
+{% endschema %}

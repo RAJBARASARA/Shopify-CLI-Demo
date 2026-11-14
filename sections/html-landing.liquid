@@ -1,0 +1,573 @@
+{%- comment -%}
+  html-landing — Threads of Kaos light-luxury landing page.
+  Faithful port of threads-of-kaos-light-luxury-landing-page.html.
+  Palette/typography live in assets/html-pages.css (hex-free here).
+  Header/footer come from Horizon header-group / footer-group.
+{%- endcomment -%}
+
+{% render 'html-fonts' %}
+{{ 'html-pages.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+-%}
+
+<div class="htmlp htmlp-landing" id="htmlp-landing-{{ section.id }}">
+  {%- if s.topbar_text != blank -%}
+    <div class="htmlp-topbar">{{ s.topbar_text }}</div>
+  {%- endif -%}
+
+  <main>
+    {%- comment -%} ---------- HERO ---------- {%- endcomment -%}
+    <section class="hero reveal">
+      <div class="hero-shell">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            {%- if s.hero_eyebrow != blank -%}<span class="htmlp-eyebrow">{{ s.hero_eyebrow }}</span>{%- endif -%}
+            <h1 class="display">{{ s.hero_title }}{%- if s.hero_subline != blank -%}<span class="sans">{{ s.hero_subline }}</span>{%- endif -%}{%- if s.hero_title_2 != blank -%} {{ s.hero_title_2 }}{%- endif -%}</h1>
+            {%- if s.hero_copy != blank -%}<div class="hero-text">{{ s.hero_copy }}</div>{%- endif -%}
+            <div class="hero-actions">
+              {%- if s.hero_primary_label != blank -%}
+                <a class="htmlp-btn htmlp-btn--primary" href="{{ s.hero_primary_link | default: '#' }}">{{ s.hero_primary_label }}</a>
+              {%- endif -%}
+              {%- if s.hero_secondary_label != blank -%}
+                <a class="htmlp-btn htmlp-btn--secondary" href="{{ s.hero_secondary_link | default: '#' }}">{{ s.hero_secondary_label }}</a>
+              {%- endif -%}
+            </div>
+            {%- if s.hero_taglines != blank -%}
+              <div class="tagline-wrap">
+                <div class="tagline" aria-live="polite">
+                  {%- assign taglines = s.hero_taglines | newline_to_br | split: '<br />' -%}
+                  {%- for line in taglines -%}
+                    {%- assign trimmed = line | strip -%}
+                    {%- if trimmed != blank -%}
+                      <span{% if forloop.first %} class="is-active"{% endif %}>{{ trimmed }}</span>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endif -%}
+          </div>
+
+          <div class="hero-visual">
+            <div class="collage">
+              <div class="panel tall">
+                {%- if s.hero_image_1 != blank -%}{{ s.hero_image_1 | image_url: width: 700 | image_tag: loading: 'eager', fetchpriority: 'high', alt: s.hero_image_1.alt | default: '' }}{%- else -%}<div class="htmlp-placeholder" style="position:absolute;inset:0;"></div>{%- endif -%}
+                <div class="panel-content">
+                  <div class="panel-label">{{ s.hero_panel_1_label | default: 'Symbol' }}</div>
+                  <div class="panel-title">{{ s.hero_panel_1_title | default: 'Reclaimed Power' }}</div>
+                </div>
+              </div>
+              <div class="panel mid">
+                {%- if s.hero_image_2 != blank -%}{{ s.hero_image_2 | image_url: width: 800 | image_tag: loading: 'eager', alt: s.hero_image_2.alt | default: '' }}{%- else -%}<div class="htmlp-placeholder" style="position:absolute;inset:0;"></div>{%- endif -%}
+                <div class="panel-content">
+                  <div class="panel-label">{{ s.hero_panel_2_label | default: 'Monogram / TK' }}</div>
+                  <div class="panel-title">{{ s.hero_panel_2_title | default: 'Identity Rebuilt' }}</div>
+                </div>
+              </div>
+              <div class="panel small">
+                {%- if s.hero_image_3 != blank -%}{{ s.hero_image_3 | image_url: width: 600 | image_tag: loading: 'lazy', alt: s.hero_image_3.alt | default: '' }}{%- else -%}<div class="htmlp-placeholder" style="position:absolute;inset:0;"></div>{%- endif -%}
+                <div class="panel-content">
+                  <div class="panel-label">{{ s.hero_panel_3_label | default: 'Statement' }}</div>
+                  <div class="panel-title">{{ s.hero_panel_3_title | default: 'Built From Broken' }}</div>
+                </div>
+              </div>
+            </div>
+            {%- if s.hero_float_title != blank or s.hero_float_copy != blank -%}
+              <div class="floating-card">
+                <div class="number">{{ s.hero_float_tag | default: 'Drop' }}</div>
+                <div>
+                  {%- if s.hero_float_title != blank -%}<strong>{{ s.hero_float_title }}</strong>{%- endif -%}
+                  {%- if s.hero_float_copy != blank -%}<p>{{ s.hero_float_copy }}</p>{%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {%- comment -%} ---------- THE DROP ---------- {%- endcomment -%}
+    {%- if s.drop_title != blank -%}
+      <section class="reveal">
+        <div class="htmlp-container">
+          <div class="section-head">
+            <div>
+              {%- if s.drop_kicker != blank -%}<span class="htmlp-kicker">{{ s.drop_kicker }}</span>{%- endif -%}
+              <h2 class="section-title">{{ s.drop_title }}</h2>
+            </div>
+            {%- if s.drop_copy != blank -%}<div class="section-subtext">{{ s.drop_copy }}</div>{%- endif -%}
+          </div>
+          <div class="drop-layout">
+            <div class="premium-slab">
+              {%- if s.drop_image != blank -%}{{ s.drop_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: s.drop_image.alt | default: '' }}{%- endif -%}
+              <div class="slab-caption">
+                <span class="htmlp-kicker" style="margin-bottom:6px;">{{ s.drop_slab_kicker | default: 'Campaign Frame' }}</span>
+                {%- if s.drop_slab_copy != blank -%}<p>{{ s.drop_slab_copy }}</p>{%- endif -%}
+              </div>
+            </div>
+            <div class="side-stack">
+              <div class="mini-panel">
+                <strong>{{ s.drop_mini1_label | default: 'Launch Energy' }}</strong>
+                <h3>{{ s.drop_mini1_title | default: 'Premium pieces, powerful silence.' }}</h3>
+                {%- if s.drop_mini1_copy != blank -%}<p>{{ s.drop_mini1_copy }}</p>{%- endif -%}
+              </div>
+              <div class="mini-panel">
+                <strong>{{ s.drop_mini2_label | default: 'Conversion Focus' }}</strong>
+                <h3>{{ s.drop_mini2_title | default: 'Built to move from story to shop.' }}</h3>
+                {%- if s.drop_mini2_copy != blank -%}<p>{{ s.drop_mini2_copy }}</p>{%- endif -%}
+                {%- if s.drop_button_label != blank -%}
+                  {%- assign drop_href = s.featured_collection.url | default: s.drop_button_link | default: '#' -%}
+                  <div style="margin-top:20px;"><a class="htmlp-btn htmlp-btn--primary" href="{{ drop_href }}">{{ s.drop_button_label }}</a></div>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- comment -%} ---------- BRAND STORY ---------- {%- endcomment -%}
+    {%- if s.story_title != blank -%}
+      <section class="reveal">
+        <div class="htmlp-container">
+          <div class="story-grid">
+            <div class="story-card">
+              {%- if s.story_kicker != blank -%}<span class="htmlp-kicker">{{ s.story_kicker }}</span>{%- endif -%}
+              <h2 class="section-title" style="margin-bottom:28px;">{{ s.story_title }}</h2>
+              {%- if s.story_copy != blank -%}<div class="story-text">{{ s.story_copy }}</div>{%- endif -%}
+              {%- if s.story_cta_label != blank -%}
+                <div style="margin-top:28px;"><a class="htmlp-btn htmlp-btn--secondary" href="{{ s.story_cta_link | default: '#' }}">{{ s.story_cta_label }}</a></div>
+              {%- endif -%}
+            </div>
+            <div class="story-art">
+              {%- if s.story_image != blank -%}{{ s.story_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: s.story_image.alt | default: '' }}{%- endif -%}
+              {%- if s.story_mark != blank -%}<div class="story-mark">{{ s.story_mark }}</div>{%- endif -%}
+            </div>
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- comment -%} ---------- SYMBOLS ---------- {%- endcomment -%}
+    {%- assign symbol_blocks = section.blocks | where: 'type', 'symbol' -%}
+    {%- if symbol_blocks.size > 0 -%}
+      <section class="reveal">
+        <div class="htmlp-container">
+          <div class="section-head">
+            <div>
+              {%- if s.symbols_kicker != blank -%}<span class="htmlp-kicker">{{ s.symbols_kicker }}</span>{%- endif -%}
+              {%- if s.symbols_title != blank -%}<h2 class="section-title">{{ s.symbols_title }}</h2>{%- endif -%}
+            </div>
+            {%- if s.symbols_copy != blank -%}<div class="section-subtext">{{ s.symbols_copy }}</div>{%- endif -%}
+          </div>
+          <div class="symbols-grid">
+            {%- for block in symbol_blocks -%}
+              <article class="symbol-card" {{ block.shopify_attributes }}>
+                <div class="symbol-icon">
+                  {%- if block.settings.image != blank -%}{{ block.settings.image | image_url: width: 120 | image_tag: loading: 'lazy', alt: block.settings.title | default: '' }}{%- else -%}{{ block.settings.glyph | default: '✦' }}{%- endif -%}
+                </div>
+                {%- if block.settings.title != blank -%}<h3>{{ block.settings.title }}</h3>{%- endif -%}
+                {%- if block.settings.copy != blank -%}<p>{{ block.settings.copy }}</p>{%- endif -%}
+              </article>
+            {%- endfor -%}
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- comment -%} ---------- CATEGORIES ---------- {%- endcomment -%}
+    {%- assign category_blocks = section.blocks | where: 'type', 'category' -%}
+    {%- if category_blocks.size > 0 -%}
+      <section class="reveal">
+        <div class="htmlp-container">
+          <div class="section-head">
+            <div>
+              {%- if s.categories_kicker != blank -%}<span class="htmlp-kicker">{{ s.categories_kicker }}</span>{%- endif -%}
+              {%- if s.categories_title != blank -%}<h2 class="section-title">{{ s.categories_title }}</h2>{%- endif -%}
+            </div>
+          </div>
+          <div class="categories-grid">
+            {%- for block in category_blocks -%}
+              {%- assign cat_col = block.settings.collection -%}
+              {%- assign cat_href = cat_col.url | default: '#' -%}
+              {%- assign cat_label = block.settings.title | default: cat_col.title -%}
+              {%- assign cat_img = block.settings.image | default: cat_col.featured_image | default: cat_col.image -%}
+              <a class="category-card" href="{{ cat_href }}" {{ block.shopify_attributes }}>
+                {%- if cat_img != blank -%}{{ cat_img | image_url: width: 500 | image_tag: loading: 'lazy', alt: cat_label | default: '' }}{%- endif -%}
+                <span class="category-label">{{ cat_label | default: 'Category' }}</span>
+              </a>
+            {%- endfor -%}
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- comment -%} ---------- FOUNDER ---------- {%- endcomment -%}
+    {%- if s.founder_title != blank or s.founder_quote != blank -%}
+      <section class="reveal">
+        <div class="htmlp-container">
+          <div class="founder-layout">
+            <div class="founder-portrait">
+              {%- if s.founder_image != blank -%}{{ s.founder_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: s.founder_name | default: '' }}{%- endif -%}
+            </div>
+            <div class="founder-card">
+              <div>
+                {%- if s.founder_kicker != blank -%}<span class="htmlp-kicker">{{ s.founder_kicker }}</span>{%- endif -%}
+                {%- if s.founder_title != blank -%}<h2 class="section-title">{{ s.founder_title }}</h2>{%- endif -%}
+              </div>
+              <div class="quote-mark" aria-hidden="true">&ldquo;</div>
+              {%- if s.founder_quote != blank -%}<div class="founder-copy">{{ s.founder_quote }}</div>{%- endif -%}
+              {%- if s.founder_name != blank -%}
+                <div class="signature">
+                  <strong>{{ s.founder_name }}</strong>
+                  {%- if s.founder_role != blank -%}<span>{{ s.founder_role }}</span>{%- endif -%}
+                </div>
+              {%- endif -%}
+              {%- if s.founder_cta_label != blank -%}
+                <div><a class="htmlp-btn htmlp-btn--secondary" href="{{ s.founder_cta_link | default: '#' }}">{{ s.founder_cta_label }}</a></div>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- comment -%} ---------- SOCIAL PROOF ---------- {%- endcomment -%}
+    {%- assign metric_blocks = section.blocks | where: 'type', 'metric' -%}
+    {%- if s.social_title != blank or metric_blocks.size > 0 -%}
+      <section class="reveal">
+        <div class="htmlp-container">
+          <div class="social-card">
+            <div>
+              {%- if s.social_kicker != blank -%}<span class="htmlp-kicker">{{ s.social_kicker }}</span>{%- endif -%}
+              {%- if s.social_title != blank -%}<h2 class="section-title" style="margin-bottom:18px;">{{ s.social_title }}</h2>{%- endif -%}
+              {%- if s.social_copy != blank -%}<div class="social-text">{{ s.social_copy }}</div>{%- endif -%}
+            </div>
+            {%- if metric_blocks.size > 0 -%}
+              <div class="social-metrics">
+                {%- for block in metric_blocks -%}
+                  <div class="metric" {{ block.shopify_attributes }}>
+                    <strong>{{ block.settings.value }}</strong>
+                    <span>{{ block.settings.label }}</span>
+                  </div>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- comment -%} ---------- EMAIL CAPTURE ---------- {%- endcomment -%}
+    {%- if s.email_title != blank -%}
+      <section class="reveal">
+        <div class="htmlp-container">
+          <div class="email-box">
+            <div>
+              {%- if s.email_kicker != blank -%}<span class="htmlp-kicker">{{ s.email_kicker }}</span>{%- endif -%}
+              <h2 class="section-title">{{ s.email_title }}</h2>
+              {%- if s.email_copy != blank -%}<div class="section-subtext" style="margin-top:18px;">{{ s.email_copy }}</div>{%- endif -%}
+              {%- if s.email_offer_chip != blank -%}<div class="offer-chip">{{ s.email_offer_chip }}</div>{%- endif -%}
+              {%- form 'customer', class: 'newsletter' -%}
+                <input type="hidden" name="contact[tags]" value="newsletter">
+                <label class="visually-hidden" for="htmlp-email-{{ section.id }}">{{ s.email_label | default: 'Email address' }}</label>
+                <input
+                  id="htmlp-email-{{ section.id }}"
+                  type="email"
+                  name="contact[email]"
+                  autocomplete="email"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  placeholder="{{ s.email_placeholder | default: 'Enter your email address' }}"
+                  required
+                >
+                <button class="htmlp-btn htmlp-btn--primary" type="submit">{{ s.email_button_label | default: 'Join Now' }}</button>
+                {%- if form.posted_successfully? -%}
+                  <p class="newsletter__note" role="status" aria-live="polite">{{ s.email_success | default: 'Thanks for subscribing.' }}</p>
+                {%- elsif form.errors -%}
+                  <p class="newsletter__note" role="alert">{{ form.errors.translated_fields.email }} {{ form.errors.messages.email }}</p>
+                {%- endif -%}
+              {%- endform -%}
+            </div>
+            <div class="email-visual">
+              {%- if s.email_image != blank -%}{{ s.email_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
+            </div>
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- comment -%} ---------- JOURNAL ---------- {%- endcomment -%}
+    {%- assign journal_blocks = section.blocks | where: 'type', 'journal' -%}
+    {%- assign journal_blog = s.journal_blog -%}
+    {%- if s.journal_title != blank -%}
+      <section class="reveal">
+        <div class="htmlp-container">
+          <div class="section-head">
+            <div>
+              {%- if s.journal_kicker != blank -%}<span class="htmlp-kicker">{{ s.journal_kicker }}</span>{%- endif -%}
+              <h2 class="section-title">{{ s.journal_title }}</h2>
+            </div>
+            {%- if s.journal_copy != blank -%}<div class="section-subtext">{{ s.journal_copy }}</div>{%- endif -%}
+          </div>
+          <div class="journal-grid">
+            {%- if journal_blog != blank and journal_blog.articles.size > 0 -%}
+              {%- for article in journal_blog.articles limit: s.journal_limit -%}
+                <a class="journal-card{% if article.image %} has-media{% endif %}" href="{{ article.url }}">
+                  {%- if article.image -%}<div class="journal-media">{{ article.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: article.title | default: '' }}</div>{%- endif -%}
+                  <div class="journal-meta">{{ article.published_at | date: '%b %d, %Y' }}</div>
+                  <div class="journal-body">
+                    <h3>{{ article.title }}</h3>
+                    {%- if article.excerpt_or_content != blank -%}<p>{{ article.excerpt_or_content | strip_html | truncatewords: 22 }}</p>{%- endif -%}
+                  </div>
+                </a>
+              {%- endfor -%}
+            {%- else -%}
+              {%- for block in journal_blocks -%}
+                {%- assign has_media = false -%}{%- if block.settings.image != blank -%}{%- assign has_media = true -%}{%- endif -%}
+                <a class="journal-card{% if has_media %} has-media{% endif %}" href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>
+                  {%- if has_media -%}<div class="journal-media">{{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.title | default: '' }}</div>{%- endif -%}
+                  <div class="journal-meta">{{ block.settings.meta | default: 'Journal' }}</div>
+                  <div class="journal-body">
+                    {%- if block.settings.title != blank -%}<h3>{{ block.settings.title }}</h3>{%- endif -%}
+                    {%- if block.settings.copy != blank -%}<p>{{ block.settings.copy }}</p>{%- endif -%}
+                  </div>
+                </a>
+              {%- endfor -%}
+            {%- endif -%}
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- comment -%} ---------- FINAL CTA ---------- {%- endcomment -%}
+    {%- if s.final_title != blank -%}
+      <section class="reveal">
+        <div class="htmlp-container">
+          <div class="cta-band">
+            {%- if s.final_image != blank -%}{{ s.final_image | image_url: width: 1400 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
+            <div class="cta-inner">
+              <div class="cta-text">
+                {%- if s.final_kicker != blank -%}<span class="htmlp-kicker">{{ s.final_kicker }}</span>{%- endif -%}
+                <h2 class="section-title">{{ s.final_title }}</h2>
+                {%- if s.final_copy != blank -%}<p>{{ s.final_copy }}</p>{%- endif -%}
+              </div>
+              {%- if s.final_cta_label != blank -%}
+                <a class="htmlp-btn htmlp-btn--primary" href="{{ s.final_cta_link | default: '#' }}">{{ s.final_cta_label }}</a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+  </main>
+</div>
+
+{% javascript %}
+  (function () {
+    const roots = document.querySelectorAll('.htmlp-landing');
+    if (!roots.length) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    roots.forEach((root) => {
+      // Reveal on scroll
+      const reveals = root.querySelectorAll('.reveal');
+      if (reduce || !('IntersectionObserver' in window)) {
+        reveals.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        reveals.forEach((el) => io.observe(el));
+      }
+
+      // Rotating taglines (skipped under reduced motion)
+      if (!reduce) {
+        const taglines = root.querySelectorAll('.tagline span');
+        if (taglines.length > 1) {
+          let i = 0;
+          setInterval(() => {
+            taglines[i].classList.remove('is-active');
+            i = (i + 1) % taglines.length;
+            taglines[i].classList.add('is-active');
+          }, 2400);
+        }
+      }
+    });
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Landing (HTML)",
+  "tag": "section",
+  "class": "htmlp-landing-section",
+  "settings": [
+    { "type": "text", "id": "topbar_text", "label": "Topbar text", "default": "Luxury streetwear for the ones who survived chaos and rebuilt themselves." },
+
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "Luxury Streetwear / Campaign Landing" },
+    { "type": "text", "id": "hero_title", "label": "Title (line 1)", "default": "THREADS OF KAOS" },
+    { "type": "text", "id": "hero_subline", "label": "Title sub-line (sans)", "default": "NOT CLOTHING." },
+    { "type": "text", "id": "hero_title_2", "label": "Title (line 2)", "default": "IDENTITY, REBUILT." },
+    { "type": "richtext", "id": "hero_copy", "label": "Intro copy", "default": "<p>Luxury streetwear for the ones who survived chaos and rebuilt themselves. Born from pain. Refined through fire. Worn with purpose.</p>" },
+    { "type": "text", "id": "hero_primary_label", "label": "Primary button label", "default": "Shop the Drop" },
+    { "type": "url", "id": "hero_primary_link", "label": "Primary button link" },
+    { "type": "text", "id": "hero_secondary_label", "label": "Secondary button label", "default": "Our Story" },
+    { "type": "url", "id": "hero_secondary_link", "label": "Secondary button link" },
+    { "type": "textarea", "id": "hero_taglines", "label": "Rotating taglines (one per line)", "default": "Built From Broken\nNot Saved. Self Made.\nStill Standing.\nWoven By Rebels.\nRebellion Refined." },
+    { "type": "image_picker", "id": "hero_image_1", "label": "Hero collage image 1 (tall)" },
+    { "type": "text", "id": "hero_panel_1_label", "label": "Collage 1 label", "default": "Symbol / Crown" },
+    { "type": "text", "id": "hero_panel_1_title", "label": "Collage 1 title", "default": "Reclaimed Power" },
+    { "type": "image_picker", "id": "hero_image_2", "label": "Hero collage image 2 (mid)" },
+    { "type": "text", "id": "hero_panel_2_label", "label": "Collage 2 label", "default": "Monogram / TK" },
+    { "type": "text", "id": "hero_panel_2_title", "label": "Collage 2 title", "default": "Identity Rebuilt" },
+    { "type": "image_picker", "id": "hero_image_3", "label": "Hero collage image 3 (small)" },
+    { "type": "text", "id": "hero_panel_3_label", "label": "Collage 3 label", "default": "Statement" },
+    { "type": "text", "id": "hero_panel_3_title", "label": "Collage 3 title", "default": "Built From Broken" },
+    { "type": "text", "id": "hero_float_tag", "label": "Floating card tag", "default": "Drop" },
+    { "type": "text", "id": "hero_float_title", "label": "Floating card title", "default": "Premium launch aesthetic" },
+    { "type": "text", "id": "hero_float_copy", "label": "Floating card copy", "default": "Editorial layout, light luxury palette, conversion-first storytelling." },
+
+    { "type": "header", "content": "The Drop" },
+    { "type": "text", "id": "drop_kicker", "label": "Kicker", "default": "Featured Collection" },
+    { "type": "text", "id": "drop_title", "label": "Title", "default": "THE DROP" },
+    { "type": "richtext", "id": "drop_copy", "label": "Subtext", "default": "<p>Built for the ones who never folded. Premium pieces forged through chaos, stitched with meaning.</p>" },
+    { "type": "collection", "id": "featured_collection", "label": "Featured collection (button target)" },
+    { "type": "image_picker", "id": "drop_image", "label": "Slab image" },
+    { "type": "text", "id": "drop_slab_kicker", "label": "Slab kicker", "default": "Campaign Frame" },
+    { "type": "textarea", "id": "drop_slab_copy", "label": "Slab copy", "default": "Use this hero-style slab for premium campaign photography or signature drop imagery." },
+    { "type": "text", "id": "drop_mini1_label", "label": "Mini 1 label", "default": "Launch Energy" },
+    { "type": "text", "id": "drop_mini1_title", "label": "Mini 1 title", "default": "Premium pieces, powerful silence." },
+    { "type": "textarea", "id": "drop_mini1_copy", "label": "Mini 1 copy", "default": "Elevated and fashion-forward while keeping the interface light, sharp, and breathable." },
+    { "type": "text", "id": "drop_mini2_label", "label": "Mini 2 label", "default": "Conversion Focus" },
+    { "type": "text", "id": "drop_mini2_title", "label": "Mini 2 title", "default": "Built to move from story to shop." },
+    { "type": "textarea", "id": "drop_mini2_copy", "label": "Mini 2 copy", "default": "Minimal friction. High intent. Distinct CTA hierarchy." },
+    { "type": "text", "id": "drop_button_label", "label": "Mini 2 button label", "default": "Shop All" },
+    { "type": "url", "id": "drop_button_link", "label": "Mini 2 button link (if no collection)" },
+
+    { "type": "header", "content": "Brand story" },
+    { "type": "text", "id": "story_kicker", "label": "Kicker", "default": "Brand Story" },
+    { "type": "inline_richtext", "id": "story_title", "label": "Title", "default": "THIS BRAND WASN’T CREATED. IT WAS SURVIVED." },
+    { "type": "richtext", "id": "story_copy", "label": "Body", "default": "<p>Threads of Kaos was built for the people who weren’t supposed to make it. This is luxury streetwear rooted in resilience. Every piece represents transformation.</p>" },
+    { "type": "text", "id": "story_cta_label", "label": "Button label", "default": "Read Our Story" },
+    { "type": "url", "id": "story_cta_link", "label": "Button link" },
+    { "type": "image_picker", "id": "story_image", "label": "Story image" },
+    { "type": "text", "id": "story_mark", "label": "Story mark (monogram)", "default": "TK" },
+
+    { "type": "header", "content": "Symbols" },
+    { "type": "text", "id": "symbols_kicker", "label": "Kicker", "default": "Symbols of Kaos" },
+    { "type": "text", "id": "symbols_title", "label": "Title", "default": "SYMBOLS HOLD POWER" },
+    { "type": "richtext", "id": "symbols_copy", "label": "Subtext", "default": "<p>Every symbol represents survival, identity, and transformation.</p>" },
+
+    { "type": "header", "content": "Categories" },
+    { "type": "text", "id": "categories_kicker", "label": "Kicker", "default": "Shop Categories" },
+    { "type": "text", "id": "categories_title", "label": "Title", "default": "BUILT FOR THE REBELS" },
+
+    { "type": "header", "content": "Founder" },
+    { "type": "text", "id": "founder_kicker", "label": "Kicker", "default": "Founder Section" },
+    { "type": "text", "id": "founder_title", "label": "Title", "default": "BUILT THROUGH FIRE" },
+    { "type": "richtext", "id": "founder_quote", "label": "Quote / body", "default": "<p>This brand exists because healing deserves representation. Because the people carrying invisible battles deserve something that understands them.</p>" },
+    { "type": "text", "id": "founder_name", "label": "Founder name", "default": "Belinda Slusher" },
+    { "type": "text", "id": "founder_role", "label": "Founder role", "default": "Founder" },
+    { "type": "text", "id": "founder_cta_label", "label": "Button label", "default": "Meet the Founder" },
+    { "type": "url", "id": "founder_cta_link", "label": "Button link" },
+    { "type": "image_picker", "id": "founder_image", "label": "Founder image" },
+
+    { "type": "header", "content": "Social proof" },
+    { "type": "text", "id": "social_kicker", "label": "Kicker", "default": "Social Proof" },
+    { "type": "text", "id": "social_title", "label": "Title", "default": "MORE THAN A BRAND" },
+    { "type": "richtext", "id": "social_copy", "label": "Copy", "default": "<p>Threads of Kaos is for the ones rebuilding. The survivors. The fighters. Join a movement built through resilience.</p>" },
+
+    { "type": "header", "content": "Email capture" },
+    { "type": "text", "id": "email_kicker", "label": "Kicker", "default": "Email Capture" },
+    { "type": "text", "id": "email_title", "label": "Title", "default": "JOIN THE MOVEMENT" },
+    { "type": "richtext", "id": "email_copy", "label": "Subtext", "default": "<p>Get first access to limited drops, exclusive releases, and pieces stitched with purpose.</p>" },
+    { "type": "text", "id": "email_offer_chip", "label": "Offer chip", "default": "10% Off Your First Order / Early Access to Drops" },
+    { "type": "text", "id": "email_placeholder", "label": "Input placeholder", "default": "Enter your email address" },
+    { "type": "text", "id": "email_button_label", "label": "Button label", "default": "Join Now" },
+    { "type": "image_picker", "id": "email_image", "label": "Email visual image" },
+
+    { "type": "header", "content": "Journal" },
+    { "type": "text", "id": "journal_kicker", "label": "Kicker", "default": "Journal" },
+    { "type": "text", "id": "journal_title", "label": "Title", "default": "THE KAOS JOURNAL" },
+    { "type": "richtext", "id": "journal_copy", "label": "Subtext", "default": "<p>Stories of survival. Transformation. Healing. Identity rebuilt.</p>" },
+    { "type": "blog", "id": "journal_blog", "label": "Blog (pulls real articles)" },
+    { "type": "range", "id": "journal_limit", "label": "Articles to show", "min": 1, "max": 6, "step": 1, "default": 3 },
+
+    { "type": "header", "content": "Final CTA" },
+    { "type": "text", "id": "final_kicker", "label": "Kicker", "default": "Final CTA" },
+    { "type": "text", "id": "final_title", "label": "Title", "default": "NOT SAVED. SELF MADE." },
+    { "type": "richtext", "id": "final_copy", "label": "Copy", "default": "<p>You survived enough. Now wear the reminder.</p>" },
+    { "type": "text", "id": "final_cta_label", "label": "Button label", "default": "Shop Threads of Kaos" },
+    { "type": "url", "id": "final_cta_link", "label": "Button link" },
+    { "type": "image_picker", "id": "final_image", "label": "CTA background image (optional)" }
+  ],
+  "blocks": [
+    {
+      "type": "symbol",
+      "name": "Symbol card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Icon image (optional)" },
+        { "type": "text", "id": "glyph", "label": "Glyph (if no image)", "default": "✦" },
+        { "type": "text", "id": "title", "label": "Title", "default": "THE CROWN" },
+        { "type": "textarea", "id": "copy", "label": "Copy", "default": "The crown symbolizes reclaimed power. Not inherited. Earned." }
+      ]
+    },
+    {
+      "type": "category",
+      "name": "Category card",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "title", "label": "Label (defaults to collection title)" },
+        { "type": "image_picker", "id": "image", "label": "Image (defaults to collection image)" }
+      ]
+    },
+    {
+      "type": "metric",
+      "name": "Metric",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Value", "default": "01" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Identity rebuilt" }
+      ]
+    },
+    {
+      "type": "journal",
+      "name": "Journal card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "meta", "label": "Meta", "default": "Story" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Survival has a voice." },
+        { "type": "textarea", "id": "copy", "label": "Copy", "default": "Editorial story space for founder reflections and resilience-centered writing." },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Landing (HTML)",
+      "blocks": [
+        { "type": "symbol", "settings": { "glyph": "♛", "title": "THE CROWN", "copy": "The crown symbolizes reclaimed power. Not inherited. Earned. For the ones who fought their way back." } },
+        { "type": "symbol", "settings": { "glyph": "TK", "title": "TK", "copy": "The Threads of Kaos monogram represents identity rebuilt. Survival becomes strength." } },
+        { "type": "symbol", "settings": { "glyph": "✦", "title": "BUILT FROM BROKEN", "copy": "Broken is not the end. It is the beginning of becoming. Your scars are proof of survival." } },
+        { "type": "category", "settings": { "title": "Men" } },
+        { "type": "category", "settings": { "title": "Women" } },
+        { "type": "category", "settings": { "title": "Hoodies" } },
+        { "type": "category", "settings": { "title": "Tees" } },
+        { "type": "category", "settings": { "title": "Headwear" } },
+        { "type": "category", "settings": { "title": "Signature Pieces" } },
+        { "type": "metric", "settings": { "value": "01", "label": "Identity rebuilt" } },
+        { "type": "metric", "settings": { "value": "02", "label": "Purpose stitched in" } },
+        { "type": "metric", "settings": { "value": "03", "label": "Luxury with meaning" } },
+        { "type": "metric", "settings": { "value": "04", "label": "Movement over trend" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

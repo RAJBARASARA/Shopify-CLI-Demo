@@ -1,0 +1,103 @@
+{
+  "sections": {
+    "main": {
+      "type": "html-pdp",
+      "blocks": {
+        "gallery": {
+          "type": "_product-media-gallery",
+          "static": true,
+          "settings": {
+            "media_presentation": "carousel",
+            "media_columns": "two",
+            "image_gap": 4,
+            "large_first_image": false,
+            "icons_style": "none",
+            "slideshow_controls_style": "thumbnails",
+            "slideshow_mobile_controls_style": "dots",
+            "thumbnail_position": "left",
+            "thumbnail_width": 72,
+            "aspect_ratio": "adapt",
+            "constrain_to_viewport": true,
+            "media_fit": "cover",
+            "media_radius": 24,
+            "extend_media": false,
+            "zoom": true,
+            "video_loop": false,
+            "hide_variants": true,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "variant-picker": {
+          "type": "variant-picker",
+          "static": true,
+          "settings": {
+            "variant_style": "buttons",
+            "show_swatches": true,
+            "alignment": "left",
+            "padding-block-start": 0,
+            "padding-block-end": 8,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "buy-buttons": {
+          "type": "buy-buttons",
+          "static": true,
+          "settings": {
+            "stacking": true,
+            "show_pickup_availability": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "quantity": { "type": "quantity", "static": true, "settings": {}, "blocks": {} },
+            "add-to-cart": { "type": "add-to-cart", "static": true, "settings": { "style_class": "button" }, "blocks": {} },
+            "accelerated-checkout": { "type": "accelerated-checkout", "static": true, "settings": {}, "blocks": {} }
+          },
+          "block_order": []
+        },
+        "accordion": {
+          "type": "accordion",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "row-details": {
+              "type": "_accordion-row",
+              "settings": { "heading": "Product details", "open_by_default": true, "icon": "none" },
+              "blocks": {
+                "text-details": { "type": "text", "settings": { "text": "<p>A premium signature piece for Threads of Kaos. Replace with your real SKU details, GSM, wash notes, and material composition.</p>" }, "blocks": {} }
+              },
+              "block_order": ["text-details"]
+            },
+            "row-fit": {
+              "type": "_accordion-row",
+              "settings": { "heading": "Fit and sizing", "open_by_default": false, "icon": "none" },
+              "blocks": {
+                "text-fit": { "type": "text", "settings": { "text": "<p>Oversized fit by default. Add model height, worn size, chest measurements, garment length, and fit recommendation here.</p>" }, "blocks": {} }
+              },
+              "block_order": ["text-fit"]
+            },
+            "row-shipping": {
+              "type": "_accordion-row",
+              "settings": { "heading": "Shipping and returns", "open_by_default": false, "icon": "none" },
+              "blocks": {
+                "text-shipping": { "type": "text", "settings": { "text": "<p>Dispatch timing, shipping thresholds, customs policies, and return windows.</p>" }, "blocks": {} }
+              },
+              "block_order": ["text-shipping"]
+            }
+          },
+          "block_order": ["row-details", "row-fit", "row-shipping"]
+        }
+      },
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
