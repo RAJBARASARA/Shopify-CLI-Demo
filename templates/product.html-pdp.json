@@ -96,7 +96,14 @@
           "block_order": ["row-details", "row-fit", "row-shipping"]
         }
       },
-      "settings": {}
+      "settings": {
+        "look_1_product": "spring-tulip-arrangement",
+        "look_1_label": "Pairing 01",
+        "look_2_product": "sunshine-sunflower-bunch",
+        "look_2_label": "Pairing 02",
+        "look_3_product": "white-phalaenopsis-orchid",
+        "look_3_label": "Pairing 03"
+      }
     }
   },
   "order": ["main"]
