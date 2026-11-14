@@ -9,594 +9,196 @@
  */
 {
   "sections": {
-    "hero_jVaWmY": {
-      "type": "hero",
+    "html_landing_yigpQf": {
+      "type": "html-landing",
       "blocks": {
-        "text_YLPk4p": {
-          "type": "text",
-          "name": "t:names.heading",
+        "symbol_nhUCAL": {
+          "type": "symbol",
           "settings": {
-            "text": "<p>Browse our latest products</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground-heading)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "glyph": "♛",
+            "title": "THE CROWN",
+            "copy": "The crown symbolizes reclaimed power. Not inherited. Earned. For the ones who fought their way back."
+          }
         },
-        "button_H9gpTf": {
-          "type": "button",
-          "name": "t:names.button",
+        "symbol_pHGCRE": {
+          "type": "symbol",
           "settings": {
-            "label": "Shop all",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button-secondary",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
+            "glyph": "TK",
+            "title": "TK",
+            "copy": "The Threads of Kaos monogram represents identity rebuilt. Survival becomes strength."
+          }
+        },
+        "symbol_Fc3iMB": {
+          "type": "symbol",
+          "settings": {
+            "glyph": "✦",
+            "title": "BUILT FROM BROKEN",
+            "copy": "Broken is not the end. It is the beginning of becoming. Your scars are proof of survival."
+          }
+        },
+        "category_YL4LXF": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Men"
+          }
+        },
+        "category_CyaJWJ": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Women"
+          }
+        },
+        "category_TRkBPi": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Hoodies"
+          }
+        },
+        "category_74eBBq": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Tees"
+          }
+        },
+        "category_BGzrVA": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Headwear"
+          }
+        },
+        "category_DFwEdQ": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Signature Pieces"
+          }
+        },
+        "metric_Cp7YFy": {
+          "type": "metric",
+          "settings": {
+            "value": "01",
+            "label": "Identity rebuilt"
+          }
+        },
+        "metric_zYzKEk": {
+          "type": "metric",
+          "settings": {
+            "value": "02",
+            "label": "Purpose stitched in"
+          }
+        },
+        "metric_JGgxe4": {
+          "type": "metric",
+          "settings": {
+            "value": "03",
+            "label": "Luxury with meaning"
+          }
+        },
+        "metric_kj9JdP": {
+          "type": "metric",
+          "settings": {
+            "value": "04",
+            "label": "Movement over trend"
+          }
         }
       },
       "block_order": [
-        "text_YLPk4p",
-        "button_H9gpTf"
+        "symbol_nhUCAL",
+        "symbol_pHGCRE",
+        "symbol_Fc3iMB",
+        "category_YL4LXF",
+        "category_CyaJWJ",
+        "category_TRkBPi",
+        "category_74eBBq",
+        "category_BGzrVA",
+        "category_DFwEdQ",
+        "metric_Cp7YFy",
+        "metric_zYzKEk",
+        "metric_JGgxe4",
+        "metric_kj9JdP"
       ],
-      "name": "t:names.hero",
+      "name": "Landing (HTML)",
       "settings": {
-        "media_type_1": "image",
-        "media_type_2": "image",
-        "stack_media_on_mobile": false,
-        "custom_mobile_media": false,
-        "media_type_1_mobile": "image",
-        "media_type_2_mobile": "image",
-        "link": "",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "space-between",
-        "vertical_alignment": "flex-end",
-        "align_baseline": true,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 24,
-        "section_width": "page-width",
-        "section_height": "medium",
-        "section_height_custom": 50,
-        "color_scheme": "scheme-6",
-        "toggle_overlay": true,
-        "overlay_color": "#12121266",
-        "overlay_style": "solid",
-        "gradient_direction": "to bottom",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 100,
-        "padding-block-end": 72
-      }
-    },
-    "product_list_fa6P9H": {
-      "type": "product-list",
-      "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "name": "t:names.header",
-          "static": true,
-          "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "flex-end",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_list_text_YFtzcL": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h3>{{ closest.collection.title }}</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_list_button_MWeP9V": {
-              "type": "_product-list-button",
-              "name": "t:names.product_list_button",
-              "settings": {
-                "label": "View all",
-                "open_in_new_tab": false,
-                "style_class": "link",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_YFtzcL",
-            "product_list_button_MWeP9V"
-          ]
-        },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
-          "settings": {
-            "product_card_gap": 4,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_677WP3": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_YXxMTj": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_JQzVV4": {
-              "type": "price",
-              "name": "t:names.product_price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "color": "var(--color-foreground)",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_677WP3",
-            "product_title_YXxMTj",
-            "price_JQzVV4"
-          ]
-        }
-      },
-      "name": "Featured collection",
-      "settings": {
-        "collection": "all",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 8,
-        "columns": 4,
-        "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 8,
-        "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "horizontal_alignment": "flex-start",
-        "gap": 28,
-        "color_scheme": "scheme-1",
-        "padding-block-start": 48,
-        "padding-block-end": 48
-      }
-    },
-    "layered_slideshow_Bckfxj": {
-      "type": "layered-slideshow",
-      "blocks": {
-        "layered_slide_4zjRNV": {
-          "type": "_layered-slide",
-          "settings": {
-            "media_type_1": "image",
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 12,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "padding-block-start": 32,
-            "padding-block-end": 32,
-            "padding-inline-start": 32,
-            "padding-inline-end": 32
-          },
-          "blocks": {
-            "text_6MeNRc": {
-              "type": "text",
-              "name": "t:names.heading",
-              "settings": {
-                "text": "<h3>New arrivals</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h2",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "text_YrHAhL": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Introducing our latest products, made especially for the season. Shop your favorites before they're gone!</p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "button_La3K3J": {
-              "type": "button",
-              "settings": {
-                "label": "Shop now",
-                "link": "shopify://collections/all",
-                "open_in_new_tab": false,
-                "style_class": "button",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_6MeNRc",
-            "text_YrHAhL",
-            "button_La3K3J"
-          ]
-        },
-        "layered_slide_YCXEhr": {
-          "type": "_layered-slide",
-          "settings": {
-            "media_type_1": "image",
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 12,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "padding-block-start": 32,
-            "padding-block-end": 32,
-            "padding-inline-start": 32,
-            "padding-inline-end": 32
-          },
-          "blocks": {
-            "text_9BkXG8": {
-              "type": "text",
-              "name": "t:names.heading",
-              "settings": {
-                "text": "<h3>Bestsellers</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h2",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "text_UwTeBT": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Discover the bestsellers that have captured the hearts of our customers with their perfect blend of functionality and style.</p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "button_rUV6wG": {
-              "type": "button",
-              "settings": {
-                "label": "Shop now",
-                "link": "shopify://collections/all",
-                "open_in_new_tab": false,
-                "style_class": "button",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_9BkXG8",
-            "text_UwTeBT",
-            "button_rUV6wG"
-          ]
-        },
-        "layered_slide_EgaPnT": {
-          "type": "_layered-slide",
-          "settings": {
-            "media_type_1": "image",
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 12,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "padding-block-start": 32,
-            "padding-block-end": 32,
-            "padding-inline-start": 32,
-            "padding-inline-end": 32
-          },
-          "blocks": {
-            "text_VDXkHR": {
-              "type": "text",
-              "name": "t:names.heading",
-              "settings": {
-                "text": "<h3>Featured collection</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h2",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "text_TfrUje": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Discover our curated collection featuring hand-picked favorites that blend style and quality.</p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "button_wDbftQ": {
-              "type": "button",
-              "settings": {
-                "label": "Shop now",
-                "link": "shopify://collections/all",
-                "open_in_new_tab": false,
-                "style_class": "button",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_VDXkHR",
-            "text_TfrUje",
-            "button_wDbftQ"
-          ]
-        }
-      },
-      "block_order": [
-        "layered_slide_4zjRNV",
-        "layered_slide_YCXEhr",
-        "layered_slide_EgaPnT"
-      ],
-      "name": "t:names.layered_slideshow",
-      "settings": {
-        "section_width": "page-width",
-        "height": "auto",
-        "corner_radius": 12,
-        "border_width": 1,
-        "drop_shadow": false,
-        "color_scheme": "scheme-2",
-        "padding-block-start": 40,
-        "padding-block-end": 40
+        "topbar_text": "Luxury streetwear for the ones who survived chaos and rebuilt themselves.",
+        "hero_eyebrow": "Luxury Streetwear / Campaign Landing",
+        "hero_title": "THREADS OF KAOS",
+        "hero_subline": "NOT CLOTHING.",
+        "hero_title_2": "IDENTITY, REBUILT.",
+        "hero_copy": "<p>Luxury streetwear for the ones who survived chaos and rebuilt themselves. Born from pain. Refined through fire. Worn with purpose.</p>",
+        "hero_primary_label": "Shop the Drop",
+        "hero_primary_link": "",
+        "hero_secondary_label": "Our Story",
+        "hero_secondary_link": "",
+        "hero_taglines": "Built From Broken\nNot Saved. Self Made.\nStill Standing.\nWoven By Rebels.\nRebellion Refined.",
+        "hero_panel_1_label": "Symbol / Crown",
+        "hero_panel_1_title": "Reclaimed Power",
+        "hero_panel_2_label": "Monogram / TK",
+        "hero_panel_2_title": "Identity Rebuilt",
+        "hero_panel_3_label": "Statement",
+        "hero_panel_3_title": "Built From Broken",
+        "hero_float_tag": "Drop",
+        "hero_float_title": "Premium launch aesthetic",
+        "hero_float_copy": "Editorial layout, light luxury palette, conversion-first storytelling.",
+        "drop_kicker": "Featured Collection",
+        "drop_title": "THE DROP",
+        "drop_copy": "<p>Built for the ones who never folded. Premium pieces forged through chaos, stitched with meaning.</p>",
+        "featured_collection": "",
+        "drop_slab_kicker": "Campaign Frame",
+        "drop_slab_copy": "Use this hero-style slab for premium campaign photography or signature drop imagery.",
+        "drop_mini1_label": "Launch Energy",
+        "drop_mini1_title": "Premium pieces, powerful silence.",
+        "drop_mini1_copy": "Elevated and fashion-forward while keeping the interface light, sharp, and breathable.",
+        "drop_mini2_label": "Conversion Focus",
+        "drop_mini2_title": "Built to move from story to shop.",
+        "drop_mini2_copy": "Minimal friction. High intent. Distinct CTA hierarchy.",
+        "drop_button_label": "Shop All",
+        "drop_button_link": "",
+        "story_kicker": "Brand Story",
+        "story_title": "THIS BRAND WASN’T CREATED. IT WAS SURVIVED.",
+        "story_copy": "<p>Threads of Kaos was built for the people who weren’t supposed to make it. This is luxury streetwear rooted in resilience. Every piece represents transformation.</p>",
+        "story_cta_label": "Read Our Story",
+        "story_cta_link": "",
+        "story_mark": "TK",
+        "symbols_kicker": "Symbols of Kaos",
+        "symbols_title": "SYMBOLS HOLD POWER",
+        "symbols_copy": "<p>Every symbol represents survival, identity, and transformation.</p>",
+        "categories_kicker": "Shop Categories",
+        "categories_title": "BUILT FOR THE REBELS",
+        "founder_kicker": "Founder Section",
+        "founder_title": "BUILT THROUGH FIRE",
+        "founder_quote": "<p>This brand exists because healing deserves representation. Because the people carrying invisible battles deserve something that understands them.</p>",
+        "founder_name": "Belinda Slusher",
+        "founder_role": "Founder",
+        "founder_cta_label": "Meet the Founder",
+        "founder_cta_link": "",
+        "social_kicker": "Social Proof",
+        "social_title": "MORE THAN A BRAND",
+        "social_copy": "<p>Threads of Kaos is for the ones rebuilding. The survivors. The fighters. Join a movement built through resilience.</p>",
+        "email_kicker": "Email Capture",
+        "email_title": "JOIN THE MOVEMENT",
+        "email_copy": "<p>Get first access to limited drops, exclusive releases, and pieces stitched with purpose.</p>",
+        "email_offer_chip": "10% Off Your First Order / Early Access to Drops",
+        "email_placeholder": "Enter your email address",
+        "email_button_label": "Join Now",
+        "journal_kicker": "Journal",
+        "journal_title": "THE KAOS JOURNAL",
+        "journal_copy": "<p>Stories of survival. Transformation. Healing. Identity rebuilt.</p>",
+        "journal_blog": "",
+        "journal_limit": 3,
+        "final_kicker": "Final CTA",
+        "final_title": "NOT SAVED. SELF MADE.",
+        "final_copy": "<p>You survived enough. Now wear the reminder.</p>",
+        "final_cta_label": "Shop Threads of Kaos",
+        "final_cta_link": ""
       }
     }
   },
   "order": [
-    "hero_jVaWmY",
-    "product_list_fa6P9H",
-    "layered_slideshow_Bckfxj"
+    "html_landing_yigpQf"
   ]
 }
