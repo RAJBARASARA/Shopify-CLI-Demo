@@ -118,7 +118,9 @@
         "products_per_page": 24,
         "columns_gap_horizontal": 16,
         "columns_gap_vertical": 24,
-        "color_scheme": "scheme-1"
+        "color_scheme": "scheme-1",
+        "category_collections": ["fresh-bouquets", "gifts-under-30", "plants-pots-green", "all-flowers"],
+        "journal_blog": "news"
       }
     }
   },
