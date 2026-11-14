@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "main": {
+      "type": "html-landing",
+      "blocks": {
+        "symbol-1": { "type": "symbol", "settings": { "glyph": "♛", "title": "THE CROWN", "copy": "The crown symbolizes reclaimed power. Not inherited. Earned. For the ones who lost themselves and fought their way back." } },
+        "symbol-2": { "type": "symbol", "settings": { "glyph": "TK", "title": "TK", "copy": "The Threads of Kaos monogram represents identity rebuilt. Past and present woven together. Survival becomes strength." } },
+        "symbol-3": { "type": "symbol", "settings": { "glyph": "✦", "title": "BUILT FROM BROKEN", "copy": "Broken is not the end. It is the beginning of becoming. Your scars are proof of survival, not weakness." } },
+        "category-1": { "type": "category", "settings": { "title": "Men" } },
+        "category-2": { "type": "category", "settings": { "title": "Women" } },
+        "category-3": { "type": "category", "settings": { "title": "Hoodies" } },
+        "category-4": { "type": "category", "settings": { "title": "Tees" } },
+        "category-5": { "type": "category", "settings": { "title": "Headwear" } },
+        "category-6": { "type": "category", "settings": { "title": "Signature Pieces" } },
+        "metric-1": { "type": "metric", "settings": { "value": "01", "label": "Identity rebuilt" } },
+        "metric-2": { "type": "metric", "settings": { "value": "02", "label": "Purpose stitched in" } },
+        "metric-3": { "type": "metric", "settings": { "value": "03", "label": "Luxury with meaning" } },
+        "metric-4": { "type": "metric", "settings": { "value": "04", "label": "Movement over trend" } },
+        "journal-1": { "type": "journal", "settings": { "meta": "Story 01", "title": "Survival has a voice.", "copy": "Editorial story space for founder reflections, recovery narratives, and resilience-centered brand writing." } },
+        "journal-2": { "type": "journal", "settings": { "meta": "Story 02", "title": "Transformation, documented.", "copy": "A premium journal layout that can become a content engine for brand affinity and repeat engagement." } },
+        "journal-3": { "type": "journal", "settings": { "meta": "Story 03", "title": "Healing with identity intact.", "copy": "Use these cards for essays, drop stories, or cultural notes that deepen the movement around the brand." } }
+      },
+      "block_order": [
+        "symbol-1", "symbol-2", "symbol-3",
+        "category-1", "category-2", "category-3", "category-4", "category-5", "category-6",
+        "metric-1", "metric-2", "metric-3", "metric-4",
+        "journal-1", "journal-2", "journal-3"
+      ],
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

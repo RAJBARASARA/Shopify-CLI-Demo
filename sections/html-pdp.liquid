@@ -1,0 +1,396 @@
+{%- comment -%}
+  html-pdp — Threads of Kaos light-luxury product page.
+  Faithful editorial layout with a REAL buy box built from Horizon native
+  theme blocks (media gallery, variant picker, buy buttons w/ quantity +
+  add-to-cart + accelerated checkout, accordion) placed statically.
+  NOTE: Shopify forbids mixing native theme blocks with section-defined
+  (local) blocks, so the editorial bands (meta, trust, reviews, look, ugc,
+  faq) are driven by SETTINGS (fixed slots), not local blocks.
+  Palette/typography in assets/html-pages.css. Header/footer from groups.
+{%- endcomment -%}
+
+{% render 'html-fonts' %}
+{{ 'html-pages.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+  assign variant = product.selected_or_first_available_variant
+  assign on_sale = false
+  if variant.compare_at_price > variant.price
+    assign on_sale = true
+  endif
+-%}
+
+<div class="htmlp htmlp-pdp" id="htmlp-pdp-{{ section.id }}">
+  <main class="pdp-shell">
+    {%- comment -%} ---------- HERO: gallery + buy box ---------- {%- endcomment -%}
+    <section class="hero-card reveal">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="{{ routes.root_url }}">{{ s.breadcrumb_home | default: 'Home' }}</a><span class="sep">/</span>
+        {%- if product.collections.first -%}
+          <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a><span class="sep">/</span>
+        {%- endif -%}
+        <strong>{{ product.title }}</strong>
+      </nav>
+
+      <div class="pdp-grid">
+        <div class="gallery-col">
+          {% content_for 'block', type: '_product-media-gallery', id: 'gallery', closest.product: product %}
+        </div>
+
+        <div class="product-panel" id="htmlp-buybox-{{ section.id }}">
+          {%- if s.eyebrow != blank -%}<span class="htmlp-eyebrow">{{ s.eyebrow }}</span>{%- endif -%}
+          {%- if s.reviews_score != blank -%}
+            <div class="rating-row">
+              <span class="stars" aria-hidden="true">★★★★★</span>
+              <strong>{{ s.reviews_score }}</strong>
+              {%- if s.reviews_count_label != blank -%}<span>{{ s.reviews_count_label }}</span>{%- endif -%}
+              {%- if s.reviews_tag != blank -%}<span>•</span><span>{{ s.reviews_tag }}</span>{%- endif -%}
+            </div>
+          {%- endif -%}
+
+          <h1 class="product-title">{{ product.title }}</h1>
+          {%- assign subtitle = s.product_subtitle | default: product.description | strip_html | truncatewords: 40 -%}
+          {%- if subtitle != blank -%}<p class="product-subtitle">{{ subtitle }}</p>{%- endif -%}
+
+          <div class="price-row">
+            {% render 'price', product_resource: product, show_sale_price_first: true %}
+            {%- if on_sale and s.sale_badge != blank -%}<span class="badge">{{ s.sale_badge }}</span>{%- endif -%}
+            {%- if s.limited_badge != blank -%}<span class="badge">{{ s.limited_badge }}</span>{%- endif -%}
+          </div>
+
+          {%- if s.meta_1_title != blank or s.meta_2_title != blank or s.meta_3_title != blank -%}
+            <div class="meta-grid">
+              {%- if s.meta_1_title != blank -%}<div class="meta-card"><strong>{{ s.meta_1_title }}</strong><span>{{ s.meta_1_copy }}</span></div>{%- endif -%}
+              {%- if s.meta_2_title != blank -%}<div class="meta-card"><strong>{{ s.meta_2_title }}</strong><span>{{ s.meta_2_copy }}</span></div>{%- endif -%}
+              {%- if s.meta_3_title != blank -%}<div class="meta-card"><strong>{{ s.meta_3_title }}</strong><span>{{ s.meta_3_copy }}</span></div>{%- endif -%}
+            </div>
+          {%- endif -%}
+
+          {% content_for 'block', type: 'variant-picker', id: 'variant-picker', closest.product: product %}
+
+          <div class="purchase-box">
+            <div class="stock">
+              {%- if product.available -%}{{ s.in_stock_text | default: 'In stock / Ready to ship' }}{%- else -%}{{ s.out_stock_text | default: 'Currently unavailable' }}{%- endif -%}
+            </div>
+            {% content_for 'block', type: 'buy-buttons', id: 'buy-buttons', closest.product: product %}
+          </div>
+
+          {%- if s.trust_1_title != blank or s.trust_2_title != blank or s.trust_3_title != blank -%}
+            <div class="trust-row">
+              {%- if s.trust_1_title != blank -%}<div class="trust-item"><strong>{{ s.trust_1_title }}</strong><p>{{ s.trust_1_copy }}</p></div>{%- endif -%}
+              {%- if s.trust_2_title != blank -%}<div class="trust-item"><strong>{{ s.trust_2_title }}</strong><p>{{ s.trust_2_copy }}</p></div>{%- endif -%}
+              {%- if s.trust_3_title != blank -%}<div class="trust-item"><strong>{{ s.trust_3_title }}</strong><p>{{ s.trust_3_copy }}</p></div>{%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </section>
+
+    {%- comment -%} ---------- ACCORDION (native) ---------- {%- endcomment -%}
+    <section class="band reveal" id="details">
+      <div class="band-shell">
+        {% content_for 'block', type: 'accordion', id: 'accordion', closest.product: product %}
+      </div>
+    </section>
+
+    {%- comment -%} ---------- REVIEWS (static/editable settings) ---------- {%- endcomment -%}
+    {%- if s.reviews_title != blank -%}
+      <section class="band reveal" id="reviews">
+        <div class="band-shell">
+          <div class="section-top">
+            <div>
+              {%- if s.reviews_kicker != blank -%}<span class="htmlp-eyebrow">{{ s.reviews_kicker }}</span>{%- endif -%}
+              <h2 class="section-title">{{ s.reviews_title }}</h2>
+            </div>
+            {%- if s.reviews_subtext != blank -%}<p class="section-subtext">{{ s.reviews_subtext }}</p>{%- endif -%}
+          </div>
+          <div class="review-grid">
+            <div class="score-card">
+              <div class="score">{{ s.reviews_score | default: '4.9' }}</div>
+              <div class="stars" aria-hidden="true">★★★★★</div>
+              {%- if s.reviews_score_copy != blank -%}<div class="score-copy">{{ s.reviews_score_copy }}</div>{%- endif -%}
+            </div>
+            <div class="review-list">
+              {%- if s.review_1_body != blank -%}<article class="review-card"><div class="review-head"><strong>{{ s.review_1_author }}</strong><span class="stars" aria-hidden="true">★★★★★</span></div><p>{{ s.review_1_body }}</p></article>{%- endif -%}
+              {%- if s.review_2_body != blank -%}<article class="review-card"><div class="review-head"><strong>{{ s.review_2_author }}</strong><span class="stars" aria-hidden="true">★★★★★</span></div><p>{{ s.review_2_body }}</p></article>{%- endif -%}
+              {%- if s.review_3_body != blank -%}<article class="review-card"><div class="review-head"><strong>{{ s.review_3_author }}</strong><span class="stars" aria-hidden="true">★★★★★</span></div><p>{{ s.review_3_body }}</p></article>{%- endif -%}
+            </div>
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- comment -%} ---------- STORY BAND ---------- {%- endcomment -%}
+    {%- if s.story_title != blank -%}
+      <section class="band reveal">
+        <div class="band-shell">
+          <div class="section-top">
+            <div>
+              {%- if s.story_kicker != blank -%}<span class="htmlp-eyebrow">{{ s.story_kicker }}</span>{%- endif -%}
+              <h2 class="section-title">{{ s.story_title }}</h2>
+            </div>
+            {%- if s.story_subtext != blank -%}<p class="section-subtext">{{ s.story_subtext }}</p>{%- endif -%}
+          </div>
+          <div class="story-layout">
+            <div class="story-copy">{{ s.story_copy }}</div>
+            <div class="story-visual">
+              {%- if s.story_image != blank -%}{{ s.story_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
+            </div>
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- comment -%} ---------- COMPLETE THE LOOK (product pickers) ---------- {%- endcomment -%}
+    {%- if s.look_1_product != blank or s.look_2_product != blank or s.look_3_product != blank -%}
+      <section class="band reveal" id="look">
+        <div class="band-shell">
+          <div class="section-top">
+            <div>
+              {%- if s.look_kicker != blank -%}<span class="htmlp-eyebrow">{{ s.look_kicker }}</span>{%- endif -%}
+              {%- if s.look_title != blank -%}<h2 class="section-title">{{ s.look_title }}</h2>{%- endif -%}
+            </div>
+            {%- if s.look_subtext != blank -%}<p class="section-subtext">{{ s.look_subtext }}</p>{%- endif -%}
+          </div>
+          <div class="trio-grid">
+            {%- for i in (1..3) -%}
+              {%- assign lp_key = 'look_' | append: i | append: '_product' -%}
+              {%- assign ll_key = 'look_' | append: i | append: '_label' -%}
+              {%- assign lp = s[lp_key] -%}
+              {%- if lp != blank -%}
+                <a class="trio-card" href="{{ lp.url }}">
+                  {%- if lp.featured_image -%}{{ lp.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: lp.title | default: '' }}{%- endif -%}
+                  <div class="trio-content">
+                    <strong>{{ s[ll_key] | default: 'Pairing' }}</strong>
+                    <h3>{{ lp.title }}</h3>
+                    <p>{{ lp.price | money }}</p>
+                  </div>
+                </a>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- comment -%} ---------- UGC ---------- {%- endcomment -%}
+    {%- if s.ugc_1_title != blank or s.ugc_2_title != blank or s.ugc_3_title != blank -%}
+      <section class="band reveal">
+        <div class="band-shell">
+          <div class="section-top">
+            <div>
+              {%- if s.ugc_kicker != blank -%}<span class="htmlp-eyebrow">{{ s.ugc_kicker }}</span>{%- endif -%}
+              {%- if s.ugc_title != blank -%}<h2 class="section-title">{{ s.ugc_title }}</h2>{%- endif -%}
+            </div>
+            {%- if s.ugc_subtext != blank -%}<p class="section-subtext">{{ s.ugc_subtext }}</p>{%- endif -%}
+          </div>
+          <div class="trio-grid">
+            {%- for i in (1..3) -%}
+              {%- assign ut_key = 'ugc_' | append: i | append: '_title' -%}
+              {%- assign ul_key = 'ugc_' | append: i | append: '_label' -%}
+              {%- assign uc_key = 'ugc_' | append: i | append: '_copy' -%}
+              {%- assign ui_key = 'ugc_' | append: i | append: '_image' -%}
+              {%- if s[ut_key] != blank -%}
+                <article class="trio-card">
+                  {%- if s[ui_key] != blank -%}{{ s[ui_key] | image_url: width: 600 | image_tag: loading: 'lazy', alt: s[ut_key] | default: '' }}{%- endif -%}
+                  <div class="trio-content">
+                    {%- if s[ul_key] != blank -%}<strong>{{ s[ul_key] }}</strong>{%- endif -%}
+                    <h3>{{ s[ut_key] }}</h3>
+                    {%- if s[uc_key] != blank -%}<p>{{ s[uc_key] }}</p>{%- endif -%}
+                  </div>
+                </article>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- comment -%} ---------- FAQ ---------- {%- endcomment -%}
+    {%- if s.faq_1_question != blank or s.faq_2_question != blank or s.faq_3_question != blank -%}
+      <section class="band reveal" id="faq">
+        <div class="band-shell">
+          <div class="section-top">
+            <div>
+              {%- if s.faq_kicker != blank -%}<span class="htmlp-eyebrow">{{ s.faq_kicker }}</span>{%- endif -%}
+              {%- if s.faq_title != blank -%}<h2 class="section-title">{{ s.faq_title }}</h2>{%- endif -%}
+            </div>
+            {%- if s.faq_subtext != blank -%}<p class="section-subtext">{{ s.faq_subtext }}</p>{%- endif -%}
+          </div>
+          <div class="faq-grid">
+            {%- for i in (1..3) -%}
+              {%- assign fq_key = 'faq_' | append: i | append: '_question' -%}
+              {%- assign fa_key = 'faq_' | append: i | append: '_answer' -%}
+              {%- if s[fq_key] != blank -%}
+                <article class="faq-card"><strong>{{ s[fq_key] }}</strong><div>{{ s[fa_key] }}</div></article>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- comment -%} ---------- FINAL CTA ---------- {%- endcomment -%}
+    {%- if s.final_title != blank -%}
+      <section class="band reveal">
+        <div class="band-shell final-shell">
+          <div class="final-inner">
+            <div class="final-copy">
+              {%- if s.final_kicker != blank -%}<span class="htmlp-eyebrow">{{ s.final_kicker }}</span>{%- endif -%}
+              <h2 class="section-title">{{ s.final_title }}</h2>
+              {%- if s.final_copy != blank -%}<p>{{ s.final_copy }}</p>{%- endif -%}
+            </div>
+            <a class="htmlp-btn htmlp-btn--primary" href="#htmlp-buybox-{{ section.id }}">{{ s.final_cta_label | default: 'Shop This Piece' }}</a>
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+  </main>
+
+  {%- comment -%} ---------- STICKY BAR (visual; jumps to the real buy box) ---------- {%- endcomment -%}
+  <div class="sticky-bar" id="htmlp-sticky-{{ section.id }}" aria-hidden="true">
+    <div class="sticky-meta">
+      <strong>{{ product.title }}</strong>
+      <span>{{ variant.price | money }}</span>
+    </div>
+    <a class="htmlp-btn htmlp-btn--primary" href="#htmlp-buybox-{{ section.id }}">{{ s.sticky_label | default: 'Add to Bag' }}</a>
+  </div>
+</div>
+
+{% javascript %}
+  (function () {
+    const roots = document.querySelectorAll('.htmlp-pdp');
+    if (!roots.length) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    roots.forEach((root) => {
+      const reveals = root.querySelectorAll('.reveal');
+      if (reduce || !('IntersectionObserver' in window)) {
+        reveals.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+          });
+        }, { threshold: 0.12 });
+        reveals.forEach((el) => io.observe(el));
+      }
+      const bar = root.querySelector('.sticky-bar');
+      const buybox = root.querySelector('[id^="htmlp-buybox-"]');
+      if (bar && buybox && 'IntersectionObserver' in window) {
+        const sio = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) { bar.classList.remove('is-visible'); bar.setAttribute('aria-hidden', 'true'); }
+            else { bar.classList.add('is-visible'); bar.setAttribute('aria-hidden', 'false'); }
+          });
+        }, { threshold: 0.15 });
+        sio.observe(buybox);
+      }
+    });
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Product (HTML)",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "header", "content": "Buy box" },
+    { "type": "text", "id": "breadcrumb_home", "label": "Breadcrumb home label", "default": "Home" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Product Detail Page / Light Luxury" },
+    { "type": "text", "id": "product_subtitle", "label": "Subtitle (defaults to product description)" },
+    { "type": "text", "id": "sale_badge", "label": "Sale badge text", "default": "On Sale" },
+    { "type": "text", "id": "limited_badge", "label": "Extra badge text", "default": "Limited Drop" },
+    { "type": "text", "id": "in_stock_text", "label": "In-stock text", "default": "In stock / Ready to ship" },
+    { "type": "text", "id": "out_stock_text", "label": "Out-of-stock text", "default": "Currently unavailable" },
+
+    { "type": "header", "content": "Meta cards" },
+    { "type": "text", "id": "meta_1_title", "label": "Meta 1 title", "default": "Fabric" },
+    { "type": "textarea", "id": "meta_1_copy", "label": "Meta 1 copy", "default": "Heavyweight brushed cotton blend with premium hand feel." },
+    { "type": "text", "id": "meta_2_title", "label": "Meta 2 title", "default": "Fit" },
+    { "type": "textarea", "id": "meta_2_copy", "label": "Meta 2 copy", "default": "Relaxed oversized silhouette with sculpted shoulder drop." },
+    { "type": "text", "id": "meta_3_title", "label": "Meta 3 title", "default": "Feeling" },
+    { "type": "textarea", "id": "meta_3_copy", "label": "Meta 3 copy", "default": "Built for resilience, warmth, structure, and everyday impact." },
+
+    { "type": "header", "content": "Trust row" },
+    { "type": "text", "id": "trust_1_title", "label": "Trust 1 title", "default": "Fast Delivery" },
+    { "type": "textarea", "id": "trust_1_copy", "label": "Trust 1 copy", "default": "2–5 business days with premium tracked shipping." },
+    { "type": "text", "id": "trust_2_title", "label": "Trust 2 title", "default": "Easy Returns" },
+    { "type": "textarea", "id": "trust_2_copy", "label": "Trust 2 copy", "default": "14-day returns for unworn pieces with tags attached." },
+    { "type": "text", "id": "trust_3_title", "label": "Trust 3 title", "default": "Drop Access" },
+    { "type": "textarea", "id": "trust_3_copy", "label": "Trust 3 copy", "default": "Members get early access to limited releases and restocks." },
+
+    { "type": "header", "content": "Rating (static)" },
+    { "type": "text", "id": "reviews_score", "label": "Score", "default": "4.9" },
+    { "type": "text", "id": "reviews_count_label", "label": "Count label", "default": "128 reviews" },
+    { "type": "text", "id": "reviews_tag", "label": "Tag", "default": "Best Seller" },
+
+    { "type": "header", "content": "Reviews band" },
+    { "type": "text", "id": "reviews_kicker", "label": "Kicker", "default": "Social Proof" },
+    { "type": "text", "id": "reviews_title", "label": "Title", "default": "BUILT TO CONVERT. BACKED BY TRUST." },
+    { "type": "richtext", "id": "reviews_subtext", "label": "Subtext", "default": "<p>A strong PDP stacks reassurance: ratings, fit feedback, and proof the product delivers.</p>" },
+    { "type": "textarea", "id": "reviews_score_copy", "label": "Score copy", "default": "128 reviews / 92% say it fits true to the oversized silhouette / 88% say fabric feels more premium than expected." },
+    { "type": "text", "id": "review_1_author", "label": "Review 1 author", "default": "Verified buyer / Jordan K." },
+    { "type": "textarea", "id": "review_1_body", "label": "Review 1 body", "default": "This feels like therapy turned into luxury. Heavy, structured, and actually premium. The fit alone sells the piece." },
+    { "type": "text", "id": "review_2_author", "label": "Review 2 author", "default": "Verified buyer / Maya R." },
+    { "type": "textarea", "id": "review_2_body", "label": "Review 2 body", "default": "Exactly the type of product page that makes it easy to buy — I understood the fit, quality, and vibe in seconds." },
+    { "type": "text", "id": "review_3_author", "label": "Review 3 author", "default": "Verified buyer / Andre S." },
+    { "type": "textarea", "id": "review_3_body", "label": "Review 3 body", "default": "Luxury streetwear energy without visual clutter. Clean, light, strong, and the hoodie feels like a signature product." },
+
+    { "type": "header", "content": "Story band" },
+    { "type": "text", "id": "story_kicker", "label": "Kicker", "default": "Brand Story Layer" },
+    { "type": "text", "id": "story_title", "label": "Title", "default": "NOT JUST A PRODUCT. A SYMBOL." },
+    { "type": "richtext", "id": "story_subtext", "label": "Subtext", "default": "<p>High-conviction fashion PDPs reinforce meaning, identity, and why the piece matters.</p>" },
+    { "type": "richtext", "id": "story_copy", "label": "Body", "default": "<p>The product page should feel like a continuation of the landing page — same warm palette, sculpted spacing, and emotional tone, shifted into a commercial structure.</p><p>This is where you deepen desire: why the piece exists and why someone should see themselves in it.</p>" },
+    { "type": "image_picker", "id": "story_image", "label": "Story image" },
+
+    { "type": "header", "content": "Complete the look" },
+    { "type": "text", "id": "look_kicker", "label": "Kicker", "default": "AOV Growth" },
+    { "type": "text", "id": "look_title", "label": "Title", "default": "COMPLETE THE LOOK" },
+    { "type": "richtext", "id": "look_subtext", "label": "Subtext", "default": "<p>Cross-sell blocks work best when they feel editorial, not promotional.</p>" },
+    { "type": "product", "id": "look_1_product", "label": "Product 1" },
+    { "type": "text", "id": "look_1_label", "label": "Product 1 label", "default": "Pairing 01" },
+    { "type": "product", "id": "look_2_product", "label": "Product 2" },
+    { "type": "text", "id": "look_2_label", "label": "Product 2 label", "default": "Pairing 02" },
+    { "type": "product", "id": "look_3_product", "label": "Product 3" },
+    { "type": "text", "id": "look_3_label", "label": "Product 3 label", "default": "Pairing 03" },
+
+    { "type": "header", "content": "Community (UGC)" },
+    { "type": "text", "id": "ugc_kicker", "label": "Kicker", "default": "Community Proof" },
+    { "type": "text", "id": "ugc_title", "label": "Title", "default": "WORN WITH PURPOSE" },
+    { "type": "richtext", "id": "ugc_subtext", "label": "Subtext", "default": "<p>Styled customer imagery reduces hesitation and shows the piece in real-world context.</p>" },
+    { "type": "image_picker", "id": "ugc_1_image", "label": "UGC 1 image" },
+    { "type": "text", "id": "ugc_1_label", "label": "UGC 1 label", "default": "Community frame" },
+    { "type": "text", "id": "ugc_1_title", "label": "UGC 1 title", "default": "Recovery looks good on you." },
+    { "type": "textarea", "id": "ugc_1_copy", "label": "UGC 1 copy", "default": "Use for customer styling photos or on-body fit references." },
+    { "type": "image_picker", "id": "ugc_2_image", "label": "UGC 2 image" },
+    { "type": "text", "id": "ugc_2_label", "label": "UGC 2 label", "default": "Fabric focus" },
+    { "type": "text", "id": "ugc_2_title", "label": "UGC 2 title", "default": "Detail that sells." },
+    { "type": "textarea", "id": "ugc_2_copy", "label": "UGC 2 copy", "default": "Closeups of stitching, cuffs, lining, weight, and branding justify premium pricing." },
+    { "type": "image_picker", "id": "ugc_3_image", "label": "UGC 3 image" },
+    { "type": "text", "id": "ugc_3_label", "label": "UGC 3 label", "default": "Fit context" },
+    { "type": "text", "id": "ugc_3_title", "label": "UGC 3 title", "default": "See the silhouette move." },
+    { "type": "textarea", "id": "ugc_3_copy", "label": "UGC 3 copy", "default": "Perfect place for lifestyle imagery or short product motion clips once assets exist." },
+
+    { "type": "header", "content": "FAQ" },
+    { "type": "text", "id": "faq_kicker", "label": "Kicker", "default": "FAQ" },
+    { "type": "text", "id": "faq_title", "label": "Title", "default": "REMOVE THE LAST OBJECTION" },
+    { "type": "richtext", "id": "faq_subtext", "label": "Subtext", "default": "<p>Answer the real blockers: fit, shrinkage, care, shipping speed, premium justification.</p>" },
+    { "type": "text", "id": "faq_1_question", "label": "FAQ 1 question", "default": "Will it shrink" },
+    { "type": "richtext", "id": "faq_1_answer", "label": "FAQ 1 answer", "default": "<p>Wash cold and air-dry; expect slight settling after the first wash.</p>" },
+    { "type": "text", "id": "faq_2_question", "label": "FAQ 2 question", "default": "How does it fit" },
+    { "type": "richtext", "id": "faq_2_answer", "label": "FAQ 2 answer", "default": "<p>Intentionally oversized — size down for a closer silhouette.</p>" },
+    { "type": "text", "id": "faq_3_question", "label": "FAQ 3 question", "default": "Why premium price" },
+    { "type": "richtext", "id": "faq_3_answer", "label": "FAQ 3 answer", "default": "<p>Material weight, finishing, design philosophy, and limited-drop positioning.</p>" },
+
+    { "type": "header", "content": "Final CTA" },
+    { "type": "text", "id": "final_kicker", "label": "Kicker", "default": "Final CTA" },
+    { "type": "text", "id": "final_title", "label": "Title", "default": "NOT SAVED. SELF MADE." },
+    { "type": "richtext", "id": "final_copy", "label": "Copy", "default": "<p>Same design language as your landing page, restructured for stronger product conversion.</p>" },
+    { "type": "text", "id": "final_cta_label", "label": "Button label", "default": "Shop This Piece" },
+
+    { "type": "header", "content": "Sticky bar" },
+    { "type": "text", "id": "sticky_label", "label": "Sticky button label", "default": "Add to Bag" }
+  ]
+}
+{% endschema %}
