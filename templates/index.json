@@ -15,95 +15,93 @@
         "symbol_nhUCAL": {
           "type": "symbol",
           "settings": {
-            "glyph": "♛",
-            "title": "THE CROWN",
-            "copy": "The crown symbolizes reclaimed power. Not inherited. Earned. For the ones who fought their way back."
+            "glyph": "✿",
+            "title": "FRESH",
+            "copy": "Hand-tied bouquets and seasonal stems, chosen for softness and scent."
           }
         },
         "symbol_pHGCRE": {
           "type": "symbol",
           "settings": {
-            "glyph": "TK",
-            "title": "TK",
-            "copy": "The Threads of Kaos monogram represents identity rebuilt. Survival becomes strength."
+            "glyph": "❀",
+            "title": "LIVING",
+            "copy": "Easy-care plants and pots to bring a little nature indoors."
           }
         },
         "symbol_Fc3iMB": {
           "type": "symbol",
           "settings": {
             "glyph": "✦",
-            "title": "BUILT FROM BROKEN",
-            "copy": "Broken is not the end. It is the beginning of becoming. Your scars are proof of survival."
+            "title": "CALM",
+            "copy": "Quiet, considered pieces — natural textures and nothing excessive."
           }
         },
         "category_YL4LXF": {
           "type": "category",
           "settings": {
-            "collection": "",
-            "title": "Men"
+            "collection": "fresh-bouquets",
+            "title": "Fresh Bouquets",
+            "image": ""
           }
         },
         "category_CyaJWJ": {
           "type": "category",
           "settings": {
-            "collection": "",
-            "title": "Women"
+            "collection": "bouquet",
+            "title": "Bouquets",
+            "image": ""
           }
         },
         "category_TRkBPi": {
           "type": "category",
           "settings": {
-            "collection": "",
-            "title": "Hoodies"
+            "collection": "plants-pots-green",
+            "title": "Plants & Pots",
+            "image": ""
           }
         },
         "category_74eBBq": {
           "type": "category",
           "settings": {
-            "collection": "",
-            "title": "Tees"
+            "collection": "gifts-under-30",
+            "title": "Gifts Under $30",
+            "image": ""
           }
         },
         "category_BGzrVA": {
           "type": "category",
           "settings": {
-            "collection": "",
-            "title": "Headwear"
-          }
-        },
-        "category_DFwEdQ": {
-          "type": "category",
-          "settings": {
-            "collection": "",
-            "title": "Signature Pieces"
+            "collection": "all-flowers",
+            "title": "All Flowers",
+            "image": ""
           }
         },
         "metric_Cp7YFy": {
           "type": "metric",
           "settings": {
             "value": "01",
-            "label": "Identity rebuilt"
+            "label": "Hand-tied & fresh"
           }
         },
         "metric_zYzKEk": {
           "type": "metric",
           "settings": {
             "value": "02",
-            "label": "Purpose stitched in"
+            "label": "Living plants & pots"
           }
         },
         "metric_JGgxe4": {
           "type": "metric",
           "settings": {
             "value": "03",
-            "label": "Luxury with meaning"
+            "label": "Calm, considered design"
           }
         },
         "metric_kj9JdP": {
           "type": "metric",
           "settings": {
             "value": "04",
-            "label": "Movement over trend"
+            "label": "Delivered with care"
           }
         }
       },
@@ -116,7 +114,6 @@
         "category_TRkBPi",
         "category_74eBBq",
         "category_BGzrVA",
-        "category_DFwEdQ",
         "metric_Cp7YFy",
         "metric_zYzKEk",
         "metric_JGgxe4",
@@ -147,7 +144,7 @@
         "drop_kicker": "Featured Collection",
         "drop_title": "THE EDIT",
         "drop_copy": "<p>A small, carefully chosen range of seasonal florals and living greenery — the pieces we reach for to make a space feel calm.</p>",
-        "featured_collection": "",
+        "featured_collection": "all-flowers",
         "drop_slab_kicker": "In Bloom",
         "drop_slab_copy": "Seasonal florals and living plants, styled for calm, considered spaces.",
         "drop_mini1_label": "Fresh Daily",
@@ -188,7 +185,7 @@
         "journal_kicker": "Journal",
         "journal_title": "THE ZENN JOURNAL",
         "journal_copy": "<p>Notes on slow living, styling with plants, and making space to breathe.</p>",
-        "journal_blog": "",
+        "journal_blog": "news",
         "journal_limit": 3,
         "final_kicker": "Begin",
         "final_title": "MAKE ROOM TO BREATHE.",
