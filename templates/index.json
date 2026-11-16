@@ -194,7 +194,11 @@
         "final_title": "NOT SAVED. SELF MADE.",
         "final_copy": "<p>You survived enough. Now wear the reminder.</p>",
         "final_cta_label": "Shop Threads of Kaos",
-        "final_cta_link": ""
+        "final_cta_link": "",
+        "hero_image_1": "shopify://shop_images/zenn-hero-banner.png",
+        "hero_image_2": "shopify://shop_images/zenn-hero-banner.png",
+        "hero_image_3": "shopify://shop_images/zenn-hero-banner.png",
+        "drop_image": "shopify://shop_images/zenn-hero-banner.png"
       }
     }
   },
