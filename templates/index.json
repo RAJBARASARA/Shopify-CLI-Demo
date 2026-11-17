@@ -195,7 +195,11 @@
         "hero_image_1": "shopify://shop_images/zenn-hero-banner.png",
         "hero_image_2": "shopify://shop_images/zenn-hero-banner.png",
         "hero_image_3": "shopify://shop_images/zenn-hero-banner.png",
-        "drop_image": "shopify://shop_images/zenn-hero-banner.png"
+        "drop_image": "shopify://shop_images/zenn-hero-banner.png",
+        "story_image": "shopify://shop_images/zenn-story.png",
+        "founder_image": "shopify://shop_images/zenn-founder.png",
+        "email_image": "shopify://shop_images/zenn-email.png",
+        "final_image": "shopify://shop_images/zenn-final.png"
       }
     }
   },
