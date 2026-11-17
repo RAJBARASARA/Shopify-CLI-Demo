@@ -81,23 +81,23 @@
               "type": "_accordion-row",
               "settings": { "heading": "Product details", "open_by_default": true, "icon": "none" },
               "blocks": {
-                "text-details": { "type": "text", "settings": { "text": "<p>A premium signature piece for Threads of Kaos. Replace with your real SKU details, GSM, wash notes, and material composition.</p>" }, "blocks": {} }
+                "text-details": { "type": "text", "settings": { "text": "<p>A fresh, hand-tied arrangement from Zenn Space, made to order with seasonal stems chosen for their calm, natural beauty.</p>" }, "blocks": {} }
               },
               "block_order": ["text-details"]
             },
             "row-fit": {
               "type": "_accordion-row",
-              "settings": { "heading": "Fit and sizing", "open_by_default": false, "icon": "none" },
+              "settings": { "heading": "Care & freshness", "open_by_default": false, "icon": "none" },
               "blocks": {
-                "text-fit": { "type": "text", "settings": { "text": "<p>Oversized fit by default. Add model height, worn size, chest measurements, garment length, and fit recommendation here.</p>" }, "blocks": {} }
+                "text-fit": { "type": "text", "settings": { "text": "<p>Trim the stems on arrival, change the water every couple of days, and keep out of direct sunlight to enjoy them longer.</p>" }, "blocks": {} }
               },
               "block_order": ["text-fit"]
             },
             "row-shipping": {
               "type": "_accordion-row",
-              "settings": { "heading": "Shipping and returns", "open_by_default": false, "icon": "none" },
+              "settings": { "heading": "Delivery", "open_by_default": false, "icon": "none" },
               "blocks": {
-                "text-shipping": { "type": "text", "settings": { "text": "<p>Dispatch timing, shipping thresholds, customs policies, and return windows.</p>" }, "blocks": {} }
+                "text-shipping": { "type": "text", "settings": { "text": "<p>Arranged fresh and shipped with tracked delivery — choose your preferred date at checkout.</p>" }, "blocks": {} }
               },
               "block_order": ["text-shipping"]
             }

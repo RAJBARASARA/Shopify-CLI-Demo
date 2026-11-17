@@ -1,5 +1,5 @@
 {%- comment -%}
-  html-collection — Threads of Kaos light-luxury collection page.
+  html-collection — Zenn Space fresh flowers & green living collection page.
   Faithful editorial bands + REAL product grid / filters / sort using
   Horizon's native results-list + filters + product-grid pipeline.
   NOTE: Shopify forbids mixing native theme blocks with section-defined
@@ -48,7 +48,7 @@
                 {%- if s.hero_image_1 != blank -%}{{ s.hero_image_1 | image_url: width: 800 | image_tag: loading: 'eager', fetchpriority: 'high', alt: '' }}{%- endif -%}
                 <div class="card-copy">
                   <span class="htmlp-kicker" style="margin-bottom:0;">{{ s.hero_card1_kicker | default: 'Campaign edit' }}</span>
-                  <strong>{{ s.hero_card1_title | default: 'Reclaimed power, cut for the street.' }}</strong>
+                  <strong>{{ s.hero_card1_title | default: 'Blooms picked at their peak.' }}</strong>
                   {%- if s.hero_card1_copy != blank -%}<p>{{ s.hero_card1_copy }}</p>{%- endif -%}
                 </div>
               </div>
@@ -56,15 +56,15 @@
                 <div class="visual-card secondary">
                   {%- if s.hero_image_2 != blank -%}{{ s.hero_image_2 | image_url: width: 600 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
                   <div class="card-copy">
-                    <span class="htmlp-kicker" style="margin-bottom:0;">{{ s.hero_card2_kicker | default: 'Monogram / TK' }}</span>
-                    <strong>{{ s.hero_card2_title | default: 'Identity rebuilt.' }}</strong>
+                    <span class="htmlp-kicker" style="margin-bottom:0;">{{ s.hero_card2_kicker | default: 'Signature / Zenn' }}</span>
+                    <strong>{{ s.hero_card2_title | default: 'Calm, arranged.' }}</strong>
                   </div>
                 </div>
                 <div class="visual-card secondary">
                   {%- if s.hero_image_3 != blank -%}{{ s.hero_image_3 | image_url: width: 600 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
                   <div class="card-copy">
                     <span class="htmlp-kicker" style="margin-bottom:0;">{{ s.hero_card3_kicker | default: 'Launch mood' }}</span>
-                    <strong>{{ s.hero_card3_title | default: 'Luxury, but never fragile.' }}</strong>
+                    <strong>{{ s.hero_card3_title | default: 'Gentle, but always fresh.' }}</strong>
                   </div>
                 </div>
               </div>
@@ -146,7 +146,7 @@
                 {%- if s.look1_image != blank -%}{{ s.look1_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
                 <div class="look-note">
                   <span class="htmlp-kicker" style="margin-bottom:0;">{{ s.look1_kicker | default: 'Look 01' }}</span>
-                  <h3>{{ s.look1_title | default: 'Silence. Texture. Weight.' }}</h3>
+                  <h3>{{ s.look1_title | default: 'Fresh. Seasonal. Simple.' }}</h3>
                   {%- if s.look1_copy != blank -%}<p>{{ s.look1_copy }}</p>{%- endif -%}
                 </div>
               </div>
@@ -154,7 +154,7 @@
                 {%- if s.look2_image != blank -%}{{ s.look2_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
                 <div class="look-note">
                   <span class="htmlp-kicker" style="margin-bottom:0;">{{ s.look2_kicker | default: 'Look 02' }}</span>
-                  <h3>{{ s.look2_title | default: 'Not trend. Testament.' }}</h3>
+                  <h3>{{ s.look2_title | default: 'Grown to last.' }}</h3>
                   {%- if s.look2_copy != blank -%}<p>{{ s.look2_copy }}</p>{%- endif -%}
                 </div>
               </div>
@@ -262,34 +262,34 @@
   "name": "Collection (HTML)",
   "enabled_on": { "templates": ["collection"] },
   "settings": [
-    { "type": "text", "id": "topbar_text", "label": "Topbar text", "default": "Luxury streetwear for the ones who survived chaos and rebuilt themselves." },
+    { "type": "text", "id": "topbar_text", "label": "Topbar text", "default": "Fresh flowers and calm green living, delivered with care." },
 
     { "type": "header", "content": "Editorial hero" },
-    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "Collection Page / Light Luxury Retail" },
-    { "type": "text", "id": "hero_title", "label": "Title (line 1)", "default": "THE DROP" },
-    { "type": "text", "id": "hero_subline", "label": "Title sub-line (sans)", "default": "Threads of Kaos" },
-    { "type": "text", "id": "hero_title_2", "label": "Title (line 2)", "default": "BUILT FROM BROKEN." },
-    { "type": "richtext", "id": "hero_copy", "label": "Intro copy", "default": "<p>A premium collection experience designed to feel editorial, breathable, and conversion-ready.</p>" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "Collection / Fresh Blooms & Green Living" },
+    { "type": "text", "id": "hero_title", "label": "Title (line 1)", "default": "THE COLLECTION" },
+    { "type": "text", "id": "hero_subline", "label": "Title sub-line (sans)", "default": "Zenn Space" },
+    { "type": "text", "id": "hero_title_2", "label": "Title (line 2)", "default": "MADE TO BREATHE." },
+    { "type": "richtext", "id": "hero_copy", "label": "Intro copy", "default": "<p>Hand-tied bouquets, seasonal stems and easy-care plants — chosen to bring a little calm into every room.</p>" },
     { "type": "text", "id": "hero_primary_label", "label": "Primary button label", "default": "Shop the Collection" },
     { "type": "url", "id": "hero_primary_link", "label": "Primary button link" },
-    { "type": "text", "id": "hero_secondary_label", "label": "Secondary button label", "default": "Our Movement" },
+    { "type": "text", "id": "hero_secondary_label", "label": "Secondary button label", "default": "Our Story" },
     { "type": "url", "id": "hero_secondary_link", "label": "Secondary button link" },
-    { "type": "text", "id": "hero_meta_line", "label": "Meta line", "default": "Signature pieces / limited launch edit / luxury streetwear" },
+    { "type": "text", "id": "hero_meta_line", "label": "Meta line", "default": "Fresh bouquets / seasonal stems / easy-care plants" },
     { "type": "image_picker", "id": "hero_image_1", "label": "Hero image 1 (large)" },
-    { "type": "text", "id": "hero_card1_kicker", "label": "Card 1 kicker", "default": "Campaign edit" },
-    { "type": "text", "id": "hero_card1_title", "label": "Card 1 title", "default": "Reclaimed power, cut for the street." },
-    { "type": "textarea", "id": "hero_card1_copy", "label": "Card 1 copy", "default": "Hero frame for your seasonal drop or signature feature once live assets are ready." },
+    { "type": "text", "id": "hero_card1_kicker", "label": "Card 1 kicker", "default": "Seasonal edit" },
+    { "type": "text", "id": "hero_card1_title", "label": "Card 1 title", "default": "Blooms picked at their peak." },
+    { "type": "textarea", "id": "hero_card1_copy", "label": "Card 1 copy", "default": "A fresh seasonal selection, gathered and arranged by hand." },
     { "type": "image_picker", "id": "hero_image_2", "label": "Hero image 2" },
-    { "type": "text", "id": "hero_card2_kicker", "label": "Card 2 kicker", "default": "Monogram / TK" },
-    { "type": "text", "id": "hero_card2_title", "label": "Card 2 title", "default": "Identity rebuilt." },
+    { "type": "text", "id": "hero_card2_kicker", "label": "Card 2 kicker", "default": "Signature / Zenn" },
+    { "type": "text", "id": "hero_card2_title", "label": "Card 2 title", "default": "Calm, arranged." },
     { "type": "image_picker", "id": "hero_image_3", "label": "Hero image 3" },
-    { "type": "text", "id": "hero_card3_kicker", "label": "Card 3 kicker", "default": "Launch mood" },
-    { "type": "text", "id": "hero_card3_title", "label": "Card 3 title", "default": "Luxury, but never fragile." },
+    { "type": "text", "id": "hero_card3_kicker", "label": "Card 3 kicker", "default": "In season" },
+    { "type": "text", "id": "hero_card3_title", "label": "Card 3 title", "default": "Gentle, but always fresh." },
 
     { "type": "header", "content": "Product grid overview" },
     { "type": "text", "id": "catalog_kicker", "label": "Kicker", "default": "Collection Overview" },
-    { "type": "text", "id": "catalog_title", "label": "Title (defaults to collection title)", "default": "SHOP THE MOVEMENT" },
-    { "type": "richtext", "id": "catalog_subtext", "label": "Subtext", "default": "<p>Structured like a premium retail collection page: editorial banner first, then filters and a strong product grid.</p>" },
+    { "type": "text", "id": "catalog_title", "label": "Title (defaults to collection title)", "default": "SHOP THE COLLECTION" },
+    { "type": "richtext", "id": "catalog_subtext", "label": "Subtext", "default": "<p>Browse the full range of fresh bouquets, stems and plants — filter by what suits your space.</p>" },
 
     { "type": "header", "content": "Product grid layout" },
     { "type": "select", "id": "layout_type", "label": "Layout", "options": [ { "value": "grid", "label": "Grid" }, { "value": "organic", "label": "Editorial" } ], "default": "grid" },
@@ -304,36 +304,36 @@
     { "type": "color_scheme", "id": "color_scheme", "label": "Grid color scheme", "default": "scheme-1" },
 
     { "type": "header", "content": "Movement / editorial" },
-    { "type": "text", "id": "editorial_kicker", "label": "Kicker", "default": "Editorial Story Panel" },
-    { "type": "text", "id": "editorial_title", "label": "Title", "default": "Luxury retail structure, brand-story soul." },
-    { "type": "textarea", "id": "editorial_copy", "label": "Copy", "default": "This block translates the founder-led landing page into a commerce section without losing identity." },
+    { "type": "text", "id": "editorial_kicker", "label": "Kicker", "default": "Our Story" },
+    { "type": "text", "id": "editorial_title", "label": "Title", "default": "A calmer home makes a calmer mind." },
+    { "type": "textarea", "id": "editorial_copy", "label": "Copy", "default": "Every arrangement is made with care, using fresh seasonal stems and plants chosen to help your space breathe." },
     { "type": "image_picker", "id": "editorial_image", "label": "Editorial image" },
     { "type": "text", "id": "look1_kicker", "label": "Look 1 kicker", "default": "Look 01" },
-    { "type": "text", "id": "look1_title", "label": "Look 1 title", "default": "Silence. Texture. Weight." },
-    { "type": "textarea", "id": "look1_copy", "label": "Look 1 copy", "default": "Use the upper card for a styling story or material highlight tied to the collection." },
+    { "type": "text", "id": "look1_title", "label": "Look 1 title", "default": "Fresh. Seasonal. Simple." },
+    { "type": "textarea", "id": "look1_copy", "label": "Look 1 copy", "default": "Seasonal stems, gathered and arranged to feel effortless at home." },
     { "type": "image_picker", "id": "look1_image", "label": "Look 1 image" },
     { "type": "text", "id": "look2_kicker", "label": "Look 2 kicker", "default": "Look 02" },
-    { "type": "text", "id": "look2_title", "label": "Look 2 title", "default": "Not trend. Testament." },
-    { "type": "textarea", "id": "look2_copy", "label": "Look 2 copy", "default": "This lower card works as a campaign insert or member-exclusive offer slot." },
+    { "type": "text", "id": "look2_title", "label": "Look 2 title", "default": "Grown to last." },
+    { "type": "textarea", "id": "look2_copy", "label": "Look 2 copy", "default": "Easy-care plants and lasting arrangements for everyday calm." },
     { "type": "image_picker", "id": "look2_image", "label": "Look 2 image" },
 
     { "type": "header", "content": "Category pivot" },
-    { "type": "text", "id": "cat_kicker", "label": "Kicker", "default": "Category Pivot" },
-    { "type": "text", "id": "cat_title", "label": "Title", "default": "SHOP BY ENERGY" },
-    { "type": "richtext", "id": "cat_subtext", "label": "Subtext", "default": "<p>These category blocks reuse the same soft gradients and glass labels from the landing page.</p>" },
+    { "type": "text", "id": "cat_kicker", "label": "Kicker", "default": "Browse" },
+    { "type": "text", "id": "cat_title", "label": "Title", "default": "SHOP BY MOOD" },
+    { "type": "richtext", "id": "cat_subtext", "label": "Subtext", "default": "<p>Find the right piece for your space — fresh bouquets, gifts and green living.</p>" },
     { "type": "collection_list", "id": "category_collections", "label": "Category collections", "limit": 8 },
 
     { "type": "header", "content": "Journal" },
-    { "type": "text", "id": "journal_kicker", "label": "Kicker", "default": "Journal Integration" },
-    { "type": "text", "id": "journal_title", "label": "Title", "default": "KEEP STORY INSIDE THE SHOP" },
-    { "type": "richtext", "id": "journal_copy", "label": "Subtext", "default": "<p>A matching content layer for editorial commerce: founder notes, recovery stories, transformation essays.</p>" },
+    { "type": "text", "id": "journal_kicker", "label": "Kicker", "default": "The Zenn Journal" },
+    { "type": "text", "id": "journal_title", "label": "Title", "default": "NOTES ON CALM LIVING" },
+    { "type": "richtext", "id": "journal_copy", "label": "Subtext", "default": "<p>Simple guides to flower care, seasonal stems and making room to breathe at home.</p>" },
     { "type": "blog", "id": "journal_blog", "label": "Blog (pulls real articles)" },
     { "type": "range", "id": "journal_limit", "label": "Articles to show", "min": 1, "max": 6, "step": 1, "default": 3 },
 
     { "type": "header", "content": "CTA band" },
     { "type": "text", "id": "cta_kicker", "label": "Kicker", "default": "Next Step" },
-    { "type": "text", "id": "cta_title", "label": "Title", "default": "OPEN THE PDP EXPERIENCE." },
-    { "type": "richtext", "id": "cta_copy", "label": "Copy", "default": "<p>Use the linked product page to keep the same premium system while moving into gallery, storytelling, and purchase conversion.</p>" },
+    { "type": "text", "id": "cta_title", "label": "Title", "default": "MAKE ROOM TO BREATHE." },
+    { "type": "richtext", "id": "cta_copy", "label": "Copy", "default": "<p>Choose your stems or plant and we'll arrange the rest — fresh, calm and ready for your space.</p>" },
     { "type": "text", "id": "cta_label", "label": "Button label", "default": "Shop the Collection" },
     { "type": "url", "id": "cta_link", "label": "Button link" }
   ]
