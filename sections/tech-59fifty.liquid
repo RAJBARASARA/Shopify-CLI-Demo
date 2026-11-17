@@ -83,9 +83,16 @@
     #tf-{{ uid }} .tf-grid { grid-template-columns: repeat(2, 1fr); }
     #tf-{{ uid }} .tf-card--wide { grid-column: span 2; aspect-ratio: 16 / 9; }
   }
+  /* Mobile — matches Figma "Mobile / PDP" section/tech (node 1:4219, 375px) */
   @media (max-width: 600px) {
-    #tf-{{ uid }} .tf-grid { grid-template-columns: 1fr; }
+    #tf-{{ uid }} { padding-top: 20px; padding-bottom: 20px; }
+    #tf-{{ uid }} .tf-wrap { padding: 0 20px; }
+    #tf-{{ uid }} .tf-grid { grid-template-columns: 1fr; gap: 15px; }
     #tf-{{ uid }} .tf-card, #tf-{{ uid }} .tf-card--wide { grid-column: auto; aspect-ratio: 1 / 1; }
+    #tf-{{ uid }} .tf-heading { font-size: 24px; margin-bottom: 15px; }
+    #tf-{{ uid }} .tf-card-body { left: 10px; right: 10px; bottom: 10px; }
+    #tf-{{ uid }} .tf-card-title { font-size: 20px; }
+    #tf-{{ uid }} .tf-card-desc { font-size: 14px; line-height: 21px; margin-top: 4px; }
   }
 {%- endstyle -%}
 
@@ -185,11 +192,11 @@
     {
       "name": "59FIFTY",
       "blocks": [
-        { "type": "card", "settings": { "wide": true,  "title": "TRUE FITTED",    "description": "CLOSED BACK STYLE AVAILABLE IN TRUE FITTING SIZE", "desktop_image_default": "fifty-true-fitted.png", "mobile_image_default": "fifty-true-fitted.png" } },
-        { "type": "card", "settings": { "wide": false, "title": "STRUCTURED CAP",  "description": "FRONT PANEL STRUCTURE FOR STABILITY AND CLASSIC CAP SHAPE", "desktop_image_default": "fifty-structured-cap.png", "mobile_image_default": "fifty-structured-cap.png" } },
-        { "type": "card", "settings": { "wide": false, "title": "FLAT VISOR",      "description": "DESIGNED TO BE FLAT, BUT CAN CURVE AS DESIRED", "desktop_image_default": "fifty-flat-visor.png", "mobile_image_default": "fifty-flat-visor.png" } },
-        { "type": "card", "settings": { "wide": false, "title": "FULL CROWN",      "description": "TALL AND BROAD PROFILE OF THE ORIGINAL FITTED CAP", "desktop_image_default": "fifty-full-crown.png", "mobile_image_default": "fifty-full-crown.png" } },
-        { "type": "card", "settings": { "wide": false, "title": "ELITE MATERIAL",  "description": "THE FABRIC WORN BY THE PROS FEATURING ENGINEERED PERFORMANCE MATERIAL", "desktop_image_default": "fifty-elite-material.png", "mobile_image_default": "fifty-elite-material.png" } }
+        { "type": "card", "settings": { "wide": true,  "title": "TRUE FITTED",    "description": "CLOSED BACK STYLE AVAILABLE IN TRUE FITTING SIZE", "desktop_image_default": "fifty-true-fitted.png", "mobile_image_default": "fifty-true-fitted-m.png" } },
+        { "type": "card", "settings": { "wide": false, "title": "STRUCTURED CAP",  "description": "FRONT PANEL STRUCTURE FOR STABILITY AND CLASSIC CAP SHAPE", "desktop_image_default": "fifty-structured-cap.png", "mobile_image_default": "fifty-structured-cap-m.png" } },
+        { "type": "card", "settings": { "wide": false, "title": "FLAT VISOR",      "description": "DESIGNED TO BE FLAT, BUT CAN CURVE AS DESIRED", "desktop_image_default": "fifty-flat-visor.png", "mobile_image_default": "fifty-flat-visor-m.png" } },
+        { "type": "card", "settings": { "wide": false, "title": "FULL CROWN",      "description": "TALL AND BROAD PROFILE OF THE ORIGINAL FITTED CAP", "desktop_image_default": "fifty-full-crown.png", "mobile_image_default": "fifty-full-crown-m.png" } },
+        { "type": "card", "settings": { "wide": false, "title": "ELITE MATERIAL",  "description": "THE FABRIC WORN BY THE PROS FEATURING ENGINEERED PERFORMANCE MATERIAL", "desktop_image_default": "fifty-elite-material.png", "mobile_image_default": "fifty-elite-material-m.png" } }
       ]
     }
   ]
