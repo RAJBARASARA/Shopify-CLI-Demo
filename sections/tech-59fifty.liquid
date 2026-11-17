@@ -13,17 +13,28 @@
 -%}
 
 {%- style -%}
+  @font-face {
+    font-family: 'TradeGothicCond';
+    src: url({{ 'trade-gothic-bold-cond.woff2' | asset_url }}) format('woff2');
+    font-weight: 700; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'TradeGothicReg';
+    src: url({{ 'trade-gothic.woff2' | asset_url }}) format('woff2');
+    font-weight: 300 500; font-style: normal; font-display: swap;
+  }
   #tf-{{ uid }} {
     background: {{ s.section_bg_color }};
     padding-top: {{ s.padding_top }}px;
     padding-bottom: {{ s.padding_bottom }}px;
-    --tf-font: 'Trade Gothic LT Std', 'Oswald', 'Arial Narrow', Helvetica, Arial, sans-serif;
+    --tf-head: 'TradeGothicCond', 'Oswald', 'Arial Narrow', Helvetica, Arial, sans-serif;
+    --tf-body: 'TradeGothicReg', 'Trade Gothic LT Std', Helvetica, Arial, sans-serif;
   }
   #tf-{{ uid }} .tf-wrap { max-width: {{ s.content_width }}px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; }
   #tf-{{ uid }} .tf-heading {
     display: inline-block;
     margin: 0 0 24px;
-    font-family: var(--tf-font);
+    font-family: var(--tf-head);
     font-size: {{ s.heading_size }}px;
     font-weight: {{ s.font_weight }};
     line-height: {{ s.line_height }};
@@ -60,11 +71,11 @@
   }
   #tf-{{ uid }} .tf-card-body { position: absolute; left: 20px; right: 20px; bottom: 24px; z-index: 1; }
   #tf-{{ uid }} .tf-card-title {
-    margin: 0; font-family: var(--tf-font); font-weight: 700; font-size: 24px;
+    margin: 0; font-family: var(--tf-head); font-weight: 700; font-size: 24px;
     line-height: 1.1; color: {{ s.text_color }}; text-transform: uppercase; word-break: break-word;
   }
   #tf-{{ uid }} .tf-card-desc {
-    margin: 6px 0 0; font-family: var(--tf-font); font-weight: 300; font-size: 16px;
+    margin: 6px 0 0; font-family: var(--tf-body); font-weight: 400; font-size: 16px;
     line-height: 1.45; color: {{ s.text_color }}; text-transform: uppercase; word-break: break-word;
   }
 
