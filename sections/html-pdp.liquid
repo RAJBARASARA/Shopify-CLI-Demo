@@ -1,5 +1,5 @@
 {%- comment -%}
-  html-pdp — Threads of Kaos light-luxury product page.
+  html-pdp — Zenn Space fresh flowers & green living product page.
   Faithful editorial layout with a REAL buy box built from Horizon native
   theme blocks (media gallery, variant picker, buy buttons w/ quantity +
   add-to-cart + accelerated checkout, accordion) placed statically.
@@ -71,7 +71,7 @@
 
           <div class="purchase-box">
             <div class="stock">
-              {%- if product.available -%}{{ s.in_stock_text | default: 'In stock / Ready to ship' }}{%- else -%}{{ s.out_stock_text | default: 'Currently unavailable' }}{%- endif -%}
+              {%- if product.available -%}{{ s.in_stock_text | default: 'In stock / Freshly arranged' }}{%- else -%}{{ s.out_stock_text | default: 'Currently unavailable' }}{%- endif -%}
             </div>
             {% content_for 'block', type: 'buy-buttons', id: 'buy-buttons', closest.product: product %}
           </div>
@@ -142,7 +142,7 @@
       </section>
     {%- endif -%}
 
-    {%- comment -%} ---------- COMPLETE THE LOOK (product pickers) ---------- {%- endcomment -%}
+    {%- comment -%} ---------- COMPLETE THE SET (product pickers) ---------- {%- endcomment -%}
     {%- if s.look_1_product != blank or s.look_2_product != blank or s.look_3_product != blank -%}
       <section class="band reveal" id="look">
         <div class="band-shell">
@@ -254,7 +254,7 @@
       <strong>{{ product.title }}</strong>
       <span>{{ variant.price | money }}</span>
     </div>
-    <a class="htmlp-btn htmlp-btn--primary" href="#htmlp-buybox-{{ section.id }}">{{ s.sticky_label | default: 'Add to Bag' }}</a>
+    <a class="htmlp-btn htmlp-btn--primary" href="#htmlp-buybox-{{ section.id }}">{{ s.sticky_label | default: 'Add to Cart' }}</a>
   </div>
 </div>
 
@@ -297,28 +297,28 @@
   "settings": [
     { "type": "header", "content": "Buy box" },
     { "type": "text", "id": "breadcrumb_home", "label": "Breadcrumb home label", "default": "Home" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Product Detail Page / Light Luxury" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Fresh Flowers & Green Living" },
     { "type": "text", "id": "product_subtitle", "label": "Subtitle (defaults to product description)" },
     { "type": "text", "id": "sale_badge", "label": "Sale badge text", "default": "On Sale" },
-    { "type": "text", "id": "limited_badge", "label": "Extra badge text", "default": "Limited Drop" },
-    { "type": "text", "id": "in_stock_text", "label": "In-stock text", "default": "In stock / Ready to ship" },
+    { "type": "text", "id": "limited_badge", "label": "Extra badge text", "default": "Seasonal" },
+    { "type": "text", "id": "in_stock_text", "label": "In-stock text", "default": "In stock / Freshly arranged" },
     { "type": "text", "id": "out_stock_text", "label": "Out-of-stock text", "default": "Currently unavailable" },
 
     { "type": "header", "content": "Meta cards" },
-    { "type": "text", "id": "meta_1_title", "label": "Meta 1 title", "default": "Fabric" },
-    { "type": "textarea", "id": "meta_1_copy", "label": "Meta 1 copy", "default": "Heavyweight brushed cotton blend with premium hand feel." },
-    { "type": "text", "id": "meta_2_title", "label": "Meta 2 title", "default": "Fit" },
-    { "type": "textarea", "id": "meta_2_copy", "label": "Meta 2 copy", "default": "Relaxed oversized silhouette with sculpted shoulder drop." },
-    { "type": "text", "id": "meta_3_title", "label": "Meta 3 title", "default": "Feeling" },
-    { "type": "textarea", "id": "meta_3_copy", "label": "Meta 3 copy", "default": "Built for resilience, warmth, structure, and everyday impact." },
+    { "type": "text", "id": "meta_1_title", "label": "Meta 1 title", "default": "Freshness" },
+    { "type": "textarea", "id": "meta_1_copy", "label": "Meta 1 copy", "default": "Hand-selected seasonal stems, arranged fresh to order." },
+    { "type": "text", "id": "meta_2_title", "label": "Meta 2 title", "default": "Care" },
+    { "type": "textarea", "id": "meta_2_copy", "label": "Meta 2 copy", "default": "Trim the stems, change the water every few days, keep out of direct sun." },
+    { "type": "text", "id": "meta_3_title", "label": "Meta 3 title", "default": "Mood" },
+    { "type": "textarea", "id": "meta_3_copy", "label": "Meta 3 copy", "default": "Calm, natural and quietly beautiful — made to help a room breathe." },
 
     { "type": "header", "content": "Trust row" },
     { "type": "text", "id": "trust_1_title", "label": "Trust 1 title", "default": "Fast Delivery" },
-    { "type": "textarea", "id": "trust_1_copy", "label": "Trust 1 copy", "default": "2–5 business days with premium tracked shipping." },
-    { "type": "text", "id": "trust_2_title", "label": "Trust 2 title", "default": "Easy Returns" },
-    { "type": "textarea", "id": "trust_2_copy", "label": "Trust 2 copy", "default": "14-day returns for unworn pieces with tags attached." },
-    { "type": "text", "id": "trust_3_title", "label": "Trust 3 title", "default": "Drop Access" },
-    { "type": "textarea", "id": "trust_3_copy", "label": "Trust 3 copy", "default": "Members get early access to limited releases and restocks." },
+    { "type": "textarea", "id": "trust_1_copy", "label": "Trust 1 copy", "default": "Carefully packed and delivered fresh with tracked shipping." },
+    { "type": "text", "id": "trust_2_title", "label": "Trust 2 title", "default": "Freshness Promise" },
+    { "type": "textarea", "id": "trust_2_copy", "label": "Trust 2 copy", "default": "Fresh on arrival or we'll make it right." },
+    { "type": "text", "id": "trust_3_title", "label": "Trust 3 title", "default": "Made With Care" },
+    { "type": "textarea", "id": "trust_3_copy", "label": "Trust 3 copy", "default": "Every arrangement is hand-tied by our florists." },
 
     { "type": "header", "content": "Rating (static)" },
     { "type": "text", "id": "reviews_score", "label": "Score", "default": "4.9" },
@@ -326,28 +326,28 @@
     { "type": "text", "id": "reviews_tag", "label": "Tag", "default": "Best Seller" },
 
     { "type": "header", "content": "Reviews band" },
-    { "type": "text", "id": "reviews_kicker", "label": "Kicker", "default": "Social Proof" },
-    { "type": "text", "id": "reviews_title", "label": "Title", "default": "BUILT TO CONVERT. BACKED BY TRUST." },
-    { "type": "richtext", "id": "reviews_subtext", "label": "Subtext", "default": "<p>A strong PDP stacks reassurance: ratings, fit feedback, and proof the product delivers.</p>" },
-    { "type": "textarea", "id": "reviews_score_copy", "label": "Score copy", "default": "128 reviews / 92% say it fits true to the oversized silhouette / 88% say fabric feels more premium than expected." },
+    { "type": "text", "id": "reviews_kicker", "label": "Kicker", "default": "Loved by customers" },
+    { "type": "text", "id": "reviews_title", "label": "Title", "default": "FRESH, EVERY TIME." },
+    { "type": "richtext", "id": "reviews_subtext", "label": "Subtext", "default": "<p>What our customers say about their flowers and plants from Zenn Space.</p>" },
+    { "type": "textarea", "id": "reviews_score_copy", "label": "Score copy", "default": "128 reviews / 95% say the flowers arrived fresh / 90% would order again." },
     { "type": "text", "id": "review_1_author", "label": "Review 1 author", "default": "Verified buyer / Jordan K." },
-    { "type": "textarea", "id": "review_1_body", "label": "Review 1 body", "default": "This feels like therapy turned into luxury. Heavy, structured, and actually premium. The fit alone sells the piece." },
+    { "type": "textarea", "id": "review_1_body", "label": "Review 1 body", "default": "Arrived beautifully fresh and lasted well over a week. The arrangement was even prettier than the photo." },
     { "type": "text", "id": "review_2_author", "label": "Review 2 author", "default": "Verified buyer / Maya R." },
-    { "type": "textarea", "id": "review_2_body", "label": "Review 2 body", "default": "Exactly the type of product page that makes it easy to buy — I understood the fit, quality, and vibe in seconds." },
+    { "type": "textarea", "id": "review_2_body", "label": "Review 2 body", "default": "So easy to order and it brightened the whole room. Will absolutely order again." },
     { "type": "text", "id": "review_3_author", "label": "Review 3 author", "default": "Verified buyer / Andre S." },
-    { "type": "textarea", "id": "review_3_body", "label": "Review 3 body", "default": "Luxury streetwear energy without visual clutter. Clean, light, strong, and the hoodie feels like a signature product." },
+    { "type": "textarea", "id": "review_3_body", "label": "Review 3 body", "default": "Gorgeous stems, calm colours and delivered right on time. Exactly what I hoped for." },
 
     { "type": "header", "content": "Story band" },
-    { "type": "text", "id": "story_kicker", "label": "Kicker", "default": "Brand Story Layer" },
-    { "type": "text", "id": "story_title", "label": "Title", "default": "NOT JUST A PRODUCT. A SYMBOL." },
-    { "type": "richtext", "id": "story_subtext", "label": "Subtext", "default": "<p>High-conviction fashion PDPs reinforce meaning, identity, and why the piece matters.</p>" },
-    { "type": "richtext", "id": "story_copy", "label": "Body", "default": "<p>The product page should feel like a continuation of the landing page — same warm palette, sculpted spacing, and emotional tone, shifted into a commercial structure.</p><p>This is where you deepen desire: why the piece exists and why someone should see themselves in it.</p>" },
+    { "type": "text", "id": "story_kicker", "label": "Kicker", "default": "Our Story" },
+    { "type": "text", "id": "story_title", "label": "Title", "default": "MADE TO HELP YOU BREATHE." },
+    { "type": "richtext", "id": "story_subtext", "label": "Subtext", "default": "<p>A little calm, grown and gathered — then arranged by hand for your space.</p>" },
+    { "type": "richtext", "id": "story_copy", "label": "Body", "default": "<p>Every bouquet and plant at Zenn Space is chosen for the calm it brings — fresh seasonal stems, gentle colours and easy care.</p><p>We keep it simple: beautiful flowers, made with care, delivered to help your home feel a little more peaceful.</p>" },
     { "type": "image_picker", "id": "story_image", "label": "Story image" },
 
     { "type": "header", "content": "Complete the look" },
-    { "type": "text", "id": "look_kicker", "label": "Kicker", "default": "AOV Growth" },
-    { "type": "text", "id": "look_title", "label": "Title", "default": "COMPLETE THE LOOK" },
-    { "type": "richtext", "id": "look_subtext", "label": "Subtext", "default": "<p>Cross-sell blocks work best when they feel editorial, not promotional.</p>" },
+    { "type": "text", "id": "look_kicker", "label": "Kicker", "default": "Pairs well with" },
+    { "type": "text", "id": "look_title", "label": "Title", "default": "COMPLETE THE SET" },
+    { "type": "richtext", "id": "look_subtext", "label": "Subtext", "default": "<p>Pair your stems with a plant or a second arrangement for the home.</p>" },
     { "type": "product", "id": "look_1_product", "label": "Product 1" },
     { "type": "text", "id": "look_1_label", "label": "Product 1 label", "default": "Pairing 01" },
     { "type": "product", "id": "look_2_product", "label": "Product 2" },
@@ -356,41 +356,41 @@
     { "type": "text", "id": "look_3_label", "label": "Product 3 label", "default": "Pairing 03" },
 
     { "type": "header", "content": "Community (UGC)" },
-    { "type": "text", "id": "ugc_kicker", "label": "Kicker", "default": "Community Proof" },
-    { "type": "text", "id": "ugc_title", "label": "Title", "default": "WORN WITH PURPOSE" },
-    { "type": "richtext", "id": "ugc_subtext", "label": "Subtext", "default": "<p>Styled customer imagery reduces hesitation and shows the piece in real-world context.</p>" },
+    { "type": "text", "id": "ugc_kicker", "label": "Kicker", "default": "From our customers" },
+    { "type": "text", "id": "ugc_title", "label": "Title", "default": "AT HOME WITH ZENN" },
+    { "type": "richtext", "id": "ugc_subtext", "label": "Subtext", "default": "<p>See how our flowers and plants look in real homes.</p>" },
     { "type": "image_picker", "id": "ugc_1_image", "label": "UGC 1 image" },
-    { "type": "text", "id": "ugc_1_label", "label": "UGC 1 label", "default": "Community frame" },
-    { "type": "text", "id": "ugc_1_title", "label": "UGC 1 title", "default": "Recovery looks good on you." },
-    { "type": "textarea", "id": "ugc_1_copy", "label": "UGC 1 copy", "default": "Use for customer styling photos or on-body fit references." },
+    { "type": "text", "id": "ugc_1_label", "label": "UGC 1 label", "default": "In the home" },
+    { "type": "text", "id": "ugc_1_title", "label": "UGC 1 title", "default": "Calm in every corner." },
+    { "type": "textarea", "id": "ugc_1_copy", "label": "UGC 1 copy", "default": "Customer photos of their Zenn Space flowers at home." },
     { "type": "image_picker", "id": "ugc_2_image", "label": "UGC 2 image" },
-    { "type": "text", "id": "ugc_2_label", "label": "UGC 2 label", "default": "Fabric focus" },
-    { "type": "text", "id": "ugc_2_title", "label": "UGC 2 title", "default": "Detail that sells." },
-    { "type": "textarea", "id": "ugc_2_copy", "label": "UGC 2 copy", "default": "Closeups of stitching, cuffs, lining, weight, and branding justify premium pricing." },
+    { "type": "text", "id": "ugc_2_label", "label": "UGC 2 label", "default": "Up close" },
+    { "type": "text", "id": "ugc_2_title", "label": "UGC 2 title", "default": "Fresh in the detail." },
+    { "type": "textarea", "id": "ugc_2_copy", "label": "UGC 2 copy", "default": "Close-ups of petals, stems and texture." },
     { "type": "image_picker", "id": "ugc_3_image", "label": "UGC 3 image" },
-    { "type": "text", "id": "ugc_3_label", "label": "UGC 3 label", "default": "Fit context" },
-    { "type": "text", "id": "ugc_3_title", "label": "UGC 3 title", "default": "See the silhouette move." },
-    { "type": "textarea", "id": "ugc_3_copy", "label": "UGC 3 copy", "default": "Perfect place for lifestyle imagery or short product motion clips once assets exist." },
+    { "type": "text", "id": "ugc_3_label", "label": "UGC 3 label", "default": "Styled" },
+    { "type": "text", "id": "ugc_3_title", "label": "UGC 3 title", "default": "Made for your space." },
+    { "type": "textarea", "id": "ugc_3_copy", "label": "UGC 3 copy", "default": "Lifestyle shots of arrangements and plants in real rooms." },
 
     { "type": "header", "content": "FAQ" },
     { "type": "text", "id": "faq_kicker", "label": "Kicker", "default": "FAQ" },
-    { "type": "text", "id": "faq_title", "label": "Title", "default": "REMOVE THE LAST OBJECTION" },
-    { "type": "richtext", "id": "faq_subtext", "label": "Subtext", "default": "<p>Answer the real blockers: fit, shrinkage, care, shipping speed, premium justification.</p>" },
-    { "type": "text", "id": "faq_1_question", "label": "FAQ 1 question", "default": "Will it shrink" },
-    { "type": "richtext", "id": "faq_1_answer", "label": "FAQ 1 answer", "default": "<p>Wash cold and air-dry; expect slight settling after the first wash.</p>" },
-    { "type": "text", "id": "faq_2_question", "label": "FAQ 2 question", "default": "How does it fit" },
-    { "type": "richtext", "id": "faq_2_answer", "label": "FAQ 2 answer", "default": "<p>Intentionally oversized — size down for a closer silhouette.</p>" },
-    { "type": "text", "id": "faq_3_question", "label": "FAQ 3 question", "default": "Why premium price" },
-    { "type": "richtext", "id": "faq_3_answer", "label": "FAQ 3 answer", "default": "<p>Material weight, finishing, design philosophy, and limited-drop positioning.</p>" },
+    { "type": "text", "id": "faq_title", "label": "Title", "default": "GOOD TO KNOW" },
+    { "type": "richtext", "id": "faq_subtext", "label": "Subtext", "default": "<p>Answers on freshness, care and delivery.</p>" },
+    { "type": "text", "id": "faq_1_question", "label": "FAQ 1 question", "default": "How long will they last" },
+    { "type": "richtext", "id": "faq_1_answer", "label": "FAQ 1 answer", "default": "<p>With fresh water and trimmed stems, most arrangements stay beautiful for 5–7 days.</p>" },
+    { "type": "text", "id": "faq_2_question", "label": "FAQ 2 question", "default": "How do I care for them" },
+    { "type": "richtext", "id": "faq_2_answer", "label": "FAQ 2 answer", "default": "<p>Trim the stems, change the water every couple of days, and keep out of direct sunlight.</p>" },
+    { "type": "text", "id": "faq_3_question", "label": "FAQ 3 question", "default": "When will it be delivered" },
+    { "type": "richtext", "id": "faq_3_answer", "label": "FAQ 3 answer", "default": "<p>We arrange to order and ship fresh — choose your delivery date at checkout.</p>" },
 
     { "type": "header", "content": "Final CTA" },
-    { "type": "text", "id": "final_kicker", "label": "Kicker", "default": "Final CTA" },
-    { "type": "text", "id": "final_title", "label": "Title", "default": "NOT SAVED. SELF MADE." },
-    { "type": "richtext", "id": "final_copy", "label": "Copy", "default": "<p>Same design language as your landing page, restructured for stronger product conversion.</p>" },
-    { "type": "text", "id": "final_cta_label", "label": "Button label", "default": "Shop This Piece" },
+    { "type": "text", "id": "final_kicker", "label": "Kicker", "default": "Bring it home" },
+    { "type": "text", "id": "final_title", "label": "Title", "default": "MAKE ROOM TO BREATHE." },
+    { "type": "richtext", "id": "final_copy", "label": "Copy", "default": "<p>Fresh flowers and easy-care plants, arranged with care and delivered to your door.</p>" },
+    { "type": "text", "id": "final_cta_label", "label": "Button label", "default": "Add to Cart" },
 
     { "type": "header", "content": "Sticky bar" },
-    { "type": "text", "id": "sticky_label", "label": "Sticky button label", "default": "Add to Bag" }
+    { "type": "text", "id": "sticky_label", "label": "Sticky button label", "default": "Add to Cart" }
   ]
 }
 {% endschema %}
