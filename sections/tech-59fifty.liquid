@@ -1,0 +1,186 @@
+{%- comment -%}
+  tech-59fifty — pixel-accurate build of the Figma "section/tech" (59FIFTY) from the
+  Desktop PDP (node 1:2127) and Mobile PDP (node 1011:703). Heading + a grid of image
+  cards (first card spans 2 columns), each with a title/description over a dark gradient.
+  Desktop: 3-col grid, card 1 spans 2. Tablet: 2-col. Mobile: single column.
+{%- endcomment -%}
+
+{%- liquid
+  assign s = section.settings
+  assign uid = section.id | replace: '_', '' | downcase
+  assign head_alpha = s.text_bg_opacity | divided_by: 100.0
+  assign head_bg = s.text_bg_color | color_modify: 'alpha', head_alpha
+-%}
+
+{%- style -%}
+  #tf-{{ uid }} {
+    background: {{ s.section_bg_color }};
+    padding-top: {{ s.padding_top }}px;
+    padding-bottom: {{ s.padding_bottom }}px;
+    --tf-font: 'Trade Gothic LT Std', 'Oswald', 'Arial Narrow', Helvetica, Arial, sans-serif;
+  }
+  #tf-{{ uid }} .tf-wrap { max-width: {{ s.content_width }}px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; }
+  #tf-{{ uid }} .tf-heading {
+    display: inline-block;
+    margin: 0 0 24px;
+    font-family: var(--tf-font);
+    font-size: {{ s.heading_size }}px;
+    font-weight: {{ s.font_weight }};
+    line-height: {{ s.line_height }};
+    letter-spacing: {{ s.letter_spacing }}px;
+    color: {{ s.text_color }};
+    text-transform: uppercase;
+    background: {{ head_bg }};
+    padding: {{ s.text_padding }}px;
+    border-radius: {{ s.text_border_radius }}px;
+    word-break: break-word;
+  }
+  #tf-{{ uid }} .tf-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  #tf-{{ uid }} .tf-card {
+    position: relative;
+    aspect-ratio: 363 / 564;
+    border-radius: 10px;
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
+  }
+  #tf-{{ uid }} .tf-card--wide { grid-column: span 2; aspect-ratio: auto; }
+  #tf-{{ uid }} .tf-card picture, #tf-{{ uid }} .tf-card img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+  }
+  #tf-{{ uid }} .tf-card img { object-fit: cover; }
+  #tf-{{ uid }} .tf-card::after {
+    content: ""; position: absolute; inset: 0; border-radius: 10px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 45%, rgba(0,0,0,0.5) 100%);
+    pointer-events: none;
+  }
+  #tf-{{ uid }} .tf-card-body { position: absolute; left: 20px; right: 20px; bottom: 24px; z-index: 1; }
+  #tf-{{ uid }} .tf-card-title {
+    margin: 0; font-family: var(--tf-font); font-weight: 700; font-size: 24px;
+    line-height: 1.1; color: {{ s.text_color }}; text-transform: uppercase; word-break: break-word;
+  }
+  #tf-{{ uid }} .tf-card-desc {
+    margin: 6px 0 0; font-family: var(--tf-font); font-weight: 300; font-size: 16px;
+    line-height: 1.45; color: {{ s.text_color }}; text-transform: uppercase; word-break: break-word;
+  }
+
+  @media (max-width: 989px) {
+    #tf-{{ uid }} .tf-grid { grid-template-columns: repeat(2, 1fr); }
+    #tf-{{ uid }} .tf-card--wide { grid-column: span 2; aspect-ratio: 16 / 9; }
+  }
+  @media (max-width: 600px) {
+    #tf-{{ uid }} .tf-grid { grid-template-columns: 1fr; }
+    #tf-{{ uid }} .tf-card, #tf-{{ uid }} .tf-card--wide { grid-column: auto; aspect-ratio: 1 / 1; }
+  }
+{%- endstyle -%}
+
+<section id="tf-{{ uid }}" class="tf-section">
+  <div class="tf-wrap">
+    {%- if s.heading != blank -%}
+      <h2 class="tf-heading">{{ s.heading }}</h2>
+    {%- endif -%}
+
+    <div class="tf-grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign dsk = ''
+          if block.settings.desktop_image != blank
+            assign dsk = block.settings.desktop_image | image_url: width: 1000
+          elsif block.settings.desktop_image_default != blank
+            assign dsk = block.settings.desktop_image_default | asset_url
+          endif
+          assign mob = ''
+          if block.settings.mobile_image != blank
+            assign mob = block.settings.mobile_image | image_url: width: 800
+          elsif block.settings.mobile_image_default != blank
+            assign mob = block.settings.mobile_image_default | asset_url
+          endif
+          assign wide_class = ''
+          if block.settings.wide
+            assign wide_class = ' tf-card--wide'
+          endif
+        -%}
+        {%- capture tag -%}{%- if block.settings.link != blank -%}a href="{{ block.settings.link }}"{%- else -%}div{%- endif -%}{%- endcapture -%}
+        {%- capture endtag -%}{%- if block.settings.link != blank -%}a{%- else -%}div{%- endif -%}{%- endcapture -%}
+        <{{ tag }} class="tf-card{{ wide_class }}" {{ block.shopify_attributes }}>
+          <picture>
+            {%- if mob != blank -%}<source media="(max-width: 600px)" srcset="{{ mob }}">{%- endif -%}
+            {%- if dsk != blank -%}<img src="{{ dsk }}" alt="{{ block.settings.title | escape }}" loading="lazy">{%- endif -%}
+          </picture>
+          {%- if block.settings.title != blank or block.settings.description != blank -%}
+            <div class="tf-card-body">
+              {%- if block.settings.title != blank -%}<h3 class="tf-card-title">{{ block.settings.title }}</h3>{%- endif -%}
+              {%- if block.settings.description != blank -%}<p class="tf-card-desc">{{ block.settings.description }}</p>{%- endif -%}
+            </div>
+          {%- endif -%}
+        </{{ endtag }}>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{%- schema -%}
+{
+  "name": "59FIFTY",
+  "tag": "section",
+  "class": "section-tech-59fifty",
+  "settings": [
+    { "type": "header", "content": "Heading" },
+    { "type": "text", "id": "heading", "label": "Heading text", "default": "59FIFTY" },
+    { "type": "range", "id": "heading_size", "label": "Heading font size", "min": 16, "max": 96, "step": 1, "unit": "px", "default": 40 },
+    { "type": "select", "id": "font_weight", "label": "Font weight", "options": [
+      { "value": "300", "label": "Light (300)" }, { "value": "400", "label": "Regular (400)" },
+      { "value": "500", "label": "Medium (500)" }, { "value": "600", "label": "Semibold (600)" },
+      { "value": "700", "label": "Bold (700)" }
+    ], "default": "700" },
+    { "type": "range", "id": "line_height", "label": "Line height", "min": 0.8, "max": 2.5, "step": 0.1, "default": 1.0 },
+    { "type": "range", "id": "letter_spacing", "label": "Letter spacing", "min": -2, "max": 10, "step": 0.5, "unit": "px", "default": 0 },
+
+    { "type": "header", "content": "Text colours & box" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#FFFFFF" },
+    { "type": "color", "id": "text_bg_color", "label": "Text background color", "default": "#000000" },
+    { "type": "range", "id": "text_bg_opacity", "label": "Text background opacity", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 0 },
+    { "type": "range", "id": "text_padding", "label": "Text padding", "min": 0, "max": 80, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "text_border_radius", "label": "Text border radius", "min": 0, "max": 60, "step": 1, "unit": "px", "default": 0 },
+
+    { "type": "header", "content": "Section" },
+    { "type": "color", "id": "section_bg_color", "label": "Section background", "default": "#000000" },
+    { "type": "range", "id": "content_width", "label": "Content max width", "min": 900, "max": 1600, "step": 10, "unit": "px", "default": 1170 },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 60 }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Feature card",
+      "settings": [
+        { "type": "checkbox", "id": "wide", "label": "Wide card (spans 2 columns)", "default": false },
+        { "type": "image_picker", "id": "desktop_image", "label": "Desktop image (overrides default)" },
+        { "type": "image_picker", "id": "mobile_image", "label": "Mobile image (overrides default)" },
+        { "type": "text", "id": "desktop_image_default", "label": "Default desktop image asset", "info": "Theme asset used when no desktop image is uploaded (e.g. fifty-true-fitted.png)" },
+        { "type": "text", "id": "mobile_image_default", "label": "Default mobile image asset", "info": "Theme asset used when no mobile image is uploaded" },
+        { "type": "text", "id": "title", "label": "Title", "default": "TITLE" },
+        { "type": "textarea", "id": "description", "label": "Description" },
+        { "type": "url", "id": "link", "label": "Link (optional)" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "59FIFTY",
+      "blocks": [
+        { "type": "card", "settings": { "wide": true,  "title": "TRUE FITTED",    "description": "CLOSED BACK STYLE AVAILABLE IN TRUE FITTING SIZE", "desktop_image_default": "fifty-true-fitted.png", "mobile_image_default": "fifty-true-fitted.png" } },
+        { "type": "card", "settings": { "wide": false, "title": "STRUCTURED CAP",  "description": "FRONT PANEL STRUCTURE FOR STABILITY AND CLASSIC CAP SHAPE", "desktop_image_default": "fifty-structured-cap.png", "mobile_image_default": "fifty-structured-cap.png" } },
+        { "type": "card", "settings": { "wide": false, "title": "FLAT VISOR",      "description": "DESIGNED TO BE FLAT, BUT CAN CURVE AS DESIRED", "desktop_image_default": "fifty-flat-visor.png", "mobile_image_default": "fifty-flat-visor.png" } },
+        { "type": "card", "settings": { "wide": false, "title": "FULL CROWN",      "description": "TALL AND BROAD PROFILE OF THE ORIGINAL FITTED CAP", "desktop_image_default": "fifty-full-crown.png", "mobile_image_default": "fifty-full-crown.png" } },
+        { "type": "card", "settings": { "wide": false, "title": "ELITE MATERIAL",  "description": "THE FABRIC WORN BY THE PROS FEATURING ENGINEERED PERFORMANCE MATERIAL", "desktop_image_default": "fifty-elite-material.png", "mobile_image_default": "fifty-elite-material.png" } }
+      ]
+    }
+  ]
+}
+{%- endschema -%}
