@@ -122,12 +122,14 @@
             assign wide_class = ' tf-card--wide'
           endif
         -%}
-        {%- capture tag -%}{%- if block.settings.link != blank -%}a href="{{ block.settings.link }}"{%- else -%}div{%- endif -%}{%- endcapture -%}
-        {%- capture endtag -%}{%- if block.settings.link != blank -%}a{%- else -%}div{%- endif -%}{%- endcapture -%}
-        <{{ tag }} class="tf-card{{ wide_class }}" {{ block.shopify_attributes }}>
+        {%- if block.settings.link != blank -%}
+          <a href="{{ block.settings.link }}" class="tf-card{{ wide_class }}" {{ block.shopify_attributes }}>
+        {%- else -%}
+          <div class="tf-card{{ wide_class }}" {{ block.shopify_attributes }}>
+        {%- endif -%}
           <picture>
             {%- if mob != blank -%}<source media="(max-width: 600px)" srcset="{{ mob }}">{%- endif -%}
-            {%- if dsk != blank -%}<img src="{{ dsk }}" alt="{{ block.settings.title | escape }}" loading="lazy">{%- endif -%}
+            {%- if dsk != blank -%}<img src="{{ dsk }}" alt="{{ block.settings.title | escape }}" width="1200" height="900" loading="lazy">{%- endif -%}
           </picture>
           {%- if block.settings.title != blank or block.settings.description != blank -%}
             <div class="tf-card-body">
@@ -135,7 +137,7 @@
               {%- if block.settings.description != blank -%}<p class="tf-card-desc">{{ block.settings.description }}</p>{%- endif -%}
             </div>
           {%- endif -%}
-        </{{ endtag }}>
+        {%- if block.settings.link != blank -%}</a>{%- else -%}</div>{%- endif -%}
       {%- endfor -%}
     </div>
   </div>

@@ -164,7 +164,7 @@
         <a class="sbl-tile" href="{{ block.settings.url | default: '#' }}" {{ block.shopify_attributes }}>
           <span class="sbl-tile-logo">
             {%- if logo != blank -%}
-              <img src="{{ logo }}" alt="{{ block.settings.label | escape }}" loading="lazy">
+              <img src="{{ logo }}" alt="{{ block.settings.label | escape }}" width="300" height="300" loading="lazy">
             {%- endif -%}
           </span>
           {%- if block.settings.label != blank -%}
