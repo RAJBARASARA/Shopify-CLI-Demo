@@ -1,0 +1,23 @@
+# Theme Check on every pull request of a Shopify theme repo. Copy to .github/workflows/theme-check.yml in the THEME repo
+# (the agent opens that as a normal PR; the owner merges). Fails the check on Theme Check ERRORS only (warnings are shown).
+name: theme-check
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  theme-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Shopify CLI
+        run: npm install -g @shopify/cli
+      - name: Theme Check (fail on errors)
+        run: shopify theme check --path . --fail-level error
