@@ -52,7 +52,7 @@
             <img id="lux-hero-{{ section.id }}" src="{{ p.featured_media | image_url: width: 1200 }}"
                  alt="{{ p.featured_media.alt | escape | default: p.title }}" width="600" height="750">
           {%- else -%}
-            <div class="lux-noimg">{{ 'products.product.no_image' | t | default: 'No image' }}</div>
+            <div class="lux-noimg">No image</div>
           {%- endif -%}
           <div class="lux-overlay">
             <div class="lux-overlay-card">
