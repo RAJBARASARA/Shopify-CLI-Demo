@@ -10,11 +10,7 @@
   {{ block.shopify_attributes }}
 >
   <span class="footer-utilities__text">
-    &copy; {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url -}}
-    {%- if block_settings.show_powered_by -%}
-      , {{ powered_by_link }}
-    {%- endif -%}
+    &copy; {{ shop.name | link_to: routes.root_url -}}
   </span>
 </div>
 
@@ -23,12 +19,6 @@
   "name": "t:names.copyright",
   "tag": null,
   "settings": [
-    {
-      "type": "checkbox",
-      "id": "show_powered_by",
-      "label": "t:settings.show_powered_by_shopify",
-      "default": true
-    },
     {
       "type": "paragraph",
       "content": "t:content.manage_store_name"
