@@ -1,0 +1,177 @@
+{%- comment -%}
+  shop-by-silhouette — pixel-built from the headwear Figma Homepage.
+  Desktop: heading 1:231 + carousel 1:232 (cards 325x493, image-filled, white
+  title 24 bold + subtitle 20 regular/60%, bottom-left; prev/next edge arrows;
+  pagination dots). Mobile: 1:3335 / 1:3340 (cards 150x227, heading 24, no arrows,
+  horizontal scroll). Tile images are uploaded to Shopify Files as WebP (CDN) per
+  the store's image rule; each block can override with its own image.
+{%- endcomment -%}
+
+{%- liquid
+  assign s = section.settings
+  assign uid = section.id | replace: '_', '' | downcase
+-%}
+
+{%- style -%}
+  @font-face { font-family:'TradeGothicCond'; src:url({{ 'trade-gothic-bold-cond.woff2' | asset_url }}) format('woff2'); font-weight:700; font-style:normal; font-display:swap; }
+  @font-face { font-family:'TradeGothicReg'; src:url({{ 'trade-gothic.woff2' | asset_url }}) format('woff2'); font-weight:300 500; font-style:normal; font-display:swap; }
+
+  #sil-{{ uid }} {
+    --sil-head:'TradeGothicCond','Oswald','Arial Narrow',Helvetica,Arial,sans-serif;
+    --sil-body:'TradeGothicReg','Trade Gothic LT Std',Helvetica,Arial,sans-serif;
+    background: {{ s.section_bg_color }};
+    padding-top: {{ s.padding_top }}px; padding-bottom: {{ s.padding_bottom }}px;
+    box-sizing:border-box;
+  }
+  #sil-{{ uid }} * { box-sizing:border-box; }
+  #sil-{{ uid }} .sil-wrap { max-width:{{ s.content_width }}px; margin:0 auto; padding:0 {{ s.side_padding }}px; position:relative; }
+  #sil-{{ uid }} .sil-head { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:20px; }
+  #sil-{{ uid }} .sil-heading { margin:0; font-family:var(--sil-head); font-weight:700; font-size:{{ s.heading_size }}px; line-height:1; letter-spacing:0; color:{{ s.text_color }}; text-transform:uppercase; }
+  #sil-{{ uid }} .sil-viewall { font-family:var(--sil-body); font-weight:500; font-size:16px; letter-spacing:.04em; color:{{ s.text_color }}; text-transform:uppercase; text-decoration:none; display:inline-flex; align-items:center; gap:8px; white-space:nowrap; }
+  #sil-{{ uid }} .sil-viewall svg { width:22px; height:22px; }
+
+  #sil-{{ uid }} .sil-track { display:flex; gap:20px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+  #sil-{{ uid }} .sil-track::-webkit-scrollbar { display:none; }
+
+  #sil-{{ uid }} .sil-card { flex:0 0 325px; max-width:325px; aspect-ratio:325 / 493; position:relative; border-radius:10px; overflow:hidden; scroll-snap-align:start; text-decoration:none; display:block; background:#1a1a1a; }
+  #sil-{{ uid }} .sil-card img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+  #sil-{{ uid }} .sil-card__body { position:absolute; left:20px; right:20px; bottom:24px; z-index:1; }
+  #sil-{{ uid }} .sil-card__title { margin:0; font-family:var(--sil-body); font-weight:700; font-size:24px; line-height:1; color:#fff; text-transform:uppercase; }
+  #sil-{{ uid }} .sil-card__sub { margin:10px 0 0; font-family:var(--sil-body); font-weight:400; font-size:20px; line-height:1; color:#fff; opacity:.6; text-transform:uppercase; }
+
+  /* edge arrows (desktop), vertically centred on the track */
+  #sil-{{ uid }} .sil-arrow { position:absolute; top:calc(50% + 10px); transform:translateY(-50%); width:44px; height:44px; border-radius:50%; border:0; background:rgba(255,255,255,.9); color:#000; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; z-index:3; box-shadow:0 2px 10px rgba(0,0,0,.18); }
+  #sil-{{ uid }} .sil-arrow:disabled { opacity:0; pointer-events:none; }
+  #sil-{{ uid }} .sil-arrow svg { width:24px; height:24px; }
+  #sil-{{ uid }} .sil-arrow--prev { left:{{ s.side_padding | minus: 18 }}px; }
+  #sil-{{ uid }} .sil-arrow--prev svg { transform:rotate(180deg); }
+  #sil-{{ uid }} .sil-arrow--next { right:{{ s.side_padding | minus: 18 }}px; }
+
+  #sil-{{ uid }} .sil-dots { display:flex; align-items:center; justify-content:center; gap:8px; margin-top:28px; }
+  #sil-{{ uid }} .sil-dots button { width:8px; height:8px; border-radius:100px; border:0; padding:0; background:#d9d9d9; cursor:pointer; transition:width .2s,background .2s; }
+  #sil-{{ uid }} .sil-dots button.is-active { width:20px; background:{{ s.text_color }}; }
+
+  @media (max-width:600px){
+    #sil-{{ uid }} { padding-top:24px; padding-bottom:24px; }
+    #sil-{{ uid }} .sil-wrap { padding:0 20px; }
+    #sil-{{ uid }} .sil-head { flex-direction:column; align-items:flex-start; gap:10px; margin-bottom:14px; }
+    #sil-{{ uid }} .sil-heading { font-size:24px; }
+    #sil-{{ uid }} .sil-viewall { font-size:13px; }
+    #sil-{{ uid }} .sil-track { gap:10px; }
+    #sil-{{ uid }} .sil-card { flex:0 0 150px; max-width:150px; aspect-ratio:150 / 227; }
+    #sil-{{ uid }} .sil-card__body { left:10px; right:10px; bottom:12px; }
+    #sil-{{ uid }} .sil-card__title { font-size:16px; }
+    #sil-{{ uid }} .sil-card__sub { font-size:14px; margin-top:7px; }
+    #sil-{{ uid }} .sil-arrow, #sil-{{ uid }} .sil-dots { display:none; }
+  }
+{%- endstyle -%}
+
+{%- capture arrow_svg -%}<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>{%- endcapture -%}
+
+<section id="sil-{{ uid }}" class="sil-section" {{ section.shopify_attributes }}>
+  <div class="sil-wrap">
+    <div class="sil-head">
+      {%- if s.heading != blank -%}<h2 class="sil-heading">{{ s.heading }}</h2>{%- endif -%}
+      {%- if s.viewall_label != blank -%}
+        <a class="sil-viewall" href="{{ s.viewall_link | default: '#' }}">{{ s.viewall_label }}{{ arrow_svg }}</a>
+      {%- endif -%}
+    </div>
+
+    <button type="button" class="sil-arrow sil-arrow--prev" data-sil-prev aria-label="Previous">{{ arrow_svg }}</button>
+    <button type="button" class="sil-arrow sil-arrow--next" data-sil-next aria-label="Next">{{ arrow_svg }}</button>
+
+    <div class="sil-track" data-sil-track role="list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign src = ''
+          if block.settings.image != blank
+            assign src = block.settings.image | image_url: width: 650
+          elsif block.settings.image_url != blank
+            assign src = block.settings.image_url
+          endif
+        -%}
+        {%- if block.settings.link != blank -%}
+          <a href="{{ block.settings.link }}" class="sil-card" {{ block.shopify_attributes }}>
+        {%- else -%}
+          <div class="sil-card" {{ block.shopify_attributes }}>
+        {%- endif -%}
+          {%- if src != blank -%}<img src="{{ src }}" alt="{{ block.settings.title | escape }} {{ block.settings.subtitle | escape }}" loading="lazy" width="325" height="493">{%- endif -%}
+          <div class="sil-card__body">
+            {%- if block.settings.title != blank -%}<p class="sil-card__title">{{ block.settings.title }}</p>{%- endif -%}
+            {%- if block.settings.subtitle != blank -%}<p class="sil-card__sub">{{ block.settings.subtitle }}</p>{%- endif -%}
+          </div>
+        {% if block.settings.link != blank %}</a>{% else %}</div>{% endif %}
+      {%- endfor -%}
+    </div>
+
+    <div class="sil-dots" data-sil-dots></div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var root=document.getElementById('sil-{{ uid }}'); if(!root) return;
+  var track=root.querySelector('[data-sil-track]'), prev=root.querySelector('[data-sil-prev]'),
+      next=root.querySelector('[data-sil-next]'), dotsWrap=root.querySelector('[data-sil-dots]');
+  function step(){var c=track.querySelector('.sil-card'); if(!c) return track.clientWidth; var g=parseFloat(getComputedStyle(track).gap)||20; return c.getBoundingClientRect().width+g;}
+  function perView(){return Math.max(1,Math.round(track.clientWidth/step()));}
+  function pages(){return Math.max(1,Math.ceil(track.children.length/perView()));}
+  function cur(){return Math.round(track.scrollLeft/(step()*perView()));}
+  function buildDots(){if(!dotsWrap)return; var n=pages(); dotsWrap.innerHTML=''; if(n<=1){sync();return;} for(var i=0;i<n;i++){(function(idx){var b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label','Slide '+(idx+1)); b.addEventListener('click',function(){track.scrollTo({left:idx*step()*perView(),behavior:'smooth'});}); dotsWrap.appendChild(b);})(i);} sync();}
+  function sync(){ if(prev)prev.disabled=track.scrollLeft<=2; if(next)next.disabled=track.scrollLeft+track.clientWidth>=track.scrollWidth-2; if(dotsWrap){var c=cur(); Array.prototype.forEach.call(dotsWrap.children,function(d,i){d.classList.toggle('is-active',i===c);});}}
+  if(prev)prev.addEventListener('click',function(){track.scrollBy({left:-step(),behavior:'smooth'});});
+  if(next)next.addEventListener('click',function(){track.scrollBy({left:step(),behavior:'smooth'});});
+  track.addEventListener('scroll',function(){requestAnimationFrame(sync);},{passive:true});
+  window.addEventListener('resize',buildDots);
+  buildDots();
+})();
+</script>
+
+{%- schema -%}
+{
+  "name": "Shop by Silhouette",
+  "tag": "section",
+  "class": "section-shop-by-silhouette",
+  "settings": [
+    { "type": "header", "content": "Heading" },
+    { "type": "text", "id": "heading", "label": "Heading text", "default": "SHOP BY SILHOUETTE" },
+    { "type": "range", "id": "heading_size", "label": "Heading font size", "min": 16, "max": 96, "step": 1, "unit": "px", "default": 40 },
+    { "type": "text", "id": "viewall_label", "label": "View-all link label", "default": "VIEW ALL SILHOUETTES" },
+    { "type": "url", "id": "viewall_link", "label": "View-all link" },
+
+    { "type": "header", "content": "Colours & layout" },
+    { "type": "color", "id": "text_color", "label": "Text / heading color", "default": "#000000" },
+    { "type": "color", "id": "section_bg_color", "label": "Section background", "default": "#FFFFFF" },
+    { "type": "range", "id": "content_width", "label": "Content max width", "min": 900, "max": 1600, "step": 10, "unit": "px", "default": 1440 },
+    { "type": "range", "id": "side_padding", "label": "Side padding", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 60 }
+  ],
+  "blocks": [
+    {
+      "type": "silhouette",
+      "name": "Silhouette",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image (overrides default)" },
+        { "type": "text", "id": "image_url", "label": "Default image URL", "info": "Shopify Files CDN URL used when no image is picked." },
+        { "type": "text", "id": "title", "label": "Title", "default": "59FIFTY" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "FITTED" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Shop by Silhouette",
+      "blocks": [
+        { "type": "silhouette", "settings": { "title": "59FIFTY",  "subtitle": "FITTED",     "image_url": "https://cdn.shopify.com/s/files/1/0729/5624/8220/files/silhouette-59fifty.webp?v=1795153911" } },
+        { "type": "silhouette", "settings": { "title": "9FIFTY",   "subtitle": "SNAPBACK",   "image_url": "https://cdn.shopify.com/s/files/1/0729/5624/8220/files/silhouette-9fifty.webp?v=1795153915" } },
+        { "type": "silhouette", "settings": { "title": "9SEVENTY", "subtitle": "ADJUSTABLE", "image_url": "https://cdn.shopify.com/s/files/1/0729/5624/8220/files/silhouette-9seventy.webp?v=1795153923" } },
+        { "type": "silhouette", "settings": { "title": "9FORTY",   "subtitle": "ADJUSTABLE", "image_url": "https://cdn.shopify.com/s/files/1/0729/5624/8220/files/silhouette-9forty.webp?v=1795153919" } },
+        { "type": "silhouette", "settings": { "title": "9TWENTY",  "subtitle": "ADJUSTABLE", "image_url": "https://cdn.shopify.com/s/files/1/0729/5624/8220/files/silhouette-9twenty.webp?v=1795153926" } }
+      ]
+    }
+  ]
+}
+{%- endschema -%}
