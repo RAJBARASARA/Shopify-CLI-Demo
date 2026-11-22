@@ -59,18 +59,34 @@
     return String(str == null ? '' : str)
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
-  function imgUrl(src) {
-    if (!src) return '';
-    // normalise the shop-domain CDN path (//shop.myshopify.com/cdn/shop/...) to the
-    // global cdn.shopify.com host, which isn't behind the storefront password wall.
-    if (window.__pcCdnPrefix) {
-      src = src.replace(/^(https?:)?\/\/[^/]+\.myshopify\.com\/cdn\/shop/, window.__pcCdnPrefix);
-    }
+  var SHOP_CDN_RE = /^(https?:)?\/\/[^/]+\.myshopify\.com\/cdn\/shop/;
+  function withWidth(src) {
     // request a sensible width from the Shopify CDN without breaking existing params
-    if (/cdn\.shopify\.com/.test(src) && src.indexOf('width=') === -1) {
+    if (/cdn\.shopify\.com|\/cdn\/shop\//.test(src) && src.indexOf('width=') === -1) {
       return src + (src.indexOf('?') === -1 ? '?' : '&') + 'width=650';
     }
     return src;
+  }
+  function imgUrl(src) {
+    return src ? withWidth(src) : '';
+  }
+  // Fallback only: the shop-domain image host (//shop.myshopify.com/cdn/shop/...) is
+  // blocked while the storefront password is on (e.g. theme previews). If an image
+  // fails to load, retry it on the global cdn.shopify.com host. The image's own URL
+  // is always tried first, so a live store never depends on this path.
+  function fallbackUrl(src) {
+    if (!src || !window.__pcCdnPrefix || !SHOP_CDN_RE.test(src)) return '';
+    return withWidth(src.replace(SHOP_CDN_RE, window.__pcCdnPrefix));
+  }
+  function wireImageFallback(scope) {
+    Array.prototype.forEach.call(scope.querySelectorAll('img[data-pc-fallback]'), function (img) {
+      img.addEventListener('error', function onErr() {
+        var fb = img.getAttribute('data-pc-fallback');
+        img.removeAttribute('data-pc-fallback');
+        img.removeEventListener('error', onErr);
+        if (fb) img.src = fb;
+      });
+    });
   }
   function renderCard(p, opts) {
     opts = opts || {};
@@ -86,7 +102,9 @@
         '</span>';
     }
     var media = p.featured_image
-      ? '<img src="' + esc(imgUrl(p.featured_image)) + '" alt="' + esc(p.title) + '" loading="lazy" width="325" height="325">'
+      ? '<img src="' + esc(imgUrl(p.featured_image)) + '"' +
+        (fallbackUrl(p.featured_image) ? ' data-pc-fallback="' + esc(fallbackUrl(p.featured_image)) + '"' : '') +
+        ' alt="' + esc(p.title) + '" loading="lazy" width="325" height="325">'
       : '';
     var ribbon = opts.ribbon ? '<span class="pc-card__ribbon">' + esc(opts.ribbon) + '</span>' : '';
     return (
@@ -113,6 +131,7 @@
       return;
     }
     track.innerHTML = products.map(function (p) { return renderCard(p, opts); }).join('');
+    wireImageFallback(track);
     wireWishlist(track);
     initCarousel(root);
   }
