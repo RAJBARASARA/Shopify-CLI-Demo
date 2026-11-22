@@ -65,13 +65,11 @@
             assign mob = dsk
           endif
         -%}
-        {%- liquid
-          assign slide_tag = 'div'
-          if block.settings.link != blank
-            assign slide_tag = 'a'
-          endif
-        -%}
-        <{{ slide_tag }} {% if block.settings.link != blank %}href="{{ block.settings.link }}" {% endif %}class="hb-slide" {{ block.shopify_attributes }}>
+        {%- if block.settings.link != blank -%}
+          <a href="{{ block.settings.link }}" class="hb-slide" {{ block.shopify_attributes }}>
+        {%- else -%}
+          <div class="hb-slide" {{ block.shopify_attributes }}>
+        {%- endif -%}
           {%- if dsk != blank -%}<img class="hb-dsk" src="{{ dsk }}" alt="{{ block.settings.heading | escape }}" {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %} width="1440" height="480">{%- endif -%}
           {%- if mob != blank -%}<img class="hb-mob" src="{{ mob }}" alt="{{ block.settings.heading | escape }}" loading="lazy" width="375" height="375">{%- endif -%}
           {%- if s.overlay_opacity > 0 -%}<div class="hb-overlay"></div>{%- endif -%}
@@ -82,7 +80,7 @@
               {%- if block.settings.button_label != blank -%}<span class="hb-btn">{{ block.settings.button_label }}</span>{%- endif -%}
             </div>
           {%- endif -%}
-        </{{ slide_tag }}>
+        {% if block.settings.link != blank %}</a>{% else %}</div>{% endif %}
       {%- endfor -%}
     </div>
     {%- if section.blocks.size > 1 -%}<div class="hb-dots" data-hb-dots></div>{%- endif -%}
@@ -96,9 +94,9 @@
   var n=track.children.length, auto={{ s.autoplay | default: false }}, speed={{ s.autoplay_speed | default: 5 }}*1000, timer=null;
   function cur(){return Math.round(track.scrollLeft/track.clientWidth);}
   function go(i){track.scrollTo({left:((i%n)+n)%n*track.clientWidth,behavior:'smooth'});}
-  if(dotsWrap){for(var i=0;i<n;i++){(function(idx){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Slide '+(idx+1));b.addEventListener('click',function(){go(idx);restart();});dotsWrap.appendChild(b);})(i);}}
+  if(dotsWrap){for(var i=0;i < n;i++){(function(idx){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Slide '+(idx+1));b.addEventListener('click',function(){go(idx);restart();});dotsWrap.appendChild(b);})(i);}}
   function sync(){if(!dotsWrap)return;var c=cur();Array.prototype.forEach.call(dotsWrap.children,function(d,i){d.classList.toggle('is-active',i===c);});}
-  function restart(){if(!auto||n<2)return;clearInterval(timer);timer=setInterval(function(){go(cur()+1);},speed);}
+  function restart(){if(!auto||n < 2)return;clearInterval(timer);timer=setInterval(function(){go(cur()+1);},speed);}
   track.addEventListener('scroll',function(){requestAnimationFrame(sync);},{passive:true});
   sync(); restart();
   root.addEventListener('mouseenter',function(){clearInterval(timer);});
