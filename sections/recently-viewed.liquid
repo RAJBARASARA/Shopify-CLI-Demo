@@ -13,9 +13,14 @@
 {%- liquid
   assign s = section.settings
   assign uid = section.id | replace: '_', '' | downcase
+  assign pc_sid = shop.id | prepend: '000000000000' | slice: -12, 12
+  assign pc_g1 = pc_sid | slice: 0, 4
+  assign pc_g2 = pc_sid | slice: 4, 4
+  assign pc_g3 = pc_sid | slice: 8, 4
+  assign pc_cdn = '//cdn.shopify.com/s/files/1/' | append: pc_g1 | append: '/' | append: pc_g2 | append: '/' | append: pc_g3
 -%}
 
-<span data-pc-money-format="{{ shop.money_format | escape }}" data-pc-cdn="{{ 'product-carousel.css' | asset_url | split: '/t/' | first }}" hidden></span>
+<span data-pc-money-format="{{ shop.money_format | escape }}" data-pc-cdn="{{ pc_cdn }}" hidden></span>
 
 {%- if product -%}
   {%- capture cur -%}{"id":{{ product.id }},"handle":{{ product.handle | json }},"url":{{ product.url | json }},"title":{{ product.title | json }},"vendor":{{ product.vendor | json }},"featured_image":{{ product.featured_image | image_url: width: 650 | json }},"price":{{ product.price }},"compare_at_price":{{ product.compare_at_price | default: 0 }}}{%- endcapture -%}
