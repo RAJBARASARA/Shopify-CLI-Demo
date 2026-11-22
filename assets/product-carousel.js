@@ -61,6 +61,11 @@
   }
   function imgUrl(src) {
     if (!src) return '';
+    // normalise the shop-domain CDN path (//shop.myshopify.com/cdn/shop/...) to the
+    // global cdn.shopify.com host, which isn't behind the storefront password wall.
+    if (window.__pcCdnPrefix) {
+      src = src.replace(/^(https?:)?\/\/[^/]+\.myshopify\.com\/cdn\/shop/, window.__pcCdnPrefix);
+    }
     // request a sensible width from the Shopify CDN without breaking existing params
     if (/cdn\.shopify\.com/.test(src) && src.indexOf('width=') === -1) {
       return src + (src.indexOf('?') === -1 ? '?' : '&') + 'width=650';
@@ -204,7 +209,10 @@
     window.__pcBooted = true;
     if (window.__pcMoneyFormat == null) {
       var holder = document.querySelector('[data-pc-money-format]');
-      if (holder) window.__pcMoneyFormat = holder.getAttribute('data-pc-money-format');
+      if (holder) {
+        window.__pcMoneyFormat = holder.getAttribute('data-pc-money-format');
+        if (holder.getAttribute('data-pc-cdn')) window.__pcCdnPrefix = holder.getAttribute('data-pc-cdn');
+      }
     }
 
     // record the current product view first (any section may carry it)
