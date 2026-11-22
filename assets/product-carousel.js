@@ -132,6 +132,7 @@
     var prev = root.querySelector('.pcarousel__arrow--prev');
     var next = root.querySelector('.pcarousel__arrow--next');
     var dotsWrap = root.querySelector('.pcarousel__dots');
+    var nav = root.querySelector('.pcarousel__nav');
     if (!track) return;
 
     function step() {
@@ -168,6 +169,8 @@
       sync();
     }
     function sync() {
+      // Hide the arrows when every card already fits (nothing to scroll to).
+      if (nav) nav.style.display = track.scrollWidth > track.clientWidth + 2 ? '' : 'none';
       if (prev) prev.disabled = track.scrollLeft <= 2;
       if (next) next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
       if (dotsWrap) {
@@ -180,7 +183,7 @@
     if (prev) prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
     if (next) next.addEventListener('click', function () { track.scrollBy({ left: step(), behavior: 'smooth' }); });
     track.addEventListener('scroll', function () { window.requestAnimationFrame(sync); }, { passive: true });
-    window.addEventListener('resize', buildDots);
+    window.addEventListener('resize', function () { buildDots(); sync(); });
     buildDots();
     sync();
   }
