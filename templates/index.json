@@ -9,201 +9,492 @@
  */
 {
   "sections": {
-    "html_landing_yigpQf": {
-      "type": "html-landing",
+    "hero_banner": {
+      "type": "hero-banner",
       "blocks": {
-        "symbol_nhUCAL": {
-          "type": "symbol",
+        "s1": {
+          "type": "slide",
           "settings": {
-            "glyph": "✿",
-            "title": "FRESH",
-            "copy": "Hand-tied bouquets and seasonal stems, chosen for softness and scent."
-          }
-        },
-        "symbol_pHGCRE": {
-          "type": "symbol",
-          "settings": {
-            "glyph": "❀",
-            "title": "LIVING",
-            "copy": "Easy-care plants and pots to bring a little nature indoors."
-          }
-        },
-        "symbol_Fc3iMB": {
-          "type": "symbol",
-          "settings": {
-            "glyph": "✦",
-            "title": "CALM",
-            "copy": "Quiet, considered pieces — natural textures and nothing excessive."
-          }
-        },
-        "category_YL4LXF": {
-          "type": "category",
-          "settings": {
-            "collection": "fresh-bouquets",
-            "title": "Fresh Bouquets",
-            "image": ""
-          }
-        },
-        "category_CyaJWJ": {
-          "type": "category",
-          "settings": {
-            "collection": "bouquet",
-            "title": "Bouquets",
-            "image": ""
-          }
-        },
-        "category_TRkBPi": {
-          "type": "category",
-          "settings": {
-            "collection": "plants-pots-green",
-            "title": "Plants & Pots",
-            "image": ""
-          }
-        },
-        "category_74eBBq": {
-          "type": "category",
-          "settings": {
-            "collection": "gifts-under-30",
-            "title": "Gifts Under $30",
-            "image": ""
-          }
-        },
-        "category_BGzrVA": {
-          "type": "category",
-          "settings": {
-            "collection": "all-flowers",
-            "title": "All Flowers",
-            "image": ""
-          }
-        },
-        "metric_Cp7YFy": {
-          "type": "metric",
-          "settings": {
-            "value": "01",
-            "label": "Hand-tied & fresh"
-          }
-        },
-        "metric_zYzKEk": {
-          "type": "metric",
-          "settings": {
-            "value": "02",
-            "label": "Living plants & pots"
-          }
-        },
-        "metric_JGgxe4": {
-          "type": "metric",
-          "settings": {
-            "value": "03",
-            "label": "Calm, considered design"
-          }
-        },
-        "metric_kj9JdP": {
-          "type": "metric",
-          "settings": {
-            "value": "04",
-            "label": "Delivered with care"
+            "desktop_image_url": "",
+            "mobile_image_url": "",
+            "heading": "NEW SEASON ARRIVALS",
+            "subheading": "DISCOVER THE LATEST DROP",
+            "button_label": "SHOP NOW",
+            "text_align": "center",
+            "link": "/collections/all"
           }
         }
       },
       "block_order": [
-        "symbol_nhUCAL",
-        "symbol_pHGCRE",
-        "symbol_Fc3iMB",
-        "category_YL4LXF",
-        "category_CyaJWJ",
-        "category_TRkBPi",
-        "category_74eBBq",
-        "category_BGzrVA",
-        "metric_Cp7YFy",
-        "metric_zYzKEk",
-        "metric_JGgxe4",
-        "metric_kj9JdP"
+        "s1"
       ],
-      "name": "Landing (HTML)",
       "settings": {
-        "topbar_text": "",
-        "hero_eyebrow": "Mindful Living / Flowers & Plants",
-        "hero_title": "ZENN SPACE",
-        "hero_subline": "BREATHE IN.",
-        "hero_title_2": "A CALMER HOME.",
-        "hero_copy": "<p>Fresh florals, living plants, and quiet everyday pieces — chosen to bring a little more stillness into busy lives. Quality over quantity. Calm over clutter.</p>",
-        "hero_primary_label": "Shop Bouquets",
-        "hero_primary_link": "",
-        "hero_secondary_label": "Our Story",
-        "hero_secondary_link": "",
-        "hero_taglines": "Calm, Curated.\nSlow Living.\nRoom to Breathe.\nNaturally Beautiful.\nStillness, Delivered",
-        "hero_panel_1_label": "Fresh / Florals",
-        "hero_panel_1_title": "Hand-Tied Bouquets",
-        "hero_panel_2_label": "Living / Green",
-        "hero_panel_2_title": "Plants & Pots",
-        "hero_panel_3_label": "Gifting",
-        "hero_panel_3_title": "Thoughtful Gifts",
-        "hero_float_tag": "New",
-        "hero_float_title": "Calm, considered design",
-        "hero_float_copy": "Natural textures, soft palettes, and nothing excessive.",
-        "drop_kicker": "Featured Collection",
-        "drop_title": "THE EDIT",
-        "drop_copy": "<p>A small, carefully chosen range of seasonal florals and living greenery — the pieces we reach for to make a space feel calm.</p>",
-        "featured_collection": "all-flowers",
-        "drop_slab_kicker": "In Bloom",
-        "drop_slab_copy": "Seasonal florals and living plants, styled for calm, considered spaces.",
-        "drop_mini1_label": "Fresh Daily",
-        "drop_mini1_title": "Flowers that feel alive.",
-        "drop_mini1_copy": "Hand-tied bouquets and arrangements, chosen for softness and season.",
-        "drop_mini2_label": "Easy Care",
-        "drop_mini2_title": "Green that grows with you.",
-        "drop_mini2_copy": "Living plants and pots to bring a little nature indoors.",
-        "drop_button_label": "Shop All",
-        "drop_button_link": "",
-        "story_kicker": "Our Story",
-        "story_title": "A CALMER HOME MAKES A CALMER MIND.",
-        "story_copy": "<p>Zenn Space began with a simple belief: the spaces we live in shape how we feel. We curate florals, plants, and quiet everyday pieces that help you slow down and breathe.</p>",
-        "story_cta_label": "Read Our Story",
-        "story_cta_link": "",
-        "story_mark": "Z",
-        "symbols_kicker": "Why Zenn",
-        "symbols_title": "SMALL THINGS, CALMER DAYS",
-        "symbols_copy": "<p>Every piece is chosen for the calm it brings — natural, considered, and made to last.</p>",
-        "categories_kicker": "Shop Categories",
-        "categories_title": "FIND YOUR CALM",
-        "founder_kicker": "From Us",
-        "founder_title": "MADE WITH CARE",
-        "founder_quote": "<p>We choose every item for the calm it brings, not the noise it makes. Our aim is to turn an ordinary space into one that feels intentional and restful.</p>",
-        "founder_name": "The Zenn Space Team",
-        "founder_role": "Curators",
-        "founder_cta_label": "About Us",
-        "founder_cta_link": "",
-        "social_kicker": "Loved By",
-        "social_title": "MORE THAN DECOR",
-        "social_copy": "<p>Zenn Space is for anyone making room to breathe. Join a community that values calm, nature, and considered living.</p>",
-        "email_kicker": "Stay In Touch",
-        "email_title": "JOIN THE CALM",
-        "email_copy": "<p>Get first access to seasonal florals, new arrivals, and quiet pieces for the home.</p>",
-        "email_offer_chip": "10% Off Your First Order / Early Access to New Arrivals",
-        "email_placeholder": "Enter your email address",
-        "email_button_label": "Subscribe",
-        "journal_kicker": "Journal",
-        "journal_title": "THE ZENN JOURNAL",
-        "journal_copy": "<p>Notes on slow living, styling with plants, and making space to breathe.</p>",
-        "journal_blog": "news",
-        "journal_limit": 3,
-        "final_kicker": "Begin",
-        "final_title": "MAKE ROOM TO BREATHE.",
-        "final_copy": "<p>Bring a little calm home today.</p>",
-        "final_cta_label": "Shop Zenn Space",
-        "final_cta_link": "",
-        "hero_image_1": "shopify://shop_images/zenn-hero-banner.png",
-        "hero_image_2": "shopify://shop_images/zenn-hero-banner.png",
-        "hero_image_3": "shopify://shop_images/zenn-hero-banner.png",
-        "drop_image": "shopify://shop_images/zenn-hero-banner.png",
-        "story_image": "shopify://shop_images/zenn-story.png",
-        "founder_image": "shopify://shop_images/zenn-founder.png",
-        "email_image": "shopify://shop_images/zenn-email.png",
-        "final_image": "shopify://shop_images/zenn-final.png"
+        "overlay_opacity": 0,
+        "autoplay": false,
+        "section_bg_color": "#141414",
+        "slide_fallback_bg": "#1A1A1A",
+        "text_color": "#FFFFFF",
+        "btn_bg_color": "#FFFFFF",
+        "btn_text_color": "#000000"
+      }
+    },
+    "shop_by_silhouette": {
+      "type": "shop-by-silhouette",
+      "blocks": {
+        "b1": {
+          "type": "silhouette",
+          "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0729/5624/8220/files/silhouette-59fifty.webp?v=1795153911",
+            "title": "59FIFTY",
+            "subtitle": "FITTED",
+            "link": ""
+          }
+        },
+        "b2": {
+          "type": "silhouette",
+          "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0729/5624/8220/files/silhouette-9fifty.webp?v=1795153915",
+            "title": "9FIFTY",
+            "subtitle": "SNAPBACK",
+            "link": ""
+          }
+        },
+        "b3": {
+          "type": "silhouette",
+          "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0729/5624/8220/files/silhouette-9seventy.webp?v=1795153923",
+            "title": "9SEVENTY",
+            "subtitle": "ADJUSTABLE",
+            "link": ""
+          }
+        },
+        "b4": {
+          "type": "silhouette",
+          "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0729/5624/8220/files/silhouette-9forty.webp?v=1795153919",
+            "title": "9FORTY",
+            "subtitle": "ADJUSTABLE",
+            "link": ""
+          }
+        },
+        "b5": {
+          "type": "silhouette",
+          "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0729/5624/8220/files/silhouette-9twenty.webp?v=1795153926",
+            "title": "9TWENTY",
+            "subtitle": "ADJUSTABLE",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5"
+      ],
+      "settings": {
+        "heading": "SHOP BY SILHOUETTE",
+        "heading_size": 40,
+        "viewall_label": "VIEW ALL SILHOUETTES",
+        "viewall_link": "",
+        "text_color": "#000000",
+        "section_bg_color": "#ffffff",
+        "content_width": 1440,
+        "side_padding": 40,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "product_list_fa6P9H": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_list_text_YFtzcL": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h3>{{ closest.collection.title }}</h3>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h4",
+                "font": "var(--font-body--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_list_button_MWeP9V": {
+              "type": "_product-list-button",
+              "name": "t:names.product_list_button",
+              "settings": {
+                "label": "View all",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_YFtzcL",
+            "product_list_button_MWeP9V"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 4,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_677WP3": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_YXxMTj": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_JQzVV4": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_677WP3",
+            "product_title_YXxMTj",
+            "price_JQzVV4"
+          ]
+        }
+      },
+      "name": "Featured collection",
+      "settings": {
+        "collection": "all",
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "max_products": 8,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 8,
+        "rows_gap": 24,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 28,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "shop_by_league_Lhf7BC": {
+      "type": "shop-by-league",
+      "blocks": {
+        "league_Mjnfmr": {
+          "type": "league",
+          "settings": {
+            "image_default": "league-mlb.png",
+            "label": "MLB",
+            "url": ""
+          }
+        },
+        "league_b4AfWX": {
+          "type": "league",
+          "settings": {
+            "image_default": "league-nfl.png",
+            "label": "NFL",
+            "url": ""
+          }
+        },
+        "league_txDaPL": {
+          "type": "league",
+          "settings": {
+            "image_default": "league-nba.png",
+            "label": "NBA",
+            "url": ""
+          }
+        },
+        "league_QWFkj6": {
+          "type": "league",
+          "settings": {
+            "image_default": "league-nhl.png",
+            "label": "NHL",
+            "url": ""
+          }
+        },
+        "league_J6b8fb": {
+          "type": "league",
+          "settings": {
+            "image_default": "league-mls.png",
+            "label": "MLS",
+            "url": ""
+          }
+        },
+        "league_z7xNzh": {
+          "type": "league",
+          "settings": {
+            "image_default": "league-milb.png",
+            "label": "MiLB",
+            "url": ""
+          }
+        },
+        "league_VNAmzf": {
+          "type": "league",
+          "settings": {
+            "image_default": "league-ncaa.png",
+            "label": "NCAA",
+            "url": ""
+          }
+        },
+        "league_CecET6": {
+          "type": "league",
+          "settings": {
+            "image_default": "league-wnba.png",
+            "label": "WNBA",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "league_Mjnfmr",
+        "league_b4AfWX",
+        "league_txDaPL",
+        "league_QWFkj6",
+        "league_J6b8fb",
+        "league_z7xNzh",
+        "league_VNAmzf",
+        "league_CecET6"
+      ],
+      "name": "Shop by League",
+      "settings": {
+        "heading": "SHOP BY LEAGUE",
+        "description": "",
+        "button_text": "SEE ALL LEAGUES",
+        "button_url": "",
+        "text_align": "left",
+        "heading_size": 48,
+        "description_size": 16,
+        "button_size": 16,
+        "font_weight": "700",
+        "line_height": 1,
+        "letter_spacing": 0,
+        "text_color": "#ffffff",
+        "text_bg_color": "#000000",
+        "text_bg_opacity": 0,
+        "text_padding": 0,
+        "text_border_radius": 0,
+        "text_max_width": 410,
+        "section_bg_color": "#000000",
+        "tile_label_color": "#ffffff",
+        "content_width": 1310,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "tech_59fifty_BeYXCW": {
+      "type": "tech-59fifty",
+      "blocks": {
+        "card_MTh6fK": {
+          "type": "card",
+          "settings": {
+            "wide": true,
+            "desktop_image_default": "fifty-true-fitted.png",
+            "mobile_image_default": "fifty-true-fitted.png",
+            "title": "TRUE FITTED",
+            "description": "CLOSED BACK STYLE AVAILABLE IN TRUE FITTING SIZE",
+            "link": "#"
+          }
+        },
+        "card_JP7Vf7": {
+          "type": "card",
+          "settings": {
+            "wide": false,
+            "desktop_image_default": "fifty-structured-cap.png",
+            "mobile_image_default": "fifty-structured-cap.png",
+            "title": "STRUCTURED CAP",
+            "description": "FRONT PANEL STRUCTURE FOR STABILITY AND CLASSIC CAP SHAPE",
+            "link": ""
+          }
+        },
+        "card_XJYVLC": {
+          "type": "card",
+          "settings": {
+            "wide": false,
+            "desktop_image_default": "fifty-flat-visor.png",
+            "mobile_image_default": "fifty-flat-visor.png",
+            "title": "FLAT VISOR",
+            "description": "DESIGNED TO BE FLAT, BUT CAN CURVE AS DESIRED",
+            "link": ""
+          }
+        },
+        "card_PQ6wer": {
+          "type": "card",
+          "settings": {
+            "wide": false,
+            "desktop_image_default": "fifty-full-crown.png",
+            "mobile_image_default": "fifty-full-crown.png",
+            "title": "FULL CROWN",
+            "description": "TALL AND BROAD PROFILE OF THE ORIGINAL FITTED CAP",
+            "link": ""
+          }
+        },
+        "card_yKQz6p": {
+          "type": "card",
+          "settings": {
+            "wide": false,
+            "desktop_image_default": "fifty-elite-material.png",
+            "mobile_image_default": "fifty-elite-material.png",
+            "title": "ELITE MATERIAL",
+            "description": "THE FABRIC WORN BY THE PROS FEATURING ENGINEERED PERFORMANCE MATERIAL",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_MTh6fK",
+        "card_JP7Vf7",
+        "card_XJYVLC",
+        "card_PQ6wer",
+        "card_yKQz6p"
+      ],
+      "name": "59FIFTY",
+      "settings": {
+        "heading": "59FIFTY",
+        "heading_size": 40,
+        "font_weight": "700",
+        "line_height": 1,
+        "letter_spacing": 0,
+        "text_color": "#ffffff",
+        "text_bg_color": "#000000",
+        "text_bg_opacity": 0,
+        "text_padding": 0,
+        "text_border_radius": 0,
+        "section_bg_color": "#000000",
+        "content_width": 1170,
+        "padding_top": 60,
+        "padding_bottom": 60
       }
     }
   },
   "order": [
-    "html_landing_yigpQf"
+    "hero_banner",
+    "shop_by_silhouette",
+    "product_list_fa6P9H",
+    "shop_by_league_Lhf7BC",
+    "tech_59fifty_BeYXCW"
   ]
 }

@@ -38,9 +38,23 @@
         "badge3_title": "DROP ACCESS",
         "badge3_text": "Members get early access to limited releases and restocks."
       }
+    },
+    "ymal": {
+      "type": "ymal-recommendations",
+      "settings": {
+        "hide_when_empty": false
+      }
+    },
+    "recently": {
+      "type": "recently-viewed",
+      "settings": {
+        "hide_when_empty": false
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "ymal",
+    "recently"
   ]
 }
