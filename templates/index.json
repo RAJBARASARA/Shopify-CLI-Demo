@@ -201,9 +201,104 @@
         "email_image": "shopify://shop_images/zenn-email.png",
         "final_image": "shopify://shop_images/zenn-final.png"
       }
+    },
+    "shop_by_category": {
+      "type": "shop-by-silhouette",
+      "blocks": {
+        "card_1": {
+          "type": "silhouette",
+          "settings": {
+            "image": "shopify://shop_images/zenn-hero-banner.png",
+            "title": "FRESH FLOWERS",
+            "subtitle": "Hand-tied bouquets",
+            "link": "shopify://collections/all-flowers"
+          }
+        },
+        "card_2": {
+          "type": "silhouette",
+          "settings": {
+            "image": "shopify://shop_images/zenn-story.png",
+            "title": "LIVING PLANTS",
+            "subtitle": "Greenery for calm rooms",
+            "link": "shopify://collections/all"
+          }
+        },
+        "card_3": {
+          "type": "silhouette",
+          "settings": {
+            "image": "shopify://shop_images/zenn-journal-2.png",
+            "title": "GIFTING",
+            "subtitle": "Flowers to send with care",
+            "link": "shopify://collections/all-flowers"
+          }
+        },
+        "card_4": {
+          "type": "silhouette",
+          "settings": {
+            "image": "shopify://shop_images/zenn-journal-3.png",
+            "title": "EVERYDAY PIECES",
+            "subtitle": "Quiet things for slow living",
+            "link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
+      ],
+      "settings": {
+        "heading": "SHOP BY CATEGORY",
+        "viewall_label": "VIEW ALL FLOWERS",
+        "viewall_link": "shopify://collections/all-flowers",
+        "text_color": "#1A1A1A",
+        "section_bg_color": "#F6F1EA"
+      }
+    },
+    "promo_banner": {
+      "type": "hero-banner",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "desktop_image": "shopify://shop_images/zenn-final.png",
+            "mobile_image": "shopify://shop_images/zenn-final.png",
+            "heading": "ROOM TO BREATHE",
+            "subheading": "Fresh flowers and living plants, delivered with care",
+            "button_label": "SHOP FLOWERS",
+            "link": "shopify://collections/all-flowers",
+            "text_align": "center"
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "desktop_image": "shopify://shop_images/zenn-story.png",
+            "mobile_image": "shopify://shop_images/zenn-story.png",
+            "heading": "SLOW LIVING",
+            "subheading": "Quiet, considered pieces for a calmer home",
+            "button_label": "SHOP ALL",
+            "link": "shopify://collections/all",
+            "text_align": "center"
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2"
+      ],
+      "settings": {
+        "autoplay": true,
+        "autoplay_speed": 6,
+        "overlay_opacity": 35,
+        "section_bg_color": "#1A1A1A"
+      }
     }
   },
   "order": [
-    "html_landing_yigpQf"
+    "html_landing_yigpQf",
+    "shop_by_category",
+    "promo_banner"
   ]
 }
