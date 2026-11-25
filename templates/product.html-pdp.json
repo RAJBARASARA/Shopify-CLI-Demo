@@ -105,7 +105,7 @@
                 "text-details": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>A premium signature piece for Threads of Kaos. Replace with your real SKU details, GSM, wash notes, and material composition.</p>"
+                    "text": "<p>A fresh, hand-tied arrangement from Zenn Space, made to order with seasonal stems chosen for their calm, natural beauty.</p>"
                   },
                   "blocks": {}
                 }
@@ -117,7 +117,7 @@
             "row-fit": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "Fit and sizing",
+                "heading": "Care & freshness",
                 "open_by_default": false,
                 "icon": "none"
               },
@@ -125,7 +125,7 @@
                 "text-fit": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Oversized fit by default. Add model height, worn size, chest measurements, garment length, and fit recommendation here.</p>"
+                    "text": "<p>Trim the stems on arrival, change the water every couple of days, and keep out of direct sunlight to enjoy them longer.</p>"
                   },
                   "blocks": {}
                 }
@@ -137,7 +137,7 @@
             "row-shipping": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "Shipping and returns",
+                "heading": "Delivery",
                 "open_by_default": false,
                 "icon": "none"
               },
@@ -145,7 +145,7 @@
                 "text-shipping": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Dispatch timing, shipping thresholds, customs policies, and return windows.</p>"
+                    "text": "<p>Arranged fresh and shipped with tracked delivery — choose your preferred date at checkout.</p>"
                   },
                   "blocks": {}
                 }
@@ -168,19 +168,23 @@
         "look_2_product": "sunshine-sunflower-bunch",
         "look_2_label": "Pairing 02",
         "look_3_product": "white-phalaenopsis-orchid",
-        "look_3_label": "Pairing 03"
+        "look_3_label": "Pairing 03",
+        "story_image": "shopify://shop_images/zenn-story.png",
+        "ugc_1_image": "shopify://shop_images/zenn-journal-2.png",
+        "ugc_2_image": "shopify://shop_images/zenn-journal-3.png",
+        "ugc_3_image": "shopify://shop_images/zenn-email.png"
       }
     },
     "ymal": {
       "type": "ymal-recommendations",
       "settings": {
-        "hide_when_empty": false
+        "hide_when_empty": true
       }
     },
     "recently": {
       "type": "recently-viewed",
       "settings": {
-        "hide_when_empty": false
+        "hide_when_empty": true
       }
     }
   },

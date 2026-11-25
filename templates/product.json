@@ -42,13 +42,13 @@
     "ymal": {
       "type": "ymal-recommendations",
       "settings": {
-        "hide_when_empty": false
+        "hide_when_empty": true
       }
     },
     "recently": {
       "type": "recently-viewed",
       "settings": {
-        "hide_when_empty": false
+        "hide_when_empty": true
       }
     }
   },
