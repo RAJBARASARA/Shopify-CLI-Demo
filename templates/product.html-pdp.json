@@ -174,9 +174,23 @@
         "ugc_2_image": "shopify://shop_images/zenn-journal-3.png",
         "ugc_3_image": "shopify://shop_images/zenn-email.png"
       }
+    },
+    "ymal": {
+      "type": "ymal-recommendations",
+      "settings": {
+        "hide_when_empty": true
+      }
+    },
+    "recently": {
+      "type": "recently-viewed",
+      "settings": {
+        "hide_when_empty": true
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "ymal",
+    "recently"
   ]
 }
