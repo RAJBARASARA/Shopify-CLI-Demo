@@ -219,7 +219,7 @@
           "settings": {
             "image": "shopify://shop_images/zenn-story.png",
             "title": "LIVING PLANTS",
-            "subtitle": "Greenery for calm rooms",
+            "subtitle": "For calm rooms",
             "link": "shopify://collections/all"
           }
         },
@@ -228,7 +228,7 @@
           "settings": {
             "image": "shopify://shop_images/zenn-journal-2.png",
             "title": "GIFTING",
-            "subtitle": "Flowers to send with care",
+            "subtitle": "Send with care",
             "link": "shopify://collections/all-flowers"
           }
         },
@@ -237,7 +237,7 @@
           "settings": {
             "image": "shopify://shop_images/zenn-journal-3.png",
             "title": "EVERYDAY PIECES",
-            "subtitle": "Quiet things for slow living",
+            "subtitle": "For slow living",
             "link": "shopify://collections/all"
           }
         }
